@@ -2,13 +2,30 @@
     padding: 0px;
     margin: 0px;
 }
+@font-face {
+    font-family: 'Oswald';
+    src: url(../assets/fonts/Oswald-Bold.ttf);
+}
+@font-face {
+    font-family: 'OswaldLight';
+    src: url(../assets/fonts/Oswald-ExtraLight.ttf);
+}
+
+@font-face {
+    font-family: 'Merriweather-Sans';
+    src: url(../assets/fonts/MerriweatherSans-Regular.otf);
+}
+
 
 header{
     display: flex;
     justify-content: center;
+    position: fixed;
+    width: 100%;
+    z-index: 5;
 }
 .navbar{
-    height: 8vh;
+    height: 9.5vh;
     display: flex;
     justify-content: space-between;
     background-color: #0A1C40;
@@ -23,41 +40,57 @@ header{
         list-style: none;
         justify-content: flex-end;
         align-items: center;
-        column-gap: 2vw;
+        column-gap: 3vw;
         margin-right: 5vw;
+        & li{
+           font-family: "Merriweather-Sans";
+           font-optical-sizing: auto;
+           font-weight: 500;
+           font-style: bold;
+           font-size: 18px;
+          
+        }
         & button{
-           width: 70px;
-           height: 30px;
-           border-radius: 43px;
+           border-color: #143577;
+           width: 80px;
+           height: 40px;
            background-color: #0A1C40;
            color: white;
+           font-family: "Oswald";
+           font-optical-sizing: auto;
+           font-weight: 500;
+           font-style: bold;
+           font-size: 18px;
+           
         }
     }
-    & h1{
-         margin-left: 5vw;
+    & img {
+        width: 10%;
+        margin-left: 2vw;
     }
    
 }
 
 
-@media (max-width:600px){
+@media (max-width:900px){
     .navbar{
         width: 100%;
+        height: 30px;
         border-radius:  0px;
         
         & ul{
+            column-gap: 1.5vw;
             margin-right: 1vw;
             & li{
-                font-size: 12px;
+                font-size: 8px;
             }
             & button{
-                font-size: 12px;
+                width: 40px;
+                height: 20px;
+                font-size: 10px;
                 
             }
         }
-        & h1{
-            margin-left: 1vw;
-            font-size: 20px;
-        }
+       
     }
 }
