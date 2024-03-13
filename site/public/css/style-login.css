@@ -1,0 +1,111 @@
+@font-face {
+    font-family: oswald;
+    src: url(Oswald-Regular.ttf);
+}
+
+@font-face {
+    font-family: oswaldLight;
+    src: url(Oswald-Light.ttf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow-x: hidden;
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(0deg, rgba(18, 36, 72, 1) 0%, rgba(18, 36, 72, 0.90) 100%), url(../assets/bg-auth.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.center-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-default-auth {
+    background-color: #8095BF;
+    width: 65%;
+    height: 80%;
+    color: white;
+    border-radius: 15px;
+    display: flex;
+}
+
+.container-bemvindo {
+    background-color: #4D628C;
+    width: 40%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    border-radius: 15px 0px 0px 15px;
+}
+
+.text-bemvindo {
+    padding-left: 10%;
+    font-family: oswald;
+}
+
+.text-bemvindo h3 {
+    font-size: 32px;
+}
+
+.text-bemvindo h1 {
+    font-size: 52px;
+    text-shadow: 1px 1px white;
+    color: #8095BF;
+}
+
+.container-form {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    height: 60px;
+    width: 150px;
+}
+
+.group-input-form {
+    width: 45%;
+    display: block;
+}
+
+.input-box {
+    padding: 5px 0;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 5px 0;
+}
+
+label {
+    display: block;
+    color: #090909;
+    font-size: 12px;
+    font-family: oswaldLight;
+}
+
+.btn-cadastrar {
+    width: 55%;
+    padding: 10px 0;
+    background-color: #4D628C;
+    font-family: oswald;
+    font-size: 21px;
+    text-shadow: 0.5px 0.5px white;
+    color: #8095BF;
+    border: none;
+    border-radius: 5px;
+}
