@@ -35,13 +35,18 @@ body {
 
 }
 
-.segundaPagina {
+.pagina {
     position: relative;
     display: flex;
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
-    background-image: linear-gradient(to bottom, #16294e, #0a1c40);
-    
+    background-repeat: no-repeat;
+    background-size: cover;
+
+
+}
+
+.segunda {
     & .transicao {
         z-index: 4;
         position: absolute;
@@ -51,75 +56,212 @@ body {
         height: 341px;
         width: 100vw;
         bottom: 97vh;
-        margin-bottom: 2px;
+
     }
 
-    & .container{
+    & .container {
         display: flex;
 
-        & .retangulo{
-            width:20vw ;
-            margin: 0;
-            height: 90vh;
+        & .retangulo {
+            width: 20vw;
+            height: 70vh;
+            align-self: center;
         }
-        & img{
+
+        & img {
             margin-top: 2vh;
             align-self: flex-end;
             margin-right: 6vw;
             width: 38vw;
             mix-blend-mode: luminosity;
-            margin-bottom: 2vh;
+
         }
-        & .text{
+
+        & .text {
             margin: 25vh 10vw 0 5vw;
-           color: white;
-           font-family: "OswaldLight";
-           font-size: 25px;
-           & h1{
-            margin-bottom: 3vh;
-           }
+            color: white;
+            font-family: "OswaldLight";
+            font-size: 30px;
+
+            & strong {
+                font-weight: 1000px;
+            }
+
+            & h1 {
+                margin-bottom: 3vh;
+                font-family: "Oswald";
+            }
 
         }
     }
 }
 
-@media (max-width:900px){
-    .paginaInicial {
-    
-        & h1 {
-          font-size: 20px;
-          margin: 10vh;
+.terceira {
+    & .transicao {
+        z-index: 4;
+        position: absolute;
+        background-image: url(../assets/Transicao-tela2-tela3.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 250px;
+        width: 100vw;
+
+    }
+
+    & .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8vw;
+        margin: 10vw;
+
+
+        & img {
+            width: 38vw;
+            mix-blend-mode: luminosity;
+        }
+
+        & .text {
+            color: white;
+            font-family: "OswaldLight";
+            font-size: 30px;
+
+            & strong {
+                font-weight: 1000px;
+            }
+
+            & h1 {
+                margin-bottom: 3vh;
+                font-family: "Oswald";
+            }
+
         }
     }
-    
-    .segundaPagina {
-       
-        & .transicao {
-          margin-top: 15vh;
-          height: 100px;
-        }
-    
-        & .container{
+}
+
+.quarta {
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+    font-family: "oswald";
+    color: white;
+    font-size: 25px;
+
+    & h1 {
+        margin-top: 2vh;
+    }
+
+
+    & .transicao {
+        z-index: 4;
+        position: absolute;
+        background-image: url(../assets/Transição-tela3-tela4.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 196px;
+        width: 100vw;
+        bottom: 100%;
+
+
+    }
+
+    & .container {
+
+        display: flex;
+        min-height: 600px;
+        width: 100vw;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 20px 30px;
+
+
+
+        & .planos {
             display: flex;
-    
-            & .retangulo{
+            flex-direction: column;
+            align-items: center;
+            background-color: #8095bf;
+            height: 530px;
+            width: 343px;
+            overflow: hidden;
+
+
+            font-size: 20px;
+            color: #0D1E40;
+
+            & p {
+                color: black;
+                text-align: center;
+                font-family: "OswaldLight";
+                margin: 1vw 2vh;
+            }
+
+            & img {
+                width: 100%;
+                height: 50%;
+            }
+
+
+        }
+    }
+}
+
+@media (max-width:1100px) {
+
+    .paginaInicial {
+
+        & h1 {
+            font-size: 20px;
+            margin: 10vh;
+        }
+    }
+
+    .pagina {
+
+        & .transicao {
+            height: 100px;
+        }
+
+        & .container {
+            display: flex;
+
+            & .retangulo {
                 display: block;
                 width: 8vw;
                 height: 20vh;
                 margin-bottom: 70vh;
             }
-            & img{
-               display: none;
+
+            & .imgPag {
+                display: none;
             }
-            & .text{
-               font-size: 20px;
-               & h1{
-                font-size: 30px;
-                
-               }
-    
+
+            & .text {
+                font-size: 20px;
+
+                & h1 {
+                    font-size: 30px;
+
+                }
+
             }
         }
     }
-    
+
+    .terceira {}
+
+    .quarta {
+
+        & .container {
+            gap: 50px 30px;
+        }
+
+        & .planos {
+            height: 427px;
+            width: 267px;
+        }
+    }
+
+
 }
