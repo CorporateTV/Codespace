@@ -108,4 +108,16 @@ label {
     color: #8095BF;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
+}
+
+.text-link {
+    font-family: oswald;
+    color: white;
+    font-size: 1em;
+}
+
+.text-link a {
+    color: #0A1C40;
+    text-decoration: none;
 }
