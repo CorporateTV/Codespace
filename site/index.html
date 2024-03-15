@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <header>
+    <header id="headerID">
         <nav class="navbar">
             <img src="./public/assets/Logo-LiSync-Inverso.png" alt="">
             <div class="container">
@@ -35,21 +35,29 @@
 
 
         </nav>
-        <div class="menu-items" id="menuItems">
+
+    </header>
+
+
+    <div class="menu" id="menuItems">
+        <div class="menu-items">
             <ul>
                 <li><a href="#home">HOME</a></li>
                 <li><a href="#sobreNos">SOBRE NOS</a></li>
                 <li><a href="#produtos">PRODUTOS</a></li>
                 <li><a href="#contato">CONTATO</a></li>
-                <button>LOGIN</button>
+                <button onclick="irLogin()">LOGIN</button>
             </ul>
         </div>
-    </header>
+    </div>
+
 
     <div class="paginaInicial" id="home" style="background-image: url(./public/assets/Tela-inicial.png);">
         <h1>Sincronizando Desempenho e Elevando Experiências.</h1>
         <img src="./public/assets/Arrow.png" id="arrow" onclick="irsegundaPagina()">
     </div>
+
+    
 
     <div class="segunda pagina" id="sobreNos">
         <div class="transicao"></div>
@@ -65,7 +73,7 @@
                     necessidades dos clientes e assegurando que nosso monitoramento de hardware atenda às suas
                     expectativas"</p>
             </div>
-            
+
 
             <img src="./public/assets/Design sem nome 1.png" class="imgPag">
         </div>
@@ -88,7 +96,7 @@
             </div>
         </div>
     </div>
-    <div id="produtos" class="quarta pagina"> 
+    <div id="produtos" class="quarta pagina">
         <div class="transicao"></div>
 
         <h1>PLANOS</h1>
@@ -162,7 +170,7 @@
                 </div>
                 <div class="containerInput">
                     <p>Celular</p>
-                    <input type="text">
+                    <input type="text" placeholder="(__)_____-____" id="celularInput" maxlength="14">
                 </div>
             </div>
             <div class="containerInput2">
@@ -173,7 +181,7 @@
                 <p>Empresa</p>
                 <input type="text">
             </div>
-            <button>ENVIAR</button>
+            <button id="enviarContato">ENVIAR</button>
 
         </div>
 
@@ -200,6 +208,6 @@
 
 
 </body>
-<script src="./public/js/MenuHamburguer.js"></script>
-<script src="./public/js/scroll-animation.js"></script>
+<script src="./public/js/main.js"></script>
+
 </html>

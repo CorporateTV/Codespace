@@ -39,16 +39,29 @@
             }
 
         }
+       
+
+    }
+    .menu{
+        display: block;
+        position: fixed;
+        z-index: 20;
+        height: 90.5%;
+        margin-top: 9.5vh;
+        right: 0;
+
+
+
         .menu-items{
             display: flex;
             background-color:#0a1c40 ;
             width: 250px;
-            height: 100vh;
+            height: 90.5vh;
             align-self: flex-end;
             justify-content: center;
             color: white;
-            transition: transform 0.5s ease-in-out;
-            transform: translate(300px);
+            
+            z-index: 12;
             
             & ul{
                 margin-top: 4vh;
@@ -56,7 +69,7 @@
                 flex-direction: column;
                 align-items: center;
                 list-style: none;
-                row-gap: 6vw;
+                row-gap: 6vh;
                 & li{
                    font-family: "Merriweather-Sans";
                    font-optical-sizing: auto;
@@ -88,8 +101,8 @@
             }
             
         }
-
     }
+    
 
 }
 
@@ -130,5 +143,28 @@
 
 .hamburger input[type="checkbox"]:checked~.hamburger-lines .line3 {
     transform: rotate(-45deg);
+}
+
+@keyframe menuItemsAnimationEntrada{
+    0%{
+        transform: translateX(300px);
+    }
+    50%{
+        transform: translateX(0px);
+    }
+    100%{
+        transform: translateY(100vh);
+    }
+}
+@keyframe menuItemsAnimationSaida{
+    0%{
+        transform: translateX(0px);
+    }
+    50%{
+        transform: translateX(300px);
+    }
+    100%{
+        transform: translateY(0vh);
+    }
 }
 

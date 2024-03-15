@@ -34,6 +34,9 @@ header{
     
 
 }
+.menu{
+    display: none;
+}
 .navbar{
     height: 9.5vh;
     display: flex;
