@@ -11,7 +11,7 @@ public class MetodosLogin {
     String usuario;
 
     do {
-      System.out.println("\n|-----------------------------------|");
+      System.out.println("\n|----------- LOGIN -----------|");
       System.out.println("Insira suas informações");
       System.out.println("Digite 0 para voltar ao MENU");
 
@@ -29,10 +29,12 @@ public class MetodosLogin {
       System.out.print("Confirmar senha: ");
       confirmarSenha = inputNext.nextLine();
 
-      resultadoAutenticacao(verificarConfirmarSenha(senha, confirmarSenha),
-          verificarCamposVazio(usuario, senha, confirmarSenha), validarTamanhoSenha(senha), usuario);
+      resultadoAutenticacao(
+          verificarConfirmarSenha(senha, confirmarSenha),
+          verificarCamposVazio(usuario, senha, confirmarSenha),
+          validarTamanhoSenha(senha), usuario);
 
-    } while (!usuario.equals("0"));
+    } while (true);
   }
 
   Boolean verificarCamposVazio(String usuario, String senha, String confirmarSenha) {

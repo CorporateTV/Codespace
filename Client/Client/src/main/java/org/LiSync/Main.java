@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Main {
   public static void main(String[] args) {
-
     Scanner selectOption = new Scanner(System.in);
     Integer option;
 
@@ -24,6 +23,8 @@ public class Main {
       switch (option) {
         case 1 -> {
           System.out.println("Redirecionando para Cadastro ...");
+          MetodosCadastro cadastro = new MetodosCadastro();
+          cadastro.menuCadastro();
         }
         case 2 -> {
           System.out.println("Redirecionando para Login ...");
@@ -31,7 +32,8 @@ public class Main {
           login.menuLogin();
         }
         case 3 -> {
-          System.out.println("Até logo! Fechando o sistema ...");
+          System.out.println("Até logo! Encerrando o sistema ...");
+          System.exit(0);
         }
         default -> System.out.println("Opção Inválida! Tente novamente.");
       }
