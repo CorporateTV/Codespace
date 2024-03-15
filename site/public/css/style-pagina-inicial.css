@@ -44,6 +44,7 @@ body {
     background-size: cover;
 
 
+
 }
 
 .segunda {
@@ -55,12 +56,13 @@ body {
         background-size: cover;
         height: 341px;
         width: 100vw;
-        bottom: 97vh;
+        bottom: 100%;
 
     }
 
     & .container {
         display: flex;
+
 
         & .retangulo {
             width: 20vw;
@@ -69,19 +71,17 @@ body {
         }
 
         & img {
-            margin-top: 2vh;
-            align-self: flex-end;
+
             margin-right: 6vw;
-            width: 38vw;
+            width: 35vw;
             mix-blend-mode: luminosity;
 
         }
 
         & .text {
-            margin: 25vh 10vw 0 5vw;
+            margin: 0 10vw 0 5vw;
             color: white;
             font-family: "OswaldLight";
-            font-size: 30px;
 
             & strong {
                 font-weight: 1000px;
@@ -92,7 +92,10 @@ body {
                 font-family: "Oswald";
             }
 
+            font-size: 180%;
         }
+
+        align-items: center;
     }
 }
 
@@ -115,7 +118,6 @@ body {
         gap: 8vw;
         margin: 10vw;
 
-
         & img {
             width: 38vw;
             mix-blend-mode: luminosity;
@@ -124,7 +126,7 @@ body {
         & .text {
             color: white;
             font-family: "OswaldLight";
-            font-size: 30px;
+            font-size: 160%;
 
             & strong {
                 font-weight: 1000px;
@@ -149,6 +151,7 @@ body {
 
     & h1 {
         margin-top: 2vh;
+        margin-bottom: 3vh;
     }
 
 
@@ -162,7 +165,6 @@ body {
         width: 100vw;
         bottom: 100%;
 
-
     }
 
     & .container {
@@ -174,6 +176,7 @@ body {
         justify-content: center;
         align-items: center;
         gap: 20px 30px;
+        margin-bottom: 20vh;
 
 
 
@@ -207,61 +210,52 @@ body {
     }
 }
 
-@media (max-width:1100px) {
+.quinta {
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+    font-family: "oswald";
+    color: white;
+    font-size: 25px;
 
-    .paginaInicial {
-
-        & h1 {
-            font-size: 20px;
-            margin: 10vh;
-        }
+    & h1 {
+        margin-top: 2vh;
+        margin-bottom: 3vh;
     }
 
-    .pagina {
 
-        & .transicao {
-            height: 100px;
-        }
+    & .transicao {
+        z-index: 4;
+        position: absolute;
+        background-image: url(../assets/Transição-tela3-tela4.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 196px;
+        width: 100vw;
+        bottom: 100%;
 
-        & .container {
+    }
+
+    & .container {
+        margin-top: 5vh;
+        display: flex;
+        & .containerWrap {
+            flex-wrap: wrap;
             display: flex;
+            gap: 10px;
+            font-family: "OswaldLight";
+            & .containerInput {
+                display: flex;
+                flex-direction: column;
 
-            & .retangulo {
-                display: block;
-                width: 8vw;
-                height: 20vh;
-                margin-bottom: 70vh;
-            }
-
-            & .imgPag {
-                display: none;
-            }
-
-            & .text {
-                font-size: 20px;
-
-                & h1 {
-                    font-size: 30px;
+                & input{
+                    min-width: 30vw;
+                    height: 4vh;
 
                 }
-
             }
         }
+
+
     }
-
-    .terceira {}
-
-    .quarta {
-
-        & .container {
-            gap: 50px 30px;
-        }
-
-        & .planos {
-            height: 427px;
-            width: 267px;
-        }
-    }
-
-
 }

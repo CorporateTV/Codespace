@@ -23,31 +23,49 @@ header{
     position: fixed;
     width: 100%;
     z-index: 5;
+    .containerHamburguer{
+        display: none;
+    }
+   
+    
+
 }
 .navbar{
     height: 9.5vh;
     display: flex;
     justify-content: space-between;
     background-color: #0A1C40;
-    width: 95%;
+    width: 98%;
     align-items: center;
     color: white;
-    border-radius: 43px;
+    border-radius: 30px;
+    & .hamburger-lines{
+        display: none;
+    }
 
     
+
+    & .checkbox{
+        display: none;
+    }
+
+    & .container{
+        display: flex;
+        
     & ul{
         display: flex;
         list-style: none;
         justify-content: flex-end;
         align-items: center;
-        column-gap: 3vw;
         margin-right: 5vw;
+        column-gap: 2vw;
         & li{
            font-family: "Merriweather-Sans";
            font-optical-sizing: auto;
            font-weight: 500;
            font-style: bold;
            font-size: 18px;
+           cursor: pointer;
           
         }
         & button{
@@ -64,33 +82,12 @@ header{
            
         }
     }
+    }
     & img {
-        width: 10%;
+        width: 150px;
         margin-left: 2vw;
     }
    
 }
 
 
-@media (max-width:900px){
-    .navbar{
-        width: 100%;
-        height: 30px;
-        border-radius:  0px;
-        
-        & ul{
-            column-gap: 1.5vw;
-            margin-right: 1vw;
-            & li{
-                font-size: 8px;
-            }
-            & button{
-                width: 40px;
-                height: 20px;
-                font-size: 10px;
-                
-            }
-        }
-       
-    }
-}
