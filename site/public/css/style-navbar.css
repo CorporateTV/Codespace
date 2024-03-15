@@ -23,7 +23,7 @@ header{
     justify-content: center;
     position: fixed;
     width: 100%;
-    z-index: 5;
+    z-index: 6;
     .menu-items{
         display: none;
     }
@@ -43,6 +43,7 @@ header{
     align-items: center;
     color: white;
     border-radius: 30px;
+    z-index: 9;
     & .hamburguer-lines{
         display: none;
     }
@@ -72,6 +73,11 @@ header{
            font-style: bold;
            font-size: 18px;
            cursor: pointer;
+           & a{
+            text-decoration: none;
+            color: white;
+           } 
+           
           
         }
         & button{

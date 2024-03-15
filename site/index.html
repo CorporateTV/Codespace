@@ -17,10 +17,10 @@
             <img src="./public/assets/Logo-LiSync-Inverso.png" alt="">
             <div class="container">
                 <ul>
-                    <li>HOME</li>
-                    <li>SOBRE NÓS</li>
-                    <li>PRODUTOS</li>
-                    <li>CONTATO</li>
+                    <li><a href="#home">HOME</a></li>
+                    <li><a href="#sobreNos">SOBRE NOS</a></li>
+                    <li><a href="#produtos">PRODUTOS</a></li>
+                    <li><a href="#contato">CONTATO</a></li>
                     <button>LOGIN</button>
                 </ul>
             </div>
@@ -37,23 +37,24 @@
         </nav>
         <div class="menu-items" id="menuItems">
             <ul>
-                <li>HOME</li>
-                <li>SOBRE NÓS</li>
-                <li>PRODUTOS</li>
-                <li>CONTATO</li>
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#sobreNos">SOBRE NOS</a></li>
+                <li><a href="#produtos">PRODUTOS</a></li>
+                <li><a href="#contato">CONTATO</a></li>
                 <button>LOGIN</button>
             </ul>
         </div>
     </header>
 
-    <div class="paginaInicial" style="background-image: url(./public/assets/Tela-inicial.png);">
+    <div class="paginaInicial" id="home" style="background-image: url(./public/assets/Tela-inicial.png);">
         <h1>Sincronizando Desempenho e Elevando Experiências.</h1>
+        <img src="./public/assets/Arrow.png" id="arrow" onclick="irsegundaPagina()">
     </div>
 
-    <div class="segunda pagina">
+    <div class="segunda pagina" id="sobreNos">
         <div class="transicao"></div>
         <div class="container">
-            <img src="./public/assets/Rectangle 37.png" class="retangulo">
+            <img src="./public/assets/Rectangle 37.png" class="retangulo" onclick="irsegundaPagina()">
 
             <div class="text">
                 <h1>SOBRE NÓS</h1>
@@ -64,6 +65,7 @@
                     necessidades dos clientes e assegurando que nosso monitoramento de hardware atenda às suas
                     expectativas"</p>
             </div>
+            
 
             <img src="./public/assets/Design sem nome 1.png" class="imgPag">
         </div>
@@ -84,11 +86,9 @@
                     sua agilidade e eficiência, assegurando insights detalhados para
                     otimizar o desempenho do hardware dos seus players.</p>
             </div>
-
-
         </div>
     </div>
-    <div class="quarta pagina">
+    <div id="produtos" class="quarta pagina"> 
         <div class="transicao"></div>
 
         <h1>PLANOS</h1>
@@ -140,7 +140,7 @@
 
 
     </div>
-    <div class="quinta pagina">
+    <div id="contato" class="quinta pagina">
 
         <h1>CONTATO</h1>
         <div class="container">
@@ -201,4 +201,5 @@
 
 </body>
 <script src="./public/js/MenuHamburguer.js"></script>
+<script src="./public/js/scroll-animation.js"></script>
 </html>

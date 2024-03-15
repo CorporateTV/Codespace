@@ -8,6 +8,8 @@ body {
     width: 100vw;
     height: 100vh;
     background-color: #16294e;
+    scroll-behavior: smooth;
+   
 }
 
 
@@ -16,6 +18,7 @@ body {
 
     position: relative;
     display: flex;
+    flex-direction: column;
     background-size: cover;
     background-repeat: no-repeat;
     justify-content: center;
@@ -30,6 +33,15 @@ body {
         font-size: 50px;
         margin: 25vw;
         text-align: center;
+    }
+    & #arrow{
+        position: absolute;
+        top: 90vh;
+        z-index: 5;
+        animation-name: arrowAnimation;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        cursor: pointer;
     }
 
 
@@ -271,6 +283,7 @@ body {
             & input {
                 width: 100%;
                 height: 5vh;
+                min-width: 300px;
             }
         }
 
@@ -306,3 +319,12 @@ footer{
         margin: 0 5vw;
     }
 }
+
+@keyframes arrowAnimation{
+    0%{top: 89vh;}
+    50% {
+        top: 90vh;
+    }
+    100%{top: 89vh;}
+}
+

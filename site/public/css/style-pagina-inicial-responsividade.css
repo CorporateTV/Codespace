@@ -2,7 +2,12 @@
 
     .paginaInicial {
         height: 80vh;
-
+        & #arrow{
+            position: absolute;
+            top: 90vh;
+            z-index: 3;
+            width:  5%;
+        }
         & h1 {
             font-size: 150%;
             margin: 3vh;
