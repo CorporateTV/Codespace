@@ -24,14 +24,18 @@
                     <button>LOGIN</button>
                 </ul>
             </div>
-            
-            <div class="hamburger-lines">
-                <span class="line line1"></span>
-                <span class="line line2"></span>
-                <span class="line line3"></span>
-            </div>  
+            <div class="hamburger">
+                <input type="checkbox" id="check" onclick="checar()" />
+                <label class="hamburger-lines" for="check">
+                    <span class="line line1"></span>
+                    <span class="line line2"></span>
+                    <span class="line line3"></span>
+                </label>
+            </div>
+
+
         </nav>
-        <div class="containerHamburguer">
+        <div class="menu-items" id="menuItems">
             <ul>
                 <li>HOME</li>
                 <li>SOBRE NÓS</li>
@@ -49,7 +53,7 @@
     <div class="segunda pagina">
         <div class="transicao"></div>
         <div class="container">
-            <img src="./public/assets/Rectangle 37.png" class="retangulo" >
+            <img src="./public/assets/Rectangle 37.png" class="retangulo">
 
             <div class="text">
                 <h1>SOBRE NÓS</h1>
@@ -108,16 +112,8 @@
                     loremloremloremlorem
                     loremloremlorem</p>
 
-            </div> <div class="planos">
-                <img src="./public/assets/img-plano.png">
-                <h1>Título</h1>
-                <p>loremloremloremloremlorem
-                    loremloremloremlorem
-                    loremloremloremloremlorem
-                    loremloremloremlorem
-                    loremloremlorem</p>
-
-            </div> <div class="planos">
+            </div>
+            <div class="planos">
                 <img src="./public/assets/img-plano.png">
                 <h1>Título</h1>
                 <p>loremloremloremloremlorem
@@ -127,33 +123,82 @@
                     loremloremlorem</p>
 
             </div>
-                
+            <div class="planos">
+                <img src="./public/assets/img-plano.png">
+                <h1>Título</h1>
+                <p>loremloremloremloremlorem
+                    loremloremloremlorem
+                    loremloremloremloremlorem
+                    loremloremloremlorem
+                    loremloremlorem</p>
+
             </div>
+
         </div>
+    </div>
 
-   
+
 
     </div>
-     <div class="quinta pagina">
+    <div class="quinta pagina">
 
         <h1>CONTATO</h1>
         <div class="container">
             <div class="containerWrap">
-                <div class="containerInput"><p>Nome</p><input  type="text"></div>
-                <div class="containerInput"><p>Sobrenome</p><input type="text"></div>
+                <div class="containerInput">
+                    <p>Nome</p>
+                    <input type="text">
+                </div>
+                <div class="containerInput">
+                    <p>Sobrenome</p>
+                    <input type="text">
+                </div>
+
             </div>
-                
+            <div class="containerWrap">
+                <div class="containerInput">
+                    <p>Cargo</p>
+                    <input type="text">
+                </div>
+                <div class="containerInput">
+                    <p>Celular</p>
+                    <input type="text">
+                </div>
+            </div>
+            <div class="containerInput2">
+                <p>E-mail</p>
+                <input type="text">
+            </div>
+            <div class="containerInput2">
+                <p>Empresa</p>
+                <input type="text">
+            </div>
+            <button>ENVIAR</button>
+
         </div>
 
-   
-
     </div>
 
+    <footer>
+        <div class="container">
+            <p>Quer saber mais sobre como a LiSync pode impulsionar o seu ambiente de TV corporativa? Entre em contato
+                conosco para uma consulta personalizada.</p>
+        </div>
+
+        <div class="container">
+            <p>(11) 9 6639-3932</p>
+            <p>lisync@sptech.school</p>
+            <p>@LiSync_corp</p>
+        </div>
+
+
+    </footer>
 
 
 
 
-    </div>
+
+
 </body>
-
+<script src="./public/js/MenuHamburguer.js"></script>
 </html>

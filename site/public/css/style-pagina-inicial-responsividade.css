@@ -42,8 +42,6 @@
         }
     }
 
-    .terceira {}
-
     .quarta {
 
         & .container {
@@ -55,6 +53,43 @@
             width: 267px;
         }
     }
+    .quinta {
 
+        & .container {
+      
+            & .containerWrap {
+                width: 100%;
+                gap: 30px;
+    
+                & .containerInput {
+                    width: 100%;
+                    input{
+                        width: 100%;
+                    }
+
+                }
+            }
+        }
+    }
+    footer{
+        font-size: 20px;
+        gap: 15vw;
+    
+        & .container{
+            margin: 0 2vw;
+        }
+    }
+
+}
+@media (max-width:600px) {
+
+    footer{
+        font-size: 15px;
+        gap: 0 2vw;
+    
+        & .container{
+            margin: 0 1vw;
+        }
+    }
 
 }

@@ -18,11 +18,15 @@
 
 
 header{
+    
     display: flex;
     justify-content: center;
     position: fixed;
     width: 100%;
     z-index: 5;
+    .menu-items{
+        display: none;
+    }
     .containerHamburguer{
         display: none;
     }
@@ -39,11 +43,13 @@ header{
     align-items: center;
     color: white;
     border-radius: 30px;
-    & .hamburger-lines{
+    & .hamburguer-lines{
         display: none;
     }
 
-    
+    & .hamburger{
+        display: none;
+    }
 
     & .checkbox{
         display: none;
@@ -81,6 +87,7 @@ header{
            font-size: 18px;
            
         }
+       
     }
     }
     & img {

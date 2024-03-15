@@ -1,87 +1,127 @@
-@media (max-width:900px) {
+@media (max-width:800px) {
     header {
+        display: flex;
         flex-direction: column;
 
         & .navbar {
+            border-radius: 0;
             width: 100%;
-            border-radius: 0px;
-
 
 
             & .container {
-                position: absolute;
-                display: block;
-                height: 32px;
-                width: 32px;
-                top: 20px;
-                left: 20px;
-                z-index: 5;
-                opacity: 0;
-                cursor: pointer;
+                width: 40px;
+                height: 40px;
+                display: none;
             }
-            
 
-            & .hamburger-lines {
-                z-index: 9;
+            & .hamburger {
                 display: flex;
-                flex-direction: column;
-                width: 200px;
-                align-items: center;
+                width: 250px;
                 justify-content: center;
-                
-
-
-                & .line {
-                    display: block;
-                    height: 3.5px;
-                    width: 28px;
-                    border-radius: 10px;
-                    background: #ffffff;
-                    margin-bottom: 2px;
-                    
+                & input {
+                    display: none;
                 }
 
-                & .line1 {
-                    transform-origin: 0% 0%;
-                    transition: transform 0.4s ease-in-out;
-                }
+                & .hamburger-lines {
+                    display: flex;
+                    flex-direction: column;
+                    row-gap: 3px;
+                    cursor: pointer;
 
-                & .line2 {
-                    transition: transform 0.2s ease-in-out;
-                }
+                    & .line {
+                        width: 30px;
+                        height: 5px;
+                        background-color: white;
+                        border-radius: 10px;
+                    }
 
-                & .line3 {
-                    transform-origin: 0% 100%;
-                    transition: transform 0.4s ease-in-out;
                 }
             }
 
         }
-
-        .containerHamburguer {
-            background-color: aqua;
+        .menu-items{
+            display: flex;
+            background-color:#0a1c40 ;
+            width: 250px;
+            height: 100vh;
             align-self: flex-end;
             justify-content: center;
-            display: flex;
-            width: 200px;
-            height: 100vh;
-
-            & ul {
-                margin-top: 3vh;
+            color: white;
+            transition: transform 0.5s ease-in-out;
+            
+            & ul{
+                margin-top: 4vh;
                 display: flex;
                 flex-direction: column;
+                align-items: center;
                 list-style: none;
-                text-align: center;
-                gap: 30px;
-                color: white;
-
-                & li {
-                    cursor: pointer;
+                row-gap: 6vw;
+                & li{
+                   font-family: "Merriweather-Sans";
+                   font-optical-sizing: auto;
+                   font-weight: 500;
+                   font-style: bold;
+                   font-size: 18px;
+                   cursor: pointer;
+                  
                 }
+                & button{
+                   border-color: #143577;
+                   width: 80px;
+                   height: 40px;
+                   background-color: #0A1C40;
+                   color: white;
+                   font-family: "Oswald";
+                   font-optical-sizing: auto;
+                   font-weight: 500;
+                   font-style: bold;
+                   font-size: 18px;
+                   
+                }
+               
             }
+            
         }
-        
-          
+
     }
-    
+
+}
+
+
+
+
+
+
+.hamburger-lines .line1 {
+    transform-origin: 0% 0%;
+    transition: transform 0.4s ease-in-out;
+}
+
+.hamburger-lines .line2 {
+    transition: transform 0.2s ease-in-out;
+}
+
+.hamburger-lines .line3 {
+    transform-origin: 0% 100%;
+    transition: transform 0.4s ease-in-out;
+}
+
+
+
+
+.hamburger input[type="checkbox"]:checked~.menu-items {
+    transform: translateX(300px);
+}
+
+
+.hamburger input[type="checkbox"]:checked~.hamburger-lines .line1 {
+    transform: rotate(45deg);
+}
+
+.hamburger input[type="checkbox"]:checked~.hamburger-lines .line2 {
+    transform: scaleY(0);
+}
+
+.hamburger input[type="checkbox"]:checked~.hamburger-lines .line3 {
+    transform: rotate(-45deg);
 }
