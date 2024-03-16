@@ -17,7 +17,8 @@
             & .hamburger {
                 display: flex;
                 width: 250px;
-                justify-content: center;
+                justify-content: flex-end;
+                margin-right: 10px;
                 & input {
                     display: none;
                 }
@@ -49,6 +50,7 @@
         height: 90.5%;
         margin-top: 9.5vh;
         right: 0;
+        transform: translate(0,-100vh);
 
 
 
@@ -128,13 +130,9 @@
 
 
 
-.hamburger input[type="checkbox"]:checked~.menu-items {
-    transform: translateX(300px);
-}
-
 
 .hamburger input[type="checkbox"]:checked~.hamburger-lines .line1 {
-    transform: rotate(45deg);
+    transform: rotate(35deg);
 }
 
 .hamburger input[type="checkbox"]:checked~.hamburger-lines .line2 {
@@ -142,29 +140,8 @@
 }
 
 .hamburger input[type="checkbox"]:checked~.hamburger-lines .line3 {
-    transform: rotate(-45deg);
+    transform: rotate(-35deg);
 }
 
-@keyframe menuItemsAnimationEntrada{
-    0%{
-        transform: translateX(300px);
-    }
-    50%{
-        transform: translateX(0px);
-    }
-    100%{
-        transform: translateY(100vh);
-    }
-}
-@keyframe menuItemsAnimationSaida{
-    0%{
-        transform: translateX(0px);
-    }
-    50%{
-        transform: translateX(300px);
-    }
-    100%{
-        transform: translateY(0vh);
-    }
-}
+
 

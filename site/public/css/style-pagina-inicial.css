@@ -9,7 +9,7 @@ body {
     height: 100vh;
     background-color: #16294e;
     scroll-behavior: smooth;
-   
+
 }
 
 
@@ -34,7 +34,8 @@ body {
         margin: 25vw;
         text-align: center;
     }
-    & #arrow{
+
+    & #arrow {
         position: absolute;
         top: 90vh;
         z-index: 5;
@@ -282,6 +283,7 @@ body {
             flex-direction: column;
             align-self: flex-start;
             width: 100%;
+
             & input {
                 width: 100%;
                 height: 5vh;
@@ -291,7 +293,8 @@ body {
         }
 
     }
-    & button{
+
+    & button {
         height: 70px;
         width: 100%;
         background-color: #143577;
@@ -304,46 +307,82 @@ body {
         margin-bottom: 30px;
     }
 }
-footer{
-    font-family: "oswald light";
-    background-color: #8095bf;
-    height: 21vh;
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    color: #102245;
-    font-size: 22px;
-    gap: 35vw;
-    align-items: center;
 
-    & .container{
+footer {
+
+    background-color: #8095bf;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    column-gap: 20vw;
+    padding: 20px 50px;
+    font-size: 22px;
+
+    & p{
+        filter: opacity(50%);
+    }
+
+    & .containerColumn {
         display: flex;
         flex-direction: column;
-        margin: 0 5vw;
+        justify-content: space-between;
+        & img {
+         width: 10vw;
+        }
+        & .icon{
+            width: 1.5vw;
+        }
+      
     }
+    & .info{
+        row-gap: 1.7vh;
+    }
+    & .infologo{
+        row-gap: 1.5vh;
+    }
+
+    & .container {
+        display: flex;
+        column-gap: 1vw;
+      
+    }
+
+    & hr {
+        width: 80%;
+    }
+
+    & .iconsColumn{
+        row-gap: 5px;
+    }
+
+    
 }
 
-@keyframes arrowAnimation{
-    0%{top: 89vh;}
+@keyframes arrowAnimation {
+    0% {
+        top: 89vh;
+    }
+
     50% {
         top: 90vh;
     }
-    100%{top: 89vh;}
+
+    100% {
+        top: 89vh;
+    }
 }
 
 
-
-.planos:hover{
+li:hover {
     transform: scale(1.05);
 }
-li:hover{
+
+
+#enviarContato:hover {
     transform: scale(1.05);
 }
 
-
-#enviarContato:hover{
-    transform: scale(1.05);
-}
-#enviarContato:active{
+#enviarContato:active {
     transform: scale(1.0);
 }

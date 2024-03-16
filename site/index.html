@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="./public/css/style-pagina-inicial.css">
     <link rel="stylesheet" href="./public/css/style-pagina-inicial-responsividade.css">
     <link rel="stylesheet" href="./public/css/style-navbar-responsividade.css">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-brands/css/uicons-brands.css'>
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
 </head>
 
 <body>
@@ -46,6 +49,7 @@
                 <li><a href="#sobreNos">SOBRE NOS</a></li>
                 <li><a href="#produtos">PRODUTOS</a></li>
                 <li><a href="#contato">CONTATO</a></li>
+                <hr style="width: 100%; color: white;">
                 <button onclick="irLogin()">LOGIN</button>
             </ul>
         </div>
@@ -57,7 +61,7 @@
         <img src="./public/assets/Arrow.png" id="arrow" onclick="irsegundaPagina()">
     </div>
 
-    
+
 
     <div class="segunda pagina" id="sobreNos">
         <div class="transicao"></div>
@@ -175,11 +179,11 @@
             </div>
             <div class="containerInput2">
                 <p>E-mail</p>
-                <input type="text">
+                <input style="min-width: 10px" type="text">
             </div>
             <div class="containerInput2">
                 <p>Empresa</p>
-                <input type="text">
+                <input style="min-width: 10px" type="text">
             </div>
             <button id="enviarContato">ENVIAR</button>
 
@@ -188,17 +192,28 @@
     </div>
 
     <footer>
-        <div class="container">
-            <p>Quer saber mais sobre como a LiSync pode impulsionar o seu ambiente de TV corporativa? Entre em contato
+        <div class="containerColumn infologo" style="width: 31.57vw;">
+            <img src="./public/assets/Logo-LiSync-branca-padrãopng.png" alt="">
+            <p>© 2024 LySinc All rights reserved</p>
+          
+        </div>
+        <div class="containerColumn informacaoFooter">
+            <p style="text-align: center;">Quer saber mais sobre como a LiSync pode impulsionar o seu ambiente de TV corporativa? Entre em contato
                 conosco para uma consulta personalizada.</p>
         </div>
-
-        <div class="container">
-            <p>(11) 9 6639-3932</p>
-            <p>lisync@sptech.school</p>
-            <p>@LiSync_corp</p>
+        <div class="container iconinfo" style="width: 31.57vw;">
+            <div class="containerColumn iconsColumn">
+               <img class="icon" src="./public/assets/phone-icon.png" alt="">
+               <img class="icon" src="./public/assets/mail-icon.png" alt="">
+               <img class="icon" src="./public/assets/instagram-icon.png" alt="">
+            </div>
+            <div class="containerColumn">
+                <p>(11) 9 6639-3932</p>
+                <p>lisync@sptech.school</p>
+                <p>@LiSync_corp</p>
+             </div>
         </div>
-
+       
 
     </footer>
 

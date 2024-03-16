@@ -2,12 +2,14 @@
 
     .paginaInicial {
         height: 80vh;
-        & #arrow{
+
+        & #arrow {
             position: absolute;
             top: 90vh;
             z-index: 3;
-            width:  5%;
+            width: 5%;
         }
+
         & h1 {
             font-size: 150%;
             margin: 3vh;
@@ -58,43 +60,51 @@
             width: 267px;
         }
     }
+
     .quinta {
 
         & .container {
-      
+
             & .containerWrap {
                 width: 100%;
                 gap: 30px;
-    
+
                 & .containerInput {
                     width: 100%;
-                    input{
-                        width: 100%;
+
+                    input {
+                        min-width: 100%;
                     }
 
                 }
             }
         }
     }
-    footer{
-        font-size: 20px;
-        gap: 15vw;
-    
-        & .container{
-            margin: 0 2vw;
+
+    & footer {
+        & .informacaoFooter {
+            display: none;
+        }
+
+        & .containerColumn {
+            & img {
+                width: 130px;
+            }
+
+            & .icon {
+                width: 20px;
+            }
         }
     }
 
 }
-@media (max-width:600px) {
 
-    footer{
-        font-size: 15px;
-        gap: 0 2vw;
-    
-        & .container{
-            margin: 0 1vw;
+@media (max-width:500px) {
+
+    & footer {
+        & .infologo{
+            display: none;
+
         }
     }
-
 }
