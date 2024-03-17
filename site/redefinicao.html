@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro | LySync</title>
+    <title>Confirmação Senha | LySync</title>
     <link rel="stylesheet" href="./public/css/style-auth.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
@@ -19,8 +19,8 @@
         <div class="container-default-auth">
             <div class="container-bemvindo">
                 <div class="text-bemvindo">
-                    <h3> Seja <br> BEM-VINDO! </h3>
-                    <h1> CADASTRO </h1>
+                    <h1> REDEFINIR </h1>
+                    <h1> SENHA </h1>
                 </div>
             </div>
             <div class="container-form">
@@ -28,30 +28,19 @@
                     <img src="public/assets/Logo-LiSync-Inverso.png" alt="Logo" class="logo">
                 </div>
                 <div class="group-input-form">
+                    
                     <div class="input-box">
-                        <label> Nome: </label>
+                        <label> Digite nova senha: </label>
                         <input type="text">
                     </div>
                     <div class="input-box">
-                        <label> Sobrenome: </label>
-                        <input type="text">
-                    </div>
-                    <div class="input-box">
-                        <label> Empresa: </label>
-                        <input type="text">
-                    </div>
-                    <div class="input-box">
-                        <label> Email: </label>
-                        <input type="text">
-                    </div>
-                    <div class="input-box">
-                        <label> Senha: </label>
+                        <label> Confirmar senha: </label>
                         <input type="text">
                     </div>
                 </div>
-                <button class="btn-cadastrar" id="cadastrar"> CADASTRAR </button>
-                <div class="container-text-link">
-                    <span class="text-link"> Já estou cadastrado, realizar o <a href="login.html"> login </a> agora.</span>
+                <button class="btn-cadastrar"> REDEFINIR </button>
+                <div class="container-text-link"> 
+                    <span class="text-link"> Retroceder para opção de  <a href="login.html"> login </a> </span>
                 </div>
             </div>
         </div>
@@ -59,9 +48,3 @@
 </body>
 
 </html>
-
-<script>
-    document.getElementById("cadastrar").onclick = function () {
-        location.href = "verificacao.html";
-    };
-</script>

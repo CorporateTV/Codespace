@@ -5,10 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | LySync</title>
-    <link rel="stylesheet" href="./public/css/style-cadastro.css">
+    <link rel="stylesheet" href="./public/css/style-auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
 <body>
+    <div class="container-btn-voltar">
+        <a href="index.html">
+            <i class="fa-solid fa-right-from-bracket fa-lg"></i>
+        </a>
+    </div>
     <div class="center-container">
         <div class="container-default-auth">
             <div class="container-bemvindo">
@@ -22,7 +28,6 @@
                     <img src="public/assets/Logo-LiSync-Inverso.png" alt="Logo" class="logo">
                 </div>
                 <div class="group-input-form">
-                    
                     <div class="input-box">
                         <label> Email: </label>
                         <input type="text">
@@ -33,8 +38,12 @@
                     </div>
                 </div>
                 <button class="btn-cadastrar"> Entrar </button>
-                <span class="text-link"> Acesse o link caso não tenha o <a href="cadastro.html"> cadastro </a> </span>
+                <div class="container-text-link">
+                    <span class="text-link"> Não tenha o <a href="cadastro.html"> cadastro </a> acese este link </span> <br>
+                    <span class="text-link"> Esqueci minha senha <a href="redefinicao.html"> redefinir-senha </a> </span>
+                </div>
             </div>
+
         </div>
     </div>
 </body>
