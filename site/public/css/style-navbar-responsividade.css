@@ -52,8 +52,6 @@
         right: 0;
         transform: translate(0,-100vh);
 
-
-
         .menu-items{
             display: flex;
             background-color:#0a1c40 ;
@@ -72,6 +70,7 @@
                 align-items: center;
                 list-style: none;
                 row-gap: 6vh;
+
                 & li{
                    font-family: "Merriweather-Sans";
                    font-optical-sizing: auto;
@@ -79,13 +78,14 @@
                    font-style: bold;
                    font-size: 18px;
                    cursor: pointer;
+
                    & a{
                     text-decoration: none;
                     color: white;
-                   } 
-                  
+                   }                 
                   
                 }
+
                 & button{
                    border-color: #143577;
                    width: 80px;
@@ -126,10 +126,6 @@
     transform-origin: 0% 100%;
     transition: transform 0.4s ease-in-out;
 }
-
-
-
-
 
 .hamburger input[type="checkbox"]:checked~.hamburger-lines .line1 {
     transform: rotate(35deg);
