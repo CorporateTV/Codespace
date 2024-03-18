@@ -13,7 +13,24 @@ function irsegundaPagina() {
 
 }
 function irquintaPagina() {
-  window.scroll({ top: window.innerHeight*4, behavior: 'smooth' })
+  if(window.innerWidth<2000&& window.innerWidth>1800){
+    window.scroll({ top: window.innerHeight*4, behavior: 'smooth' })
+  }
+  else if(window.innerWidth<=1800 && window.innerWidth>1400){
+    window.scroll({ top: window.innerHeight*3.9, behavior: 'smooth' })
+  }
+  else if(window.innerWidth<=1400 && window.innerWidth>1100){
+    window.scroll({ top: window.innerHeight*3.8, behavior: 'smooth' })
+  }else if(window.innerWidth<=1100 && window.innerWidth>1070){
+    window.scroll({ top: window.innerHeight*3.8, behavior: 'smooth' })
+  }
+  else if(window.innerWidth<=1070 && window.innerWidth>700){
+    window.scroll({ top: window.innerHeight*4.5, behavior: 'smooth' })
+  }
+  else if(window.innerWidth<=700){
+    window.scroll({ top: window.innerHeight*5.1, behavior: 'smooth' })
+  }
+
 
 }
 

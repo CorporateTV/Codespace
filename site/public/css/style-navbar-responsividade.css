@@ -1,3 +1,24 @@
+
+@media (max-width:1200px) {
+header{
+    & .navbar{
+        font-size: 2px;
+    }
+    & .container {
+    & ul{
+        & li{
+            & a{
+                font-size: 15px;
+            }
+        }
+    }
+    }
+    
+}
+}
+
+
+
 @media (max-width:800px) {
     header {
         display: flex;
@@ -7,6 +28,7 @@
             border-radius: 0;
             width: 100%;
             z-index: 9;
+            margin: 0;
 
             & .container {
                 width: 40px;
