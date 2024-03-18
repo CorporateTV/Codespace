@@ -119,7 +119,7 @@ label {
 
 .container-text-link {
     width: 45%;
-    text-align: left;
+    text-align: center;
 }
 
 .text-link {
@@ -148,4 +148,16 @@ label {
 
 .container-btn-voltar a:visited {
     color: white;
+}
+
+
+/* Elementos visiveis apenas para mobile */
+
+.container-bemvindo-mobile {
+    display: none;
+    font-family: oswald;
+}
+
+.text-bemvindo-mobile {
+    display: none;
 }

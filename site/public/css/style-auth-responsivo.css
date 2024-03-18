@@ -1,0 +1,153 @@
+@media only screen and (max-width:992px) {
+    .text-bemvindo h3 {
+        font-size: 28px;
+    }
+    
+    .text-bemvindo h1 {
+        font-size: 42px;
+    }
+
+    .container-default-auth {
+        width: 65%;
+        height: 65%;
+    }
+
+    .text-link {
+        font-family: oswald;
+        color: white;
+        font-size: 0.7em;
+    }
+
+    .container-btn-voltar {
+        height: 45px;
+        height: 45px;
+    }
+
+    .container-btn-voltar i {
+        font-size: medium;
+    }
+
+    .group-input-form {
+        width: 50%;
+    }
+
+    .container-text-link {
+        width: 50%;
+    }
+
+    .cadastro-mobile {
+        height: 77.5%;
+    }
+
+    .text-aviso-verificar p{
+        font-size: 10px;
+    }
+
+    /* Verificação responsivo */
+
+    .confirmation-code-input {
+        width: 30px; 
+        height: 30px; 
+        font-size: 12px; 
+        text-align: center; 
+    }
+}
+
+@media only screen and (max-width:768px) {
+    .container-bemvindo {
+        display: none;
+    }
+
+    .container-default-auth {
+        position: relative;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .container-bemvindo-mobile {
+        width: 100%;
+        height: 60px;
+        border-radius: 15px 15px 0px 0px;
+        background-color: #4D628C;
+        display: flex;
+        position: absolute;
+        top: 0;
+    }
+
+    .text-bemvindo-mobile {
+        display: flex;
+        align-items: center;
+        text-align: center; 
+        margin-left: 20px;
+    }
+
+    .text-bemvindo-mobile h1{
+        font-size: 28px;
+        text-shadow: 1px 1px white;
+        color: #8095BF;
+    }
+
+    .logo {
+        height: 50px;
+        width: 125px;
+    }
+
+    .text-link {
+        font-family: oswald;
+        color: white;
+        font-size: 0.7em;
+    }
+
+    .container-btn-voltar {
+        height: 45px;
+        height: 45px;
+    }
+
+    .container-btn-voltar i {
+        font-size: medium;
+    }
+
+    .group-input-form {
+        width: 80%;
+    }
+
+    .btn-cadastrar {
+        width: 70%;
+        padding: 5px 0;
+        font-size: 16px;
+    }
+
+    .text-link {
+        font-size: 0.6em;
+    }
+
+    label {
+        font-size: 10px;
+    }
+
+    .container-text-link {
+        width: 55%;
+        text-align: center;
+    }
+
+    .cadastro-mobile {
+        height: 77.5%;
+    }
+}
+
+@media only screen and (max-width:600px) {
+
+    .container-btn-voltar {
+        height: 35px;
+        width: 35px;
+    }
+
+    .container-btn-voltar i {
+        font-size: smaller;
+    }
+
+    .container-text-link {
+        width: 80%;
+    }
+}

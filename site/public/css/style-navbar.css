@@ -41,6 +41,7 @@ header{
     height: 9.5vh;
     display: flex;
     justify-content: space-between;
+    margin-top: 10px;
     background-color: #0A1C40;
     width: 98%;
     align-items: center;

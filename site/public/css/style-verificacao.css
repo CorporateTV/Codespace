@@ -72,7 +72,9 @@
 }
 
 .confirmation-code-container {
-    margin: 20px;
+    display: flex;
+    gap: 20px;
+    width: 100%;
 }
 
 .confirmation-code-input {
@@ -80,7 +82,6 @@
     height: 40px; 
     font-size: 20px; 
     text-align: center; 
-    margin-right: 10px; 
     border: 1px solid #ccc;
     border-radius: 5px; 
 }
@@ -104,3 +105,4 @@
     border-radius: 5px;
     cursor: pointer;
 }
+
