@@ -40,7 +40,7 @@
     }
 
     .text-aviso-verificar p{
-        font-size: 10px;
+        font-size: 18px;
     }
 
     /* Verificação responsivo */
@@ -51,7 +51,17 @@
         font-size: 12px; 
         text-align: center; 
     }
+
+    .text-bemvindo-verificao h1 {
+        font-size: 32px;
+    }
+
+    .container-form {
+        margin-top: 0;
+    }
+
 }
+
 
 @media only screen and (max-width:768px) {
     .container-bemvindo {
@@ -63,6 +73,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        height: 90%;
     }
 
     .container-bemvindo-mobile {
@@ -132,8 +143,16 @@
     }
 
     .cadastro-mobile {
-        height: 77.5%;
+        height: 95%;
     }
+
+    /* Tela Verificação */
+
+    .confirmation-code-input {
+        height: 25px;
+        width: 25px;
+    }
+
 }
 
 @media only screen and (max-width:600px) {
@@ -141,6 +160,7 @@
     .container-btn-voltar {
         height: 35px;
         width: 35px;
+        right: 30px;
     }
 
     .container-btn-voltar i {
@@ -149,5 +169,14 @@
 
     .container-text-link {
         width: 80%;
+    }
+
+    .text-aviso-verificar p{
+        font-size: 14px;
+    }
+
+    .confirmation-code-input {
+        height: 20px;
+        width: 20px;
     }
 }

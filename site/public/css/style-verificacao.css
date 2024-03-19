@@ -15,7 +15,7 @@
     align-items: center;
 }
 
-.container-default-auth {
+.container-default-verificao {
     background-color: #8095BF;
     width: 65%;
     height: 80%;
@@ -26,7 +26,7 @@
     flex-direction: column;
 }
 
-.container-bemvindo {
+.container-bemvindo-verificao {
     background-color: #4D628C;
     width: 100%;
     height: 20%;
@@ -37,11 +37,11 @@
     text-align: center;
 }
 
-.text-bemvindo-auth {
+.text-bemvindo-verificao {
     font-family: oswald;
 }
 
-.text-bemvindo-auth h1 {
+.text-bemvindo-verificao h1 {
     font-size: 52px;
     text-shadow: 1px 1px white;
     color: #8095BF;
@@ -73,6 +73,8 @@
 
 .confirmation-code-container {
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 20px;
     width: 100%;
 }
