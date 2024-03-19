@@ -34,7 +34,6 @@
                     <img src="public/assets/Logo-LiSync-Inverso.png" alt="Logo" class="logo">
                 </div>
                 <div class="group-input-form">
-                    
                     <div class="input-box">
                         <label> Digite nova senha: </label>
                         <input type="text">
@@ -44,13 +43,18 @@
                         <input type="text">
                     </div>
                 </div>
-                <button class="btn-cadastrar"> REDEFINIR </button>
+                <button class="btn-cadastrar" id="redefinir"> REDEFINIR </button>
                 <div class="container-text-link"> 
-                    <span class="text-link"> Retroceder para opção de  <a href="login.html"> login </a> </span>
+                    <span class="text-link"> Retroceder para página de  <a href="login.html"> login </a> </span>
                 </div>
             </div>
         </div>
     </div>
 </body>
-
 </html>
+
+<script>
+    document.getElementById("redefinir").onclick = function () {
+        location.href = "login.html";
+    };
+</script>

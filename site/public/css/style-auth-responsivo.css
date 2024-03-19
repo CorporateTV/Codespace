@@ -4,7 +4,7 @@
     }
     
     .text-bemvindo h1 {
-        font-size: 42px;
+        font-size: 38px;
     }
 
     .container-default-auth {
@@ -37,10 +37,6 @@
 
     .cadastro-mobile {
         height: 77.5%;
-    }
-
-    .text-aviso-verificar p{
-        font-size: 18px;
     }
 
     /* Verificação responsivo */
