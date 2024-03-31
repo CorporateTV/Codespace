@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | LySync</title>
-    <link rel="stylesheet" href="./public/css/style-auth.css">
-    <link rel="stylesheet" href="public/css/style-auth-responsivo.css">
+    <title>Cadastro | LySync</title>
+    <link rel="stylesheet" href="css/style-auth.css">
+    <link rel="stylesheet" href="css/style-auth-responsivo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
@@ -17,23 +17,35 @@
         </a>
     </div>
     <div class="center-container">
-        <div class="container-default-auth">
+        <div class="container-default-auth cadastro-mobile">
             <div class="container-bemvindo-mobile">
                 <div class="text-bemvindo-mobile">
-                    <h1> LOGIN </h1>
+                    <h1> CADASTRO </h1>
                 </div>
             </div>
             <div class="container-bemvindo">
                 <div class="text-bemvindo">
                     <h3> Seja <br> BEM-VINDO! </h3>
-                    <h1> Login </h1>
+                    <h1> CADASTRO </h1>
                 </div>
             </div>
             <div class="container-form">
                 <div class="logo-form">
-                    <img src="public/assets/Logo-LiSync-Inverso.png" alt="Logo" class="logo">
+                    <img src="assets/Logo-LiSync-Inverso.png" alt="Logo" class="logo">
                 </div>
                 <div class="group-input-form">
+                    <div class="input-box">
+                        <label> Nome: </label>
+                        <input type="text">
+                    </div>
+                    <div class="input-box">
+                        <label> Sobrenome: </label>
+                        <input type="text">
+                    </div>
+                    <div class="input-box">
+                        <label> Empresa: </label>
+                        <input type="text">
+                    </div>
                     <div class="input-box">
                         <label> Email: </label>
                         <input type="text">
@@ -43,15 +55,19 @@
                         <input type="text">
                     </div>
                 </div>
-                <button class="btn-cadastrar"> Entrar </button>
+                <button class="btn-cadastrar" id="cadastrar"> CADASTRAR </button>
                 <div class="container-text-link">
-                    <span class="text-link"> Não tenha o <a href="cadastro.html"> cadastro </a> acese este link </span> <br>
-                    <span class="text-link"> Esqueci minha senha <a href="redefinicao_email.html"> redefinir-senha </a> </span>
+                    <span class="text-link"> Já estou cadastrado, realizar o <a href="login.html"> login </a> agora.</span>
                 </div>
             </div>
-
         </div>
     </div>
 </body>
+
 </html>
 
+<script>
+    document.getElementById("cadastrar").onclick = function () {
+        location.href = "verificacao.html";
+    };
+</script>

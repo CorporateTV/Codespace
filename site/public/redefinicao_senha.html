@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmação Senha | LySync</title>
+    <link rel="stylesheet" href="css/style-auth.css">
+    <link rel="stylesheet" href="css/style-auth-responsivo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+    <div class="container-btn-voltar">
+        <a href="index.html">
+            <i class="fa-solid fa-right-from-bracket fa-lg"></i>
+        </a>
+    </div>
+    <div class="center-container">
+        <div class="container-default-auth">
+            <div class="container-bemvindo-mobile">
+                <div class="text-bemvindo-mobile">
+                    <h1> REDEFINIR SENHA </h1>
+                </div>
+            </div>
+            <div class="container-bemvindo">
+                <div class="text-bemvindo">
+                    <h1> REDEFINIR </h1>
+                    <h1> SENHA </h1>
+                </div>
+            </div>
+            <div class="container-form">
+                <div class="logo-form">
+                    <img src="assets/Logo-LiSync-Inverso.png" alt="Logo" class="logo">
+                </div>
+                <div class="group-input-form">
+                    <div class="input-box">
+                        <label> Digite nova senha: </label>
+                        <input type="text">
+                    </div>
+                    <div class="input-box">
+                        <label> Confirmar senha: </label>
+                        <input type="text">
+                    </div>
+                </div>
+                <button class="btn-cadastrar" id="redefinir"> REDEFINIR </button>
+                <div class="container-text-link"> 
+                    <span class="text-link"> Retroceder para página de  <a href="login.html"> login </a> </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    document.getElementById("redefinir").onclick = function () {
+        location.href = "login.html";
+    };
+</script>
