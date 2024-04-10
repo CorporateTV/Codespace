@@ -1,0 +1,285 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* Reset HTML */
+
+@font-face {
+    font-family: 'Oswald';
+    src: url(../assets/fonts/Oswald-Bold.ttf);
+}
+
+@font-face {
+    font-family: 'OswaldLight';
+    src: url(../assets/fonts/Oswald-ExtraLight.ttf);
+}
+
+@font-face {
+    font-family: 'Merriweather-Sans';
+    src: url(../assets/fonts/MerriweatherSans-Regular.otf);
+}
+
+.bar {
+    position: fixed;
+    background: linear-gradient(90deg, rgba(15,39,88,1) 0%, rgba(10,28,64,1) 100%);
+    height: 100vh;
+    width: 92px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+
+}
+
+ul {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    bottom: 50%;
+    row-gap: 3vh;
+    
+    
+    li {
+        width: 92px;
+        display: flex;
+        padding: 10px 0 10px;
+        border-radius: 0px 10px 0;
+        overflow: hidden;
+        height: 40px;
+        align-items: center;
+        transition: 0.25s ;
+        
+
+        .imgIcon{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 92px;
+        }
+
+        p {
+            font-family: 'Oswald';
+            display: none;  
+            color: white;
+            font-size: 30px;
+            white-space: nowrap;
+            margin-left: 10px;
+            margin-right: 15px;
+        }
+    }
+
+}
+
+.selc:hover {
+    width: auto;
+}
+
+.selection1:hover {
+    width: auto;    
+    background-color: #8095bf;
+}
+.selection1:hover #p1 {
+    display: block;
+    
+}
+
+
+
+.selection2:hover {
+    width: auto;
+    background-color: #8095bf;
+}
+.selection2:hover #p2 {
+    display: block;
+}
+
+
+
+.selection3:hover {
+    width: auto;
+    background-color: #8095bf;
+}
+.selection3:hover #p3 {
+    display: block;
+}
+
+
+
+.selection4:hover {
+    width: auto;
+    background-color: #8095bf;
+}
+.selection4:hover #p4 {
+    display: block;
+}
+
+
+.selection5 {
+    font-family: 'Oswald';
+    position: absolute;
+    bottom: 3vh;
+    width: 92px;
+    display: flex;
+    padding: 10px 0 10px;
+    border-radius: 0px 10px 0;
+    overflow: hidden;
+    height: 40px;
+    .imgIcon{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 92px;
+    }
+
+    p {
+        display: none;  
+        color: white;
+        font-size: 30px;
+        align-self: flex-start;
+        white-space: nowrap;
+        margin-left: 10px;
+        margin-right: 15px;
+        margin-top: 5px;
+        
+    }
+}
+
+.selection5:hover {
+    width: auto;
+    background-color: #8095bf;
+}
+.selection5:hover #p5 {
+    display: block;
+}
+
+
+
+
