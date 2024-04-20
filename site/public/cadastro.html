@@ -36,26 +36,26 @@
                 <div class="group-input-form">
                     <div class="input-box">
                         <label> Nome: </label>
-                        <input type="text">
+                        <input id="input_nome" type="text">
                     </div>
                     <div class="input-box">
                         <label> Sobrenome: </label>
-                        <input type="text">
+                        <input id="input_sobrenome" type="text">
                     </div>
                     <div class="input-box">
                         <label> Empresa: </label>
-                        <input type="text">
+                        <input id="input_empresa" type="text">
                     </div>
                     <div class="input-box">
                         <label> Email: </label>
-                        <input type="text">
+                        <input id="input_email" type="text">
                     </div>
                     <div class="input-box">
                         <label> Senha: </label>
-                        <input type="text">
+                        <input id="input_senha" type="text">
                     </div>
                 </div>
-                <button class="btn-cadastrar" id="cadastrar"> CADASTRAR </button>
+                <button onclick="cadastrar()" class="btn-cadastrar" id="cadastrar"> CADASTRAR </button>
                 <div class="container-text-link">
                     <span class="text-link"> Já estou cadastrado, realizar o <a href="login.html"> login </a> agora.</span>
                 </div>
@@ -71,3 +71,6 @@
         location.href = "verificacao.html";
     };
 </script>
+
+<script type="module" src="../src/controllers/enviarCod.js"></script>
+
