@@ -150,3 +150,11 @@ table {
     display: flex;
     align-items: center;
 }
+
+.ativo {
+    color: #29AB48;
+}
+
+.inativo {
+    color: #D8474D;
+}
