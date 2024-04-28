@@ -1,0 +1,192 @@
+.container-layout {
+    background-color: #E4E8F1;
+    color: white;
+    font-family: 'Oswald';
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.header-layout {
+    background-color: #0a1c40;
+    margin: 20px;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-layout h1 {
+    color: white;
+    font-size: 32px;
+}
+
+.imgIcon-header {
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    background-color: #0F172A;
+}
+
+.container-content {
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.container-tab-layout {
+    background-color: #0a1c40;
+    width: 80%;
+    border-radius: 10px;
+}
+
+.display-tab {
+    overflow: hidden;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    margin-bottom: 5px;
+    
+}
+
+.display-tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 1rem ;
+    transition: 0.3s;
+    color: white;
+    font-size: 1em;
+    font-family: 'Oswald';
+}
+
+.display-tab button:hover {
+    background-color: #0F172A;
+}
+
+.display-tab button:active {
+    background-color: #8095bf;
+}
+
+.container-display #Geral .tab-content {
+    display: block;
+}
+
+.tab-content {
+    display: none;
+    background-color: rgba(28, 36, 79, 0.6);
+    padding: 1rem;
+}
+
+.tab-content h1{
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.layout-config {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.layout-config h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: solid 2px white;
+}
+
+.form-left {
+    width: 50%;
+}
+
+.container-form {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-right {
+    width: 50%;
+}
+
+.card-empresa {
+    background-color: #0F172A;
+    border-radius: 20px;
+    padding: 20px;
+    color: white;
+    font-size: 1.2em;
+    height: 40%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
+.logo-empresa {
+    width: 200px;
+    height: 75px;
+}
+
+.logo-empresa img {
+    width: 100%;
+    height: 100%;
+}
+
+.text-empresa span{
+    font-size: 0.8em;
+}
+
+.container-tab-profile {
+    background-color: #0a1c40;
+    width: 20%;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.profile-description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.container-tab-profile img {
+    height: 200px;
+    width: 250px;
+    background-color: whitesmoke;
+    border-radius: 5px;
+}
+
+.text-profile {
+    font-family: 'Oswald';
+    width: 100%;
+    color: white;
+}
+
+.text-profile h3 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.text-profile ul li{
+    margin-bottom: 10px;
+}
+
+.sistema-container {
+    background-color: #0F172A;
+    border-radius: 20px;
+}
