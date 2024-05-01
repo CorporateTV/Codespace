@@ -112,6 +112,7 @@
 .container-form {
     display: flex;
     justify-content: space-between;
+    gap: 30px;
 }
 
 .form-right {

@@ -9,6 +9,28 @@
     font-size: 18px;
 }
 
+.button-default {
+    width: 125px;
+    background-color: #8095BF;
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    color: white;
+    font-family: 'Oswald';
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.select-default {
+    width: 150px;
+    background-color: #8095BF;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-family: 'Oswald';
+    font-size: 1em;
+}
+
 .input-configuracao {
     position: relative;
     border-bottom: 2px solid white;

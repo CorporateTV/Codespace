@@ -117,7 +117,7 @@
     top: 25%;
     left: 5%;
     height: 70%;
-    width: 90%;
+    width: 95%;
     max-width: 964px;
     display: flex;
     justify-content: center;
@@ -177,7 +177,7 @@
     align-content: center;
     background: white;
     border: none;
-    padding: 8px;
+    padding: 5px;
     border-radius: 50%;
     outline: 0;
     cursor: pointer;
@@ -186,14 +186,14 @@
 
 
 #prev {
-    top: 50%;
+    top: 45%;
     left: 0;
     transform: translate(50%, -50%);
     display: none;
 }
 
 #next {
-    top: 50%;
+    top: 45%;
     right: 0;
     transform: translate(-50%, -50%);
 }

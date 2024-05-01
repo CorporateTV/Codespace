@@ -5,9 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Analytics</title>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
     <link rel="stylesheet" href="../css/style-sidebar-dash.css">
     <link rel="stylesheet" href="../css/style-dash-global.css">
+    <link rel="stylesheet" href="../css/style-analytcs.css">
+    <link rel="stylesheet" href="../css/style-components.css">
     <link rel="stylesheet" href="../css/style-reset.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
 <body>
@@ -40,8 +46,70 @@
         </div>
 
         <div class="container-layout">
+            <div class="wrapper-layout">
+                <div class="box header">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <h2>Nome setor - 01</h2>
+                </div>
+                <div class="box row-tv">
+                    <div class="container-info-tv">
+                        <div class="card-info-tv">
+                            <h3>Nome TV</h3>
+                            <div class="card-row-descricao">
+                                <ul>
+                                    <li>Hostname</li>
+                                    <li>Conexão</li>
+                                    <li>Status</li>
+                                    <li>Tempo de Atividade</li>
+                                </ul>
+                                <img src="../assets/monitor.png" alt="Monitor">
+                            </div>
+                            <div class="card-row-buttons">
+                                <button class="button-default">Ligar</button>
+                                <button class="button-default">Reiniciar</button>
+                                <button class="button-default">Desligar</button>
+                            </div>
+                        </div>
+                        <div class="tv-uptime">
+                            <h3>Tempo em atividade (%)</h3>
+                            <div id="chart_tempoAtividade"></div>
+                        </div>
+                        <div class="tv-ideal">
+                            <p> Selecionar outra televisão </p>
+                            <select name="lista_televisoes" id="lista_televisoes" class="select-default">
+                                <option value="tv01">TV01</option>
+                                <option value="tv02">TV02</option>
+                                <option value="tv03">TV03</option>
+                            </select>
 
+                            <div id="chart_historico"></div>
+                        </div>
+                    </div>
+                    <div class="monitoramento">
+                        <div class="monitor-header">
+                            <div class="descricao-componente">
+                                <h3>Nome TV - CPU %</h3>
+                                <span>Intel(R) Core(TM) i3-6100 3.70Ghz</span>
+                            </div>
+                            <div class="selecao-componente">
+                                <span>Componente</span>
+                                <select name="lista_componente" id="lista_componente" class="select-default">
+                                    <option value="cpu">CPU</option>
+                                    <option value="ram">RAM</option>
+                                    <option value="disco">Disco</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="chart_monitoramento" class="div-monitoramento"></div>
+                    </div>
+                </div>
+                <div class="box processos"></div>
+                <div class="box geral"></div>
+                <div class="box notifacao"></div>
+            </div>
         </div>
     </div>
 </body>
 </html>
+
+<script src="../js/charts/chart_analytics.js"></script>

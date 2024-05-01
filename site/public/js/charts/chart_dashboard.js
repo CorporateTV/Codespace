@@ -6,6 +6,8 @@ google.charts.setOnLoadCallback(drawChartUsuarios);
 
 google.charts.setOnLoadCallback(drawChartQuantidadeTv);
 
+google.charts.setOnLoadCallback(drawChart);
+
 function drawChartUsuarios() {
     var dataUsuarios = google.visualization.arrayToDataTable([
         ['Cargo', 'Quantidade'],
@@ -54,7 +56,6 @@ function drawChartQuantidadeTv() {
 
 /* Gráfico Dashboard setores */
 
-google.charts.setOnLoadCallback(drawChart);
 function drawChart() {
     var data = google.visualization.arrayToDataTable([
         ['Setor' ,'ON', 'OFF'],
