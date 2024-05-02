@@ -39,16 +39,18 @@ function irLogin() {
 
 }
 
-celularInput.addEventListener('keypress', () => {
+var inputCelular = document.getElementById("celular_input");
 
-  if (celularInput.value.length < 1) {
-    celularInput.value += '('
+inputCelular.addEventListener('keypress', () => {
+
+  if (inputCelular.value.length < 1) {
+    inputCelular.value += '('
   }
-  if (celularInput.value.length === 3) {
-    celularInput.value += ')'
+  if (inputCelular.value.length === 3) {
+    inputCelular.value += ')'
   }
-  if (celularInput.value.length === 9) {
-    celularInput.value += '.'
+  if (inputCelular.value.length === 9) {
+    inputCelular.value += '-'
   }
 
 })
