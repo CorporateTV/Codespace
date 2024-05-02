@@ -3,16 +3,18 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    position: relative;
 }
 
 .wrapper-layout {
+    position: absolute;
     display: grid;
+    top: 20px;
     width: 95%;
     height: 90%;
     grid-template-rows: 40% 60%;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 10px;
     justify-content: center;
 }
 
@@ -74,6 +76,12 @@
     border-bottom: 1px solid #E4E8F1;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+}
+
+.header-title {
+    display: flex;
+    align-items: center;
     gap: 20px;
 }
 
@@ -97,6 +105,17 @@
     text-align: center;
 }
 
+.grafico-rosca {
+    width: 45%;   
+}
+
+.gerente {
+    color: #4F699C;
+}
+
+.assistente {
+    color: #8095bf;
+}
 
 .row2 {
     grid-column: 1 / 4;
@@ -204,6 +223,8 @@
     border-radius: 20px;
     position: relative;
 }
+
+
 
 .setores-container {
     position: absolute;

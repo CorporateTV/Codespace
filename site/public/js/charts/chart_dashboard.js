@@ -19,10 +19,15 @@ function drawChartUsuarios() {
         pieHole: 0.4,
         legend: 'none',
         backgroundColor: 'transparent',
-        pieSliceBorderColor : "transparent",
+        chartArea: {
+            width: "100%",
+            height: "80%",
+            
+        },
         width: 200,
-        height: 200,
-        colors: ['#0F172A', '#8095bf']
+        height: 150,
+        pieSliceBorderColor : "transparent",
+        colors: ['#4F699C', '#8095bf']
     };
 
     var chart = new google.visualization.PieChart(document.getElementById('chart_usuarios'));
@@ -43,9 +48,14 @@ function drawChartQuantidadeTv() {
         pieHole: 0.4,
         legend: 'none',
         backgroundColor: 'transparent',
-        pieSliceBorderColor : "transparent",
+        chartArea: {
+            width: "100%",
+            height: "80%",
+            
+        },
         width: 200,
-        height: 200,
+        height: 150,
+        pieSliceBorderColor : "transparent",
         colors: ['#D8474D', '#29AB48']
     };
 
