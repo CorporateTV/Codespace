@@ -8,7 +8,14 @@
     <link rel="stylesheet" href="css/style-auth.css">
     <link rel="stylesheet" href="css/style-auth-responsivo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="../public/js/validacao.js"></script>
+    <script src="../src/controllers/enviarCod.js"></script>
 </head>
+
+<div class="container-alert">
+    <div id="alerta-confirmacao" class="alert"></div>
+</div>
+
 
 <body>
     <div class="container-btn-voltar">
@@ -36,14 +43,16 @@
                 <div class="group-input-form">
                     <div class="input-box">
                         <label> Email: </label>
-                        <input type="text">
+                        <input id="input_email" type="text">
+                        <div id="email-error" class="error-message"></div>
                     </div>
                     <div class="input-box">
                         <label> Senha: </label>
-                        <input type="text">
+                        <input id="input_senha" type="text">
+                        <div id="senha-error" class="error-message"></div>
                     </div>
                 </div>
-                <button class="btn-cadastrar"> Entrar </button>
+                <button onclick="login()" class="btn-cadastrar" id="login"> Entrar </button>
                 <div class="container-text-link">
                     <span class="text-link"> Não tenha o <a href="cadastro.html"> cadastro </a> acese este link </span> <br>
                     <span class="text-link"> Esqueci minha senha <a href="redefinicao_email.html"> redefinir-senha </a> </span>
@@ -54,4 +63,69 @@
     </div>
 </body>
 </html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+   
+        const btnLogin = document.getElementById('login');
+
+        // Adicione um ouvinte de evento de clique ao botão
+        btnLogin.addEventListener('click', function() {
+            login(); // Chama a função cadastrar() quando o botão for clicado
+        });
+    });
+
+    function login(){
+ var email = input_email.value
+ var senha = input_senha.value
+
+ var regexEmail = /^(?!.*@(gmail|hotmail|outlook)\.com).*$/;
+    var regex2Email = /^[A-Za-z0-9._%+-]+@(?!.*@(gmail|hotmail|outlook)\.com).*$/;
+    console.log(email);
+    const validacaoEmail = regexEmail.test(email);
+    console.log(validacaoEmail);
+    console.log(email);
+    const validacao2Email = regex2Email.test(email);
+    console.log(validacao2Email);
+
+    var regexSenha = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,50}$/;
+    console.log(senha);
+    const validacaoSenha = regexSenha.test(senha);
+    console.log(validacaoSenha);
+
+    if (email.trim() === "") {
+        document.getElementById('email-error').innerHTML = "O campo email não pode estar vazio";
+        document.getElementById('email-error').style.color = "red";
+    }
+
+    if (senha.trim() === "") {
+        document.getElementById('senha-error').innerHTML = "O campo senha não pode estar vazio";
+        document.getElementById('senha-error').style.color = "red";
+    }
+
+    
+    if (validacao2Email && validacaoEmail && validacaoSenha) {
+        var alertaConfirmacao = document.getElementById('alerta-confirmacao');
+        alertaConfirmacao.innerHTML = "Acesso Confirmado!";
+        alertaConfirmacao.style.display = "block";
+
+
+        setTimeout(function() {
+            alertaConfirmacao.style.display = "none";
+            window.location.href = "";
+        }, 3000);
+        
+    }
+
+    if (!validacaoEmail){ 
+        document.getElementById('email-error').innerHTML ="Só pode usar email corporativo";
+        document.getElementById('email-error').style.color = "red";
+    } 
+        else if (!validacaoSenha) {
+            document.getElementById('senha-error').innerHTML ="A senha deve ter no mínimo 8 caracteres, incluindo pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial";
+        document.getElementById('senha-error').style.color = "red";      
+    }
+
+}
+</script>
 

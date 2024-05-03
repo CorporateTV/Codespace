@@ -1,76 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cadastro | LySync</title>
-    <link rel="stylesheet" href="css/style-auth.css">
-    <link rel="stylesheet" href="css/style-auth-responsivo.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-</head>
+    <link rel="stylesheet" href="css/style-auth.css" />
+    <link rel="stylesheet" href="css/style-auth-responsivo.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <script src="js/validacao.js"></script>
+  </head>
 
-<body>
+  <body>
     <div class="container-btn-voltar">
-        <a href="index.html">
-            <i class="fa-solid fa-right-from-bracket fa-lg"></i>
-        </a>
+      <a href="index.html">
+        <i class="fa-solid fa-right-from-bracket fa-lg"></i>
+      </a>
     </div>
+
+    <div class="container-alert">
+      <div id="alerta-confirmacao" class="alert"></div>
+    </div>
+
     <div class="center-container">
-        <div class="container-default-auth cadastro-mobile">
-            <div class="container-bemvindo-mobile">
-                <div class="text-bemvindo-mobile">
-                    <h1> CADASTRO </h1>
-                </div>
-            </div>
-            <div class="container-bemvindo">
-                <div class="text-bemvindo">
-                    <h3> Seja <br> BEM-VINDO! </h3>
-                    <h1> CADASTRO </h1>
-                </div>
-            </div>
-            <div class="container-form">
-                <div class="logo-form">
-                    <img src="assets/Logo-LiSync-Inverso.png" alt="Logo" class="logo">
-                </div>
-                <div class="group-input-form">
-                    <div class="input-box">
-                        <label> Nome: </label>
-                        <input id="input_nome" type="text">
-                    </div>
-                    <div class="input-box">
-                        <label> Sobrenome: </label>
-                        <input id="input_sobrenome" type="text">
-                    </div>
-                    <div class="input-box">
-                        <label> Empresa: </label>
-                        <input id="input_empresa" type="text">
-                    </div>
-                    <div class="input-box">
-                        <label> Email: </label>
-                        <input id="input_email" type="text">
-                    </div>
-                    <div class="input-box">
-                        <label> Senha: </label>
-                        <input id="input_senha" type="text">
-                    </div>
-                </div>
-                <button onclick="cadastrar()" class="btn-cadastrar" id="cadastrar"> CADASTRAR </button>
-                <div class="container-text-link">
-                    <span class="text-link"> Já estou cadastrado, realizar o <a href="login.html"> login </a> agora.</span>
-                </div>
-            </div>
+      <div class="container-default-auth cadastro-mobile">
+        <div class="container-bemvindo-mobile">
+          <div class="text-bemvindo-mobile">
+            <h1>CADASTRO</h1>
+          </div>
         </div>
+        <div class="container-bemvindo">
+          <div class="text-bemvindo">
+            <h3>
+              Seja <br />
+              BEM-VINDO!
+            </h3>
+            <h1>CADASTRO</h1>
+          </div>
+        </div>
+        <div class="container-form">
+          <div class="logo-form">
+            <img src="assets/Logo-LiSync-Inverso.png" alt="Logo" class="logo" />
+          </div>
+          <div class="group-input-form">
+            <div class="input-box">
+              <label> Nome: </label>
+              <!-- Adicione IDs aos seus campos de entrada -->
+              <input id="input_nome" type="text" />
+              <div id="nome-error" class="error-message"></div>
+            </div>
+            <div class="input-box">
+              <label> Sobrenome: </label>
+              <input id="input_sobrenome" type="text" />
+              <div id="sobrenome-error" class="error-message"></div>
+            </div>
+            <div class="input-box">
+              <label> Empresa: </label>
+              <input id="input_empresa" type="text" />
+              <div id="empresa-error" class="error-message"></div>
+            </div>
+            <div class="input-box">
+              <label> Email: </label>
+              <input id="input_email" type="text" />
+              <div id="email-error" class="error-message"></div>
+            </div>
+            <div class="input-box">
+              <label> Senha: </label>
+              <input id="input_senha" type="text" />
+              <div id="senha-error" class="error-message"></div>
+            </div>
+          </div>
+          <button
+            onclick="cadastrar()"
+            id="cadastrar"
+            class="btn-cadastrar"
+          >
+            <a href="verificacao.html"></a>Enviar Email
+          </button>
+          <div class="container-text-link">
+            <span class="text-link">
+              Já estou cadastrado, realizar o
+              <a href="login.html"> login </a> agora.</span
+            >
+          </div>
+        </div>
+      </div>
     </div>
-</body>
 
+  </body>
 </html>
+    <script>   
+    function validar() {
+    
+    var nome = input_nome.value;
+    var sobrenome = input_sobrenome.value;
+    var email = input_email.value;
+    var senha = input_senha.value;
 
-<script>
-    document.getElementById("cadastrar").onclick = function () {
-        location.href = "verificacao.html";
+    var regexNome = /^[a-zA-ZÀ-ÿ\s]+$/;
+    console.log(nome);
+    const validacaoNome = regexNome.test(nome);
+    console.log(validacaoNome);
+
+    var regexSobrenome = /^[a-zA-ZÀ-ÿ\s]+$/;
+    console.log(sobrenome);
+    const validacaoSobrenome = regexSobrenome.test(sobrenome);
+    console.log(validacaoSobrenome);
+
+    var regexEmail = /^(?!.*@(gmail|hotmail|outlook)\.com).*$/;
+    var regex2Email = /^[A-Za-z0-9._%+-]+@(?!.*@(gmail|hotmail|outlook)\.com).*$/;
+    console.log(email);
+    const validacaoEmail = regexEmail.test(email);
+    console.log(validacaoEmail);
+    console.log(email);
+    const validacao2Email = regex2Email.test(email);
+    console.log(validacao2Email);
+
+    var regexSenha = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,50}$/;
+    console.log(senha);
+    const validacaoSenha = regexSenha.test(senha);
+    console.log(validacaoSenha);
+     
+    document.getElementById('nome-error').innerHTML = "";
+    document.getElementById('sobrenome-error').innerHTML = "";
+    document.getElementById('email-error').innerHTML = "";
+    document.getElementById('senha-error').innerHTML = "";
+
+    if (nome.trim() === "") {
+        document.getElementById('nome-error').innerHTML = "O campo nome não pode estar vazio";
+        document.getElementById('nome-error').style.color = "red";
+    }
+
+    if (sobrenome.trim() === "") {
+        document.getElementById('sobrenome-error').innerHTML = "O campo sobrenome não pode estar vazio";
+        document.getElementById('sobrenome-error').style.color = "red";
+    }
+
+    if (email.trim() === "") {
+        document.getElementById('email-error').innerHTML = "O campo email não pode estar vazio";
+        document.getElementById('email-error').style.color = "red";
+    }
+
+    if (senha.trim() === "") {
+        document.getElementById('senha-error').innerHTML = "O campo senha não pode estar vazio";
+        document.getElementById('senha-error').style.color = "red";
+    }
+
+    
+    if (validacaoNome && validacaoSobrenome && validacao2Email && validacaoEmail && validacaoSenha) {
+        var alertaConfirmacao = document.getElementById('alerta-confirmacao');
+        alertaConfirmacao.innerHTML = "Cadastro Confirmado!";
+        alertaConfirmacao.style.display = "block";
+
+
+        setTimeout(function() {
+            alertaConfirmacao.style.display = "none";
+            window.location.href = "verificacao.html";
+        }, 3000);
+        
+    }
+        else if (!validacaoNome){           
+            document.getElementById('nome-error').innerHTML = "O campo nome está preenchido de forma incorreta";
+            document.getElementById('nome-error').style.color = "red";
+    } 
+        else if (!validacaoSobrenome){
+        document.getElementById('sobrenome-error').innerHTML = "O campo sobrenome está preenchido de forma incorreta";
+        document.getElementById('sobrenome-error').style.color = "red";
+    } 
+        else if (!validacaoEmail){ 
+        document.getElementById('email-error').innerHTML ="Só pode usar email corporativo";
+        document.getElementById('email-error').style.color = "red";
+    } 
+        else if (!validacaoSenha) {
+            document.getElementById('senha-error').innerHTML ="A senha deve ter no mínimo 8 caracteres, incluindo pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial";
+        document.getElementById('senha-error').style.color = "red";      
+    }
+
+}
+    
+function cadastrar() {
+    validar();
+    
+    const nome = document.getElementById('input_nome').value;
+    const email = document.getElementById('input_email').value;
+
+    const codigo = Math.floor(100000 + Math.random() * 900000).toString().substring(0, 6); 
+
+    const formData = {
+        nome: nome,
+        email: email,
+        codigo: codigo
     };
-</script>
 
-<script type="module" src="../src/controllers/enviarCod.js"></script>
+    fetch("/codigo/cadastrar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.text();
+        }
+        throw new Error("Erro ao enviar os dados");
+    })
+    .then(data => {
+        console.log(data); // Exibe a resposta do servidor no console
+        // Aqui você pode adicionar alguma lógica para lidar com a resposta do servidor, se necessário
+    })
+    .catch(error => {
+        console.error(error); // Exibe erros no console
+    });
+}
 
+    </script>
