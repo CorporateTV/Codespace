@@ -188,6 +188,8 @@ function cadastrar() {
 
     const codigo = Math.floor(100000 + Math.random() * 900000).toString().substring(0, 6); 
 
+    localStorage.setItem('codigo', codigo);
+
     const formData = {
         nome: nome,
         email: email,
@@ -208,12 +210,13 @@ function cadastrar() {
         throw new Error("Erro ao enviar os dados");
     })
     .then(data => {
-        console.log(data); // Exibe a resposta do servidor no console
-        // Aqui você pode adicionar alguma lógica para lidar com a resposta do servidor, se necessário
+        console.log(data); 
     })
     .catch(error => {
-        console.error(error); // Exibe erros no console
+        console.error(error); 
     });
 }
+
+const codigo = localStorage.getItem('codigo');
 
     </script>

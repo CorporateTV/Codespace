@@ -12,6 +12,15 @@
 </head>
 
 <body>
+    
+    <div class="container-alert">
+        <div id="alerta-confirmacao" class="alert"></div>
+      </div>
+
+      <div class="container-alert">
+        <div id="alerta-erro" class="alertErro"></div>
+      </div>
+    
     <div class="container-btn-voltar">
         <a href="index.html">
             <i class="fa-solid fa-right-from-bracket fa-lg"></i>
@@ -49,5 +58,46 @@
 
 </html>
 
-<script type="module" src="../src/controllers/enviarCod.js"></script>
+<script>
+    const codigo = localStorage.getItem('codigo');
+if (codigo) {
+    console.log("Código recuperado:", codigo);
+    preencherCodigo(codigo);
+} else {
+    console.log("Nenhum código encontrado no localStorage.");
+}
+    
+    function validarCod() {
+    var codValidar = number1.value + number2.value + number3.value + number4.value + number5.value + number6.value;
+    var codigo = localStorage.getItem('codigo');
+
+    if (codigo == codValidar) {
+        var alertaConfirmacao = document.getElementById('alerta-confirmacao');
+        alertaConfirmacao.innerHTML = "Código Correto!";
+        alertaConfirmacao.style.display = "block";
+
+        setTimeout(function() {
+            alertaConfirmacao.style.display = "none";
+            window.location.href = "login.html";
+        }, 3000);
+    } else {
+        var alertaErro = document.getElementById('alerta-erro');
+        alertaErro.innerHTML = "Código incorreto. Por favor, tente novamente.";
+        alertaErro.style.display = "block";
+
+        setTimeout(function() {
+            alertaErro.style.display = "none";
+        }, 3000);
+    }
+}
+
+    
+    
+    
+    
+    
+    
+    
+   
+</script>
 
