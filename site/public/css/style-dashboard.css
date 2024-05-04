@@ -22,6 +22,7 @@
 .box {
     font-family: 'Oswald';
     color: white;
+    position: relative;
 }
 
 .box:nth-child(-n+3) {
@@ -70,15 +71,6 @@
     font-size: 1.5em;
 }
 
-.header-box {
-    font-size: 1.5em;
-    padding: 20px;
-    border-bottom: 1px solid #E4E8F1;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
 .header-title {
     display: flex;
     align-items: center;
@@ -90,6 +82,7 @@
     gap: 20px;
     justify-content: space-around;
     align-items: center;
+    height: 75%;
 }
 
 .quantidade-chart table {
@@ -141,8 +134,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
+
+
+.container-select {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+    top: 15%;
+    left: 5%;
+}
+
 
 #carousel {
     overflow: auto;
@@ -165,6 +169,7 @@
 .container-carousel .card {
     height: 100%;
     padding: 1em;
+    cursor: pointer;
 
     &>container-img {
         width: 75px;
@@ -182,10 +187,11 @@
         text-align: center;
     }
 
-    &>p {
-        margin: 0.30em 0;
-        line-height: 1;
-    }
+}
+
+.container-carousel .card p {
+    font-size: 1em;
+    line-height: 1.5em;
 }
 
 
@@ -223,8 +229,6 @@
     border-radius: 20px;
     position: relative;
 }
-
-
 
 .setores-container {
     position: absolute;
