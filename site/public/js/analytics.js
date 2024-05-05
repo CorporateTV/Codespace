@@ -6,10 +6,10 @@ const andar = sessionStorage.FLOOR_TV;
 const setor = sessionStorage.SECTOR_TV;
 
 
-document.getElementById("setor_name").innerHTML = `${setor}`
-document.getElementById("andar_name").innerHTML = `${andar}`
+document.getElementById("setor_name").innerHTML = `${setor ?? "Marketing"}`  
+document.getElementById("andar_name").innerHTML = `${andar ?? "1"}`
 
-document.getElementById("nome_tv").innerHTML = `${nomeTv}`
-document.getElementById("hostname").innerHTML = `${hostname}`
-document.getElementById("conexao").innerHTML = `${condicao}`
-document.getElementById("status").innerHTML = `${statusTv}`
+document.getElementById("nome_tv").innerHTML = `${nomeTv ?? "TV-01"}`
+document.getElementById("hostname").innerHTML = `${hostname ?? "HOSTNAME1"}`
+document.getElementById("conexao").innerHTML = `${condicao ?? "ON"}`
+document.getElementById("status").innerHTML = `${statusTv ?? "Normal"}`

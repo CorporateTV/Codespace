@@ -38,7 +38,7 @@ function entrar() {
             sessionStorage.ID_USUARIO = json.idUsuario;
 
             setTimeout(function () {
-              window.location.href = "./dashboard/analytics.html";
+              window.location.href = "./dashboard/dashboard.html";
             }, 1000); // apenas para exibir o loading
           });
         } else {

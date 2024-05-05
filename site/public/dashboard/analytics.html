@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
-<body>
+<body onload="validarSessao()">
     <div class="bg-layout">
         <div class="sideBar">
             <div class="sideBar-container">
@@ -78,9 +78,7 @@
                             <div class="select-televisao">
                                 <p> Selecionar outra televisão </p>
                                 <select name="lista_televisoes" id="lista_televisoes" class="select-default">
-                                    <option value="tv01">TV01</option>
-                                    <option value="tv02">TV02</option>
-                                    <option value="tv03">TV03</option>
+                                    <option selected> Selecionar TV </option>
                                 </select>
                             </div>
                             <div class="div-historico">
@@ -150,5 +148,8 @@
 </html>
 
 <script src="../js/charts/chart_analytics.js"></script>
+<script src="../js/getData/tv_data.js"></script>
 <script src="../js/select_chart.js"></script>
+<script src="../js/change_info_page.js"></script>
+<script src="../js/sessao.js"></script>
 <script src="../js/analytics.js"></script>

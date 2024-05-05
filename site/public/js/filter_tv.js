@@ -1,5 +1,4 @@
 function createComponent(tvInfo) {
-    // Create a new div element for the card
     var cardDiv = document.createElement("div");
     cardDiv.className = "card";
 
@@ -35,40 +34,28 @@ function createComponent(tvInfo) {
     cardDiv.appendChild(containerImgDiv);
     cardDiv.appendChild(infoTvDiv);
 
-    cardDiv.addEventListener("click", function() {
+    cardDiv.addEventListener("click", function () {
         sessionStorage.NOME_TV = tvInfo.tvName;
         sessionStorage.HOSTNAME_TV = tvInfo.hostname;
         sessionStorage.STATUS_TV = tvInfo.status;
         sessionStorage.CONDITION_TV = tvInfo.condition;
         sessionStorage.FLOOR_TV = tvInfo.floor;
         sessionStorage.SECTOR_TV = tvInfo.sector;
-        window.location.href = "analytics.html"; // Replace with your desired URL
+        window.location.href = "analytics.html";
     });
 
     return cardDiv;
 }
 
-// Function to create multiple components
+
 function createMultipleComponents(tvInfoArray) {
     var container = document.getElementById("content");
-    // Loop through the TV information array and create a component for each entry
+
     for (var i = 0; i < tvInfoArray.length; i++) {
         var component = createComponent(tvInfoArray[i]);
         container.appendChild(component);
     }
 }
-
-// Usage example:
-var tvInfoArray = [
-    { tvName: "TV-01", hostname: "HOSTNAME1", status: "ON", condition: "Normal", floor: "1", sector: "Marketing" },
-    { tvName: "TV-02", hostname: "HOSTNAME2", status: "ON", condition: "Normal", floor: "1", sector: "Marketing" },
-    { tvName: "TV-03", hostname: "HOSTNAME3", status: "OFF", condition: "Error", floor: "2", sector: "RH" },
-    { tvName: "TV-04", hostname: "HOSTNAME4", status: "ON", condition: "Normal", floor: "4", sector: "Vendas" },
-    { tvName: "TV-05", hostname: "HOSTNAME5", status: "OFF", condition: "Error", floor: "1", sector: "Hall" },
-    { tvName: "TV-06", hostname: "HOSTNAME6", status: "ON", condition: "Normal", floor: "1", sector: "Marketing" },
-    { tvName: "TV-07", hostname: "HOSTNAME7", status: "OF", condition: "Normal", floor: "1", sector: "Marketing" },
-    { tvName: "TV-08", hostname: "HOSTNAME8", status: "ON", condition: "Normal", floor: "1", sector: "Marketing" },
-];
 
 
 function populateFloorOptions(tvInfoArray) {
@@ -124,12 +111,12 @@ function populateSectorOptions(tvInfoArray, floor) {
 }
 
 function filterComponents(tvInfoArray, floor, sector) {
-    var visibleComponents = new Set(); // Store the indices of components that should be visible
+    var visibleComponents = new Set();
 
     for (var i = 0; i < tvInfoArray.length; i++) {
         var tvInfo = tvInfoArray[i];
         if (tvInfo.floor === floor && tvInfo.sector === sector) {
-            visibleComponents.add(i); // Add the index of the matching component
+            visibleComponents.add(i);
         }
     }
 
@@ -143,7 +130,6 @@ function filterComponents(tvInfoArray, floor, sector) {
         var status = infoTv.children[2].textContent;
         var condition = infoTv.children[3].textContent;
 
-        // Check if any of the visible components match the current component's info
         if ([...visibleComponents].some(index => {
             var tvInfo = tvInfoArray[index];
             return tvName === tvInfo.tvName && hostname === tvInfo.hostname && status === tvInfo.status && condition === tvInfo.condition;
@@ -168,11 +154,13 @@ document.getElementById('setor').addEventListener('change', function () {
     filterComponents(tvInfoArray, floor, sector);
 });
 
-// Initial filtering based on default selection
+// Iniciar valores padrões de andar e setor
+
 var defaultFloor = document.getElementById('andar').value;
 var defaultSector = document.getElementById('setor').value;
 populateSectorOptions(tvInfoArray, defaultFloor);
 filterComponents(tvInfoArray, defaultFloor, defaultSector);
 
-// Call the function to create multiple components
 createMultipleComponents(tvInfoArray);
+
+
