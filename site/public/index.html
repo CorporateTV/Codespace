@@ -297,6 +297,7 @@
             })
                 .then(response => {
                     if (response.ok) {
+                        alert("Contato enviado comm sucesso!")
                         return response.text();
                     }
                     throw new Error("Erro ao enviar os dados");

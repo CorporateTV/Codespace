@@ -11,8 +11,8 @@ async function enviar(req, res) {
         secureConnection: false, // TLS requires secureConnection to be false
         port: 587, // port for secure SMTP
         auth: {
-            user: 'marcelo.souza@sptech.school',
-            pass: '#Gf43363952848'
+            user: 'lisync_tech@outlook.com',
+            pass: 'Lisynctech'
         },
         tls: {
             ciphers: 'SSLv3'
@@ -21,8 +21,8 @@ async function enviar(req, res) {
 
     // Corpo do email
     const mailOptions = {
-        from: 'marcelo.souza@sptech.school',
-        to: 'marcelo.souza@sptech.school',
+        from: 'lisync_tech@outlook.com',
+        to: 'lisync_tech@outlook.com',
         subject: 'Novo contato recebido',
         text: `
         Nome: ${nome}
