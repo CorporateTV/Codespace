@@ -31,6 +31,11 @@
     font-size: 1em;
 }
 
+.full-size {
+    width: 100%;
+    background-color: #4D628C;
+}
+
 .input-configuracao {
     position: relative;
     border-bottom: 2px solid white;

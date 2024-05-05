@@ -7,15 +7,21 @@
     <title>Cadastro | LySync</title>
     <link rel="stylesheet" href="css/style-auth.css">
     <link rel="stylesheet" href="css/style-auth-responsivo.css">
+    <link rel="stylesheet" href="css/style-components.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
-<body>
+<body onload="listarEmpresas()">
     <div class="container-btn-voltar">
         <a href="index.html">
             <i class="fa-solid fa-right-from-bracket fa-lg"></i>
         </a>
     </div>
+
+    <div class="container-alert">
+        <div id="alerta-confirmacao" class="alert"></div>
+      </div>
+
     <div class="center-container">
         <div class="container-default-auth cadastro-mobile">
             <div class="container-bemvindo-mobile">
@@ -36,38 +42,41 @@
                 <div class="group-input-form">
                     <div class="input-box">
                         <label> Nome: </label>
-                        <input type="text">
+                        <input id="input_nome" type="text" />
+                        <div id="nome-error" class="error-message"></div>
                     </div>
                     <div class="input-box">
                         <label> Sobrenome: </label>
-                        <input type="text">
+                        <input id="input_sobrenome" type="text" />
+                        <div id="sobrenome-error" class="error-message"></div>
                     </div>
                     <div class="input-box">
                         <label> Empresa: </label>
-                        <input type="text">
+                        <select id="listaEmpresas" class="select-default full-size">
+                            <option selected></option>
+                        </select>
+                        <div id="empresa-error" class="error-message"></div>
                     </div>
                     <div class="input-box">
                         <label> Email: </label>
-                        <input type="text">
+                        <input id="input_email" type="text" />
+                        <div id="email-error" class="error-message"></div>
                     </div>
                     <div class="input-box">
                         <label> Senha: </label>
-                        <input type="text">
+                        <input id="input_senha" type="password" />
+                        <div id="senha-error" class="error-message"></div>
                     </div>
                 </div>
-                <button class="btn-cadastrar" id="cadastrar"> CADASTRAR </button>
+                <button onclick="validarEnvio()" class="btn-cadastrar" id="cadastrar"> CADASTRAR </button>
                 <div class="container-text-link">
-                    <span class="text-link"> Já estou cadastrado, realizar o <a href="login.html"> login </a> agora.</span>
+                    <span class="text-link"> Já estou cadastrado, realizar o <a href="login.html"> login </a>
+                        agora.</span>
                 </div>
             </div>
         </div>
     </div>
 </body>
-
 </html>
 
-<script>
-    document.getElementById("cadastrar").onclick = function () {
-        location.href = "verificacao.html";
-    };
-</script>
+<script src="js/auth/cadastro.js"></script>
