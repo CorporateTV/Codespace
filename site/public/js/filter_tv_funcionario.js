@@ -138,7 +138,7 @@ function filterComponents(tvInfoArray, floor, sector) {
             var tvInfo = tvInfoArray[index];
             return tvName === tvInfo.tvName && hostname === tvInfo.hostname && status === tvInfo.status && condition === tvInfo.condition;
         })) {
-            component.style.display = 'block';
+            component.style.display = 'flex';
         } else {
             component.style.display = 'none';
         }
