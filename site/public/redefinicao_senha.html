@@ -11,6 +11,12 @@
 </head>
 
 <body>
+
+    <div class="container-alert">
+        <div id="alerta-confirmacao" class="alert"></div>
+        <div id="alerta-erro" class="alertErro"></div>
+    </div>
+
     <div class="container-btn-voltar">
         <a href="index.html">
             <i class="fa-solid fa-right-from-bracket fa-lg"></i>
@@ -20,13 +26,13 @@
         <div class="container-default-auth">
             <div class="container-bemvindo-mobile">
                 <div class="text-bemvindo-mobile">
-                    <h1> REDEFINIR SENHA </h1>
+                    <h1>REDEFINIR SENHA</h1>
                 </div>
             </div>
             <div class="container-bemvindo">
                 <div class="text-bemvindo">
-                    <h1> REDEFINIR </h1>
-                    <h1> SENHA </h1>
+                    <h1>REDEFINIR</h1>
+                    <h1>SENHA</h1>
                 </div>
             </div>
             <div class="container-form">
@@ -35,26 +41,88 @@
                 </div>
                 <div class="group-input-form">
                     <div class="input-box">
-                        <label> Digite nova senha: </label>
-                        <input type="text">
-                    </div>
+                        <label>Digite nova senha:</label>
+                        <input id="novaSenha" type="password">
+                        <span class="toggle-password" onclick="togglePassword('novaSenha')"> <!-- ícone para alternar a visibilidade da senha -->
+                            <i class="fas fa-eye"></i>
+                        </span>
+                    </div>                                       
                     <div class="input-box">
-                        <label> Confirmar senha: </label>
-                        <input type="text">
+                        <label>Confirmar senha:</label>
+                        <input id="confirmacaoSenha" type="password">
+                        <span class="toggle-password" onclick="togglePassword('confirmacaoSenha')"> <!-- ícone para alternar a visibilidade da senha -->
+                            <i class="fas fa-eye"></i>
+                        </span>
                     </div>
                 </div>
-                <button class="btn-cadastrar" id="redefinir"> REDEFINIR </button>
-                <div class="container-text-link"> 
-                    <span class="text-link"> Retroceder para página de  <a href="login.html"> login </a> </span>
+                <button onclick="redefinir()" class="btn-cadastrar" id="redefinir">REDEFINIR</button>
+                <div class="container-text-link">
+                    <span class="text-link">Retroceder para página de <a href="login.html">login</a></span>
                 </div>
             </div>
         </div>
     </div>
+
+
 </body>
+
 </html>
 
-<script>
-    document.getElementById("redefinir").onclick = function () {
-        location.href = "login.html";
-    };
-</script>
+    <script>
+        function redefinir() {
+            var novaSenha = document.getElementById("novaSenha").value;
+            var confirmacaoSenha = document.getElementById("confirmacaoSenha").value;
+
+            var regexSenha = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,50}$/;
+            var validacaoSenha = regexSenha.test(novaSenha);
+
+            if (!validacaoSenha) {
+                var alertaConfirmacao = document.getElementById('alerta-confirmacao');
+                alertaConfirmacao.innerHTML = "A senha deve ter no mínimo 8 caracteres, incluindo pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial!";
+                alertaConfirmacao.style.display = "block";
+
+                setTimeout(function () {
+                    alertaConfirmacao.style.display = "none";
+                }, 3000);
+
+                return; // Pare a execução se a senha não for válida
+            }
+
+            if (novaSenha === confirmacaoSenha) {
+                var alertaConfirmacao = document.getElementById('alerta-confirmacao');
+                alertaConfirmacao.innerHTML = "Redefinição Concluída!";
+                alertaConfirmacao.style.display = "block";
+
+                setTimeout(function () {
+                    alertaConfirmacao.style.display = "none";
+                    window.location.href = "login.html";
+                }, 3000);
+            } else {
+                var alertaConfirmacao = document.getElementById('alerta-confirmacao');
+                alertaConfirmacao.innerHTML = "Falha ao Redefinir!";
+                alertaConfirmacao.style.display = "block";
+
+                setTimeout(function () {
+                    alertaConfirmacao.style.display = "none";
+                }, 3000);
+            }
+        }
+
+        
+    function togglePassword(inputId) {
+        var input = document.getElementById(inputId);
+        var icon = input.nextElementSibling.querySelector('i');
+
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            input.type = "password";
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+    }
+
+
+    </script>

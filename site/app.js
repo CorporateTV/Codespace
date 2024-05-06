@@ -11,6 +11,8 @@ var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var emailRouter = require("./src/routes/email");
 var codigoRouter = require("./src/routes/codigo");
+var redefinirSenhaRoutes = require("../site/src/routes/redefinirSenha");
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -22,6 +24,7 @@ app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/email", emailRouter);
 app.use("/codigo", codigoRouter);
+app.use("/senha", redefinirSenhaRoutes);
 
 
 app.listen(PORTA, function () {
@@ -30,4 +33,18 @@ app.listen(PORTA, function () {
     \t\tSe "desenvolvimento", você está se conectando ao banco LOCAL (MySQL Workbench). \n
     \t\tSe "producao", você está se conectando ao banco REMOTO (SQL Server em nuvem Azure) \n
     \t\t\t\tPara alterar o ambiente, comente ou descomente as linhas 1 ou 2 no arquivo 'app.js'`);
+});
+
+var express = require("express");
+var app = express();
+
+var redefinirSenhaRoutes = require("../site/src/routes/redefinirSenha");
+app.use("/senha", redefinirSenhaRoutes);
+
+// Outros middlewares e configurações do aplicativo
+
+// Inicie o servidor
+var port = process.env.PORT || 3000;
+app.listen(port, function () {
+    console.log("Servidor iniciado na porta " + port);
 });

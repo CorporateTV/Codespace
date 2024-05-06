@@ -92,8 +92,30 @@ function atualizarPerfil(req, res) {
         res.status(500).json(erro.sqlMessage);
     })
 }
+
+function redefinirSenha(req, res) {
+    var novaSenha = req.body.novaSenha;
+    var confirmacaoSenha = req.body.confirmacaoSenha;
+
+    if (novaSenha !== confirmacaoSenha) {
+        res.status(400).send("As senhas não coincidem!");
+        return;
+    }
+
+    
+    usuarioModel.redefinirSenha(novaSenha)
+        .then(function () {
+            res.status(200).send("Senha redefinida com sucesso!");
+        })
+        .catch(function (erro) {
+            console.error(erro);
+            res.status(500).send("Erro ao redefinir a senha.");
+        });
+}
+
 module.exports = {
     autenticar,
     cadastrar,
     atualizarPerfil,
+    redefinirSenha
 }
