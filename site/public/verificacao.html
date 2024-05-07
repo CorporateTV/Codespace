@@ -12,11 +12,21 @@
 </head>
 
 <body>
+
+    <div class="container-alert">
+        <div id="alerta-confirmacao" class="alert"></div>
+    </div>
+
+    <div class="container-alert">
+        <div id="alerta-erro" class="alertErro"></div>
+    </div>
+
     <div class="container-btn-voltar">
         <a href="index.html">
             <i class="fa-solid fa-right-from-bracket fa-lg"></i>
         </a>
     </div>
+    
     <div class="center-container">
         <div class="container-default-verificao">
             <div class="container-bemvindo-verificao">
@@ -26,18 +36,19 @@
             </div>
             <div class="container-form">
                 <div class="text-aviso-verificar">
-                    <p>Insira o código de confirmação que enviamos para o seu e-mail para validar sua conta. Se não encontrar o e-mail, verifique sua pasta de spam ou solicite um novo código.</p>
+                    <p>Insira o código de confirmação que enviamos para o seu e-mail para validar sua conta. Se não
+                        encontrar o e-mail, verifique sua pasta de spam ou solicite um novo código.</p>
                 </div>
-                
+
                 <div class="confirmation-code-container">
-                    <input type="text" class="confirmation-code-input" maxlength="1">
-                    <input type="text" class="confirmation-code-input" maxlength="1">
-                    <input type="text" class="confirmation-code-input" maxlength="1">
-                    <input type="text" class="confirmation-code-input" maxlength="1">
-                    <input type="text" class="confirmation-code-input" maxlength="1">
-                    <input type="text" class="confirmation-code-input" maxlength="1">               
+                    <input id="number1" type="text" class="confirmation-code-input" maxlength="1">
+                    <input id="number2" type="text" class="confirmation-code-input" maxlength="1">
+                    <input id="number3" type="text" class="confirmation-code-input" maxlength="1">
+                    <input id="number4" type="text" class="confirmation-code-input" maxlength="1">
+                    <input id="number5" type="text" class="confirmation-code-input" maxlength="1">
+                    <input id="number6" type="text" class="confirmation-code-input" maxlength="1">
                 </div>
-                <button class="btn-cadastrar"> VERIFICAR </button>
+                <button class="btn-cadastrar" onclick="validarCod()"> VERIFICAR </button>
                 <div class="logo-form">
                     <img src="assets/Logo-LiSync-Inverso.png" alt="Logo" class="logo">
                 </div>
@@ -48,3 +59,5 @@
 </body>
 
 </html>
+
+<script src="js/auth/cadastro.js"></script>

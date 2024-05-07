@@ -91,7 +91,12 @@
 
             <div class="text">
                 <h1>INOVAÇÃO</h1>
-                <p>ALinceSync oferece uma plataforma robusta para monitoramento em tempo real do hardware de players de TVs corporativas, incorporando as distintas habilidades de um lince. Com uma inovação revolucionária, possibilitando um acesso remoto aos players das TVs corporativas, ampliando ainda mais a eficiência e agilidade da nossa tecnologia. Da visão ampliada à captura precisa de nuances, nossa tecnologia reflete sua agilidade e eficiência, assegurando insights detalhados para otimizar o desempenho do hardware dos seus players.</p>
+                <p>ALinceSync oferece uma plataforma robusta para monitoramento em tempo real do hardware de players de
+                    TVs corporativas, incorporando as distintas habilidades de um lince. Com uma inovação
+                    revolucionária, possibilitando um acesso remoto aos players das TVs corporativas, ampliando ainda
+                    mais a eficiência e agilidade da nossa tecnologia. Da visão ampliada à captura precisa de nuances,
+                    nossa tecnologia reflete sua agilidade e eficiência, assegurando insights detalhados para otimizar o
+                    desempenho do hardware dos seus players.</p>
             </div>
         </div>
     </div>
@@ -154,39 +159,41 @@
 
         <h1>CONTATO</h1>
         <div class="container">
+            <!-- Campos do formulário -->
             <div class="containerWrap">
+                <!-- Campos para nome e sobrenome -->
                 <div class="containerInput">
                     <p>Nome</p>
-                    <input type="text">
+                    <input type="text" id="nome_input">
                 </div>
                 <div class="containerInput">
                     <p>Sobrenome</p>
-                    <input type="text">
+                    <input type="text" id="sobrenome_input">
                 </div>
-
             </div>
             <div class="containerWrap">
+                <!-- Campos para cargo e celular -->
                 <div class="containerInput">
                     <p>Cargo</p>
-                    <input type="text">
+                    <input type="text" id="cargo_input">
                 </div>
                 <div class="containerInput">
                     <p>Celular</p>
-                    <input type="text" placeholder="(__)_____-____" id="celularInput" maxlength="14">
+                    <input type="text" placeholder="(__)_____-____" id="celular_input" maxlength="14">
                 </div>
             </div>
+            <!-- Campos para email e empresa -->
             <div class="containerInput2">
                 <p>E-mail</p>
-                <input style="min-width: 10px" type="text">
+                <input style="min-width: 10px" type="text" id="email_input">
             </div>
             <div class="containerInput2">
                 <p>Empresa</p>
-                <input style="min-width: 10px" type="text">
+                <input style="min-width: 10px" type="text" id="empresa_input">
             </div>
-            <button id="enviarContato">ENVIAR</button>
-
+            <!-- Botão de enviar formulário -->
+            <button id="enviarContato" onclick="enviarFormulario()">ENVIAR</button>
         </div>
-
     </div>
 
     <footer>
@@ -216,12 +223,8 @@
 
     </footer>
 
-
-
-
-
-
 </body>
 <script src="js/main.js"></script>
+<script src="js/contato.js"></script>
 
 </html>

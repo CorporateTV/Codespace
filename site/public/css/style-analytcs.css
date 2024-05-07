@@ -1,0 +1,172 @@
+.container-layout {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.wrapper-layout {
+    position: absolute;
+    top: 10px;
+    display: grid;
+    width: 95%;
+    height: 95%;
+    grid-template-rows: 5% 55% 40%;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    justify-content: center;
+}
+
+.box {
+    font-family: 'Oswald';
+    color: white;
+    background-color: #0C2048;
+    border-radius: 10px;
+}
+
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 1.25em;
+    grid-column: 1 / 4;
+
+    & > a {
+        text-decoration: none;
+        color: white;
+        margin-left: 1em;
+    }
+}
+
+.row-tv {
+    grid-column: 1 / 4;
+    display: flex;
+    justify-content: space-between;
+    background-color: #E4E8F1;
+    gap: 20px;
+    
+}
+
+
+.container-info-tv {
+    width: 55%;
+    background-color: #0C2048;
+    padding: 5px;
+    display: grid;
+    grid-template-columns: 58% 42%;
+    grid-template-rows: 70% 30%;
+    border-radius: 20px;
+}
+
+.container-info-tv h3 {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+}
+
+.card-info-tv {
+    padding: 15px;
+    & > img {
+        width: 100px;
+        height: 75px;
+    }
+}
+
+.card-row-descricao {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    & > ul {
+        font-size: 1.25em;
+        line-height: 1.25em;
+    }
+}
+
+.value-descricao {
+    font-size: 0.7em;
+}
+
+.card-row-buttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 70px;
+    width: 100%;
+}
+
+.div-historico {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 250px;
+}
+
+.div-historico h2 {
+    font-size: 1.25em;
+    position: absolute;
+    top: 0;
+}
+
+.tv-uptime {
+    padding: 10px;
+}
+
+.tv-ideal {
+    grid-column: 2;
+    grid-row: 3 / 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.select-televisao{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.monitoramento {
+    width: 45%;
+    background-color: #0C2048;
+    border-radius: 20px;
+}
+
+.monitor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.monitor-header h3 {
+    font-size: 1.25em;
+    line-height: 1.5em;
+}
+
+.selecao-componente {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.div-monitoramento {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 275px;
+}
+
+.lista-log {
+    padding: 20px;
+    font-size: 1.1em;
+    line-height: 2em;   
+}

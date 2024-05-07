@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics</title>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <link rel="stylesheet" href="../css/style-sidebar-dash.css">
+    <link rel="stylesheet" href="../css/style-dash-global.css">
+    <link rel="stylesheet" href="../css/style-analytcs.css">
+    <link rel="stylesheet" href="../css/style-components.css">
+    <link rel="stylesheet" href="../css/style-reset.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<!-- onload="validarSessao()" -->
+<body >
+    <div class="bg-layout">
+        <div class="sideBar">
+            <div class="sideBar-container">
+                <ul class="sideBar-menu">
+                    <li class="selection">
+                        <div class="imgIcon"><img src="../assets/Dashboard icon.png" alt=""></div>
+                        <p class="selectText"> <a href="dashboard.html">Dashboard</a></p>
+                    </li>
+                    <li class="selection">
+                        <div class="imgIcon"><img src="../assets/Analytics Icon.png" alt=""></div>
+                        <p class="selectText"> <a href="analytics.html"></a>Analytics</p>
+                    </li>
+                    <li class="selection">
+                        <div class="imgIcon"><img src="../assets/Centro de Controle.png" alt=""></div>
+                        <p class="selectText"> <a href="control_center.html">Control Center</a></p>
+                    </li>
+                    <li class="selection">
+                        <div class="imgIcon"><img src="../assets/Engrenagem.png" alt=""></div>
+                        <p class="selectText"><a href="configuracao.html">Configurações</a></p>
+                    </li>
+                </ul>
+                <li class="selection exit" onclick="limparSessao()">
+                    <div class="imgIcon"><img src="../assets/sair.png" alt=""></div>
+                    <p class="selectText">Sair</p>
+                </li>
+            </div>
+        </div>
+
+        <div class="container-layout">
+            <div class="wrapper-layout">
+                <div class="box header">
+                     <a href="dashboard.html"><i class="fa-solid fa-arrow-left"></i></a>
+                    <h2><span id="setor_name"></span> - <span id="andar_name"></span></h2>
+                </div>
+                <div class="box row-tv">
+                    <div class="container-info-tv">
+                        <div class="card-info-tv">
+                            <h3 id="nome_tv">Nome TV</h3>
+                            <div class="card-row-descricao">
+                                <ul>
+                                    <li>Hostname: <span class="value-descricao" id="hostname"></span></li>
+                                    <li>Conexão: <span class="value-descricao" id="conexao"></span></li>
+                                    <li>Status: <span class="value-descricao" id="status"></span></li>
+                                </ul>
+                                <img src="../assets/monitor.png" alt="Monitor">
+                            </div>
+                            <div class="card-row-buttons">
+                                <button class="button-default">Ligar</button>
+                                <button class="button-default">Reiniciar</button>
+                                <button class="button-default">Desligar</button>
+                            </div>
+                        </div>
+                        <div class="tv-uptime">
+                            <!-- <h3>Tempo em atividade (%)</h3>
+                            <div id="chart_tempoAtividade"></div> -->
+                        </div>
+                        <div class="tv-ideal">
+                            <div class="select-televisao">
+                                <p> Selecionar outra televisão </p>
+                                <select name="lista_televisoes" id="lista_televisoes" class="select-default">
+                                    <option selected> Selecionar TV </option>
+                                </select>
+                            </div>
+                            <div class="div-historico">
+                                <div id="chart_historico" ></div>
+                                <h2> Histórico ideal</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="monitoramento">
+                        <div class="monitor-header">
+                            <div class="descricao-componente">
+                                <h3>Nome TV - <span id="nome_componente">CPU</span> %</h3>
+                                <span id="modelos_componentes">Intel(R) Core(TM) i3-6100 3.70Ghz</span>
+                            </div>
+                            <div class="selecao-componente">
+                                <span>Componente</span>
+                                <select name="lista_componente" id="lista_componente" class="select-default" onchange="trocarTipoComponente()">
+                                    <option value="cpu" selected>CPU</option>
+                                    <option value="ram">RAM</option>
+                                    <option value="disco">Disco</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="chart_cpu" class="div-monitoramento"></div>
+                        <div id="chart_ram" class="div-monitoramento" style="display: none;"></div>
+                        <div id="chart_disco" class="div-monitoramento" style="display: none;"></div>
+                    </div>
+                </div>
+                <div class="box processos">
+                    <div class="header-box">
+                        <h3>Processos com maior consumo</h3>
+                    </div>
+                    <ul class="lista-log">
+                        <li>1º Processo </li>
+                        <li>2º Processo </li>
+                        <li>3º Processo </li>
+                        <li>4º Processo </li>
+                        <li>5º Processo </li>
+                    </ul>
+                </div>
+                <div class="box geral">
+                    <div class="header-box">
+                        <h3>Janelas abertas</h3>
+                    </div>
+                    <ul class="lista-log">
+                        <li>Nome Janela 1</li>
+                        <li>Nome Janela 2</li>
+                        <li>Nome Janela 3</li>
+                        <li>Nome Janela 4</li>
+                        <li>Nome Janela 5</li>
+                    </ul>
+                </div>
+                <div class="box notifacao">
+                    <div class="header-box">
+                        <h3>Alertas</h3>
+                    </div>
+                    <ul class="lista-log">
+                        <li>Alerta de CPU</li>
+                        <li>Alerta de RAM</li>
+                        <li>Alerta de Disco</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script src="../js/charts/chart_analytics.js"></script>
+<script src="../js/getData/tv_data.js"></script>
+<script src="../js/select_chart.js"></script>
+<script src="../js/change_info_page.js"></script>
+<script src="../js/sessao.js"></script>
+<script src="../js/analytics.js"></script>

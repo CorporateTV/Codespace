@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics</title>
+    <link rel="stylesheet" href="../css/style-sidebar-dash.css">
+    <link rel="stylesheet" href="../css/style-dash-global.css">
+    <link rel="stylesheet" href="../css/style-config.css">
+    <link rel="stylesheet" href="../css/style-reset.css">
+    <link rel="stylesheet" href="../css/style-components.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body onload="validarSessao()">
+    <div class="bg-layout">
+        <div class="sideBar">
+            <div class="sideBar-container">
+                <ul class="sideBar-menu">
+                    <li class="selection">
+                        <div class="imgIcon"><img src="../assets/Dashboard icon.png" alt=""></div>
+                        <p class="selectText"> <a href="dashboard.html">Dashboard</a></p>
+                    </li>
+                    <li class="selection">
+                        <div class="imgIcon"><img src="../assets/Analytics Icon.png" alt=""></div>
+                        <p class="selectText"> <a href="analytics.html">Analytics</a></p>
+                    </li>
+                    <li class="selection">
+                        <div class="imgIcon"><img src="../assets/Centro de Controle.png" alt=""></div>
+                        <p class="selectText"> <a href="control_center.html">Control Center</a></p>
+                    </li>
+                    <li class="selection">
+                        <div class="imgIcon"><img src="../assets/Engrenagem.png" alt=""></div>
+                        <p class="selectText"><a href="configuracao.html">Configurações</a></p>
+                    </li>
+                </ul>
+                <li class="selection exit" onclick="limparSessao()">
+                    <div class="imgIcon"><img src="../assets/sair.png" alt=""></div>
+                    <p class="selectText">Sair</p>
+                </li>
+            </div>
+        </div>
+
+        <div class="container-layout">
+
+            <div class="header-layout">
+                <div class="imgIcon-header"><img src="../assets/Engrenagem.png" alt=""></div>
+                <h1> Configurações </h1>
+            </div>
+
+            <div class="container-content">
+                <div class="container-tab-layout">
+                    <div class="display-tab">
+                        <button class="tab-links" onclick="tabConfiguracao(event, 'Geral')" id="defaultOpen">
+                            Perfil
+                        </button>
+<!--                         <button class="tab-links" onclick="tabConfiguracao(event, 'Sistema')">
+                            Sistema
+                        </button> -->
+                    </div>
+
+                    <div id="Geral" class="tab-content">
+                        <h1> Meu perfil </h1>
+
+                        <div class="layout-config">
+                            <div class="form-left">
+                                <h3>Informações pessoais</h3>
+                                <div class="container-form">
+                                    <div class="form-left">
+                                        <div class="input-configuracao">
+                                            <label> Nome </label>
+                                            <input id="input_nome" name="text" type="text" readonly>
+                                            <span class="edit-button" onclick="editInput('input_nome')"><i class="fa-solid fa-pencil"></i></span>
+                                        </div>
+                                        <div class="input-configuracao">
+                                            <label> Email </label>
+                                            <input id="input_email" name="text" type="text" readonly>
+                                            <span class="edit-button" onclick="editInput('input_email')"><i class="fa-solid fa-pencil"></i></span>
+                                        </div>
+                                        <div class="input-configuracao">
+                                            <label> Celular </label>
+                                            <input id="input_celular" name="text" type="text" readonly>
+                                            <span class="edit-button" onclick="editInput('input_celular')"><i class="fa-solid fa-pencil"></i></span>
+                                        </div>
+                                        <div class="input-configuracao">
+                                            <label> Cargo </label>
+                                            <input id="input_cargo" name="text" type="text" readonly>
+                                            <span class="edit-button" onclick="editInput('input_cargo')"><i class="fa-solid fa-pencil"></i></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-right">
+                                        <div class="input-configuracao">
+                                            <label> Data de Cadastro </label>
+                                            <input name="text" type="text" readonly placeholder="01/01/2024">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-right">
+                                <h3> Empresa </h3>
+                                <div class="card-empresa">
+                                    <div class="text-empresa">
+                                        <ul>
+                                            <li> Nome empresa: <span> Lisync </span> </li>
+                                            <li> Plano: <span> Interprise </span> </li>
+                                            <li> Licenças: <span> 50 </span> </li>
+                                        </ul>
+                                    </div>
+                                    <div class="logo-empresa">
+                                        <img src="../assets/Logo-LiSync-Inverso.png" alt="Logo empresa">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div id="Sistema" class="tab-content">
+                        <h1> Sistema </h1>
+                        <div class="layout-config">
+                            <div class="form-left">
+                                <div class="sistema-container">
+                                    <h3> Usuários </h3>
+                                    <ul>
+                                        <li>Quantidade de usuários: 10</li>
+                                        <li>Quantdade de usuários Gestor: 2</li>
+                                        <li></li>
+                                        <li></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-tab-profile">
+                    <div class="profile-description">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3106/3106773.png" alt="Avatar">
+                        <div class="text-profile">
+                            <h3> Nome perfil </h3>
+                            <ul>
+                                <li> Empresa: </li>
+                                <li> Email: </li>
+                                <li> Celular: </li>
+                                <li> Cargo: </li>
+                                <li> Data de Cadastro: </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button class="button-messenger">
+                        <i class="fa-regular fa-envelope"></i>
+                        <span>Slack</span>
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script src="../js/tab.js"></script>
+<script src="../js/sessao.js"></script>

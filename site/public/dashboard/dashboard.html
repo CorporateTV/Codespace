@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics</title>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <link rel="stylesheet" href="../css/style-sidebar-dash.css">
+    <link rel="stylesheet" href="../css/style-dash-global.css">
+    <link rel="stylesheet" href="../css/style-dashboard.css">
+    <link rel="stylesheet" href="../css/style-components.css">
+    <link rel="stylesheet" href="../css/style-reset.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<!-- onload="validarSessao()" -->
+<body >
+    <div class="bg-layout">
+        <div class="sideBar">
+            <div class="sideBar-container">
+                <ul class="sideBar-menu">
+                    <li class="selection">
+                        <div class="imgIcon"><img src="../assets/Dashboard icon.png" alt=""></div>
+                        <p class="selectText"> <a href="dashboard.html">Dashboard</a></p>
+                    </li>
+                    <li class="selection">
+                        <div class="imgIcon"><img src="../assets/Analytics Icon.png" alt=""></div>
+                        <p class="selectText"> <a href="analytics.html">Analytics</a></p>
+                    </li>
+                    <li class="selection">
+                        <div class="imgIcon"><img src="../assets/Centro de Controle.png" alt=""></div>
+                        <p class="selectText"> <a href="control_center.html">Control Center</a></p>
+                    </li>
+                    <li class="selection">
+                        <div class="imgIcon"><img src="../assets/Engrenagem.png" alt=""></div>
+                        <p class="selectText"><a href="configuracao.html">Configurações</a></p>
+                    </li>
+                </ul>
+                <li class="selection exit" onclick="limparSessao()">
+                    <div class="imgIcon"><img src="../assets/sair.png" alt=""></div>
+                    <p class="selectText">Sair</p>
+                </li>
+            </div>
+        </div>
+        <div class="container-layout">
+            <div class="wrapper-layout">
+                <div class="box plano">
+                    <h2>Quantidade de televisões </h2>
+                    <h3>Plano: <span>Premium</span></h3>
+                    <div class="container-row-plano">
+                        <div class="quantidade-categoria">
+                            <p> Total </p>
+                            <span> 30 </span>
+                        </div>
+                        <div class="quantidade-categoria">
+                            <p> Utilizado </p>
+                            <span> 25 </span>
+                        </div>
+                        <div class="quantidade-categoria">
+                            <p> Disponível </p>
+                            <span> 5 </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="box usuarios">
+                    <div class="header-box">
+                        <div class="header-title">
+                            <i class="fa-solid fa-user fa-2x"></i>
+                            <h1> Usuários </h1>
+                        </div>
+                        <span>10</span>
+                    </div>
+                    <div class="quantidade-chart">
+                        <table>
+                            <tr>
+                                <td class="assistente">Assistentes NOC</td>
+                                <td class="qtd-table">8</td>
+                            </tr>
+                            <tr>
+                                <td class="gerente">Gerente NOC</td>
+                                <td class="qtd-table">2</td>
+                            </tr>
+                        </table>
+                        <div id="chart_usuarios" class="grafico-rosca"></div>
+                    </div>
+                </div>
+                <div class="box televisao">
+                    <div class="header-box">
+                        <div class="header-title">
+                            <i class="fa-solid fa-tv fa-2x"></i>
+                            <h1> Televisões </h1>
+                        </div>
+                        <span>20</span>
+                    </div>
+                    <div class="quantidade-chart">
+                        <table>
+                            <tr>
+                                <td class="ativo">Ativos</td>
+                                <td class="qtd-table">15</td>
+                            </tr>
+                            <tr>
+                                <td class="inativo">Inativos</td>
+                                <td class="qtd-table">5</td>
+                            </tr>
+                        </table>
+                        <div id="chart_qtdTv" class="grafico-rosca"></div>
+                    </div>
+                </div>
+                <div class="box row2">
+                    <div class="painel">
+                        <div class="header-box">
+                            <h1> Painel de Televisões </h1>
+                        </div>
+                        <div class="container-select">
+                            <span>Andar</span>
+                            <select name="andar" id="andar" class="select-painel">
+                                <option selected></option>
+                            </select>
+                            <p></p>
+                            <sapn>Setor</sapn>
+                            <select name="setor" id="setor" class="select-painel">
+                                <option value="Marketing">Marketing</option>
+                                <option value="RH">RH</option>
+                                <option value="Vendas">Vendas</option>
+                                <option value="Hall">Hall</option>
+                            </select>
+                        </div>
+                        <div class="container-carousel">
+                            <div id="carousel">
+                                <button id="prev">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                        <path fill="none" d="M0 0h24v24H0V0z" />
+                                        <path d="M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z" />
+                                    </svg>
+                                </button>
+                                <div class="inner" id="content">
+                                </div>
+                                <button id="next">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                        <path fill="none" d="M0 0h24v24H0V0z" />
+                                        <path d="M10.02 6L8.61 7.41 13.19 12l-4.58 4.59L10.02 18l6-6-6-6z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grafico-setores">
+                        <div class="header-box">
+                            <h1> Televisões on / off por setor </h1>
+                        </div>
+                        <div class="setores-container">
+                            <div id="chart_porSetor"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>
+<script src="../js/getData/tv_data.js"></script>
+<script src="../js/carousel.js"></script>
+<script src="../js/charts/chart_dashboard.js"></script>
+<script src="../js/filter_tv.js"></script>
+<script src="../js/sessao.js"></script>
