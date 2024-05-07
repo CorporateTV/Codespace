@@ -31,12 +31,12 @@
 }
 
 .box h2 {
-    font-size: 1.25em;
+    font-size: 1.5em;
     margin: 20px 0px 0px 20px;
 }
 
 .box h3 {
-    font-size: 1.1em;
+    font-size: 1.3em;
     margin: 10px 0px 0px 20px;
 }
 
@@ -68,7 +68,7 @@
 }
 
 .quantidade-categoria span {
-    font-size: 1.5em;
+    font-size: 1.7em;
 }
 
 .header-title {
@@ -91,7 +91,7 @@
 
 .quantidade-chart table td {
     padding: 5px;
-    font-size: 0.9em;
+    font-size: 1.3em;
 }
 
 .quantidade-chart table .qtd-table {
