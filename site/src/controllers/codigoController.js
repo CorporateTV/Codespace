@@ -9,8 +9,8 @@ async function cadastrar(req, res) {
         secureConnection: false, // TLS requires secureConnection to be false
         port: 587, // port for secure SMTP
         auth: {
-            user: 'guilherme.sgoncalves@sptech.school',
-        pass: '#Gf56077598810',
+            user: 'lisync_tech@outlook.com',
+            pass: 'Lisynctech'
         },
         tls: {
             ciphers: 'SSLv3'
@@ -18,9 +18,10 @@ async function cadastrar(req, res) {
     });
 
     const mailOptions = {
-        from: 'LiSync <guilherme.sgoncalves@sptech.school>',
+        from: 'lisync_tech@outlook.com',
         to: email,
-        subject: 'Enviando Email test com NODEMAILER',
+        subject: 'Código de Confirmação',
+        html: `<p>Olá ${nome}, o seu código de confirmação é: <b>${codigo}</b></p>`,
         text: `Olá ${nome}, o seu código de confirmação é: ${codigo}` 
     };
 

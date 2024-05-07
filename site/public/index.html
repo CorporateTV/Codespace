@@ -10,11 +10,17 @@
     <link rel="stylesheet" href="css/style-pagina-inicial-responsividade.css">
     <link rel="stylesheet" href="css/style-navbar-responsividade.css">
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-brands/css/uicons-brands.css'>
+    <link rel="stylesheet" href="css/style-auth.css" />
     <link rel='stylesheet'
         href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
 </head>
 
 <body>
+
+    <div class="container-alert">
+        <div id="alerta-confirmacao" class="alert"></div>
+      </div>
+
     <header id="headerID">
         <nav class="navbar">
             <img src="assets/Logo-LiSync-Inverso.png" alt="">
@@ -165,10 +171,12 @@
                 <div class="containerInput">
                     <p>Nome</p>
                     <input type="text" id="nome_input">
+                    <div id="nome-error" class="error-message"></div>
                 </div>
                 <div class="containerInput">
                     <p>Sobrenome</p>
                     <input type="text" id="sobrenome_input">
+                    <div id="sobrenome-error" class="error-message"></div>
                 </div>
             </div>
             <div class="containerWrap">
@@ -176,20 +184,24 @@
                 <div class="containerInput">
                     <p>Cargo</p>
                     <input type="text" id="cargo_input">
+                    <div id="cargo-error" class="error-message"></div>
                 </div>
                 <div class="containerInput">
                     <p>Celular</p>
-                    <input type="text" placeholder="(__)_____-____" id="celular_input" maxlength="14">
+                    <input type="tel" id="celular_input" maxlength="14">
+                    <div id="celular-error" class="error-message"></div>
                 </div>
             </div>
             <!-- Campos para email e empresa -->
             <div class="containerInput2">
                 <p>E-mail</p>
                 <input style="min-width: 10px" type="text" id="email_input">
+                <div id="email-error" class="error-message"></div>
             </div>
             <div class="containerInput2">
                 <p>Empresa</p>
                 <input style="min-width: 10px" type="text" id="empresa_input">
+                <div id="empresa-error" class="error-message"></div>
             </div>
             <!-- Botão de enviar formulário -->
             <button id="enviarContato" onclick="enviar()">ENVIAR</button>
@@ -199,11 +211,11 @@
     <footer>
         <div class="containerColumn infologo" style="width: 31.57vw;">
             <img src="assets/Logo-LiSync-branca-padrãopng.png" alt="">
-            <p>© 2024 LySinc All rights reserved</p>
+            <p style="font-family: oswald;">© 2024 LySinc All rights reserved</p>
 
         </div>
         <div class="containerColumn informacaoFooter">
-            <p style="text-align: center;">Quer saber mais sobre como a LiSync pode impulsionar o seu ambiente de TV
+            <p style="text-align: center;  font-family: oswald;">Quer saber mais sobre como a LiSync pode impulsionar o seu ambiente de TV
                 corporativa? Entre em contato
                 conosco para uma consulta personalizada.</p>
         </div>
@@ -213,10 +225,10 @@
                 <img class="icon" src="assets/mail-icon.png" alt="">
                 <img class="icon" src="assets/instagram-icon.png" alt="">
             </div>
-            <div class="containerColumn">
-                <p>(11) 9 6639-3932</p>
-                <p>lisync@sptech.school</p>
-                <p>@LiSync_corp</p>
+            <div  class="containerColumn">
+                <p style="font-family: oswald;">(11) 9 6639-3932</p>
+                <p style="font-family: oswald;">lisync@sptech.school</p>
+                <p style="font-family: oswald;">@LiSync_corp</p>
             </div>
         </div>
 
@@ -236,39 +248,139 @@
 <script>
     // JavaScript
     function validarFormulario() {
-        const nome = document.getElementById('nome_input').value.trim();
-        const sobrenome = document.getElementById('sobrenome_input').value.trim();
-        const cargo = document.getElementById('cargo_input').value.trim();
-        const celular = document.getElementById('celular_input').value.trim();
-        const email = document.getElementById('email_input').value.trim();
-        const empresa = document.getElementById('empresa_input').value.trim();
+    const nome = document.getElementById('nome_input').value.trim();
+    const sobrenome = document.getElementById('sobrenome_input').value.trim();
+    const cargo = document.getElementById('cargo_input').value.trim();
+    const celular = document.getElementById('celular_input').value;
+    const email = document.getElementById('email_input').value.trim();
+    const empresa = document.getElementById('empresa_input').value.trim();
 
-        // Expressões regulares para validar os campos
-        const regexNome = /^[a-zA-ZÀ-ÿ\u00f1\u00d1\s']+$/; // Aceita letras, espaços e apóstrofos
+    var regexNome = /^[a-zA-ZÀ-ÿ\s]+$/;
+    const validacaoNome = regexNome.test(nome);
+
+    var regexSobrenome = /^[a-zA-ZÀ-ÿ\s]+$/;
+    const validacaoSobrenome = regexSobrenome.test(sobrenome);
+    
+    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
+    const validacaoEmail = regexSobrenome.test(sobrenome);
+
+    var regexCargo = /^[a-zA-ZÀ-ÿ\s]+$/;
+    const validacaoCargo = regexCargo.test(cargo);
+
+    var regexCelular = /^\d{10,11}$/;
+    const validacaoCelular = regexCelular.test(celular);
+
+    
+    document.getElementById('nome-error').innerHTML = "";
+    document.getElementById('sobrenome-error').innerHTML = "";
+    document.getElementById('email-error').innerHTML = "";
+    document.getElementById('cargo-error').innerHTML = "";
+    document.getElementById('empresa-error').innerHTML = "";
+    document.getElementById('celular-error').innerHTML = "";
+
+
+
+    if (nome === "" && sobrenome === "" && email === "" && cargo === "" && empresa === ""){
+        document.getElementById('nome-error').innerHTML = "O campo nome não pode estar vazio";
+        document.getElementById('nome-error').style.color = "red";
+
+        document.getElementById('sobrenome-error').innerHTML = "O campo sobrenome não pode estar vazio";
+        document.getElementById('sobrenome-error').style.color = "red";
+
+        document.getElementById('email-error').innerHTML = "O campo email não pode estar vazio";
+        document.getElementById('email-error').style.color = "red";
+
+        document.getElementById('cargo-error').innerHTML = "O campo cargo não pode estar vazio";
+        document.getElementById('cargo-error').style.color = "red";
+
+        document.getElementById('celular-error').innerHTML = "O campo celular não pode estar vazio";
+        document.getElementById('celular-error').style.color = "red";
+
+        document.getElementById('empresa-error').innerHTML = "O campo empresa não pode estar vazio";
+        document.getElementById('empresa-error').style.color = "red";
+        return false; 
+    }
+
+    if (nome === "") {
+        document.getElementById('nome-error').innerHTML = "O campo nome não pode estar vazio";
+        document.getElementById('nome-error').style.color = "red";
         
-        const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Verifica se o email tem formato válido
+    }
 
-        // Validação do nome e sobrenome
-        if (!regexNome.test(nome) || !regexNome.test(sobrenome)) {
-            alert("Por favor, insira apenas letras nos campos de nome e sobrenome.");
-            return false;
-        }
+    if (sobrenome === "") {
+        document.getElementById('sobrenome-error').innerHTML = "O campo sobrenome não pode estar vazio";
+        document.getElementById('sobrenome-error').style.color = "red";
+        
+    }
 
-        // Validação do cargo
-        if (!regexNome.test(cargo)) {
-            alert("Por favor, insira apenas letras no campo de cargo.");
-            return false;
-        }
+    if (email === "") {
+        document.getElementById('email-error').innerHTML = "O campo email não pode estar vazio";
+        document.getElementById('email-error').style.color = "red";
+        
+    }
 
-        // Validação do email
-        if (!regexEmail.test(email)) {
-            alert("Por favor, insira um email válido.");
-            return false;
-        }
+    if (cargo === "") {
+        document.getElementById('cargo-error').innerHTML = "O campo cargo não pode estar vazio";
+        document.getElementById('cargo-error').style.color = "red";
+        
+    }
 
-        // Se todas as validações passarem, retorna verdadeiro
+    if (celular === "") {
+    document.getElementById('celular-error').innerHTML = "O campo celular não pode estar vazio";
+    document.getElementById('celular-error').style.color = "red";
+    
+} 
+
+if (empresa === "") {
+    document.getElementById('empresa-error').innerHTML = "O campo empresa não pode estar vazio";
+    document.getElementById('empresa-error').style.color = "red";
+    
+}
+
+    if (!validacaoCelular) {
+    document.getElementById('celular-error').innerHTML = "O campo celular deve conter apenas números";
+    document.getElementById('celular-error').style.color = "red";
+    }
+
+   
+    if (!validacaoNome) {
+        document.getElementById('nome-error').innerHTML = "Por favor, insira apenas letras nos campos de nome, sobrenome e cargo.";
+        document.getElementById('nome-error').style.color = "red";
+        
+    }
+
+    if (!validacaoSobrenome) {
+        document.getElementById('sobrenome-error').innerHTML = "Por favor, insira apenas letras nos campos de nome, sobrenome e cargo.";
+        document.getElementById('sobrenome-error').style.color = "red";
+        
+    }
+    if (!validacaoCargo) {
+        document.getElementById('cargo-error').innerHTML = "Por favor, insira apenas letras nos campos de nome, sobrenome e cargo.";
+        document.getElementById('cargo-error').style.color = "red";
+        
+    }
+
+    if (!validacaoEmail) {
+        document.getElementById('email-error').innerHTML = "Por favor, insira um email válido.";
+        document.getElementById('email-error').style.color = "red";
+        
+    }
+
+    if (validacaoCargo == true && validacaoCelular == true && validacaoEmail == true && validacaoNome == true && validacaoSobrenome == true) {
+        var alertaConfirmacao = document.getElementById('alerta-confirmacao');
+        alertaConfirmacao.innerHTML = "Formulário enviado com sucesso!";
+        alertaConfirmacao.style.display = "block";
+
+        setTimeout(function() {
+            alertaConfirmacao.style.display = "none";
+        }, 3000);
+        
         return true;
     }
+   
+}
+
+    
 
     function enviar() {
         if (validarFormulario()) {
