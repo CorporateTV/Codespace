@@ -206,6 +206,7 @@ function cadastrar() {
         .catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
         });
+        window.onload
 
     return false;
 }

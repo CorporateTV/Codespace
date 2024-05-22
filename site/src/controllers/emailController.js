@@ -2,7 +2,7 @@ var nodemailer = require('nodemailer')
 
 // Rota para receber dados do formulário
 async function enviarEmailContato(req, res) {
-    const { nome, sobrenome, cargo, celular, email, empresa } = req.body;
+    const { nome, celular, email, empresa , mensagem } = req.body;
 
     // Configurações de envio de email
     const transporter = nodemailer.createTransport({
@@ -10,8 +10,8 @@ async function enviarEmailContato(req, res) {
         secureConnection: false, // TLS requires secureConnection to be false
         port: 587, // port for secure SMTP
         auth: {
-            user: 'matheus.shoji@sptech.school',
-            pass: '#Gf48021646888'
+            user: 'lisync_tech@outlook.com',
+            pass: 'Lisynctech'
         },
         tls: {
             ciphers: 'SSLv3'
@@ -20,16 +20,16 @@ async function enviarEmailContato(req, res) {
 
     // Corpo do email
     const mailOptions = {
-        from: 'matheus.shoji@sptech.school',
-        to: 'matheus.shoji@sptech.school',
+        from: 'lisync_tech@outlook.com',
+        to: 'lisync_tech@outlook.com',
         subject: 'Novo contato recebido',
         text: `
         Nome: ${nome}
-        Sobrenome: ${sobrenome}
-        Cargo: ${cargo}
         Celular: ${celular}
         Email: ${email}
         Empresa: ${empresa}
+        mensagem: 
+        ${mensagem}
       `
     };
 
@@ -53,8 +53,8 @@ async function enviarEmailConfirmacao(req, res) {
         secureConnection: false, // TLS requires secureConnection to be false
         port: 587, // port for secure SMTP
         auth: {
-            user: 'matheus.shoji@sptech.school',
-            pass: '#Gf48021646888'
+            user: 'lisync_tech@outlook.com',
+            pass: 'Lisynctech'
         },
         tls: {
             ciphers: 'SSLv3'
@@ -62,7 +62,7 @@ async function enviarEmailConfirmacao(req, res) {
     });
 
     const mailOptions = {
-        from: 'LiSync <matheus.shoji@sptech.school>',
+        from: 'lisync_tech@outlook.com',
         to: email,
         subject: 'Enviando Email test com NODEMAILER',
         text: `Olá ${nome}, o seu código de confirmação é: ${codigo}` 

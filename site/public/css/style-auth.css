@@ -310,3 +310,9 @@ label {
     right: 40px;
     top: 30px;
 }
+
+.containerRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
