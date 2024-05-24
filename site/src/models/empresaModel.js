@@ -14,19 +14,17 @@ function listar() {
 
 function buscarPornomeEmpresa(nomeEmpresa) {
     var query = `select * from Empresa where nomeFantasia = '${nomeEmpresa}'`;
-    
-  
     return database.executar(query);
   }
-  // function cadastrarGestor(){
-  //   console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha, idEmpresa);
+  function cadastrarGestor(nome, email, senha, idEmpresa){
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha, idEmpresa);
     
-  //   var instrucao = `
-  //       INSERT INTO Usuario (nome ,email, senha, fkEmpresa) VALUES ('${nome}', '${email}', '${senha}', '${idEmpresa}');
-  //   `;
-  //   console.log("Executando a instrução SQL: \n" + instrucao);
-  //   return database.executar(instrucao);
-  // }
+    var instrucao = `
+        INSERT INTO Usuario (nome ,email, fkEmpresa ,senha) VALUES ('${nome}', '${email}',  '${idEmpresa}','${senha}');
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+  }
 
   function cadastrarEmpresa(nomeFantasia, plano){
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nomeFantasia);
@@ -40,7 +38,7 @@ function buscarPornomeEmpresa(nomeEmpresa) {
 
 
 module.exports = { 
-  // cadastrarGestor,
+  cadastrarGestor,
   cadastrarEmpresa, 
   buscarPorId, 
   listar, 

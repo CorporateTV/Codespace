@@ -4,7 +4,8 @@ var router = express.Router();
 var empresaController = require("../controllers/empresaController");
 
 router.get("/buscar", function (req, res) {
-    empresaController.buscarPornomeEmpresa(req, res);
+    const nomeEmpresa = req.query.nomeEmpresa;
+    empresaController.buscarPornomeEmpresa(nomeEmpresa, res);
 });
 
 router.get("/buscar/:idEmpresa", function (req, res) {

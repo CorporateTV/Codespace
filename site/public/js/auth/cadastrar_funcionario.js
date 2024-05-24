@@ -4,7 +4,7 @@ function validarEnvio() {
     var email = document.getElementById('input_emailFunc').value;
     var email2 = document.getElementById('input_email2Func').value;
     const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+{}|:<>?-=[];,./';
-
+    
     //gerar ao menos uma letra maiúscula
     let senha = caracteres.charAt(Math.floor(Math.random() * 26));
 
@@ -32,7 +32,7 @@ function validarEnvio() {
     var regex2Email = /^[A-Za-z0-9._%+-]+@(?!.*@(gmail|hotmail|outlook)\.com).*$/;
 
     const validacaoEmail = regexEmail.test(email);
-    const validacao2Email = regex2Email.test(email);
+
 
 
     document.getElementById('nome-error').innerHTML = "";
@@ -60,8 +60,6 @@ function validarEnvio() {
         // alertaConfirmacao.innerHTML = "Cadastro Confirmado!";
         // alertaConfirmacao.style.display = "none";
 
-
-    
         sessionStorage.NOME_USUARIO = nome;
         sessionStorage.EMAIL_USUARIO = email;
         sessionStorage.SENHA_USUARIO = senha;
@@ -132,14 +130,3 @@ function cadastrar() {
     return false;
 }
 
-function abrirAdicionarFuncionario(){
-
-    let abaAddFunc = document.getElementById("janelaFuncionario").style.display;
-    if(abaAddFunc == 'flex'){
-        document.getElementById("janelaFuncionario").style.display = 'none';
-        
-    }else{
-        document.getElementById("janelaFuncionario").style.display = 'flex';
-    }
-
-}

@@ -1,7 +1,7 @@
 var empresaModel = require("../models/empresaModel");
 
 function buscarPornomeEmpresa(req, res) {
-  var nomeEmpresa = req.query.nomeFantasia;
+  var nomeEmpresa = "Elera."
   
   empresaModel.buscarPornomeEmpresa(nomeEmpresa).then((resultado) => {
     res.status(200).json(resultado);
@@ -24,9 +24,7 @@ function buscarPorId(req, res) {
   });
 }
 
-// function cadastrarGestor(){
 
-// }
 function cadastrarEmpresa(req,res){
   // Crie uma variável que vá recuperar os valores do arquivo cadastro-admin.html
   var nomeFantasia = req.body.nomeFantasiaServer;
@@ -55,12 +53,11 @@ function cadastrarEmpresa(req,res){
              res.status(500).json(erro.sqlMessage);
          }
      );
- }
+}
 
 
 module.exports = {
   cadastrarEmpresa,
-  // cadastrarGestor,
   buscarPorId,
   listar,
   buscarPornomeEmpresa

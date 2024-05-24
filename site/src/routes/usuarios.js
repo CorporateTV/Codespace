@@ -16,4 +16,9 @@ router.post("/atualizarPerfil", function (req, res) {
     usuarioController.atualizarPerfil(req, res);
 })
 
+router.post("/cadastrarGestor", function (req, res) {
+    usuarioController.cadastrarGestor(req, res);
+})
+
+
 module.exports = router;
