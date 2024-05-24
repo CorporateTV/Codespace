@@ -22,7 +22,7 @@ var mySqlConfig = {
     host: "localhost",
     database: "lisyncDB",
     user: "root",
-    password: "1304",
+    password: "root",
 };
 
 function executar(instrucao) {
