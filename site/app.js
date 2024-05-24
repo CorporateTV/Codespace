@@ -11,6 +11,8 @@ var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var empresaRouter = require("./src/routes/empresa");
 var emailRouter = require("./src/routes/email");
+var tvRouter = require("./src/routes/tv");
+var ambienteRouter = require("./src/routes/ambiente");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -22,6 +24,8 @@ app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/email", emailRouter);
 app.use("/empresa", empresaRouter);
+app.use("/tv", tvRouter);
+app.use("/ambiente", ambienteRouter);
 
 app.listen(PORTA, function () {
     console.log(`Servidor do seu site já está rodando! Acesse o caminho a seguir para visualizar: http://localhost:${PORTA} \n

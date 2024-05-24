@@ -15,35 +15,36 @@
     <link rel="stylesheet" href="../css/style-reset.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
-<!-- onload="validarSessao()" -->
-<body >
+
+<body onload="validarSessao()" >
     <div class="bg-layout">
-        <div class="sideBar">
-            <div class="sideBar-container">
-                <ul class="sideBar-menu">
-                    <li class="selection">
-                        <div class="imgIcon"><img src="../assets/Dashboard icon.png" alt=""></div>
-                        <p class="selectText"> <a href="dashboard.html">Dashboard</a></p>
+        <div class="bg-layout">
+            <div class="sideBar">
+                <div class="sideBar-container">
+                    <ul class="sideBar-menu">
+                        <li class="selection">
+                            <div class="imgIcon"><img src="../assets/Dashboard icon.png" alt=""></div>
+                            <p class="selectText"> <a href="dashboard.html">Dashboard</a></p>
+                        </li>
+                        <li class="selection">
+                            <div class="imgIcon"><img src="../assets/Analytics Icon.png" alt=""></div>
+                            <p class="selectText"> <a href="analytics.html">Analytics</a></p>
+                        </li>
+                        <li class="selection">
+                            <div class="imgIcon"><img src="../assets/Centro de Controle.png" alt=""></div>
+                            <p class="selectText"> <a href="control_center.html">Control Center</a></p>
+                        </li>
+                        <li class="selection">
+                            <div class="imgIcon"><img src="../assets/Engrenagem.png" alt=""></div>
+                            <p class="selectText"><a href="configuracao.html">Configurações</a></p>
+                        </li>
+                    </ul>
+                    <li class="selection exit" onclick="limparSessao()">
+                        <div class="imgIcon"><img src="../assets/sair.png" alt=""></div>
+                        <p class="selectText">Sair</p>
                     </li>
-                    <li class="selection">
-                        <div class="imgIcon"><img src="../assets/Analytics Icon.png" alt=""></div>
-                        <p class="selectText"> <a href="analytics.html"></a>Analytics</p>
-                    </li>
-                    <li class="selection">
-                        <div class="imgIcon"><img src="../assets/Centro de Controle.png" alt=""></div>
-                        <p class="selectText"> <a href="control_center.html">Control Center</a></p>
-                    </li>
-                    <li class="selection">
-                        <div class="imgIcon"><img src="../assets/Engrenagem.png" alt=""></div>
-                        <p class="selectText"><a href="configuracao.html">Configurações</a></p>
-                    </li>
-                </ul>
-                <li class="selection exit" onclick="limparSessao()">
-                    <div class="imgIcon"><img src="../assets/sair.png" alt=""></div>
-                    <p class="selectText">Sair</p>
-                </li>
+                </div>
             </div>
-        </div>
 
         <div class="container-layout">
             <div class="wrapper-layout">

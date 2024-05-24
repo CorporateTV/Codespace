@@ -173,3 +173,14 @@ table {
     padding: 10px;
 }
 
+.status-normal {
+    color: #0FCF51;
+}
+
+.status-atencao {
+    color: #EBB52A;
+}
+
+.status-alerta {
+    color: #DC2020;
+}

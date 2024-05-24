@@ -1,5 +1,4 @@
 var usuarioModel = require("../models/usuarioModel");
-var empresaModel = require("../models/empresaModel")
 
 
 function autenticar(req, res) {
