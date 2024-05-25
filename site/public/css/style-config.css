@@ -106,8 +106,10 @@
 }
 
 .form-left {
-    align-content: end;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .container-form {

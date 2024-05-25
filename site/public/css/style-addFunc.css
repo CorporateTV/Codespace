@@ -49,6 +49,7 @@ body{
   overflow: auto;
   border: solid;
   height: 89%; 
+  overflow-y: auto;
 }
 
 .button-cadastrar{
@@ -94,6 +95,10 @@ body{
 
 .button-cadastrar:active {
     transform: scale(0.96); /* Diminui o tamanho quando clicado */
+}
+.opcaoEmpresa{
+    margin: 10px 0;
+    font-size: 25px;
 }
 
 #fecharCadFunc{
