@@ -106,7 +106,8 @@
 }
 
 .form-left {
-    width: 50%;
+    align-content: end;
+    text-align: center;
 }
 
 .container-form {

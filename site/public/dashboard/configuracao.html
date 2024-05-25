@@ -98,7 +98,7 @@
                                             <span class="edit-button" onclick="editInput('input_cargo')"><i
                                                     class="fa-solid fa-pencil"></i></span>
                                         </div>
-                                        <button>Aplicar</button>
+                                        <button class="button-aplicar">Aplicar</button>
                                     </div>
 
                                     <div class="form-right">
@@ -153,15 +153,57 @@
 
                     <div id="CadastroFuncionários" class="tab-content">
 
-                        <div class="form">
+                    <div class="row-container">
 
+                        <div class="listFunc">
+                        <h1>Lista de Funcionários</h1>
+                        <div class="list-empresas" id="list-empresas_ID"></div>
+                        </div>
+
+                        <div class="form-left">
+                            <h3>Informações pessoais</h3>
+                            <div class="container-form">
+
+                                <div class="form-left" style="display: block;">
+                                    <div class="input-configuracao">
+                                        <label> Nome </label>
+                                        <input id="input_nome" name="text" type="text" readonly>
+                                        <span class="edit-button" onclick="editInput('input_nome')"><i
+                                                class="fa-solid fa-pencil"></i></span>
+                                    </div>
+                                    <div class="input-configuracao">
+                                        <label> Email </label>
+                                        <input id="input_email" name="text" type="text" readonly>
+                                        <span class="edit-button" onclick="editInput('input_email')"><i
+                                                class="fa-solid fa-pencil"></i></span>
+                                    </div>
+                                    <div class="input-configuracao">
+                                        <label> Celular </label>
+                                        <input id="input_celular" name="text" type="text" readonly>
+                                        <span class="edit-button" onclick="editInput('input_celular')"><i
+                                                class="fa-solid fa-pencil"></i></span>
+                                    </div>
+                                    <div class="input-configuracao">
+                                        <label> Cargo </label>
+                                        <input id="input_cargo" name="text" type="text" readonly>
+                                        <span class="edit-button" onclick="editInput('input_cargo')"><i
+                                                class="fa-solid fa-pencil"></i></span>
+                                    </div>
+                                    <button>Aplicar</button>
+                                </div>
+
+                               
+                            </div>
+
+                        </div>
+
+                        <div class="form">
                             <div id="fecharCadFunc" onclick="abrirAdicionarFuncionario()">
                                 <div class="line1"></div>
                                 <div class="line2"></div>
                             </div>
                             <img src="../assets/Logo-LiSync-Inverso.png" class="img-logo" alt="">
-                            <div class="form">
-
+                            <div class="formulario">
 
                                 <div class="container-input">
                                     <label>Nome completo</label>
@@ -181,11 +223,12 @@
                                 </div>
                                 <button class="button-cadastrar" onclick="validarEnvio()">Adicionar Funcionário</button>
 
-
                             </div>
+                        </div>  
 
 
-                        </div>
+                    </div>
+                        
                     </div>
                 </div>
 

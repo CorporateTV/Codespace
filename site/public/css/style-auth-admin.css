@@ -347,6 +347,9 @@ label {
     justify-content: center;
     overflow: auto;
 }
+.listFunc{
+    font-size: 10px;
+}
 
 .empresa{
 
