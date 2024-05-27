@@ -1,46 +1,60 @@
 var sessionIdEmpresa = sessionStorage.ID_EMPRESA;
 
-function quantidadeTv(idEmpresa) {
-    fetch(`/tv/quantidadeTv/${idEmpresa}`, {
+function listarDadosTvEmpresa(idEmpresa) {
+    return fetch(`/tv/listarDadosTv/${idEmpresa}`, {
         method: "GET",
     })
-    
     .then(function (resposta) {
-        console.log(resposta.json); 
+        if (!resposta.ok) {
+            throw new Error('Network response was not ok ' + resposta.statusText);
+        }
+        return resposta.json();
     })
-} 
-
-function listarAmbientes(idEmpresa) {
-    fetch(`/ambiente/listar/${idEmpresa}`, {
-        method: "GET",
+    .then((data) => {
+        console.log(data);
+        return data;
     })
-
-    .then(function (resposta) {
-        resposta.json().then((ambientes) => {
-            ambientes.forEach((ambiente) => {
-                console.log(`${ambiente.setor} + ${ambiente.andar}`)
-            });
-        });
-    })
-    .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
+    .catch(function (erro) {
+        console.log(`#ERRO: ${erro}`);
     });
 }
 
-var tvInfoArray = [
-    { tvName: "TV-01", hostname: "HOSTNAME1", status: "ON", condition: "Normal", floor: "1", sector: "Marketing" },
-    { tvName: "TV-02", hostname: "HOSTNAME2", status: "ON", condition: "Normal", floor: "1", sector: "Marketing" },
-    { tvName: "TV-03", hostname: "HOSTNAME3", status: "OFF", condition: "Error", floor: "2", sector: "RH" },
-    { tvName: "TV-04", hostname: "HOSTNAME4", status: "ON", condition: "Normal", floor: "4", sector: "Vendas" },
-    { tvName: "TV-05", hostname: "HOSTNAME5", status: "OFF", condition: "Error", floor: "1", sector: "Hall" },
-    { tvName: "TV-06", hostname: "HOSTNAME6", status: "ON", condition: "Normal", floor: "1", sector: "Marketing" },
-    { tvName: "TV-07", hostname: "HOSTNAME7", status: "OF", condition: "Normal", floor: "1", sector: "Marketing" },
-    { tvName: "TV-08", hostname: "HOSTNAME8", status: "ON", condition: "Normal", floor: "1", sector: "Marketing" },
-    { tvName: "TV-09", hostname: "HOSTNAME9", status: "ON", condition: "Normal", floor: "1", sector: "Hall" },
-    { tvName: "TV-10", hostname: "HOSTNAME10", status: "ON", condition: "Normal", floor: "4", sector: "Vendas" },
-    { tvName: "TV-11", hostname: "HOSTNAME11", status: "ON", condition: "Normal", floor: "4", sector: "Vendas" },
-];
+function listarComponentes(idTv) {
+    return fetch(`/componente/componentesTv/${idTv}`, {
+        method: "GET",
+    })
+    .then(function (resposta) {
+        if (!resposta.ok) {
+            throw new Error('Network response was not ok ' + resposta.statusText);
+        }
+        return resposta.json();
+    })
+    .then((data) => {
+        /* console.log(data.find(componente => componente.tipoComponente === "CPU")); */
+        return data;
+    })
+    .catch(function (erro) {
+        console.log(`#ERRO: ${erro}`);
+    });
+}
 
-console.log();
-quantidadeTv(sessionIdEmpresa)
-listarAmbientes(sessionIdEmpresa);
+function selecionarComponente(idTv, tipoComponente) {
+    return fetch(`/componente/componentesTv/${idTv}`, {
+        method: "GET",
+    })
+    .then(function (resposta) {
+        if (!resposta.ok) {
+            throw new Error('Network response was not ok ' + resposta.statusText);
+        }
+        return resposta.json();
+    })
+    .then((data) => {
+        // Filtrar os componentes pelo tipo especificado
+        const componenteFiltrado = data.find(componente => componente.tipoComponente === tipoComponente);
+        return componenteFiltrado ? [componenteFiltrado.tipoComponente, componenteFiltrado.modelo] : null;
+    })
+    .catch(function (erro) {
+        console.log(`#ERRO: ${erro}`);
+        return null; // Retorna null em caso de erro
+    });
+}

@@ -57,9 +57,6 @@
                         <button class="tab-links" onclick="tabConfiguracao(event, 'Geral')" id="defaultOpen">
                             Perfil
                         </button>
-                        <button class="tab-links" onclick="tabConfiguracao(event, 'Sistema')">
-                            Sistema
-                        </button>
                         <button class="tab-links" onclick="tabConfiguracao(event, 'CadastroFuncionários')">
                             Cadastro de Funcionários
                         </button>
@@ -84,12 +81,6 @@
                                             <label> Email </label>
                                             <input id="input_email" name="text" type="text" readonly>
                                             <span class="edit-button" onclick="editInput('input_email')"><i
-                                                    class="fa-solid fa-pencil"></i></span>
-                                        </div>
-                                        <div class="input-configuracao">
-                                            <label> Celular </label>
-                                            <input id="input_celular" name="text" type="text" readonly>
-                                            <span class="edit-button" onclick="editInput('input_celular')"><i
                                                     class="fa-solid fa-pencil"></i></span>
                                         </div>
                                         <div class="input-configuracao">
@@ -133,23 +124,6 @@
 
                     </div>
 
-                    <div id="Sistema" class="tab-content">
-                        <h1> Sistema </h1>
-                        <div class="layout-config">
-                            <div class="form-left">
-                                <div class="sistema-container">
-                                    <h3> Usuários </h3>
-                                    <ul>
-                                        <li>Quantidade de usuários: 10</li>
-                                        <li>Quantdade de usuários Gestor: 2</li>
-                                        <li></li>
-                                        <li></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <div id="CadastroFuncionários" class="tab-content">
 
                     <div class="row-container">
@@ -176,12 +150,6 @@
                                         <label> Email </label>
                                         <input id="input_email" name="text" type="text" readonly>
                                         <span class="edit-button" onclick="editInput('input_email')"><i
-                                                class="fa-solid fa-pencil"></i></span>
-                                    </div>
-                                    <div class="input-configuracao">
-                                        <label> Celular </label>
-                                        <input id="input_celular" name="text" type="text" readonly>
-                                        <span class="edit-button" onclick="editInput('input_celular')"><i
                                                 class="fa-solid fa-pencil"></i></span>
                                     </div>
                                     <div class="input-configuracao">
@@ -238,7 +206,6 @@
                             <ul>
                                 <li> Empresa: </li>
                                 <li> Email: </li>
-                                <li> Celular: </li>
                                 <li> Cargo: </li>
                                 <li> Data de Cadastro: </li>
                             </ul>

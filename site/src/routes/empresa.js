@@ -17,7 +17,11 @@ router.get("/listar", function (req, res) {
 });
 
 router.post("/cadastrarEmpresa",function (req, res){
-    empresaController.cadastrarEmpresa(req, res)
+    empresaController.cadastrarEmpresa(req, res);
+})
+
+router.get("/quantidadeUsuarios/:idEmpresa", function (req, res) {
+    empresaController.quantidadeUsuarios(req, res);
 })
 
 module.exports = router;

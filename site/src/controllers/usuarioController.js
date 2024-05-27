@@ -12,32 +12,32 @@ function autenticar(req, res) {
     } else {
 
         usuarioModel.autenticar(email, senha)
-        .then(
-            function (resultadoAutenticar) {
-                console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
-                console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
-                if (resultadoAutenticar.length == 1) {
-                    console.log(resultadoAutenticar);
-                    res.json({
-                        idUsuario: resultadoAutenticar[0].idUsuario,
-                        email: resultadoAutenticar[0].email,
-                        nome: resultadoAutenticar[0].nome,
-                        senha: resultadoAutenticar[0].senha,
-                        idEmpresa : resultadoAutenticar[0].idEmpresa
-                    })
-                } else if (resultadoAutenticar.length == 0) {
-                    res.status(403).send("Email e/ou senha inválido(s)");
-                } else {
-                    res.status(403).send("Mais de um usuário com o mesmo login e senha!");
+            .then(
+                function (resultadoAutenticar) {
+                    console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+                    console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
+                    if (resultadoAutenticar.length == 1) {
+                        console.log(resultadoAutenticar);
+                        res.json({
+                            idUsuario: resultadoAutenticar[0].idUsuario,
+                            email: resultadoAutenticar[0].email,
+                            nome: resultadoAutenticar[0].nome,
+                            senha: resultadoAutenticar[0].senha,
+                            idEmpresa: resultadoAutenticar[0].idEmpresa
+                        })
+                    } else if (resultadoAutenticar.length == 0) {
+                        res.status(403).send("Email e/ou senha inválido(s)");
+                    } else {
+                        res.status(403).send("Mais de um usuário com o mesmo login e senha!");
+                    }
                 }
-            }
-        ).catch(
-            function (erro) {
-                console.log(erro);
-                console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
-                res.status(500).json(erro.sqlMessage);
-            }
-        );
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
     }
 
 }
@@ -81,7 +81,7 @@ function cadastrar(req, res) {
 }
 
 
-function  cadastrarGestor(req, res) {
+function cadastrarGestor(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var nome = req.body.nomeGestorServer;
     var email = req.body.emailGestorServer;
@@ -101,20 +101,20 @@ function  cadastrarGestor(req, res) {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
         usuarioModel.cadastrar(nome, email, senha, idEmpresa)
-        .then(
-            function (resultado) {
-                res.json(resultado);
-            }
-        ).catch(
-            function (erro) {
-                console.log(erro);
-                console.log(
-                    "\nHouve um erro ao realizar o cadastro! Erro: ",
-                    erro.sqlMessage
-                );
-                res.status(500).json(erro.sqlMessage);
-            }
-        );
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
     }
 }
 
@@ -131,15 +131,15 @@ function atualizarPerfil(req, res) {
         res.status(400).send("Seu nome está undefined!");
     }
 
-    usuarioModel.atualizarPerfil(nome, email, idFuncionario).then(function(resultado){
+    usuarioModel.atualizarPerfil(nome, email, idFuncionario).then(function (resultado) {
         res.status(200).send("Perfil atualizado com sucesso");
-    }).catch(function(erro){
+    }).catch(function (erro) {
         res.status(500).json(erro.sqlMessage);
     })
 }
 
 
-function cadastrarGestor(){
+function cadastrarGestor() {
     var nome = req.body.nomeGestorServer
     var email = req.body.emailGestorServer
     var senha = req.body.senhaGestorServer
@@ -147,19 +147,35 @@ function cadastrarGestor(){
 
 
     usuarioModel.cadastrarGestor(nome, email, senha, idEmpresa).then(
-      function (resultado) {
-          res.json(resultado);
-      }
-  ).catch(
-      function (erro) {
-          console.log(erro);
-          console.log(
-              "\nHouve um erro ao realizar o cadastro! Erro: ",
-              erro.sqlMessage
-          );
-          res.status(500).json(erro.sqlMessage);
-      }
-  );
+        function (resultado) {
+            res.json(resultado);
+        }
+    ).catch(
+        function (erro) {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao realizar o cadastro! Erro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}
+
+function quantidadeUsuariosPorTipo(req, res) {
+    var idEmpresa = req.params.idEmpresa;
+  
+    usuarioModel.quantidadeUsuariosPorTipo(idEmpresa).then((resultado) => {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado[0]);
+        } else {
+            res.status(204).json([]);
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar a quantidade de usuários: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
   }
 
 
@@ -168,4 +184,5 @@ module.exports = {
     autenticar,
     cadastrar,
     atualizarPerfil,
+    quantidadeUsuariosPorTipo
 }

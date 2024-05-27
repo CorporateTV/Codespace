@@ -74,6 +74,8 @@
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(1, 0.5fr);
     gap: 20px;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 
 .card-tv-status {

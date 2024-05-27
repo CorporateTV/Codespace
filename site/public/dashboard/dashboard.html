@@ -7,16 +7,19 @@
     <title>Analytics</title>
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
 
     <link rel="stylesheet" href="../css/style-sidebar-dash.css">
     <link rel="stylesheet" href="../css/style-dash-global.css">
     <link rel="stylesheet" href="../css/style-dashboard.css">
     <link rel="stylesheet" href="../css/style-components.css">
     <link rel="stylesheet" href="../css/style-reset.css">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
  
-<body onload="validarSessao()">
+<body onload="validarSessao(), exibirDadosPlano()">
     <div class="bg-layout">
         <div class="sideBar">
             <div class="sideBar-container">
@@ -48,19 +51,19 @@
             <div class="wrapper-layout">
                 <div class="box plano">
                     <h2>Quantidade de televisões </h2>
-                    <h3>Plano: <span>Premium</span></h3>
+                    <h3>Plano: <span id="text_nomePlano">Premium</span></h3>
                     <div class="container-row-plano">
                         <div class="quantidade-categoria">
                             <p> Total </p>
-                            <span> 30 </span>
+                            <span id="text_planoTotal"></span>
                         </div>
                         <div class="quantidade-categoria">
                             <p> Utilizado </p>
-                            <span> 25 </span>
+                            <span id="text_planoUtilizado"></span>
                         </div>
                         <div class="quantidade-categoria">
                             <p> Disponível </p>
-                            <span> 5 </span>
+                            <span id="text_planoDisponivel"></span>
                         </div>
                     </div>
                 </div>
@@ -70,17 +73,17 @@
                             <i class="fa-solid fa-user fa-2x"></i>
                             <h1> Usuários </h1>
                         </div>
-                        <span>10</span>
+                        <span id="text_quantidadeUsuarios"></span>
                     </div>
                     <div class="quantidade-chart">
                         <table>
                             <tr>
                                 <td class="assistente">Assistentes NOC</td>
-                                <td class="qtd-table">8</td>
+                                <td class="qtd-table" id="text_qtdAssistente"></td>
                             </tr>
                             <tr>
                                 <td class="gerente">Gerente NOC</td>
-                                <td class="qtd-table">2</td>
+                                <td class="qtd-table" id="text_qtdGerente"></td>
                             </tr>
                         </table>
                         <div id="chart_usuarios" class="grafico-rosca"></div>
@@ -92,7 +95,7 @@
                             <i class="fa-solid fa-tv fa-2x"></i>
                             <h1> Televisões </h1>
                         </div>
-                        <span>20</span>
+                        <span id="text_quantidadeTv"></span>
                     </div>
                     <div class="quantidade-chart">
                         <table>
@@ -114,17 +117,14 @@
                             <h1> Painel de Televisões </h1>
                         </div>
                         <div class="container-select">
-                            <span>Andar</span>
+                            <span>Andar:</span>
                             <select name="andar" id="andar" class="select-painel">
                                 <option selected></option>
                             </select>
                             <p></p>
-                            <sapn>Setor</sapn>
+                            <sapn>Setor:</sapn>
                             <select name="setor" id="setor" class="select-painel">
-                                <option value="Marketing">Marketing</option>
-                                <option value="RH">RH</option>
-                                <option value="Vendas">Vendas</option>
-                                <option value="Hall">Hall</option>
+                                <option selected></option>
                             </select>
                         </div>
                         <div class="container-carousel">
@@ -161,6 +161,8 @@
 
 </html>
 <script src="../js/getData/tv_data.js"></script>
+<script src="../js/getData/empresa_data.js"></script>
+
 <script src="../js/carousel.js"></script>
 <script src="../js/charts/chart_dashboard.js"></script>
 <script src="../js/filter_tv.js"></script>

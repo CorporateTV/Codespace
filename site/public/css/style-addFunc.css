@@ -1,29 +1,24 @@
-body{
-    background-color: rgb(32, 32, 32);  
-}
-
-.img-logo{
+.img-logo {
     width: 73%;
     height: fit-content;
-    margin: 50px 0;
-    
+
 }
 
-.container-input{
+.container-input {
     color: white;
     width: 100%;
     display: flex;
     flex-direction: column;
-    
-    input{
+
+    input {
         display: flex;
         max-width: 100%;
     }
-   
+
 }
 
 
-.form{
+.form {
     gap: 20px;
     justify-content: center;
     display: flex;
@@ -32,29 +27,27 @@ body{
     width: 25%;
     text-align: center;
 }
-.row-container{
+
+.row-container {
     display: flex;
     flex-direction: row;
     width: 100%;
     height: 100%;
-
     justify-content: space-around;
 }
 
-.list-empresas{
-
+.list-empresas {
     background-color: #8095bf;
-  width: 100%;
-  justify-content: center;
-  overflow: auto;
-  border: solid;
-  height: 89%; 
-  overflow-y: auto;
+    width: 100%;
+    justify-content: center;
+    overflow: auto;
+    border: solid;
+    height: 80%;
+    overflow-y: auto;
 }
 
-.button-cadastrar{
+.button-cadastrar {
     width: 100%;
-    margin-top: 50px;
     padding: 10px 5px;
     background-color: #4D628C;
     font-family: oswald;
@@ -66,9 +59,8 @@ body{
     cursor: pointer;
 }
 
-.button-aplicar{
+.button-aplicar {
     width: 100%;
-    margin-top: 50px;
     padding: 10px 5px;
     background-color: #4D628C;
     font-family: oswald;
@@ -79,29 +71,33 @@ body{
     border-radius: 5px;
     cursor: pointer;
 }
-.formulario{
+
+.formulario {
     gap: 20px;
-   justify-content: center;
-   display: flex;
-   align-items: start;
-   flex-direction: column;
-   width: 83%;
-   height: 100%;
+    justify-content: center;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    width: 83%;
+    height: 100%;
 }
 
 .button-cadastrar:hover {
-    background-color: #32415f; /* Altera a cor de fundo ao passar o mouse */
-}   
+    background-color: #32415f;
+    /* Altera a cor de fundo ao passar o mouse */
+}
 
 .button-cadastrar:active {
-    transform: scale(0.96); /* Diminui o tamanho quando clicado */
+    transform: scale(0.96);
+    /* Diminui o tamanho quando clicado */
 }
-.opcaoEmpresa{
+
+.opcaoEmpresa {
     margin: 10px 0;
     font-size: 25px;
 }
 
-#fecharCadFunc{
+#fecharCadFunc {
     position: absolute;
     z-index: 3;
     width: 15px;
@@ -109,53 +105,54 @@ body{
     right: 10px;
     top: 10px;
 
-    .line1, .line2 {
+    .line1,
+    .line2 {
         position: absolute;
         width: 2px;
         background-color: white;
-      }
-      
-      .line1 {
+    }
+
+    .line1 {
         top: 0;
         left: 50%;
         height: 100%;
         transform: rotate(45deg);
-      }
-      
-      .line2 {
+    }
+
+    .line2 {
         top: 0;
         left: 50%;
         height: 100%;
         transform: rotate(-45deg);
-      }
-      .listFunc{
+    }
+
+    .listFunc {
         font-size: 15px;
-      }
+    }
 }
 
 
 @media only screen and (max-width: 1000px) {
-    .container-formulario{
-    
+    .container-formulario {
         width: 50%;
         height: 60%;
-        
+    }
 
-    }
-    .button-cadastrar{
+    .button-cadastrar {
         font-size: 2.5vw;
-       
     }
-    .img-logo{
+
+    .img-logo {
         width: 50%;
     }
-}  
+}
+
 @media only screen and (max-width: 600px) {
-    .img-logo{
+    .img-logo {
         width: 70%;
     }
-    .button-cadastrar{
+
+    .button-cadastrar {
         font-size: 3vw;
-       
     }
 }

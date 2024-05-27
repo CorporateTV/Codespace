@@ -9,7 +9,6 @@ function buscarPornomeEmpresa(req, res) {
 
 }
 
-
 function listar(req, res) {
   empresaModel.listar().then((resultado) => {
     res.status(200).json(resultado);
@@ -55,10 +54,26 @@ function cadastrarEmpresa(req,res){
      );
 }
 
+function quantidadeUsuarios(req, res) {
+  var idEmpresa = req.params.idEmpresa;
+
+  empresaModel.quantidadeUsuarios(idEmpresa).then((resultado) => {
+      if (resultado.length > 0) {
+          res.status(200).json({ quantidadeUsuarios: resultado[0].quantidadeUsuarios});
+      } else {
+          res.status(204).json({quantidadeUsuarios: 0});
+      }
+  }).catch(function (erro) {
+      console.log(erro);
+      console.log("Houve um erro ao buscar as Usuários: ", erro.sqlMessage);
+      res.status(500).json(erro.sqlMessage);
+  });
+}
 
 module.exports = {
   cadastrarEmpresa,
   buscarPorId,
   listar,
-  buscarPornomeEmpresa
+  buscarPornomeEmpresa,
+  quantidadeUsuarios
 };

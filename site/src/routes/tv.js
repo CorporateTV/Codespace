@@ -7,4 +7,8 @@ router.get("/quantidadeTv/:idEmpresa", function(req, res) {
     tvController.quantidadeTvEmpresa(req, res);
 });
 
+router.get("/listarDadosTv/:idEmpresa", function(req, res) {
+    tvController.listarDadosTv(req, res);
+})
+
 module.exports = router;

@@ -20,5 +20,8 @@ router.post("/cadastrarGestor", function (req, res) {
     usuarioController.cadastrarGestor(req, res);
 })
 
+router.get("/quantidadeUsuariosPorTipo/:idEmpresa", function(req, res) {
+    usuarioController.quantidadeUsuariosPorTipo(req, res);
+});
 
 module.exports = router;
