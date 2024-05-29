@@ -70,6 +70,10 @@ function quantidadeUsuarios(req, res) {
   });
 }
 
+function usuariosEmpresa(req, res) {
+  
+}
+
 module.exports = {
   cadastrarEmpresa,
   buscarPorId,

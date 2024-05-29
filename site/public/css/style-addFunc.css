@@ -17,68 +17,58 @@
 
 }
 
-
-.form {
+.form-cadastrar {
     gap: 20px;
+    padding: 10px;
     justify-content: center;
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 25%;
-    text-align: center;
+    width: 100%;
 }
 
 .row-container {
     display: flex;
     flex-direction: row;
+    gap: 2em;
     width: 100%;
-    height: 100%;
-    justify-content: space-around;
+    height: 80%;
+    justify-content: space-between;
 }
 
 .list-empresas {
     background-color: #8095bf;
-    width: 100%;
+    width: 95%;
     justify-content: center;
     overflow: auto;
-    border: solid;
-    height: 80%;
-    overflow-y: auto;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    height: 100%;
+    border: solid 2px;
+    padding: 5px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 
-.button-cadastrar {
+.button-funcionario {
     width: 100%;
-    padding: 10px 5px;
-    background-color: #4D628C;
-    font-family: oswald;
-    font-size: 21px;
-    text-shadow: 0.5px 0.5px white;
-    color: #8095BF;
+    background-color: #8095BF;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+    font-family: 'Oswald';
+    font-size: 1em;
     cursor: pointer;
 }
 
-.button-aplicar {
-    width: 100%;
-    padding: 10px 5px;
-    background-color: #4D628C;
-    font-family: oswald;
-    font-size: 21px;
-    text-shadow: 0.5px 0.5px white;
-    color: #8095BF;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.formulario {
+.campos-cadastrar {
     gap: 20px;
     justify-content: center;
     display: flex;
-    align-items: start;
+    align-items: center;
     flex-direction: column;
-    width: 83%;
+    width: 40%;
     height: 100%;
 }
 
@@ -93,8 +83,8 @@
 }
 
 .opcaoEmpresa {
-    margin: 10px 0;
-    font-size: 25px;
+    font-size: 1.2em;
+    line-height: 1.5em;
 }
 
 #fecharCadFunc {
@@ -126,11 +116,7 @@
         transform: rotate(-45deg);
     }
 
-    .listFunc {
-        font-size: 15px;
-    }
 }
-
 
 @media only screen and (max-width: 1000px) {
     .container-formulario {
@@ -155,4 +141,33 @@
     .button-cadastrar {
         font-size: 3vw;
     }
+}
+
+.listFunc {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+}
+
+.campos-editar {
+    width: 50%;
+}
+
+.form-editar {
+    display: flex;
+    width: 65%;
+    flex-direction: column;
+}
+
+.editar{
+    width: 100%;
+}
+
+.titulo-form {
+    font-size: 18px;
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: solid 2px white;
 }

@@ -186,28 +186,6 @@ label {
     margin-left: 20px;
 }
 
-/* Switch */
-
-/* .main-form {
-    width: 100%;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.container-switch {
-    width: 90%;
-    display: flex;
-    gap: 10px;
-    font-size: 0.7em;
-    flex-direction: column;
-    justify-content: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-} */
-
 .container-form {
     width: 100%;
     display: flex;
@@ -329,7 +307,7 @@ label {
     align-items: center;
     justify-content: center;
     display: flex;
-    height: 100%;
+    height: 80%;
     width: 60%;
     background-color: #4d628c;
     flex-direction: column;
@@ -340,15 +318,11 @@ label {
     }
 }
 .list-empresas{
-
     background-color: #8095bf;
-    width: 80%;
-    height: 50%;
+    width: 90%;
+    height: 80%;
     justify-content: center;
-    overflow: auto;
-}
-.listFunc{
-    font-size: 10px;
+    overflow-y: scroll;
 }
 
 .empresa{

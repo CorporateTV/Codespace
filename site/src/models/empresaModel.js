@@ -42,6 +42,7 @@ function quantidadeUsuarios(idEmpresa) {
   return database.executar(sql);
 }
 
+
 module.exports = {
   cadastrarGestor,
   cadastrarEmpresa,

@@ -70,7 +70,6 @@ function quantidadeTv(idEmpresa) {
 
         resposta.json().then((data) => {
             const quantidade = data.quantidade;
-            console.log(quantidade);
             sessionStorage.QUANTIDADE_TV = quantidade;
             document.getElementById("text_quantidadeTv").innerText = quantidade;
         }); 
@@ -95,7 +94,6 @@ function quantidadeUsuarios(idEmpresa) {
 
         resposta.json().then((data) => {
             const quantidade = data.quantidadeUsuarios;
-            console.log(quantidade);
             document.getElementById("text_quantidadeUsuarios").innerText = quantidade;
         }); 
     })

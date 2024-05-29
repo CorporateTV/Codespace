@@ -24,4 +24,6 @@ router.get("/quantidadeUsuarios/:idEmpresa", function (req, res) {
     empresaController.quantidadeUsuarios(req, res);
 })
 
+
+
 module.exports = router;
