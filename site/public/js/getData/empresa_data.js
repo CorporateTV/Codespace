@@ -122,11 +122,33 @@ function listarAmbientes(idEmpresa) {
     });
 }
 
+function listarUsuariosEmpresa(idEmpresa) {
+    fetch(`/empresa/listarUsuariosEmpresa/${idEmpresa}`, {
+        method: "GET",
+    })
+
+    .then(function (resposta) {
+
+        resposta.json().then((usuarios) => {
+            usuarios.forEach((usuario) => {
+                console.log(usuario.nome);
+                const spanElement = document.createElement("span");
+                spanElement.className = "opcaoEmpresa";
+                spanElement.id = usuario.idUsuario;
+                spanElement.textContent = usuario.nome;
+                spanElement.onclick = function() {
+                    selecionarUsuario(idEmpresa, usuario.idUsuario);
+                };
+                lista_usuarios_empresa.appendChild(spanElement);
+            })
+        })
+    })
+}
+
+
 /* Execução das funções */
 
 dadosEmpresa(sessionIdEmpresa);
 
 // Funções página Dashboard
-quantidadeTv(sessionIdEmpresa);
-quantidadeUsuarios(sessionIdEmpresa);
 listarAmbientes(sessionIdEmpresa);

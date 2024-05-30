@@ -42,6 +42,12 @@ function quantidadeUsuarios(idEmpresa) {
   return database.executar(sql);
 }
 
+function listarUsuariosEmpresa(idEmpresa) {
+  var sql = `SELECT idUsuario, nome, email, fkGestor FROM Usuario JOIN Empresa as empresa ON fkEmpresa = idEmpresa WHERE idEmpresa = ${idEmpresa}`;
+
+  return database.executar(sql);
+}
+
 
 module.exports = {
   cadastrarGestor,
@@ -50,4 +56,5 @@ module.exports = {
   listar,
   buscarPornomeEmpresa,
   quantidadeUsuarios,
+  listarUsuariosEmpresa
 };

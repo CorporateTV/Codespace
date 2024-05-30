@@ -206,7 +206,44 @@ function cadastrar() {
         .catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
         });
-        window.onload
+    window.onload
+
+    return false;
+}
+
+function cadastrarUsuarioGestor(idEmpresa) {
+    const nome = input_nomeCadastro.value;
+    const idEmpresaVar = idEmpresa;
+    const email = input_emailCadastro.value;
+    const senha = input_senhaCadastro.value;
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/gestorCadastrar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            nomeServer: nome,
+            emailServer: email,
+            senhaServer: senha,
+            idEmpresaServer: idEmpresaVar
+        }),
+    })
+        .then(function (resposta) {
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                alert("Cadastro realizado com sucesso!")
+
+            } else {
+                throw "Houve um erro ao tentar realizar o cadastro!";
+            }
+        })
+        .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+    window.onload
 
     return false;
 }

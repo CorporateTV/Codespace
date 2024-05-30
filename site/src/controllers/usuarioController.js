@@ -102,14 +102,14 @@ function atualizarPerfil(req, res) {
 }
 
 
-function cadastrarGestor() {
-    var nome = req.body.nomeGestorServer
-    var email = req.body.emailGestorServer
-    var senha = req.body.senhaGestorServer
-    var idEmpresa = req.body.idEmpresa
+function gestorCadastrar(req, res) {
+    var nome = req.body.nomeServer;
+    var email = req.body.emailServer;
+    var senha = req.body.senhaServer;
+    var idEmpresa = req.body.idEmpresaServer;
 
 
-    usuarioModel.cadastrarGestor(nome, email, senha, idEmpresa).then(
+    usuarioModel.gestorCadastrar(nome, email, senha, idEmpresa).then(
         function (resultado) {
             res.json(resultado);
         }
@@ -139,13 +139,23 @@ function quantidadeUsuariosPorTipo(req, res) {
         console.log("Houve um erro ao buscar a quantidade de usuários: ", erro.sqlMessage);
         res.status(500).json(erro.sqlMessage);
     });
-  }
+}
+
+function buscarUsuario(req, res) {
+    var idEmpresa = req.query.idEmpresa;
+    var idUsuario = req.query.idUsuario;
+
+    usuarioModel.buscarUsuario(idEmpresa, idUsuario).then((resultado) => {
+        res.status(200).json(resultado);
+    })
+}
 
 
 module.exports = {
-    cadastrarGestor,
+    gestorCadastrar,
     autenticar,
     cadastrar,
     atualizarPerfil,
-    quantidadeUsuariosPorTipo
+    quantidadeUsuariosPorTipo,
+    buscarUsuario
 }

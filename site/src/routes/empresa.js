@@ -24,6 +24,8 @@ router.get("/quantidadeUsuarios/:idEmpresa", function (req, res) {
     empresaController.quantidadeUsuarios(req, res);
 })
 
-
+router.get("/listarUsuariosEmpresa/:idEmpresa", function (req, res) {
+    empresaController.listarUsuariosEmpresa(req, res);
+})
 
 module.exports = router;

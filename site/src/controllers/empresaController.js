@@ -70,8 +70,12 @@ function quantidadeUsuarios(req, res) {
   });
 }
 
-function usuariosEmpresa(req, res) {
-  
+function listarUsuariosEmpresa(req, res) {
+  var idEmpresa = req.params.idEmpresa;
+
+  empresaModel.listarUsuariosEmpresa(idEmpresa).then((resultadoUsuarios) => {
+    res.status(200).json(resultadoUsuarios);
+  })
 }
 
 module.exports = {
@@ -79,5 +83,6 @@ module.exports = {
   buscarPorId,
   listar,
   buscarPornomeEmpresa,
-  quantidadeUsuarios
+  quantidadeUsuarios,
+  listarUsuariosEmpresa
 };

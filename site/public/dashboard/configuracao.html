@@ -15,7 +15,7 @@
     <script src="../js/auth/cadastrar_funcionario.js"></script>
 </head>
 
-<body onload="validarSessao()">
+<body onload="validarSessao(), listarUsuariosEmpresa(sessionIdEmpresa)">
     <div class="bg-layout">
         <div class="sideBar">
             <div class="sideBar-container">
@@ -50,48 +50,46 @@
                     <div class="imgIcon-header"><img src="../assets/Engrenagem.png" alt=""></div>
                     <h1> Configurações </h1>
                 </div>
-    
+
                 <div class="container-content">
                     <div class="container-tab-layout">
                         <div class="display-tab">
-                            <button class="tab-links" onclick="tabConfiguracao(event, 'Geral')">
+                            <button class="tab-links" onclick="tabConfiguracao(event, 'Geral')" id="defaultOpen">
                                 Perfil
                             </button>
                             <button class="tab-links" onclick="tabConfiguracao(event, 'CadastroFuncionários')"
-                                id="defaultOpen">
+                                id="cadastroFuncionarios">
                                 Cadastro de Funcionários
                             </button>
                         </div>
-    
+
                         <div id="Geral" class="tab-content">
                             <h1> Meu perfil </h1>
-    
+
                             <div class="layout-config">
                                 <div class="form-left">
                                     <h3>Informações pessoais</h3>
                                     <div class="container-form">
-    
+
                                         <div class="form-left" style="display: block;">
                                             <div class="input-configuracao">
                                                 <label> Nome </label>
-                                                <input id="input_nome" name="text" type="text" readonly>
+                                                <input id="input_nome_perfil" name="text" type="text" readonly>
                                                 <span class="edit-button" onclick="editInput('input_nome')"><i
                                                         class="fa-solid fa-pencil"></i></span>
                                             </div>
                                             <div class="input-configuracao">
                                                 <label> Email </label>
-                                                <input id="input_email" name="text" type="text" readonly>
+                                                <input id="input_email_perfil" name="text" type="text" readonly>
                                                 <span class="edit-button" onclick="editInput('input_email')"><i
                                                         class="fa-solid fa-pencil"></i></span>
                                             </div>
                                             <div class="input-configuracao">
                                                 <label> Cargo </label>
-                                                <input id="input_cargo" name="text" type="text" readonly>
-                                                <span class="edit-button" onclick="editInput('input_cargo')"><i
-                                                        class="fa-solid fa-pencil"></i></span>
+                                                <input id="input_cargo_perfil" name="text" type="text" readonly>
                                             </div>
                                         </div>
-    
+
                                         <div class="form-right">
                                             <div class="input-configuracao">
                                                 <label> Data de Cadastro </label>
@@ -99,111 +97,125 @@
                                             </div>
                                         </div>
                                     </div>
-    
+
+                                    <button class="button-default" style="display: none;" id="button-edit-profile"
+                                        onclick="atualizarPerfil()">Atualizar</button>
+
                                 </div>
-    
+
                                 <div class="form-right">
                                     <h3> Empresa </h3>
                                     <div class="card-empresa">
                                         <div class="text-empresa">
                                             <ul>
-                                                <li> Nome empresa: <span> Lisync </span> </li>
-                                                <li> Plano: <span> Interprise </span> </li>
-                                                <li> Licenças: <span> 50 </span> </li>
+                                                <li> Nome empresa: <span id="text_empresa_nomeFantasia"></span> </li>
+                                                <li> Plano: <span id="text_empresa_plano"></span> </li>
+                                                <li> Licenças: <span id="text_empresa_licencas"></span> </li>
                                             </ul>
                                         </div>
                                         <div class="logo-empresa">
                                             <img src="../assets/Logo-LiSync-Inverso.png" alt="Logo empresa">
                                         </div>
-    
+
                                     </div>
-    
+
                                 </div>
-    
+
                             </div>
-    
+
                         </div>
-    
+
                         <div id="CadastroFuncionários" class="tab-content">
-    
+
                             <div class="row-container">
-    
+
                                 <div class="listFunc">
                                     <h3 class="titulo-form">Lista de Funcionários</h3>
-                                    <div class="list-empresas" id="list-empresas_ID">
-                                        <span class="opcaoEmpresa">Lisync</span>
+                                    <div class="list-usuario-empresas" id="lista_usuarios_empresa">
+
                                     </div>
                                 </div>
-    
+
                                 <div class="form-editar">
                                     <h3 class="titulo-form">Informações pessoais</h3>
                                     <div class="container-form">
-    
+
                                         <div class="campos-editar">
                                             <div class="input-configuracao editar">
                                                 <label> Nome </label>
-                                                <input id="input_nome" name="text" type="text" readonly>
+                                                <input id="input_gestor_nomeUsuario" name="text" type="text" readonly>
                                                 <span class="edit-button" onclick="editInput('input_nome')"><i
                                                         class="fa-solid fa-pencil"></i></span>
                                             </div>
                                             <div class="input-configuracao editar">
                                                 <label> Email </label>
-                                                <input id="input_email" name="text" type="text" readonly>
+                                                <input id="input_gestor_emailUsuario" name="text" type="text" readonly>
                                                 <span class="edit-button" onclick="editInput('input_email')"><i
                                                         class="fa-solid fa-pencil"></i></span>
                                             </div>
-                                            <div class="input-configuracao editar">
-                                                <label> Cargo </label>
-                                                <input id="input_cargo" name="text" type="text" readonly>
-                                                <span class="edit-button" onclick="editInput('input_cargo')"><i
-                                                        class="fa-solid fa-pencil"></i></span>
-                                            </div>
+                                            <select id="select_gestor_cargo" class="select-painel" disabled>
+                                                <option value="0">Assistente NOC</option>
+                                                <option value="1">Gestor NOC</option>
+                                            </select>
                                             <button class="button-funcionario">Atualizar</button>
                                         </div>
                                     </div>
                                 </div>
-    
-    
+
+
                             </div>
                             <div class="form-cadastrar">
                                 <h3 class="titulo-form">Cadastro de Funcionário</h3>
-                                
+
                                 <div class="campos-cadastrar">
                                     <img src="../assets/Logo-LiSync-Inverso.png" class="img-logo" alt="">
                                     <div class="container-input">
                                         <label>Nome completo</label>
-                                        <input type="text" id="input_nomeFunc">
+                                        <input type="text" id="input_nomeCadastro">
                                         <div id="nome-error" class="error-message"></div>
                                     </div>
-    
+
                                     <div class="container-input">
                                         <label>E-mail</label>
-                                        <input type="text" id="input_emailFunc">
+                                        <input type="email" id="input_emailCadastro">
                                         <div id="email-error" class="error-message"></div>
                                     </div>
 
                                     <div class="container-input">
                                         <label>Confirmar E-mail</label>
-                                        <input type="text" id="input_email2Func">
+                                        <input type="email" id="input_emailConfirmar">
                                         <div id="email-error2" class="error-message"></div>
                                     </div>
-                                    <button class="button-funcionario" onclick="validarEnvio()">Adicionar Funcionário</button>
-    
+
+                                    <div class="container-input">
+                                        <label>Senha</label>
+                                        <input type="password" id="input_senhaCadastro">
+                                        <div id="email-error3" class="error-message"></div>
+                                    </div>
+
+                                    <div class="container-input">
+                                        <label>Confirmar Senha</label>
+                                        <input type="password" id="input_senhaConfirmar">
+                                        <div id="email-error4" class="error-message"></div>
+                                    </div>
+
+                                    <button class="button-funcionario" onclick="cadastrarUsuarioGestor(sessionIdEmpresa)">Adicionar
+                                        Funcionário</button>
+
                                 </div>
                             </div>
                         </div>
                     </div>
-    
+
                     <div class="container-tab-profile">
                         <div class="profile-description">
                             <img src="https://cdn-icons-png.flaticon.com/512/3106/3106773.png" alt="Avatar">
                             <div class="text-profile">
-                                <h3> Nome perfil </h3>
+                                <h3 id="profile_description_nome"></h3>
                                 <ul>
-                                    <li> Empresa: </li>
-                                    <li> Email: </li>
-                                    <li> Cargo: </li>
-                                    <li> Data de Cadastro: </li>
+                                    <li id="profile_description_empresa"></li>
+                                    <li id="profile_description_email"></li>
+                                    <li id="profile_description_cargo"></li>
                                 </ul>
                             </div>
                         </div>
@@ -212,7 +224,7 @@
                             <span>Slack</span>
                         </button>
                     </div>
-    
+
                 </div>
             </div>
         </div>
@@ -223,5 +235,8 @@
 
 </html>
 
-<script src="../js/tab.js"></script>
+<script src="../js/getData/usuario_data.js"></script>
+<script src="../js/getData/empresa_data.js"></script>
+<script src="../js/config_client.js"></script>
 <script src="../js/sessao.js"></script>
+<script src="../js/auth/cadastro.js"></script>

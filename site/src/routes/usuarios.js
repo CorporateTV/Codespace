@@ -16,12 +16,18 @@ router.post("/atualizarPerfil", function (req, res) {
     usuarioController.atualizarPerfil(req, res);
 })
 
-router.post("/cadastrarGestor", function (req, res) {
-    usuarioController.cadastrarGestor(req, res);
+router.post("/gestorCadastrar", function (req, res) {
+    usuarioController.gestorCadastrar(req, res);
 })
 
 router.get("/quantidadeUsuariosPorTipo/:idEmpresa", function(req, res) {
     usuarioController.quantidadeUsuariosPorTipo(req, res);
 });
+
+router.get("/buscarUsuario", function(req, res) {
+    usuarioController.buscarUsuario(req, res);
+});
+
+
 
 module.exports = router;

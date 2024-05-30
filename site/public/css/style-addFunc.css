@@ -36,10 +36,11 @@
     justify-content: space-between;
 }
 
-.list-empresas {
+.list-usuario-empresas {
     background-color: #8095bf;
     width: 95%;
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
     overflow: auto;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     height: 100%;
@@ -59,6 +60,7 @@
     color: white;
     font-family: 'Oswald';
     font-size: 1em;
+    margin-top: 20px;
     cursor: pointer;
 }
 
