@@ -138,6 +138,7 @@ function listarUsuariosEmpresa(idEmpresa) {
                 spanElement.textContent = usuario.nome;
                 spanElement.onclick = function() {
                     selecionarUsuario(idEmpresa, usuario.idUsuario);
+                    idUsuarioSelecionado = this.id;
                 };
                 lista_usuarios_empresa.appendChild(spanElement);
             })

@@ -12,25 +12,24 @@
     <link rel="stylesheet" href="../css/style-components.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="../css/style-addFunc.css">
-    <script src="../js/auth/cadastrar_funcionario.js"></script>
 </head>
 
-<body onload="validarSessao(), listarUsuariosEmpresa(sessionIdEmpresa)">
+<body onload="validarSessao(), listarUsuariosEmpresa(sessionIdEmpresa), alterarLinkPorTipoUsuario()">
     <div class="bg-layout">
         <div class="sideBar">
             <div class="sideBar-container">
                 <ul class="sideBar-menu">
                     <li class="selection">
                         <div class="imgIcon"><img src="../assets/Dashboard icon.png" alt=""></div>
-                        <p class="selectText"> <a href="dashboard.html">Dashboard</a></p>
+                        <p class="selectText"> <a id="tipo_dash">Dashboard</a></p>
                     </li>
                     <li class="selection">
                         <div class="imgIcon"><img src="../assets/Analytics Icon.png" alt=""></div>
                         <p class="selectText"> <a href="analytics.html">Analytics</a></p>
                     </li>
-                    <li class="selection">
+                    <li class="selection" id="control_center">
                         <div class="imgIcon"><img src="../assets/Centro de Controle.png" alt=""></div>
-                        <p class="selectText"> <a href="control_center.html">Control Center</a></p>
+                        <p class="selectText"> <a href="control_center.html">Centro de Controle</a></p>
                     </li>
                     <li class="selection">
                         <div class="imgIcon"><img src="../assets/Engrenagem.png" alt=""></div>
@@ -67,21 +66,21 @@
                             <h1> Meu perfil </h1>
 
                             <div class="layout-config">
-                                <div class="form-left">
+                                <div class="form-profile-data">
                                     <h3>Informações pessoais</h3>
                                     <div class="container-form">
 
                                         <div class="form-left" style="display: block;">
                                             <div class="input-configuracao">
                                                 <label> Nome </label>
-                                                <input id="input_nome_perfil" name="text" type="text" readonly>
-                                                <span class="edit-button" onclick="editInput('input_nome')"><i
+                                                <input class="input-edit-profile" id="input_nome_perfil" name="text" type="text" readonly>
+                                                <span class="edit-button" onclick="editInput()"><i
                                                         class="fa-solid fa-pencil"></i></span>
                                             </div>
                                             <div class="input-configuracao">
                                                 <label> Email </label>
-                                                <input id="input_email_perfil" name="text" type="text" readonly>
-                                                <span class="edit-button" onclick="editInput('input_email')"><i
+                                                <input class="input-edit-profile" id="input_email_perfil" name="text" type="text" readonly>
+                                                <span class="edit-button" onclick="editInput()"><i
                                                         class="fa-solid fa-pencil"></i></span>
                                             </div>
                                             <div class="input-configuracao">
@@ -89,17 +88,10 @@
                                                 <input id="input_cargo_perfil" name="text" type="text" readonly>
                                             </div>
                                         </div>
-
-                                        <div class="form-right">
-                                            <div class="input-configuracao">
-                                                <label> Data de Cadastro </label>
-                                                <input name="text" type="text" readonly placeholder="01/01/2024">
-                                            </div>
-                                        </div>
                                     </div>
 
                                     <button class="button-default" style="display: none;" id="button-edit-profile"
-                                        onclick="atualizarPerfil()">Atualizar</button>
+                                        onclick="atualizarPerfil(sessaoIdUsuario)">Atualizar</button>
 
                                 </div>
 
@@ -143,21 +135,22 @@
                                         <div class="campos-editar">
                                             <div class="input-configuracao editar">
                                                 <label> Nome </label>
-                                                <input id="input_gestor_nomeUsuario" name="text" type="text" readonly>
-                                                <span class="edit-button" onclick="editInput('input_nome')"><i
+                                                <input class="input-edit-gestor" id="input_gestor_nomeUsuario" name="text" type="text" readonly>
+                                                <span class="edit-button" onclick="editInputGestor()"><i
                                                         class="fa-solid fa-pencil"></i></span>
                                             </div>
                                             <div class="input-configuracao editar">
                                                 <label> Email </label>
-                                                <input id="input_gestor_emailUsuario" name="text" type="text" readonly>
-                                                <span class="edit-button" onclick="editInput('input_email')"><i
+                                                <input class="input-edit-gestor" id="input_gestor_emailUsuario" name="text" type="text" readonly>
+                                                <span class="edit-button" onclick="editInputGestor()"><i
                                                         class="fa-solid fa-pencil"></i></span>
                                             </div>
                                             <select id="select_gestor_cargo" class="select-painel" disabled>
-                                                <option value="0">Assistente NOC</option>
-                                                <option value="1">Gestor NOC</option>
+                                                <option value="1">Assistente NOC</option>
+                                                <option value="null">Gestor NOC</option>
                                             </select>
-                                            <button class="button-funcionario">Atualizar</button>
+                                            <button class="button-funcionario" style="display: none;" 
+                                            id="button-edit-gestor" onclick="atualizarPerfilGestor(sessaoIdUsuario)">Atualizar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -184,19 +177,19 @@
                                     <div class="container-input">
                                         <label>Confirmar E-mail</label>
                                         <input type="email" id="input_emailConfirmar">
-                                        <div id="email-error2" class="error-message"></div>
+                                        <div id="emailConfirmar-error" class="error-message"></div>
                                     </div>
 
                                     <div class="container-input">
                                         <label>Senha</label>
                                         <input type="password" id="input_senhaCadastro">
-                                        <div id="email-error3" class="error-message"></div>
+                                        <div id="senha-error" class="error-message"></div>
                                     </div>
 
                                     <div class="container-input">
                                         <label>Confirmar Senha</label>
                                         <input type="password" id="input_senhaConfirmar">
-                                        <div id="email-error4" class="error-message"></div>
+                                        <div id="senhaConfirmar-error" class="error-message"></div>
                                     </div>
 
                                     <button class="button-funcionario" onclick="cadastrarUsuarioGestor(sessionIdEmpresa)">Adicionar
@@ -230,13 +223,13 @@
         </div>
     </div>
 
-
+    
 </body>
 
 </html>
 
+<script src="../js/sessao.js" ></script>
 <script src="../js/getData/usuario_data.js"></script>
 <script src="../js/getData/empresa_data.js"></script>
 <script src="../js/config_client.js"></script>
-<script src="../js/sessao.js"></script>
 <script src="../js/auth/cadastro.js"></script>

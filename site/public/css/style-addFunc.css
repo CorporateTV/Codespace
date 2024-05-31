@@ -87,6 +87,11 @@
 .opcaoEmpresa {
     font-size: 1.2em;
     line-height: 1.5em;
+    cursor: pointer;
+}
+
+.opcaoEmpresa:hover {
+    color: #0F172A;
 }
 
 #fecharCadFunc {

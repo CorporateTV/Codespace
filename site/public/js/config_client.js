@@ -17,8 +17,8 @@ function tabConfiguracao(evt, optionValue) {
 document.getElementById("defaultOpen").click();
 
 function tabGestor(idGestor) {
-  var usuarioGestor = idGestor == 1;
-  if(!usuarioGestor) {
+  var usuarioGestor = idGestor == "null";
+  if (!usuarioGestor) {
     const element = document.getElementById("cadastroFuncionarios");
     element.remove();
   }
@@ -29,37 +29,32 @@ function tabGestor(idGestor) {
 function exibirPlanoPerfil() {
   const nomePlano = sessionStorage.PLANO;
   const licencasUtilizadas = sessionStorage.QUANTIDADE_TV;
-  var totalTvPorPlano; 
+  var totalTvPorPlano;
 
   document.getElementById("text_empresa_plano").innerText = nomePlano;
-  
 
-  switch(nomePlano) {
-      case "Enterprise":
-          document.getElementById("text_empresa_licencas").innerText = "50";
-          totalTvPorPlano = 50;
-          break;
-      case "Corporativo":
-          document.getElementById("text_empresa_licencas").innerText = "25";
-          console.log("Entrou");
-          totalTvPorPlano = 25;
-          break;
-      case "Basico":
-          document.getElementById("text_empresa_licencas").innerText = "10";
-          totalTvPorPlano = 10;
-          break;
-      default:
-          console.log("Plano desconhecido");
-          totalTvPorPlano = 0;
-          document.getElementById("text_empresa_licencas").innerText = "0";
-          break;
+
+  switch (nomePlano) {
+    case "Enterprise":
+      document.getElementById("text_empresa_licencas").innerText = "50";
+      totalTvPorPlano = 50;
+      break;
+    case "Corporativo":
+      document.getElementById("text_empresa_licencas").innerText = "25";
+      console.log("Entrou");
+      totalTvPorPlano = 25;
+      break;
+    case "Basico":
+      document.getElementById("text_empresa_licencas").innerText = "10";
+      totalTvPorPlano = 10;
+      break;
+    default:
+      console.log("Plano desconhecido");
+      totalTvPorPlano = 0;
+      document.getElementById("text_empresa_licencas").innerText = "0";
+      break;
   }
-  
-} 
 
-function atualizarPerfil() {
-  document.getElementById("button-edit-profile").style.display = "none";
-  console.log("Atualizou perfil")
 }
 
 
@@ -67,13 +62,51 @@ function atualizarPerfil() {
 
 document.getElementById("input_nome_perfil").value = sessaoNomeUsuario;
 document.getElementById("input_email_perfil").value = sessaoeEmail;
-document.getElementById("input_cargo_perfil").value = verificarGestor(sessaoGestor);
+document.getElementById("input_cargo_perfil").value = verificarGestor(Number(sessaoGestor));
 
-function editInput(inputId) {
-  var inputElement = document.getElementById(inputId);
-  inputElement.readOnly = !inputElement.readOnly;
+function editInput() {
+  var inputsElement = document.querySelectorAll(".input-edit-profile");
+  var buttonEditProfile = document.getElementById("button-edit-profile");
 
-  document.getElementById("button-edit-profile").style.display = "block";
+  var modoEdicao = false;
+
+  inputsElement.forEach(function (input) {
+    input.readOnly = !input.readOnly;
+    if (input.readOnly) {
+      modoEdicao = true;
+    }
+  });
+
+
+  if (modoEdicao) {
+    buttonEditProfile.style.display = "none";
+  } else {
+    buttonEditProfile.style.display = "block";
+  }
+
+};
+
+function editInputGestor() {
+  var inputsElementGestor = document.querySelectorAll(".input-edit-gestor");
+  var buttonEditGestor = document.getElementById("button-edit-gestor");
+  var selectCargoGestor = document.getElementById("select_gestor_cargo");
+
+  var modoEdicao = false;
+
+  inputsElementGestor.forEach(function (input) {
+    input.readOnly = !input.readOnly;
+    if (input.readOnly) {
+      modoEdicao = true;
+    }
+  });
+
+  selectCargoGestor.disabled = !selectCargoGestor.disabled;
+
+  if (modoEdicao) {
+    buttonEditGestor.style.display = "none";
+  } else {
+    buttonEditGestor.style.display = "block";
+  }
 }
 
 /* Dados empresa */

@@ -95,7 +95,27 @@ function atualizarPerfil(req, res) {
     }
 
     usuarioModel.atualizarPerfil(nome, email, idFuncionario).then(function (resultado) {
-        res.status(200).send("Perfil atualizado com sucesso");
+        res.status(200).send(`Perfil atualizado com sucesso: ${nome} + ${email} + ${idFuncionario}`);
+    }).catch(function (erro) {
+        res.status(500).json(erro.sqlMessage);
+    })
+}
+
+function atualizarPerfilGestor(req, res) {
+    var nome = req.body.nomeServer;
+    var email = req.body.emailServer;
+    var idCargo = req.body.idCargoServer;
+    var idFuncionario = req.body.idServer;
+
+    if (nome == undefined) {
+        res.status(400).send("Seu nome está undefined!");
+    }
+    if (email == undefined) {
+        res.status(400).send("Seu nome está undefined!");
+    }
+
+    usuarioModel.atualizarPerfilGestor(nome, email, idCargo, idFuncionario).then(function (resultado) {
+        res.status(200).send(`Perfil atualizado com sucesso: ${nome} + ${email} + ${idCargo} + ${idFuncionario}`);
     }).catch(function (erro) {
         res.status(500).json(erro.sqlMessage);
     })
@@ -156,6 +176,7 @@ module.exports = {
     autenticar,
     cadastrar,
     atualizarPerfil,
+    atualizarPerfilGestor,
     quantidadeUsuariosPorTipo,
     buscarUsuario
 }

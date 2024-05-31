@@ -13,11 +13,14 @@
     <link rel="stylesheet" href="../css/style-dash-global.css">
     <link rel="stylesheet" href="../css/style-analytcs.css">
     <link rel="stylesheet" href="../css/style-components.css">
+    <link rel="stylesheet" href="../css/style-modal-shell.css">
     <link rel="stylesheet" href="../css/style-reset.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <script type="module" src="../js/inovacao/modal_shell.js"></script>
 </head>
 
-<body onload="validarSessao()" >
+<body onload="validarSessao(), alterarLinkPorTipoUsuario()">
     <div class="bg-layout">
         <div class="bg-layout">
             <div class="sideBar">
@@ -25,15 +28,15 @@
                     <ul class="sideBar-menu">
                         <li class="selection">
                             <div class="imgIcon"><img src="../assets/Dashboard icon.png" alt=""></div>
-                            <p class="selectText"> <a href="dashboard.html">Dashboard</a></p>
+                            <p class="selectText"> <a id="tipo_dash">Dashboard</a></p>
                         </li>
                         <li class="selection">
                             <div class="imgIcon"><img src="../assets/Analytics Icon.png" alt=""></div>
                             <p class="selectText"> <a href="analytics.html">Analytics</a></p>
                         </li>
-                        <li class="selection">
+                        <li class="selection" id="control_center">
                             <div class="imgIcon"><img src="../assets/Centro de Controle.png" alt=""></div>
-                            <p class="selectText"> <a href="control_center.html">Control Center</a></p>
+                            <p class="selectText"> <a href="control_center.html">Centro de Controle</a></p>
                         </li>
                         <li class="selection">
                             <div class="imgIcon"><img src="../assets/Engrenagem.png" alt=""></div>
@@ -71,8 +74,23 @@
                             </div>
                         </div>
                         <div class="tv-uptime">
-                            <!-- <h3>Tempo em atividade (%)</h3>
-                            <div id="chart_tempoAtividade"></div> -->
+                            <button class="button-default" id="btn-comandos">Comandos</button>
+                            <div id="modalShell" class="modal">
+                                <div class="modal-container">
+                                    <div class="modal-header">
+                                        <h4> Comandos: <span id="nome_tv_modal"></span></h4>
+                                        <span class="close-modal">&times;</span>
+                                    </div>
+                                    <div class="modal-content">
+                                        <div class="container-shell">
+                                            <div id="default"></div>
+                                        </div>
+                                        <div class="container-options">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="tv-ideal">
                             <div class="select-televisao">
@@ -147,9 +165,9 @@
 </body>
 </html>
 
-<script src="../js/charts/chart_analytics.js"></script>
+<script src="../js/sessao.js"></script>
 <script src="../js/getData/tv_data.js"></script>
+<script src="../js/analytics.js"></script>
+<script src="../js/charts/chart_analytics.js"></script>
 <script src="../js/select_chart.js"></script>
 <script src="../js/change_info_page.js"></script>
-<script src="../js/sessao.js"></script>
-<script src="../js/analytics.js"></script>

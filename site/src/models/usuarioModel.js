@@ -27,18 +27,21 @@ function gestorCadastrar(nome, email, senha, idEmpresa) {
     return database.executar(sql);
 }
 
-function atualizarPerfil(nome, email, idFuncionario) {
-    var instrucao = `
-        
-    UPDATE funcionario set nome = '${nome}', email = '${email}' WHERE idFuncionario = ${idFuncionario};
-    `;
+function atualizarPerfil(nome, email, idUsuario) {
+    var instrucao = `UPDATE Usuario set nome = "${nome}", email = "${email}" WHERE idUsuario = ${idUsuario};`;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function atualizarPerfilGestor(nome, email, cargo, idUsuario) {
+    var instrucao = `UPDATE Usuario set nome = "${nome}", email = "${email}", fkGestor = ${cargo} WHERE idUsuario = ${idUsuario};`;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
 function quantidadeUsuariosPorTipo(idEmpresa) {
-    var sql = `SELECT SUM(CASE WHEN fkGestor IS NULL THEN 1 ELSE 0 END) AS assitenteNoc, SUM(CASE WHEN fkGestor IS NOT NULL THEN 1 ELSE 0 END) 
-    AS gestorNoc FROM Usuario WHERE fkEmpresa = ${idEmpresa};`;
+    var sql = `SELECT SUM(CASE WHEN fkGestor IS NULL THEN 1 ELSE 0 END) AS gestorNoc, SUM(CASE WHEN fkGestor IS NOT NULL THEN 1 ELSE 0 END) 
+    AS assitenteNoc FROM Usuario WHERE fkEmpresa = ${idEmpresa};`;
     console.log("Executando a instrução SQL: \n" + sql);
     return database.executar(sql);
 }
@@ -53,6 +56,7 @@ module.exports = {
     autenticar,
     cadastrar,
     atualizarPerfil,
+    atualizarPerfilGestor,
     quantidadeUsuariosPorTipo,
     buscarUsuario,
     gestorCadastrar
