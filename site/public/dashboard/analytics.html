@@ -19,7 +19,7 @@
 
 </head>
 
-<body onload="validarSessao(), alterarLinkPorTipoUsuario()">
+<body onload="validarSessao(), alterarLinkPorTipoUsuario(), iniciarGraficos(idTv, 1, 'CPU')">
     <div class="bg-layout">
         <div class="bg-layout">
             <div class="sideBar">
@@ -119,8 +119,8 @@
                                 <span>Componente</span>
                                 <select name="lista_componente" id="lista_componente" class="select-default" onchange="trocarTipoComponente()">
                                     <option value="CPU" selected>CPU</option>
-                                    <option value="RAM">RAM</option>
                                     <option value="Disco">Disco</option>
+                                    <option value="RAM">RAM</option>
                                 </select>
                             </div>
                         </div>

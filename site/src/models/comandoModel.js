@@ -21,8 +21,8 @@ function atualizarComando(nomeComando, idComando) {
     return database.executar(sql);
 }
 
-function deletarComando(idTelevisao) {
-    sql = `DELETE FROM Comando WHERE idComando = ${idTelevisao};`
+function deletarComando(idComando) {
+    sql = `DELETE FROM Comando WHERE idComando = ${idComando};`
 
     console.log("Executando a instrução SQL: \n" + sql);
     return database.executar(sql);

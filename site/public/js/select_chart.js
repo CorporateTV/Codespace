@@ -3,6 +3,7 @@ document.getElementById("nome_tvChart").innerText = sessionStorage.NOME_TV;
 function trocarTipoComponente() {
     const tituloComponente = document.getElementById("nome_componente");
     const modelosComponentes = document.getElementById("modelos_componentes");
+
     const graficoCpu = document.getElementById("chart_cpu");
     const graficoRam = document.getElementById("chart_ram");
     const graficoDisco = document.getElementById("chart_disco");
@@ -18,17 +19,7 @@ function trocarTipoComponente() {
                 graficoCpu.style.display = "block";
                 graficoRam.style.display = "none";
                 graficoDisco.style.display = "none";
-                google.charts.setOnLoadCallback(drawCharMonitoramentoCpu);
-                drawCharMonitoramentoCpu();
-                break;
-            case "RAM":
-                tituloComponente.innerHTML = `RAM`;
-                modelosComponentes.innerHTML = tipoComponente[1]
-                graficoCpu.style.display = "none";
-                graficoRam.style.display = "block";
-                graficoDisco.style.display = "none";
-                google.charts.setOnLoadCallback(drawCharMonitoramentoRam);
-                drawCharMonitoramentoRam();
+                iniciarGraficos(sessionIdTv, 1, "CPU")
                 break;
             case "Disco":
                 tituloComponente.innerHTML = `Disco`;
@@ -36,8 +27,15 @@ function trocarTipoComponente() {
                 graficoCpu.style.display = "none";
                 graficoRam.style.display = "none";
                 graficoDisco.style.display = "block";
-                google.charts.setOnLoadCallback(drawCharMonitoramentoDisco);
-                drawCharMonitoramentoDisco();
+                iniciarGraficos(sessionIdTv, 2, "Disco");
+                break;
+            case "RAM":
+                tituloComponente.innerHTML = `RAM`;
+                modelosComponentes.innerHTML = tipoComponente[1]
+                graficoCpu.style.display = "none";
+                graficoRam.style.display = "block";
+                graficoDisco.style.display = "none";
+                iniciarGraficos(sessionIdTv, 3, "RAM");
                 break;
             default:
                 tituloComponente.innerHTML = `Sem componente`;
@@ -51,9 +49,5 @@ function trocarTipoComponente() {
         modelosComponentes.innerHTML = `Sem componente`
         console.error(`Erro ao listar componentes: ${erro}`);
     });
-
-
-    /* const lista_modelos = ['Intel(R) Core(TM) i3-6100 3.70Ghz', 'Memória RAM 8,0 GiB', 'KINGSTON SA400S37240G']  */
-
 
 }
