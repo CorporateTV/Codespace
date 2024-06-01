@@ -1,9 +1,10 @@
-const nomeTv = sessionStorage.NOME_TV; 
-const hostname = sessionStorage.HOSTNAME_TV;
-const statusTv = sessionStorage.STATUS_TV; 
-const condicao = sessionStorage.CONDITION_TV; 
-const andar = sessionStorage.FLOOR_TV;
-const setor = sessionStorage.SECTOR_TV;
+var idTv = sessionStorage.ID_TV; 
+var nomeTv = sessionStorage.NOME_TV; 
+var hostname = sessionStorage.HOSTNAME_TV;
+var statusTv = sessionStorage.STATUS_TV; 
+var condicao = sessionStorage.CONDITION_TV; 
+var andar = sessionStorage.FLOOR_TV;
+var setor = sessionStorage.SECTOR_TV;
 
 
 document.getElementById("setor_name").innerHTML = `${setor ?? "Marketing"}`  

@@ -1,11 +1,10 @@
-const sessaoNomeFantasia = sessionStorage.NOME_FANTASIA;
-const sessaoPlano = sessionStorage.PLANO;
+var sessaoNomeFantasia = sessionStorage.NOME_FANTASIA;
+var sessaoPlano = sessionStorage.PLANO;
 
-const sessaoIdUsuario = sessionStorage.ID_USUARIO;
-const sessaoeEmail = sessionStorage.EMAIL_USUARIO;
-const sessaoNomeUsuario = sessionStorage.NOME_USUARIO;
-const sessaoGestor = sessionStorage.ID_GESTOR;
-
+var sessaoIdUsuario = sessionStorage.ID_USUARIO;
+var sessaoeEmail = sessionStorage.EMAIL_USUARIO;
+var sessaoNomeUsuario = sessionStorage.NOME_USUARIO;
+var sessaoGestor = sessionStorage.ID_GESTOR;
 
 function validarSessao() {
     var email = sessionStorage.EMAIL_USUARIO;

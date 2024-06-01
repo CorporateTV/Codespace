@@ -11,7 +11,6 @@ function listarDadosTvEmpresa(idEmpresa) {
         return resposta.json();
     })
     .then((data) => {
-        console.log(data);
         return data;
     })
     .catch(function (erro) {

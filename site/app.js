@@ -22,6 +22,7 @@ var emailRouter = require("./src/routes/email");
 var tvRouter = require("./src/routes/tv");
 var ambienteRouter = require("./src/routes/ambiente");
 var componenteRouter = require("./src/routes/componente");
+var comandoRouter = require("./src/routes/comando");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -36,6 +37,7 @@ app.use("/empresa", empresaRouter);
 app.use("/tv", tvRouter);
 app.use("/ambiente", ambienteRouter);
 app.use("/componente", componenteRouter);
+app.use("/comando", comandoRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`

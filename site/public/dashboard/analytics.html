@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="../css/style-reset.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-    <script type="module" src="../js/inovacao/modal_shell.js"></script>
 </head>
 
 <body onload="validarSessao(), alterarLinkPorTipoUsuario()">
@@ -83,10 +82,15 @@
                                     </div>
                                     <div class="modal-content">
                                         <div class="container-shell">
-                                            <div id="default"></div>
+                                            <div class="massage-input-container">
+                                                <input type="text" id="messageInput" placeholder="Digite um comando...">
+                                                <button onclick="enviarComando(idTv)">Enviar</button>
+                                            </div>
+                                            <div class="massage-feed" id="messageFeed">
+                                            </div>
                                         </div>
                                         <div class="container-options">
-
+                                            <h3> Configurações de comando </h3>
                                         </div>
                                     </div>
                                 </div>
@@ -171,3 +175,6 @@
 <script src="../js/charts/chart_analytics.js"></script>
 <script src="../js/select_chart.js"></script>
 <script src="../js/change_info_page.js"></script>
+
+<script src="../js/inovacao/modal_shell.js"></script>
+<script src="../js/inovacao/comandos_feed.js"></script>

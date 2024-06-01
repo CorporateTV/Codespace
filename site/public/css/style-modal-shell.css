@@ -56,10 +56,95 @@
 
 .container-shell {
     width: 70%;
-    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: start;
+    justify-content: center;
+}
+
+.massage-input-container {
+    background-color: #ccc;
+    border: 1px solid white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 95%;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #8095BF;
+    color: white;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+button:hover {
+    background-color: #0F172A;
+}
+
+#messageInput {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 3px;
+}
+
+.massage-feed {
+    flex: 1;
+    padding: 10px;
+    overflow-y: scroll;
+    width: 95%;
+    height: 60%;
+}
+
+.massage-comando {
+    padding: 10px;
+    background-color: #0F172A;
+    border: 1px solid white;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.massage-resultado {
+    border-top: 1px solid white;
+    margin-top: 10px;
+    padding: 20px;
+    font-size: 0.6em;
+}
+
+.massage-comando .edit-massage-button, .massage-comando .delete-massage-button {
+    position: absolute;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.massage-comando .edit-massage-button {
+    top: 0;
+    right: 50px;
+    color: #007bff;
+}
+
+.massage-comando .delete-massage-button {
+    top: 0;
+    right: 0;
+    color: #ff0000;
 }
 
 .container-options {
     width: 30%;
-    background-color:#8095BF;;
+    background-color:#0F172A;
+    border-radius: 10px;
+    border: solid 1px white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.container-options h3 {
+    padding: 10px;
 }

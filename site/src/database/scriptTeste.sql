@@ -36,7 +36,7 @@ SELECT * from Ambiente where fkEmpresa = 1;
 		email VARCHAR(225),
 		senha VARCHAR(45),
 		fkEmpresa INT NOT NULL,
-		fkGestor INT,
+		fkGestor INT ,
 		CONSTRAINT fkEmpresa FOREIGN KEY (fkEmpresa) REFERENCES Empresa(idEmpresa),
 		CONSTRAINT fkGestor FOREIGN KEY (fkGestor) REFERENCES Usuario(idUsuario)
 	);
@@ -47,6 +47,12 @@ SELECT * from Ambiente where fkEmpresa = 1;
 		("José Felipe", "jose.felipe@elera.io", "jose123", 2, 1),
 		("Ademiro", "admin", "admin", 1, null);
 
+
+	INSERT INTO Usuario(nome, email, senha, fkEmpresa, fkGestor) VALUES 
+		("Lucas Saito", "lucas.saito@elera.io", "saito123", 2, 2);
+        
+        	INSERT INTO Usuario(nome, email, senha, fkEmpresa, fkGestor) VALUES 
+		("Rodrigo Guedes", "rodrigo.guedes@elera.io", "rodrigo123", 2, 2);
 
 	CREATE TABLE Televisao (
 		idTelevisao INT PRIMARY KEY AUTO_INCREMENT,
@@ -159,6 +165,7 @@ INSERT INTO Televisao (nome, taxaAtualizacao, hostName, fkAmbiente) VALUES
 
 SELECT * FROM Ambiente;
 SELECT * FROM Televisao;
+SELECT * FROM Usuario;
 
 -- Função quantidade TV por empresa
 SELECT COUNT(*) AS quantidade FROM Televisao JOIN Ambiente ON fkAmbiente = IdAmbiente JOIN Empresa ON fkEmpresa = IdEmpresa WHERE idEmpresa = 1;
@@ -180,4 +187,22 @@ SELECT * FROM Televisao as televisao JOIN Ambiente as ambiente ON fkAmbiente = I
 -- Função listar todos os dados Componente
 SELECT modelo as modelo, identificador as identificador, tipoComponente as tipoComponente FROM Componente as componente JOIN Televisao as televisao ON fkTelevisao = idTelevisao WHERE idTelevisao = 45;
         
+UPDATE Usuario set nome = "Felipe Almeida", email = "felipe.almeida@sptech.school" WHERE idUsuario = 1;
+
+SELECT SUM(CASE WHEN fkGestor IS NULL THEN 1 ELSE 0 END) AS gestorNoc, SUM(CASE WHEN fkGestor IS NOT NULL THEN 1 ELSE 0 END) 
+    AS assitenteNoc FROM Usuario WHERE fkEmpresa = 1;
+    
+SELECT * FROM Usuario WHERE fkEmpresa = 1;
+
+SELECT * FROM Comando WHERE fkTelevisao = 1;
+SELECT * FROM Comando;
+
+INSERT INTO Comando (nome, fkTelevisao) VALUES 
+	("ipconfig", 1);
+    
+UPDATE Comando SET nome = "top" WHERE idComando = 1;
+DELETE FROM Comando WHERE idComando = 1; 
+
+SELECT MAX(idComando) FROM Comando;
+
 -- DROP DATABASE lisyncDB;
