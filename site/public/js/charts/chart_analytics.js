@@ -31,24 +31,24 @@ function drawChartHistoricoTv() {
     chart.draw(dataHistorico, optionsHistoricoTv);
 }
 
-function iniciarGraficos(idTelevisao, idComponente, tipoComponente) {
+function iniciarGraficos(idTelevisao, tipoComponente) {
     switch (tipoComponente) {
         case "CPU":
-            drawCharMonitoramento(idTelevisao, idComponente, 'chart_cpu', 'CPU');
+            drawCharMonitoramento(idTelevisao, 'chart_cpu', 'CPU');
             break;
         case "Disco":
-            drawCharMonitoramento(idTelevisao, idComponente, 'chart_disco', 'Disco');
+            drawCharMonitoramento(idTelevisao, 'chart_disco', 'Disco');
             break;
         case "RAM":
-            drawCharMonitoramento(idTelevisao, idComponente, 'chart_ram', 'RAM');
+            drawCharMonitoramento(idTelevisao, 'chart_ram', 'RAM');
             break;
         default:
             console.error('Tipo de componente desconhecido');
     }
 }
 
-function drawCharMonitoramento(idTelevisao, idComponente, chartElementId, tipo) {
-    fetch(`/medidas/ultimas/${idTelevisao}/${idComponente}`, { cache: 'no-store' }).then(response => {
+function drawCharMonitoramento(idTelevisao, chartElementId, tipo) {
+    fetch(`/medidas/ultimas/${idTelevisao}/${tipo}`, { cache: 'no-store' }).then(response => {
         if (response.ok) {
             return response.json();
         } else {
@@ -92,15 +92,15 @@ function drawCharMonitoramento(idTelevisao, idComponente, chartElementId, tipo) 
             chart.draw(dataMonitoramento, google.charts.Line.convertOptions(optionsMonitoramento));
 
             // Comça a atualizar após plotar os 7 primeiros registros
-            usoComponentesTempoReal(idTelevisao, idComponente, chart, dataMonitoramento, optionsMonitoramento);
+            usoComponentesTempoReal(idTelevisao, tipo, chart, dataMonitoramento, optionsMonitoramento);
         }
     }).catch(error => {
         console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
     });
 }
 
-function usoComponentesTempoReal(idTelevisao, idComponente, chart, dataMonitoramento, optionsMonitoramento) {
-    fetch(`/medidas/tempo-real-componentes/${idTelevisao}/${idComponente}`, { cache: 'no-store' }).then(response => {
+function usoComponentesTempoReal(idTelevisao, tipo, chart, dataMonitoramento, optionsMonitoramento) {
+    fetch(`/medidas/tempo-real-componentes/${idTelevisao}/${tipo}`, { cache: 'no-store' }).then(response => {
         if (response.ok) {
             return response.json();
         } else {
@@ -128,11 +128,11 @@ function usoComponentesTempoReal(idTelevisao, idComponente, chart, dataMonitoram
         }
 
         // Define o tempo que a função de atualizar o gráfico será acionada novamente
-        setTimeout(() => usoComponentesTempoReal(idTelevisao, idComponente, chart, dataMonitoramento, optionsMonitoramento), 5000);
+        setTimeout(() => usoComponentesTempoReal(idTelevisao, tipo, chart, dataMonitoramento, optionsMonitoramento), 5000);
     }).catch(error => {
         console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
         
         // Continua atualizando mesmo com erro
-        setTimeout(() => usoComponentesTempoReal(idTelevisao, idComponente, chart, dataMonitoramento, optionsMonitoramento), 5000);
+        setTimeout(() => usoComponentesTempoReal(idTelevisao, tipo, chart, dataMonitoramento, optionsMonitoramento), 5000);
     });
 }

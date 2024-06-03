@@ -17,10 +17,6 @@ function listarDadosTv(idEmpresa) {
     return(database.executar(sql));    
 }
 
-function listarTvPorAmbiente(idEmpresa) {
-
-}
-
 
 module.exports = {
     quantidadeTvEmpresa,

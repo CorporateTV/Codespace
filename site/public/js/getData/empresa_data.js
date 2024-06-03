@@ -1,5 +1,3 @@
-var sessionIdEmpresa = sessionStorage.ID_EMPRESA;
-
 function dadosEmpresa(idEmpresa) {
     fetch(`/empresa/buscar/${idEmpresa}`, {
         method: "GET",

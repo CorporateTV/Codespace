@@ -1,9 +1,4 @@
 /* Gráfico usuários */
-google.charts.load("current", { packages: ["corechart"] });
-
-
-google.charts.setOnLoadCallback(drawChartQuantidadeTv);
-
 google.charts.setOnLoadCallback(drawChart);
 
 google.charts.setOnLoadCallback(drawChartUsuarios);
@@ -32,52 +27,6 @@ function quantidadeUsuariosPorTipo(idEmpresa) {
         console.error('Error:', error);
     });
 }
-
-/* function drawChartUsuarios() {
-
-    fetch(`/usuarios/quantidadeUsuariosPorTipo/${sessionStorage.ID_EMPRESA}`, {
-        method: "GET",
-    })
-
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok ' + response.statusText);
-        }
-        return response.json();
-    })
-
-    .then(data => {
-        console.log(data)
-
-        var dataUsuarios = google.visualization.arrayToDataTable([
-            ['Cargo', 'Quantidade'],
-            ['Gerente', data.gestorNoc],
-            ['Assistentes NOC', data.assitenteNoc],
-        ]);
-    
-        var optionsUsuarios = {
-            pieHole: 0.4,
-            legend: 'none',
-            backgroundColor: 'transparent',
-            chartArea: {
-                width: "100%",
-                height: "80%",
-                
-            },
-            width: 200,
-            height: 150,
-            pieSliceBorderColor : "transparent",
-            colors: ['#4F699C', '#8095bf']
-        };
-    
-        var chart = new google.visualization.PieChart(document.getElementById('chart_usuarios'));
-        chart.draw(dataUsuarios, optionsUsuarios);
-    })
-
-    .catch(error => {
-        console.error("Error:", error);
-    });
-} */
 
 function drawChartUsuarios() {
     var jsonData = $.ajax({
@@ -124,11 +73,11 @@ function drawChartUsuarios() {
 /* Gráfico Quantidade TV */
 
 
-function drawChartQuantidadeTv() {
+function drawChartQuantidadeTv(qtdInativo, qtdAtivo) {
     var dataQtdTelevisoes = google.visualization.arrayToDataTable([
         ['Status', 'Quantidade'],
-        ['Inativo', 5],
-        ['Ativo', 15],
+        ['Inativo', qtdInativo],
+        ['Ativo', qtdAtivo],
     ]);
 
     var optionsQtdTelevisoes = {

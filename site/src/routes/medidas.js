@@ -3,12 +3,20 @@ var router = express.Router();
 
 var medidaController = require("../controllers/medidasController");
 
-router.get("/ultimas/:idTelevisao/:idComponente", function (req, res) {
+router.get("/ultimas/:idTelevisao/:tipoComponente", function (req, res) {
     medidaController.buscarUtlimasMedidasComponente(req, res);
 })
 
-router.get("/tempo-real-componentes/:idTelevisao/:idComponente", function (req, res) {
+router.get("/tempo-real-componentes/:idTelevisao/:tipoComponente", function (req, res) {
     medidaController.buscarMedidasComponenteEmTempoReal(req, res);
+})
+
+router.get("/atualizacao-componentes/:idTelevisao/:tipoComponente", function (req, res) {
+    medidaController.verificarAtualizacaoComponente(req, res);
+})
+
+router.get("/atualizacao-empresa/:idEmpresa", function (req, res) {
+    medidaController.verificarAtualizacaoTelevisoesEmpresa(req, res);
 })
 
 module.exports = router;
