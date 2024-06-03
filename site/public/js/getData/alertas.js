@@ -28,7 +28,10 @@ function televisoesEmpresaAtualizadas(idEmpresa) {
             var qtdInativo = data.quantidadeNaoAtualizadas
             var qtdAtivo = sessionStorage.QUANTIDADE_TV - qtdInativo;
 
-            console.log(qtdInativo);
+            console.log(data);
+            console.log(data.ambienteStatus);
+
+            drawChartAtualizadosPorSetor(data.ambienteStatus)
 
             document.getElementById("qtdAtivo").innerText = `${qtdAtivo}`;
             document.getElementById("qtdInativo").innerText = `${qtdInativo}`
@@ -41,3 +44,4 @@ function televisoesEmpresaAtualizadas(idEmpresa) {
 }
 
 televisoesEmpresaAtualizadas(sessionIdEmpresa);
+

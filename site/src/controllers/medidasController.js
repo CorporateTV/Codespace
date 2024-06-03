@@ -102,17 +102,34 @@ function verificarAtualizacaoTelevisoesEmpresa(req, res) {
                     return {
                         idTelevisao: tv.idTelevisao,
                         nomeTv: tv.nome,
-                        atualizado: atualizado
+                        atualizado: atualizado,
+                        setor: tv.setor
                     };
                 });
             });
 
             Promise.all(verificacoes).then(resultados => {
                 let televisoesNaoAtualizadas = resultados.filter(tv => !tv.atualizado);
+                let ambientesSatus = {};
+
+                resultados.forEach(tv => {
+                    if (!ambientesSatus[tv.setor]) {
+                        ambientesSatus[tv.setor] = { atualizado: 0, naoAtualizado: 0 };
+                    }
+
+                    if (tv.atualizado) {
+                        ambientesSatus[tv.setor].atualizado += 1;
+                    } else {
+                        ambientesSatus[tv.setor].naoAtualizado += 1;
+                    }
+                });
+
                 res.status(200).json({
                     quantidadeNaoAtualizadas: televisoesNaoAtualizadas.length,
-                    televisoesNaoAtualizadas: televisoesNaoAtualizadas
+                    televisoesNaoAtualizadas: televisoesNaoAtualizadas,
+                    ambienteStatus: ambientesSatus
                 });
+
             }).catch(function (erro) {
                 console.log(erro);
                 console.log("Houve um erro ao verificar a atualização dos componentes.", erro.sqlMessage);

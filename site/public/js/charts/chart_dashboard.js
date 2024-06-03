@@ -1,6 +1,4 @@
 /* Gráfico usuários */
-google.charts.setOnLoadCallback(drawChart);
-
 google.charts.setOnLoadCallback(drawChartUsuarios);
 
 function quantidadeUsuariosPorTipo(idEmpresa) {
@@ -102,14 +100,17 @@ function drawChartQuantidadeTv(qtdInativo, qtdAtivo) {
 
 /* Gráfico Dashboard setores */
 
-function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-        ['Setor' ,'ON', 'OFF'],
-        ['Marketing', 8, 2],
-        ['RH', 4, 1],
-        ['Vendas', 5, 3],
-        ['Hall', 6, 1]
-    ]);
+function drawChartAtualizadosPorSetor(ambientesStatus) {
+
+    console.log(ambientesStatus)
+
+    const ambientesData =[['Setor', 'ON', 'OFF']];
+
+    for (const [setor, status] of Object.entries(ambientesStatus)) {
+        ambientesData.push([setor, status.atualizado, status.naoAtualizado])
+    }
+
+    var dataChart = google.visualization.arrayToDataTable(ambientesData);
 
     var options = {
         width: 600,
@@ -136,7 +137,7 @@ function drawChart() {
         }
     };
     var chart = new google.visualization.ColumnChart(document.getElementById("chart_porSetor"));
-    chart.draw(data, options);
+    chart.draw(dataChart, options);
 }
 
 quantidadeUsuariosPorTipo(sessionIdEmpresa)
