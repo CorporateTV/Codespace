@@ -52,7 +52,16 @@ function buscarUsuario(idEmpresa, idUsuario) {
     return database.executar(sql);
 }
 
+function buscarGestor(idEmpresa) {
+    var sql = `SELECT *FROM Usuario WHERE fkEmpresa = ${idEmpresa} and fkGestor is null;`;
+
+    return database.executar(sql);
+}
+
+
+
 module.exports = {
+    buscarGestor,
     autenticar,
     cadastrar,
     atualizarPerfil,

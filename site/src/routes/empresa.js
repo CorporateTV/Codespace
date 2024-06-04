@@ -28,4 +28,8 @@ router.get("/listarUsuariosEmpresa/:idEmpresa", function (req, res) {
     empresaController.listarUsuariosEmpresa(req, res);
 })
 
+router.post("/atualizarEmpresa", function (req, res) {
+    empresaController.atualizarEmpresa(req, res);
+})
+
 module.exports = router;

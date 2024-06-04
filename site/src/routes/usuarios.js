@@ -32,5 +32,9 @@ router.get("/buscarUsuario", function(req, res) {
     usuarioController.buscarUsuario(req, res);
 });
 
+router.get("/buscarGestor", function(req, res) {
+    usuarioController.buscarGestor(req, res);
+});
+
 
 module.exports = router;

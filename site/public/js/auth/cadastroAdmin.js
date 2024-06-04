@@ -1,61 +1,33 @@
-function listarEmpresas() {
-    
 
 
-    fetch("/empresa/listar", {
-        method: "GET",
-    })
-        .then(function (resposta) {
-            resposta.json().then((empresas) => {
-                empresas.forEach((empresa) => {
-                    let id = 1
-                    chamarEmpresas(id, empresa.nomeFantasia)
-                    id++
-                    // listaEmpresas.innerHTML += `<option value='${empresa.idEmpresa}'>${empresa.nomeFantasia}</option>`;
-                });
-            });
-        })
-        .catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-        });
-}
-
-    function buscarEmpresaPnome(){
+function buscarEmpresaPnome() {
     fetch(`/empresa/buscar?nomeFantasia=${"Elera."}`, {
         method: "GET",
     })
-    .then(function(resposta) {
-        // Verifica se a resposta é bem-sucedida (status 200)
-        if (!resposta.ok) {
-            throw new Error('Erro ao buscar dados');
-        }
-        // Retorna os dados como JSON
-        return resposta.json();
-    })
-    .then(function(dados) {
-        // Manipula os dados conforme necessário
-        console.log(dados); // Aqui você pode fazer o que quiser com os dados recebidos
-        sessionStorage.ID_EMPRESA = dados[0].idEmpresa;
-        console.log(sessionStorage.ID_EMPRESA)
-        cadastrarGestor()
-    })
-    .catch(function(erro) {
-        console.error('Erro:', erro);
-    });
+        .then(function (resposta) {
+            // Verifica se a resposta é bem-sucedida (status 200)
+            if (!resposta.ok) {
+                throw new Error('Erro ao buscar dados');
+            }
+            // Retorna os dados como JSON
+            return resposta.json();
+        })
+        .then(function (dados) {
+            // Manipula os dados conforme necessário
+            console.log(dados); // Aqui você pode fazer o que quiser com os dados recebidos
+            sessionStorage.ID_EMPRESA = dados[0].idEmpresa;
+            console.log(sessionStorage.ID_EMPRESA)
+            cadastrarGestor()
+        })
+        .catch(function (erro) {
+            console.error('Erro:', erro);
+        });
 }
 
 
-function chamarEmpresas(id, nomeFantasia){
-    let divFilho = document.createElement('div');
-    let divPai = document.getElementById('list-empresas_ID')
 
-    divPai.appendChild(divFilho);
-    divFilho.id = id;
-    divFilho.className = 'empresa'
-    divFilho.innerHTML = nomeFantasia
-}
 
-window.onload = function() {
+window.onload = function () {
     listarEmpresas();
 };
 
@@ -77,7 +49,7 @@ function cadastrarEmpresa() {
             planoServer: plano
         }),
     })
-    
+
         .then(function (resposta) {
             console.log("resposta: ", resposta);
 
@@ -110,8 +82,8 @@ function cadastrarGestor() {
         body: JSON.stringify({
             nomeGestorServer: nome,
             emailGestorServer: email,
-            senhaGestorServer:senha,
-            idEmpresaServer:idEmpresa
+            senhaGestorServer: senha,
+            idEmpresaServer: idEmpresa
         }),
     })
         .then(function (resposta) {
@@ -130,9 +102,9 @@ function cadastrarGestor() {
 }
 
 function mudarSelect() {
-    const selectElement = document.getElementById("plan"); 
+    const selectElement = document.getElementById("plan");
     const plano = selectElement.options[selectElement.selectedIndex].value;
-    sessionStorage.PLANO = plano; 
+    sessionStorage.PLANO = plano;
 }
 
 
@@ -193,7 +165,7 @@ function validarEnvio() {
         alertaConfirmacao.style.display = "block";
 
 
-        sessionStorage.NOME_FANTASIA= input_nomeFantasia.value;
+        sessionStorage.NOME_FANTASIA = input_nomeFantasia.value;
         sessionStorage.NOME_GESTOR = nome
         sessionStorage.EMAIL_GESTOR = email
         sessionStorage.CNPJ = cnpj
@@ -202,7 +174,7 @@ function validarEnvio() {
         // sessionStorage.ID_EMPRESA = listaEmpresas.value;
 
 
-        
+
         // emailConfirmacao();
 
         // setTimeout(function () {
@@ -215,11 +187,21 @@ function validarEnvio() {
         document.getElementById('nome-error').innerHTML = "O campo nome está preenchido de forma incorreta";
         document.getElementById('nome-error').style.color = "red";
     }
-    function cadastrar(){
+    function cadastrar() {
         cadastrarEmpresa()
         chamarEmpresas()
 
     }
+
+
+
+
+  
+    
+
+    
+
+
 
     // else if (!validacaoEmail) {
     //     document.getElementById('email-error').innerHTML = "Só pode usar email corporativo";
@@ -227,12 +209,12 @@ function validarEnvio() {
     // }
 
 
+}
 
-
-
-
+function atualizarInformacoesCadastro() {
+    editInputGestor()
+    atualizarEmpresa(sessionStorage.ID_EMPRESA)
+    atualizarPerfil(sessionStorage.ID_GESTOR_EMPRESA);
 
     
-
-
 }

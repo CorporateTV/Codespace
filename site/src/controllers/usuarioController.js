@@ -170,8 +170,16 @@ function buscarUsuario(req, res) {
     })
 }
 
+function buscarGestor(req, res) {
+    var idEmpresa = req.query.idEmpresa;
+    usuarioModel.buscarGestor(idEmpresa).then((resultado) => {
+        res.status(200).json(resultado);
+    })
+}
+
 
 module.exports = {
+    buscarGestor,
     gestorCadastrar,
     autenticar,
     cadastrar,

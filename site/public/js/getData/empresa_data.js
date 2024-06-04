@@ -14,7 +14,9 @@ function dadosEmpresa(idEmpresa) {
             console.log(data);
             console.log(data[0].plano)
             sessionStorage.NOME_FANTASIA = data[0].nomeFantasia;
+            sessionStorage.CNPJ = data[0].cnpj;
             sessionStorage.PLANO = data[0].plano;
+            sessionStorage.ID_EMPRESA = data[0].idEmpresa
 
         })
     })
@@ -145,6 +147,94 @@ function listarUsuariosEmpresa(idEmpresa) {
         })
     })
 }
+
+
+function listarEmpresas() {
+
+    fetch("/empresa/listar", {
+        method: "GET",
+    })
+        .then(function (resposta) {
+            resposta.json().then((empresas) => {
+                empresas.forEach((empresa) => {
+                    let divFilho = document.createElement('div');
+                    let divPai = document.getElementById('list-empresas_ID')
+                    divFilho.id = empresa.idEmpresa;
+                    divFilho.className = 'empresa'
+                    divFilho.innerHTML = empresa.nomeFantasia
+                    divFilho.classList.add('divFilhoEmpresa');
+                    divPai.appendChild(divFilho);
+                    divFilho.onclick = function() {
+                        console.log("UAI")
+                        selecionarGestor(empresa.idEmpresa)
+                        buscarDadosCadastroAdmin(this.id)
+                        // idUsuarioSelecionado = this.id;
+                    };
+                });
+            });
+        })
+        .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+}
+
+function buscarDadosCadastroAdmin(id){
+
+    dadosEmpresa(id);
+    input_nome_fantasia.value = sessionStorage.getItem('NOME_FANTASIA');
+    input_CNPJ.value = sessionStorage.getItem('CNPJ');
+
+    console.log(id)
+}
+
+
+function atualizarEmpresa(idEmpresa) {
+    const nomeFantasia = input_nome_fantasia.value;
+    const cnpj = input_CNPJ.value;
+
+
+
+    fetch(`/Empresa/atualizarEmpresa`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            nomeFantasiaServer: nomeFantasia,
+            cnpjServer: cnpj,
+            idEmpresaServer: idEmpresa,
+        }),
+    })
+
+        .then(function (resposta) {
+            console.log("Resposta atualização:" + resposta);
+
+            var buttonEditProfile = document.getElementById("button-edit-profile");
+            var inputsElement = document.querySelectorAll(".input-edit-profile");
+
+            inputsElement.forEach(function (input) {
+                input.readOnly
+            });
+
+            buttonEditProfile.style.display = "none";
+
+
+            if (resposta.ok) {
+                console.log("Perfil atualizado com sucesso!")
+
+
+            } else {
+                throw "Houve um erro ao tentar realizar o perfil!";
+            };
+        })
+
+        .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        })
+}
+
+
+
 
 
 /* Execução das funções */

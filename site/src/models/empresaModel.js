@@ -48,8 +48,15 @@ function listarUsuariosEmpresa(idEmpresa) {
   return database.executar(sql);
 }
 
+function atualizarEmpresa(nomeFantasia, cnpj, idEmpresa) {
+  var instrucao = `UPDATE Empresa set nomeFantasia = "${nomeFantasia}", cnpj = "${cnpj}" WHERE idEmpresa = ${idEmpresa};`;
+  console.log("Executando a instrução SQL: \n" + instrucao);
+  return database.executar(instrucao);
+}
+
 
 module.exports = {
+  atualizarEmpresa,
   cadastrarGestor,
   cadastrarEmpresa,
   buscarPorId,

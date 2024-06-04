@@ -9,11 +9,7 @@ function buscarPornomeEmpresa(req, res) {
 
 }
 
-function listar(req, res) {
-  empresaModel.listar().then((resultado) => {
-    res.status(200).json(resultado);
-  });
-}
+
 
 function buscarPorId(req, res) {
   var idEmpresa = req.params.idEmpresa;
@@ -70,6 +66,12 @@ function quantidadeUsuarios(req, res) {
   });
 }
 
+function listar(req, res) {
+  empresaModel.listar().then((resultado) => {
+    res.status(200).json(resultado);
+  });
+}
+
 function listarUsuariosEmpresa(req, res) {
   var idEmpresa = req.params.idEmpresa;
 
@@ -77,8 +79,26 @@ function listarUsuariosEmpresa(req, res) {
     res.status(200).json(resultadoUsuarios);
   })
 }
+function atualizarEmpresa(req, res) {
+  var nomeFantasia = req.body.nomeFantasiaServer;
+  var cnpj = req.body.cnpjServer;
+  var idEmpresa = req.body.idEmpresaServer;
 
+  if (nomeFantasia == undefined) {
+      res.status(400).send("Seu nome está undefined!");
+  }
+  if (cnpj == undefined) {
+      res.status(400).send("Seu nome está undefined!");
+  }
+
+  EmpresaoModel.atualizarEmpresa(nomeFantasia, cnpj, idEmpresa).then(function (resultado) {
+      res.status(200).send(`Perfil atualizado com sucesso: ${nomeFantasia} + ${cnpj} + ${idEmpresa}`);
+  }).catch(function (erro) {
+      res.status(500).json(erro.sqlMessage);
+  })
+}
 module.exports = {
+  atualizarEmpresa,
   cadastrarEmpresa,
   buscarPorId,
   listar,

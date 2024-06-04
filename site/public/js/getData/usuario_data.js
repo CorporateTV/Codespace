@@ -27,6 +27,36 @@ function selecionarUsuario(idEmpresa, idUsuario) {
         })
 }
 
+function selecionarGestor(idEmpresa) {
+    fetch(`http://localhost:3333/usuarios/buscarGestor?idEmpresa=${idEmpresa}`, {
+        method: "GET",
+    })
+    .then(function (resposta) {
+        return resposta.text();  // Lê a resposta como texto
+    })
+    .then(function (texto) {
+        try {
+            const usuario = JSON.parse(texto);  // Tenta converter o texto para JSON
+            console.log(usuario);  // Log do JSON convertido
+
+            // Atualiza os valores dos inputs se o JSON for válido
+            if (Array.isArray(usuario) && usuario.length > 0) {
+                sessionStorage.ID_GESTOR_EMPRESA = usuario[0].idUsuario
+                document.getElementById("input_nome_perfil").value = usuario[0].nome;
+                document.getElementById("input_email_perfil").value = usuario[0].email;
+            } else {
+                console.error("Resposta JSON não é um array ou está vazio:", usuario);
+            }
+        } catch (e) {
+            console.error("Erro ao analisar JSON:", e, "Resposta recebida:", texto);
+        }
+    })
+    .catch(function (erro) {
+        console.error("Erro na requisição fetch:", erro);
+    });
+}
+
+
 function atualizarPerfil(idUsuario) {
     const nomePerfil = input_nome_perfil.value;
     const emailPerfil = input_email_perfil.value;
