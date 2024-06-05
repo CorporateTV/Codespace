@@ -544,6 +544,9 @@ table {
     overflow-y: scroll;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+    gap: 10px;
+    font-size: 130%;
+  }
 }
 
 .button-funcionario {

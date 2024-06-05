@@ -3,6 +3,39 @@ var idUsuarioSelecionado;
 function verificarGestor(idGestor) {
     return idGestor > 0 ? "Assistente NOC" : "Gerente NOC";
 }
+function cadastrarGestor(idEmpresa) {
+    const nome = input_nome.value;
+    const email = input_email.value;
+
+
+    
+    
+    fetch("/usuarios/cadastrarGestor", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            nomeGestorServer: nome,
+            emailGestorServer: email,
+            senhaGestorServer: senha,
+            idEmpresaServer: idEmpresa
+        }),
+    })
+        .then(function (resposta) {
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                alert("Cadastro realizado com sucesso!");
+            } else {
+                throw "Houve um erro ao tentar realizar o cadastro!";
+            }
+        })
+        .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+    return false;
+}
 
 function selecionarUsuario(idEmpresa, idUsuario) {
     fetch(`http://localhost:3333/usuarios/buscarUsuario?idEmpresa=${idEmpresa}&idUsuario=${idUsuario}`, {
@@ -87,7 +120,6 @@ function atualizarPerfil(idUsuario) {
             });
 
             buttonEditProfile.style.display = "none";
-
 
             if (resposta.ok) {
                 console.log("Perfil atualizado com sucesso!")

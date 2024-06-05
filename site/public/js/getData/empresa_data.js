@@ -1,5 +1,47 @@
 var sessionIdEmpresa = sessionStorage.ID_EMPRESA;
 
+
+function cadastrarEmpresa() {
+
+    const nomeFantasia = input_nomeFantasia_cadastro.value;
+    const plano = sessionStorage.PLANO
+    const cnpj = input_empresa_CNPJ.value
+    
+
+
+    // Enviando o valor da nova input
+    fetch("/empresa/cadastrarEmpresa", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            nomeFantasiaServer: nomeFantasia,
+            planoServer: plano,
+            cnpjServer: cnpj
+        }),
+    })
+
+        .then(function (resposta) {
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                alert("Cadastro realizado com sucesso!")
+                buscarEmpresaPnome();
+
+            } else {
+                throw "Houve um erro ao tentar realizar o cadastro!";
+            }
+        })
+        .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        })
+
+    return false;
+}
+
+
+
 function dadosEmpresa(idEmpresa) {
     fetch(`/empresa/buscar/${idEmpresa}`, {
         method: "GET",
@@ -168,7 +210,7 @@ function listarEmpresas() {
                         console.log("UAI")
                         selecionarGestor(empresa.idEmpresa)
                         buscarDadosCadastroAdmin(this.id)
-                        // idUsuarioSelecionado = this.id;
+                        select_plano.value = empresa.plano;
                     };
                 });
             });
@@ -179,18 +221,17 @@ function listarEmpresas() {
 }
 
 function buscarDadosCadastroAdmin(id){
-
     dadosEmpresa(id);
     input_nome_fantasia.value = sessionStorage.getItem('NOME_FANTASIA');
     input_CNPJ.value = sessionStorage.getItem('CNPJ');
-
-    console.log(id)
 }
 
 
 function atualizarEmpresa(idEmpresa) {
     const nomeFantasia = input_nome_fantasia.value;
     const cnpj = input_CNPJ.value;
+    const planoElement = document.getElementById('plan');
+    const plano = planoElement.value;
 
 
 
@@ -203,6 +244,7 @@ function atualizarEmpresa(idEmpresa) {
             nomeFantasiaServer: nomeFantasia,
             cnpjServer: cnpj,
             idEmpresaServer: idEmpresa,
+            planoServer:plano
         }),
     })
 

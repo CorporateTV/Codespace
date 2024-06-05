@@ -22,9 +22,10 @@ function buscarPorId(req, res) {
 
 function cadastrarEmpresa(req,res){
   // Crie uma variável que vá recuperar os valores do arquivo cadastro-admin.html
-  var nomeFantasia = req.body.nomeFantasiaServer;
-  var plano = req.body.planoServer;
-  console.log(nomeFantasia)
+  // var nomeFantasia = req.body.nomeFantasiaServer;
+  // var plano = req.body.planoServer;
+  // console.log(nomeFantasia)
+  const { nomeFantasia,cnpj, plano } = req.body;
   
 
  // Faça as validações dos valores
@@ -33,7 +34,7 @@ function cadastrarEmpresa(req,res){
  } 
 
  // Passe os valores como parâmetro e vá para o arquivo empresaModel.js
- empresaModel.cadastrarEmpresa(nomeFantasia,plano)
+ empresaModel.cadastrarEmpresa(nomeFantasia,cnpj,plano)
      .then(
          function (resultado) {
              res.json(resultado);
@@ -83,6 +84,7 @@ function atualizarEmpresa(req, res) {
   var nomeFantasia = req.body.nomeFantasiaServer;
   var cnpj = req.body.cnpjServer;
   var idEmpresa = req.body.idEmpresaServer;
+  var plano = req.body.planoServer;
 
   if (nomeFantasia == undefined) {
       res.status(400).send("Seu nome está undefined!");
@@ -91,8 +93,8 @@ function atualizarEmpresa(req, res) {
       res.status(400).send("Seu nome está undefined!");
   }
 
-  EmpresaoModel.atualizarEmpresa(nomeFantasia, cnpj, idEmpresa).then(function (resultado) {
-      res.status(200).send(`Perfil atualizado com sucesso: ${nomeFantasia} + ${cnpj} + ${idEmpresa}`);
+  empresaModel.atualizarEmpresa(nomeFantasia, cnpj, idEmpresa , plano).then(function (resultado) {
+      res.status(200).send(`Perfil atualizado com sucesso: ${nomeFantasia} + ${cnpj} + ${idEmpresa} + ${plano}`);
   }).catch(function (erro) {
       res.status(500).json(erro.sqlMessage);
   })
