@@ -24,4 +24,8 @@ router.get("/quantidadeUsuariosPorTipo/:idEmpresa", function(req, res) {
     usuarioController.quantidadeUsuariosPorTipo(req, res);
 });
 
+router.post("/redefinirSenha", function (req, res) {
+    usuarioController.redefinirSenha(req, res);
+});
+
 module.exports = router;

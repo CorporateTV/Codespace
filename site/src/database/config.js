@@ -8,6 +8,13 @@ var mySqlConfig = {
     port: process.env.DB_PORT
 };
 
+var mySqlConfig = {
+    host: "localhost",
+    database: "lisyncDB",
+    user: "root",
+    password: "Guerr@magica1",
+};
+
 function executar(instrucao) {
 
     if (process.env.AMBIENTE_PROCESSO !== "producao" && process.env.AMBIENTE_PROCESSO !== "desenvolvimento") {
