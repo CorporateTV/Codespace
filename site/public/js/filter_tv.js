@@ -35,11 +35,11 @@ function createComponent(tvInfo) {
     infoTvDiv.className = "info-tv";
 
     var tvNameP = document.createElement("p");
-    tvNameP.textContent = tvInfo.nome;
+    tvNameP.textContent = tvInfo.nomeTelevisao;
     tvNameP.id = "nome_tv_componente";
 
     var hostnameP = document.createElement("p");
-    hostnameP.textContent = tvInfo.hostName;
+    hostnameP.textContent = tvInfo.hostname;
     hostnameP.id = "hostname_componente";
 
     var statusP = document.createElement("p");
@@ -60,8 +60,8 @@ function createComponent(tvInfo) {
 
     cardDiv.addEventListener("click", function () {
         sessionStorage.ID_TV = tvInfo.idTelevisao;
-        sessionStorage.NOME_TV = tvInfo.nome;
-        sessionStorage.HOSTNAME_TV = tvInfo.hostName;
+        sessionStorage.NOME_TV = tvInfo.nomeTelevisao;
+        sessionStorage.HOSTNAME_TV = tvInfo.hostname;
         sessionStorage.STATUS_TV = "ON";
         sessionStorage.CONDITION_TV = "NORMAL";
         sessionStorage.FLOOR_TV = tvInfo.andar;
@@ -136,7 +136,7 @@ function filterComponents(tvInfoArray, andar, setor) {
         var tvName = infoTv.children[0].textContent;
         var hostname = infoTv.children[1].textContent;
 
-        var tvInfo = tvInfoArray.find(tv => tv.nome === tvName && tv.hostName === hostname);
+        var tvInfo = tvInfoArray.find(tv => tv.nomeTelevisao === tvName && tv.hostname === hostname);
 
         if (andar && setor) {
             if (tvInfo.andar === andar && tvInfo.setor === setor) {

@@ -133,7 +133,7 @@ function listarUsuariosEmpresa(idEmpresa) {
                 const spanElement = document.createElement("span");
                 spanElement.className = "opcaoEmpresa";
                 spanElement.id = usuario.idUsuario;
-                spanElement.textContent = usuario.nome;
+                spanElement.textContent = usuario.nomeUsuario;
                 spanElement.onclick = function() {
                     selecionarUsuario(idEmpresa, usuario.idUsuario);
                     idUsuarioSelecionado = this.id;

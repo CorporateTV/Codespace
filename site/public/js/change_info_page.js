@@ -8,7 +8,7 @@ listarDadosTvEmpresa(sessionIdEmpresa).then(tvInfoArrayJson => {
         tvInfoArrayJson.forEach(tv => {
             // Criar uma nova opção para cada TV
             var option = document.createElement("option");
-            option.text = tv.nome;
+            option.text = tv.nomeTelevisao;
             option.value = tv.idTelevisao;
             selectElement.add(option);            
         });
@@ -41,16 +41,16 @@ function armazenarPropriedades(tvInfoArray, idTelevisao) {
     // Verificar se a TV foi encontrada
     if (tv) {
         // Armazenar as propriedades da TV em variáveis
-        var tvName = tv.nome;
-        var hostname = tv.hostName;
+        var tvName = tv.nomeTelevisao;
+        var hostname = tv.hostname;
         var status = "ON";
         var condition = "NORMAL";
         var andar = tv.andar;
         var setor = tv.setor;
 
         sessionStorage.ID_TV = tv.idTelevisao;
-        sessionStorage.NOME_TV = tv.nome;
-        sessionStorage.HOSTNAME_TV = tv.hostName;
+        sessionStorage.NOME_TV = tv.nomeTelevisao;
+        sessionStorage.HOSTNAME_TV = tv.hostname;
         sessionStorage.STATUS_TV = "ON";
         sessionStorage.CONDITION_TV = "NORMAL";
         sessionStorage.FLOOR_TV = tv.andar;

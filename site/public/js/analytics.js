@@ -22,8 +22,8 @@ function primeioAcessoAnalytcs(idTelevisao, idEmpresa) {
                 console.log(data[0].idTelevisao);
 
                  sessionStorage.ID_TV = data[0].idTelevisao;
-                 sessionStorage.NOME_TV = data[0].nome;
-                 sessionStorage.HOSTNAME_TV = data[0].hostName;
+                 sessionStorage.NOME_TV = data[0].nomeTelevisao;
+                 sessionStorage.HOSTNAME_TV = data[0].hostname;
                  sessionStorage.STATUS_TV = "OK";
                  sessionStorage.CONDITION_TV = "NORMAL";
                  sessionStorage.FLOOR_TV = data[0].andar;
@@ -32,9 +32,9 @@ function primeioAcessoAnalytcs(idTelevisao, idEmpresa) {
                 document.getElementById("setor_name").innerHTML = `${data[0].setor}`
                 document.getElementById("andar_name").innerHTML = `${data[0].andar}`
 
-                document.getElementById("nome_tv").innerHTML = `${data[0].nome}`
-                document.getElementById("nome_tv_modal").innerHTML = `${data[0].nome}`
-                document.getElementById("hostname").innerHTML = `${data[0].hostName}`
+                document.getElementById("nome_tv").innerHTML = `${data[0].nomeTelevisao}`
+                document.getElementById("nome_tv_modal").innerHTML = `${data[0].nomeTelevisao}`
+                document.getElementById("hostname").innerHTML = `${data[0].hostname}`
                 document.getElementById("conexao").innerHTML = `${"OK"}`
                 document.getElementById("status").innerHTML = `${"NORMAL"}`
             })

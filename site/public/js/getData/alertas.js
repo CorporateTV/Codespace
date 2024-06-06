@@ -44,4 +44,3 @@ function televisoesEmpresaAtualizadas(idEmpresa) {
 }
 
 televisoesEmpresaAtualizadas(sessionIdEmpresa);
-

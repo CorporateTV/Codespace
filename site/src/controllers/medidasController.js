@@ -101,7 +101,7 @@ function verificarAtualizacaoTelevisoesEmpresa(req, res) {
 
                     return {
                         idTelevisao: tv.idTelevisao,
-                        nomeTv: tv.nome,
+                        nomeTv: tv.nomeTelevisao,
                         atualizado: atualizado,
                         setor: tv.setor
                     };

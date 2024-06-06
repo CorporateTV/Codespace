@@ -10,7 +10,26 @@ function buscarUtlimasMedidasComponente(idTelevisao, tipoComponente, limite_linh
         JOIN Televisao as tv ON fkTelevisao = idTelevisao
         WHERE idTelevisao = ${idTelevisao} AND tipoComponente = '${tipoComponente}' 
         order by idLogComponente desc limit ${limite_linhas};`;
-    } else {
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
+        sql = `
+        SELECT
+            CONVERT(VARCHAR(8), CAST(dataHora AS TIME), 108) AS dataRegistro,
+            valor AS usoComponente,
+            fkComponente AS idComponente,
+            comp.tipoComponente,
+            tv.nomeTelevisao AS nomeTv
+        FROM
+            LogComponente
+            JOIN Componente AS comp ON fkComponente = idComponente
+            JOIN Televisao AS tv ON fkTelevisao = idTelevisao
+        WHERE
+            idTelevisao = ${idTelevisao}
+            AND tipoComponente = '${tipoComponente}'
+        ORDER BY
+            idLogComponente DESC
+        OFFSET 0 ROWS FETCH NEXT ${limite_linhas} ROWS ONLY;`
+    }
+    else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
     }
@@ -29,6 +48,25 @@ function buscarMedidasComponenteEmTempoReal(idTelevisao, tipoComponente) {
         JOIN Televisao as tv ON fkTelevisao = idTelevisao 
         WHERE idTelevisao = ${idTelevisao} AND tipoComponente = '${tipoComponente}'
         order by idLogComponente desc limit 1;`;
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
+        console.log("FOI SQL SERVER")
+
+        sql = `SELECT
+            CONVERT(VARCHAR(8), CAST(dataHora AS TIME), 108) AS dataRegistro,
+            valor AS usoComponente,
+            fkComponente AS idComponente,
+            comp.tipoComponente,
+            tv.nomeTelevisao AS nomeTv
+        FROM
+            LogComponente
+            JOIN Componente AS comp ON fkComponente = idComponente
+            JOIN Televisao AS tv ON fkTelevisao = idTelevisao
+        WHERE
+            idTelevisao = ${idTelevisao}
+            AND tipoComponente = '${tipoComponente}'
+        ORDER BY
+            idLogComponente DESC
+        OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY;`
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -58,7 +96,26 @@ function buscarUltimaAtualizacaoComponente(idTelevisao, tipoComponente) {
                 ORDER BY 
                     idLogComponente DESC 
                 LIMIT 1;`;
-    } else {
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
+        sql = `
+        SELECT
+            CONVERT(VARCHAR(8), CAST(dataHora AS TIME), 108) AS dataRegistro,
+            valor AS usoComponente,
+            fkComponente AS idComponente,
+            comp.tipoComponente,
+            tv.nomeTelevisao AS nomeTv
+        FROM
+            LogComponente
+            JOIN Componente AS comp ON fkComponente = idComponente
+            JOIN Televisao AS tv ON fkTelevisao = idTelevisao
+        WHERE
+            idTelevisao = ${idTelevisao}
+            AND tipoComponente = '${tipoComponente}'
+        ORDER BY
+            idLogComponente DESC
+        OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY;`
+    }
+    else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return;
     }

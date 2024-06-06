@@ -34,7 +34,7 @@ function entrar() {
           console.log(json);
           console.log(JSON.stringify(json));
           sessionStorage.EMAIL_USUARIO = json.email;
-          sessionStorage.NOME_USUARIO = json.nome;
+          sessionStorage.NOME_USUARIO = json.nomeUsuario;
           sessionStorage.ID_USUARIO = json.idUsuario;
           sessionStorage.ID_GESTOR = json.idGestor;
           sessionStorage.ID_EMPRESA = json.idEmpresa;
