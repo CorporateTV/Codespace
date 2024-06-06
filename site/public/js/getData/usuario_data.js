@@ -124,8 +124,6 @@ function atualizarPerfil(idUsuario) {
             if (resposta.ok) {
                 console.log("Perfil atualizado com sucesso!")
 
-                sessionStorage.EMAIL_USUARIO = emailPerfil;
-                sessionStorage.NOME_USUARIO = nomePerfil;
 
             } else {
                 throw "Houve um erro ao tentar realizar o perfil!";

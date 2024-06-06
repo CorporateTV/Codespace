@@ -6,8 +6,6 @@ function cadastrarEmpresa() {
     const nomeFantasia = input_nomeFantasia_cadastro.value;
     const plano = sessionStorage.PLANO
     const cnpj = input_empresa_CNPJ.value
-    
-
 
     // Enviando o valor da nova input
     fetch("/empresa/cadastrarEmpresa", {
@@ -47,33 +45,33 @@ function dadosEmpresa(idEmpresa) {
         method: "GET",
     })
 
-    .then(function (resposta) {
-        if(!resposta.ok) {
-            throw new Error('response was not ok ' + resposta.statusText);
-        }
+        .then(function (resposta) {
+            if (!resposta.ok) {
+                throw new Error('response was not ok ' + resposta.statusText);
+            }
 
-        resposta.json().then((data) => {
-            console.log(data);
-            console.log(data[0].plano)
-            sessionStorage.NOME_FANTASIA = data[0].nomeFantasia;
-            sessionStorage.CNPJ = data[0].cnpj;
-            sessionStorage.PLANO = data[0].plano;
-            sessionStorage.ID_EMPRESA = data[0].idEmpresa
+            resposta.json().then((data) => {
+                console.log(data);
+                console.log(data[0].plano)
+                sessionStorage.NOME_FANTASIA = data[0].nomeFantasia;
+                sessionStorage.CNPJ = data[0].cnpj;
+                sessionStorage.PLANO = data[0].plano;
+                sessionStorage.ID_EMPRESA = data[0].idEmpresa
 
+            })
         })
-    })
 }
 
 function exibirDadosPlano() {
     const nomePlano = sessionStorage.PLANO;
     const licencasUtilizadas = sessionStorage.QUANTIDADE_TV;
-    var totalTvPorPlano; 
+    var totalTvPorPlano;
 
     document.getElementById("text_nomePlano").innerText = nomePlano;
     document.getElementById("text_planoUtilizado").innerText = licencasUtilizadas;
-    
 
-    switch(nomePlano) {
+
+    switch (nomePlano) {
         case "Enterprise":
             document.getElementById("text_planoTotal").innerText = "50";
             totalTvPorPlano = 50;
@@ -93,58 +91,58 @@ function exibirDadosPlano() {
             document.getElementById("text_planoTotal").innerText = "0";
             break;
     }
-    
+
 
     const quantidadeDisponivel = totalTvPorPlano - Number(licencasUtilizadas);
     document.getElementById("text_planoDisponivel").innerText = quantidadeDisponivel;
 
-} 
+}
 
 function quantidadeTv(idEmpresa) {
     fetch(`/tv/quantidadeTv/${idEmpresa}`, {
         method: "GET",
     })
-    
-    .then(function (resposta) {
-        if(!resposta.ok) {
-            throw new Error('response was not ok ' + resposta.statusText);
-        }
 
-        /* Estrutura para acessar propriedade de um objeto */
+        .then(function (resposta) {
+            if (!resposta.ok) {
+                throw new Error('response was not ok ' + resposta.statusText);
+            }
 
-        resposta.json().then((data) => {
-            const quantidade = data.quantidade;
-            sessionStorage.QUANTIDADE_TV = quantidade;
-            document.getElementById("text_quantidadeTv").innerText = quantidade;
-        }); 
-    })
+            /* Estrutura para acessar propriedade de um objeto */
 
-    .catch(function (error) {
-        console.error("Erro: ", error);
-    });
+            resposta.json().then((data) => {
+                const quantidade = data.quantidade;
+                sessionStorage.QUANTIDADE_TV = quantidade;
+                document.getElementById("text_quantidadeTv").innerText = quantidade;
+            });
+        })
+
+        .catch(function (error) {
+            console.error("Erro: ", error);
+        });
 }
 
 function quantidadeUsuarios(idEmpresa) {
     fetch(`/empresa/quantidadeUsuarios/${idEmpresa}`, {
         method: "GET",
     })
-    
-    .then(function (resposta) {
-        if(!resposta.ok) {
-            throw new Error('response was not ok ' + resposta.statusText);
-        }
 
-        /* Estrutura para acessar propriedade de um objeto */
+        .then(function (resposta) {
+            if (!resposta.ok) {
+                throw new Error('response was not ok ' + resposta.statusText);
+            }
 
-        resposta.json().then((data) => {
-            const quantidade = data.quantidadeUsuarios;
-            document.getElementById("text_quantidadeUsuarios").innerText = quantidade;
-        }); 
-    })
+            /* Estrutura para acessar propriedade de um objeto */
 
-    .catch(function (error) {
-        console.error("Erro: ", error);
-    });
+            resposta.json().then((data) => {
+                const quantidade = data.quantidadeUsuarios;
+                document.getElementById("text_quantidadeUsuarios").innerText = quantidade;
+            });
+        })
+
+        .catch(function (error) {
+            console.error("Erro: ", error);
+        });
 }
 
 
@@ -154,16 +152,16 @@ function listarAmbientes(idEmpresa) {
         method: "GET",
     })
 
-    .then(function (resposta) {
-        resposta.json().then((ambientes) => {
-            ambientes.forEach((ambiente) => {
-                console.log(`${ambiente.setor} + ${ambiente.andar}`)
+        .then(function (resposta) {
+            resposta.json().then((ambientes) => {
+                ambientes.forEach((ambiente) => {
+                    console.log(`${ambiente.setor} + ${ambiente.andar}`)
+                });
             });
+        })
+        .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
         });
-    })
-    .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-    });
 }
 
 function listarUsuariosEmpresa(idEmpresa) {
@@ -171,23 +169,23 @@ function listarUsuariosEmpresa(idEmpresa) {
         method: "GET",
     })
 
-    .then(function (resposta) {
+        .then(function (resposta) {
 
-        resposta.json().then((usuarios) => {
-            usuarios.forEach((usuario) => {
-                console.log(usuario.nome);
-                const spanElement = document.createElement("span");
-                spanElement.className = "opcaoEmpresa";
-                spanElement.id = usuario.idUsuario;
-                spanElement.textContent = usuario.nome;
-                spanElement.onclick = function() {
-                    selecionarUsuario(idEmpresa, usuario.idUsuario);
-                    idUsuarioSelecionado = this.id;
-                };
-                lista_usuarios_empresa.appendChild(spanElement);
+            resposta.json().then((usuarios) => {
+                usuarios.forEach((usuario) => {
+                    console.log(usuario.nome);
+                    const spanElement = document.createElement("span");
+                    spanElement.className = "opcaoEmpresa";
+                    spanElement.id = usuario.idUsuario;
+                    spanElement.textContent = usuario.nome;
+                    spanElement.onclick = function () {
+                        selecionarUsuario(idEmpresa, usuario.idUsuario);
+                        idUsuarioSelecionado = this.id;
+                    };
+                    lista_usuarios_empresa.appendChild(spanElement);
+                })
             })
         })
-    })
 }
 
 
@@ -206,11 +204,20 @@ function listarEmpresas() {
                     divFilho.innerHTML = empresa.nomeFantasia
                     divFilho.classList.add('divFilhoEmpresa');
                     divPai.appendChild(divFilho);
-                    divFilho.onclick = function() {
-                        console.log("UAI")
+                    divFilho.onclick = function () {
                         selecionarGestor(empresa.idEmpresa)
-                        buscarDadosCadastroAdmin(this.id)
-                        select_plano.value = empresa.plano;
+
+
+                        input_nome_fantasia.value = this.innerHTML
+                        var divsEmpresas = document.querySelectorAll('.empresa');
+
+                        for (var i = 0; i < divsEmpresas.length; i++) {
+                            divsEmpresas[i].classList.remove('selecionada');
+                        }
+                        // Adicionar classe de cor à div clicada
+                        this.classList.add('selecionada');
+
+
                     };
                 });
             });
@@ -220,11 +227,7 @@ function listarEmpresas() {
         });
 }
 
-function buscarDadosCadastroAdmin(id){
-    dadosEmpresa(id);
-    input_nome_fantasia.value = sessionStorage.getItem('NOME_FANTASIA');
-    input_CNPJ.value = sessionStorage.getItem('CNPJ');
-}
+
 
 
 function atualizarEmpresa(idEmpresa) {
@@ -244,7 +247,7 @@ function atualizarEmpresa(idEmpresa) {
             nomeFantasiaServer: nomeFantasia,
             cnpjServer: cnpj,
             idEmpresaServer: idEmpresa,
-            planoServer:plano
+            planoServer: plano
         }),
     })
 

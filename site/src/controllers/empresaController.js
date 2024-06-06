@@ -1,7 +1,7 @@
 var empresaModel = require("../models/empresaModel");
 
 function buscarPornomeEmpresa(req, res) {
-  var nomeEmpresa = "Elera."
+  var nomeEmpresa = req.params.nomeEmpresa;
   
   empresaModel.buscarPornomeEmpresa(nomeEmpresa).then((resultado) => {
     res.status(200).json(resultado);

@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="../css/style-reset.css">
 </head>
 
-<body onload="validarSessao()">
+<body onload="validarSessao(), listarDadosTvEmpresaComponentes(sessionStorage.ID_EMPRESA)">
     <div class="bg-layout">
         <div class="sideBar">
             <div class="sideBar-container">
@@ -100,6 +100,8 @@
     </div>
 </body>
 </html>
+
+
 
 <script src="../js/charts/chart_controlCenter.js"></script>
 <script src="../js/getData/tv_data.js"></script>

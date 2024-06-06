@@ -92,6 +92,7 @@ function editInputGestor() {
   var selectCargoGestor = document.getElementById("select_gestor_cargo");
 
   var modoEdicao = false;
+  
 
   inputsElementGestor.forEach(function (input) {
     input.readOnly = !input.readOnly;
@@ -99,6 +100,7 @@ function editInputGestor() {
       modoEdicao = true;
     }
   });
+  
 
   selectCargoGestor.disabled = !selectCargoGestor.disabled;
 

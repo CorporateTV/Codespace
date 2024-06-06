@@ -8,7 +8,9 @@ function listarDadosTvEmpresa(idEmpresa) {
         if (!resposta.ok) {
             throw new Error('Network response was not ok ' + resposta.statusText);
         }
+
         return resposta.json();
+        
     })
     .then((data) => {
         return data;
@@ -161,6 +163,7 @@ function filterComponents(tvInfoArray, andar, setor) {
         }
     }
 }
+
 
 listarDadosTvEmpresa(sessionIdEmpresa).then(tvInfoArrayJson => {
     if (tvInfoArrayJson) {

@@ -1,7 +1,8 @@
 
 
-function buscarEmpresaPnome() {
-    fetch(`/empresa/buscar?nomeFantasia=${"Elera."}`, {
+function buscarEmpresaPnome(nomeEmpresa) {
+
+    fetch(`/empresa/buscarEmpresaPnome/${nomeEmpresa}`, {
         method: "GET",
     })
         .then(function (resposta) {
@@ -10,12 +11,12 @@ function buscarEmpresaPnome() {
                 throw new Error('Erro ao buscar dados');
             }
             // Retorna os dados como JSON
+            
             return resposta.json();
+            
         })
         .then(function (dados) {
-            // Manipula os dados conforme necessário
-            console.log(dados); // Aqui você pode fazer o que quiser com os dados recebidos
-            return dados[0]
+            sessionStorage.ID_EMPRESA_CADASTRO = dados[0].idEmpresa
 
         })
         .catch(function (erro) {
@@ -29,6 +30,8 @@ function buscarEmpresaPnome() {
 
 window.onload = function () {
     listarEmpresas();
+    resetCredenciais() 
+    validarSessao();
 };
 
 
@@ -71,8 +74,8 @@ function validarEnvio() {
 
     if (validacaoNomeFantasia && email == emailConfirmacao && validacaoEmail && validacao2Email) {
         var alertaConfirmacao = document.getElementById('alerta-confirmacao');
-        // alertaConfirmacao.innerHTML = "Cadastro Confirmado!";
-        // alertaConfirmacao.style.display = "block";
+        alertaConfirmacao.innerHTML = "Cadastro Confirmado!";
+        alertaConfirmacao.style.display = "block";
 
 
 
@@ -99,7 +102,7 @@ function validarEnvio() {
 
         var dadosEmpresa = {
             nomeFantasia: input_nomeFantasia_cadastro.value,
-            plano: sessionStorage.PLANO,
+            plano: plan.value,
             cnpj: input_empresa_CNPJ.value
         };
 
@@ -113,14 +116,14 @@ function validarEnvio() {
         }
         senha = senha.split('').sort(() => Math.random() - 0.5).join('');
 
-        // Dados do gestor
+
         var dadosGestor = {
             nome: input_nome_cadastro.value,
             email: input_email_cadastro.value,
             senha: senha
         };
 
-        // Requisição AJAX para cadastrar empresa
+
         fetch("/empresa/cadastrarEmpresa", {
             method: "POST",
             headers: {
@@ -134,7 +137,8 @@ function validarEnvio() {
                 if (resposta.ok) {
                     if (buscarEmpresaPnome(input_nomeFantasia_cadastro.value) != false) {
 
-                        idEmpresa = buscarEmpresaPnome(input_nomeFantasia_cadastro.value).idEmpresa
+                        let idEmpresa = sessionStorage.ID_EMPRESA_CADASTRO
+                        console.log(sessionStorage.ID_EMPRESA_CADASTRO);
                         dadosGestor.fkEmpresa = idEmpresa;
                         
                         fetch("/usuarios/gestorCadastrar", {
@@ -160,42 +164,20 @@ function validarEnvio() {
                 console.error("Erro ao cadastrar empresa:", error);
             });
 
-
-
-        // Adicionar idEmpresa aos dados do gestor
-        
-
-        // Requisição AJAX para cadastrar gestor
-
-
-
-
-
-
     }
-
-
-
-
-
-
-
-
-
-
 
     // else if (!validacaoEmail) {
     //     document.getElementById('email-error').innerHTML = "Só pode usar email corporativo";
     //     document.getElementById('email-error').style.color = "red";
     // }
-
-
 }
 
 function atualizarInformacoesCadastro() {
     editInputGestor()
     atualizarEmpresa(sessionStorage.ID_EMPRESA)
     atualizarPerfil(sessionStorage.ID_GESTOR_EMPRESA);
+    listarEmpresas();
+
 }
 
 function resetCredenciais() {
@@ -203,8 +185,6 @@ function resetCredenciais() {
     input_CNPJ.value = ""
     input_nome_perfil.value = ""
     input_email_perfil.value = ""
-
-
 }
 
 

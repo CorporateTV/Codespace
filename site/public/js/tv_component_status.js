@@ -1,6 +1,26 @@
+function listarDadosTvEmpresaComponentes(idEmpresa) {
+    return fetch(`/tv/listarDadosTv/${idEmpresa}`, {
+        method: "GET",
+    })
+    .then(function (resposta) {
+        if (!resposta.ok) {
+            throw new Error('Network response was not ok ' + resposta.statusText);
+        }
+
+        return resposta.json();
+        
+    })
+    .then((data) => {
+        return data;
+    })
+    .catch(function (erro) {
+        console.log(`#ERRO: ${erro}`);
+    });
+}
+
 function createComponentStatus(tvInfo) {
     var cardDiv = document.createElement("div");
-    cardDiv.className = "card-tv-status bg-status-ok";
+    cardDiv.className = "card-tv-status     bg-status-ok";
 
     var infoTvDiv = document.createElement("div");
     infoTvDiv.className = "card-status-text";
@@ -13,7 +33,7 @@ function createComponentStatus(tvInfo) {
     subtitleP.textContent = 'Localização:';
 
     var localizacaoP = document.createElement("p");
-    localizacaoP.textContent = `${tvInfo.floor} - ${tvInfo.sector}` ;
+    localizacaoP.textContent = `${tvInfo.andar} - ${tvInfo.setor}` ;
     localizacaoP.id = "localizacao_status"
 
     infoTvDiv.appendChild(hostnameP);
@@ -54,5 +74,32 @@ function createMultipleComponentsStatus(tvInfoArray) {
         container.appendChild(component);
     }
 }
+
+function populateFloorOptionsStatus(tvInfoArray) {
+    const andaresUnicos = new Set();
+    const selectElement = document.getElementById('andar');
+
+    selectElement.innerHTML = '';
+
+    tvInfoArray.forEach(tvInfo => {
+        andaresUnicos.add(tvInfo.andar);
+    });
+
+    andaresUnicos.forEach(andar => {
+        const option = document.createElement('option');
+        option.value = andar;
+        option.textContent = andar;
+        selectElement.appendChild(option);
+    });
+}
+
+listarDadosTvEmpresaComponentes(sessionIdEmpresa).then(tvInfoArrayJson => {
+    if (tvInfoArrayJson) {
+        createMultipleComponentsStatus(tvInfoArrayJson);
+        populateFloorOptionsStatus(tvInfoArrayJson);
+    } else {
+        console.error("No TV data found for the company.");
+    }
+});
 
 createMultipleComponentsStatus(tvInfoArray);

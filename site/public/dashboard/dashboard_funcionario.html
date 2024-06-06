@@ -18,23 +18,25 @@
 </head>
  
 
-<body s>
+<body onload="listarDadosTvEmpresa(sessionStorage.ID_EMPRESA)">
     <div class="bg-layout">
         <div class="sideBar">
             <div class="sideBar-container">
                 <ul class="sideBar-menu">
                     <li class="selection">
                         <div class="imgIcon"><img src="../assets/Dashboard icon.png" alt=""></div>
-                        <p class="selectText"> <a href="dashboard.html">Dashboard</a></p>
+                        <p class="selectText"> <a href="dashboard_funcionario.html">Dashboard</a></p>
                     </li>
                     <li class="selection">
                         <div class="imgIcon"><img src="../assets/Analytics Icon.png" alt=""></div>
                         <p class="selectText"> <a href="analytics.html">Analytics</a></p>
                     </li>
+                    
                     <li class="selection">
                         <div class="imgIcon"><img src="../assets/Engrenagem.png" alt=""></div>
                         <p class="selectText"><a href="configuracao.html">Configurações</a></p>
                     </li>
+                    
                 </ul>
                 <li class="selection exit" onclick="limparSessao()">
                     <div class="imgIcon"><img src="../assets/sair.png" alt=""></div>
@@ -104,4 +106,5 @@
 <script src="../js/carousel.js"></script>
 <script src="../js/charts/chart_dashboard.js"></script>
 <script src="../js/filter_tv_funcionario.js"></script>
+<script src="../js/tv_component_status_funcionario.js"></script>
 <script src="../js/sessao.js"></script>
