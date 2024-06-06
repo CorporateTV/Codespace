@@ -43,16 +43,14 @@ function armazenarPropriedades(tvInfoArray, idTelevisao) {
         // Armazenar as propriedades da TV em variáveis
         var tvName = tv.nomeTelevisao;
         var hostname = tv.hostname;
-        var status = "ON";
-        var condition = "NORMAL";
+        var status = "NORMAL";
         var andar = tv.andar;
         var setor = tv.setor;
 
         sessionStorage.ID_TV = tv.idTelevisao;
         sessionStorage.NOME_TV = tv.nomeTelevisao;
         sessionStorage.HOSTNAME_TV = tv.hostname;
-        sessionStorage.STATUS_TV = "ON";
-        sessionStorage.CONDITION_TV = "NORMAL";
+        sessionStorage.STATUS_TV = "NORMAL";
         sessionStorage.FLOOR_TV = tv.andar;
         sessionStorage.SECTOR_TV = tv.setor;
         sessionStorage.COMPONENTES_TV = JSON.stringify(tv.componentes);
@@ -62,7 +60,7 @@ function armazenarPropriedades(tvInfoArray, idTelevisao) {
         document.getElementById("nome_tv").innerHTML = tvName;
         document.getElementById("hostname").innerHTML = hostname;
         document.getElementById("status").innerHTML = status;
-        document.getElementById("conexao").innerHTML = condition;
+        
         document.getElementById("andar_name").innerHTML = andar;
         document.getElementById("setor_name").innerHTML = setor;
     }

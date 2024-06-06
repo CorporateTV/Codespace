@@ -77,8 +77,7 @@ function verificarAtualizacaoComponente(req, res) {
 
 function verificarAtualizacaoTelevisoesEmpresa(req, res) {
     var idEmpresa = req.params.idEmpresa;
-    var limiteTempo = 5000; // 5 minutos em milissegundos
-
+    var limiteTempo = 30000; 
     console.log(`Verificando atualização para todas as televisões da empresa ${idEmpresa}`);
 
     tvModel.listarDadosTv(idEmpresa).then(function (televisoes) {

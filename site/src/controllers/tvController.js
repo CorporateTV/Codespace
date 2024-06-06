@@ -36,9 +36,9 @@ function listarDadosTv(req, res) {
                         .then((resultadoComponentes) => {
                             return {
                                 idTelevisao: tv.idTelevisao,
-                                nome: tv.nome,
+                                nomeTelevisao: tv.nomeTelevisao,
                                 taxaAtualizacao: tv.taxaAtualizacao,
-                                hostName: tv.hostName,
+                                hostname: tv.hostname,
                                 fkAmbiente: tv.fkAmbiente,
                                 idAmbiente: tv.idAmbiente,
                                 setor: tv.setor,

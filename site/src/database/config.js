@@ -1,4 +1,4 @@
-// var mysql = require("mysql2");
+var mysql = require("mysql2");
 var sql = require('mssql');
 
 // CONEXÃO DO SQL SERVER - AZURE (NUVEM)
@@ -19,12 +19,12 @@ var sqlServerConfig = {
 }
 
 // CONEXÃO DO MYSQL WORKBENCH
-// var mySqlConfig = {
-//    host: "localhost",
-//    database: "teste",
-//    user: "sa",
-//    password: "urubu100",
-//};
+ var mySqlConfig = {
+    host: "localhost",
+    database: "lisyncDB",
+    user: "root",
+    password: "root",
+};
 
 function executar(instrucao) {
     // VERIFICA A VARIÁVEL DE AMBIENTE SETADA EM app.js

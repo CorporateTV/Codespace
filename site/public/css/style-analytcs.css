@@ -170,6 +170,10 @@
 
 .lista-log {
     padding: 20px;
-    font-size: 1.1em;
-    line-height: 2em;   
+    font-size: 0.8em;
+    line-height: 2em;  
+    height: 70%;
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }

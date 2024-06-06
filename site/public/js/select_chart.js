@@ -47,6 +47,7 @@ function trocarTipoComponente() {
     }).catch((erro) => {
         tituloComponente.innerHTML = `Sem componente`;
         modelosComponentes.innerHTML = `Sem componente`
+        document.getElementById("conexao").innerHTML = "OFF";
         console.error(`Erro ao listar componentes: ${erro}`);
     });
 

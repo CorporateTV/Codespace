@@ -43,11 +43,11 @@ function createComponent(tvInfo) {
     hostnameP.id = "hostname_componente";
 
     var statusP = document.createElement("p");
-    statusP.textContent = "ON";
+    statusP.textContent = "NORMAL";
     statusP.id = "status_componente";
 
     var conditionP = document.createElement("p");
-    conditionP.textContent = "NORMAL";
+    conditionP.textContent = "ON";
     conditionP.id = "condition_componente";
 
     infoTvDiv.appendChild(tvNameP);
@@ -62,8 +62,8 @@ function createComponent(tvInfo) {
         sessionStorage.ID_TV = tvInfo.idTelevisao;
         sessionStorage.NOME_TV = tvInfo.nomeTelevisao;
         sessionStorage.HOSTNAME_TV = tvInfo.hostname;
-        sessionStorage.STATUS_TV = "ON";
-        sessionStorage.CONDITION_TV = "NORMAL";
+        sessionStorage.STATUS_TV = "NORMAL";
+        sessionStorage.CONEXAO_TV = "ON";
         sessionStorage.FLOOR_TV = tvInfo.andar;
         sessionStorage.SECTOR_TV = tvInfo.setor;
         sessionStorage.COMPONENTES_TV = JSON.stringify(tvInfo.componentes);

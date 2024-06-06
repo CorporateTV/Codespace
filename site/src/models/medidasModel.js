@@ -5,7 +5,7 @@ function buscarUtlimasMedidasComponente(idTelevisao, tipoComponente, limite_linh
 
     if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         sql = `SELECT date_format(dataHora,'%H:%i:%s') as dataRegistro, valor as usoComponente, 
-        fkComponente as idComponente, comp.tipoComponente, tv.nome as nomeTv FROM 
+        fkComponente as idComponente, comp.tipoComponente, tv.nomeTelevisao as nomeTv FROM 
         LogComponente JOIN Componente as comp ON fkComponente = idComponente
         JOIN Televisao as tv ON fkTelevisao = idTelevisao
         WHERE idTelevisao = ${idTelevisao} AND tipoComponente = '${tipoComponente}' 
@@ -43,7 +43,7 @@ function buscarMedidasComponenteEmTempoReal(idTelevisao, tipoComponente) {
 
     if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         sql = `SELECT date_format(dataHora,'%H:%i:%s') as dataRegistro, valor as usoComponente, 
-        fkComponente as idComponente, comp.tipoComponente, tv.nome as nomeTv FROM 
+        fkComponente as idComponente, comp.tipoComponente, tv.nomeTelevisao as nomeTv FROM 
         LogComponente JOIN Componente as comp ON fkComponente = idComponente
         JOIN Televisao as tv ON fkTelevisao = idTelevisao 
         WHERE idTelevisao = ${idTelevisao} AND tipoComponente = '${tipoComponente}'
@@ -84,7 +84,7 @@ function buscarUltimaAtualizacaoComponente(idTelevisao, tipoComponente) {
                     valor as usoComponente, 
                     fkComponente as idComponente, 
                     comp.tipoComponente, 
-                    tv.nome as nomeTv 
+                    tv.nomeTelevisao as nomeTv 
                 FROM 
                     LogComponente 
                 JOIN 
