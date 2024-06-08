@@ -23,6 +23,9 @@ listarDadosTvEmpresa(sessionIdEmpresa).then(tvInfoArrayJson => {
             document.getElementById("nome_tvChart").innerText = sessionStorage.NOME_TV;
             trocarTipoComponente();
             medidadsPorComponentes(selectedOption)
+            processosTv(selectedOption);
+
+            document.getElementById("lista_logComponente").innerHTML = ``;
         });
 
     } else {

@@ -123,9 +123,27 @@ function buscarUltimaAtualizacaoComponente(idTelevisao, tipoComponente) {
     return database.executar(sql);
 }
 
+function buscarMedidasProcessos(idTelevisao) {
+    sql = `
+    SELECT 
+        processo.idLog, processo.pid, date_format(processo.dataHora,'%H:%i:%s') as dataRegistro,
+        processo.nomeProcesso, processo.valor, processo.fkComponente, comp.modelo, comp.tipoComponente, tv.nomeTelevisao
+    FROM 
+        LogProcesso as processo 
+        JOIN Componente as comp ON fkComponente = idComponente 
+        JOIN Televisao as tv ON fkTelevisao = idTelevisao 
+    WHERE idTelevisao = ${idTelevisao}
+    ORDER BY 
+        idLog DESC LIMIT 5;
+    `
+
+    return database.executar(sql);
+}
+
 
 module.exports = {
     buscarUtlimasMedidasComponente,
     buscarMedidasComponenteEmTempoReal,
-    buscarUltimaAtualizacaoComponente
+    buscarUltimaAtualizacaoComponente,
+    buscarMedidasProcessos
 }

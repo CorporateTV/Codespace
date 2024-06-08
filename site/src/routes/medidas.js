@@ -23,4 +23,8 @@ router.get("/tempo-real-tv/:idTelevisao", function (req, res) {
     medidaController.buscarMedidasComponentesTv(req, res);
 })
 
+router.get("/processos/:idTelevisao", function (req, res) {
+    medidaController.buscarMedidasProcessos(req, res);
+})
+
 module.exports = router;

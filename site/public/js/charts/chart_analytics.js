@@ -47,50 +47,10 @@ function iniciarGraficos(idTelevisao, tipoComponente) {
         default:
             console.error('Tipo de componente desconhecido');
     }
+    processosTv(idTelevisao);
 }
 
-function alertaMonitoramento(idTelevisao, componentes) {
-    var textoErro = '';
-    var nomeTv = sessionStorage.NOME_TV; // Assume que o nome da TV é armazenado no sessionStorage
 
-    componentes.forEach(componente => {
-        var tipo = componente.tipoComponente;
-        var dataUso = componente.uso_percentual;
-
-        switch (tipo) {
-            case "CPU":
-                if (dataUso > 80.0) {
-                    textoErro += `ESTADO CRÍTICO - Uso da CPU elevado em ${nomeTv} | ${dataUso.toFixed(2)}%<br>`;
-                } else if (dataUso > 60.0) {
-                    textoErro += `ESTADO ATENÇÃO - Uso da CPU moderado em ${nomeTv} | ${dataUso.toFixed(2)}%<br>`;
-                }
-                break;
-
-            case "Disco":
-                if (dataUso > 60.0) {
-                    textoErro += `ESTADO CRÍTICO - Uso do Disco elevado em ${nomeTv} | ${dataUso.toFixed(2)}%<br>`;
-                } else if (dataUso > 30.0) {
-                    textoErro += `ESTADO ATENÇÃO - Uso do Disco moderado em ${nomeTv} | ${dataUso.toFixed(2)}%<br>`;
-                }
-                break;
-
-            case "RAM":
-                if (dataUso > 90.0) {
-                    textoErro += `ESTADO CRÍTICO - Uso da RAM elevado em ${nomeTv} | ${dataUso.toFixed(2)}%<br>`;
-                } else if (dataUso > 75.0) {
-                    textoErro += `ESTADO ATENÇÃO - Uso da RAM moderado em ${nomeTv} | ${dataUso.toFixed(2)}%<br>`;
-                }
-                break;
-        }
-    });
-
-    if (textoErro) {
-        console.log(textoErro);
-        document.getElementById("lista_logComponente").innerHTML += `<li>${textoErro}</li>`;
-    } else {
-        document.getElementById("lista_logComponente").innerHTML += `<li>Sem alertas para ${nomeTv}</li>`;
-    }
-}
 
 function drawCharMonitoramento(idTelevisao, chartElementId, tipo) {
     fetch(`/medidas/ultimas/${idTelevisao}/${tipo}`, { cache: 'no-store' }).then(response => {
@@ -179,35 +139,4 @@ function usoComponentesTempoReal(idTelevisao, tipo, chart, dataMonitoramento, op
         // Continua atualizando mesmo com erro
         setTimeout(() => usoComponentesTempoReal(idTelevisao, tipo, chart, dataMonitoramento, optionsMonitoramento), 5000);
     });
-}
-
-function medidadsPorComponentes(idTelevisao) {
-    // Função que busca as medidas dos componentes
-    function fetchMedidas() {
-        fetch(`/medidas/tempo-real-tv/${idTelevisao}`, { cache: 'no-store' })
-            .then((response) => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    console.log("Erro na função Componentes medida");
-                }
-            })
-            .then((respostaTv) => {
-                if (respostaTv) {
-                    alertaMonitoramento(idTelevisao, respostaTv.componentes);
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
-
-    // Limpar o intervalo anterior se houver
-    if (monitoramentoInterval) {
-        clearInterval(monitoramentoInterval);
-    }
-
-    // Executar a função imediatamente e definir o intervalo de 5 segundos
-    fetchMedidas();
-    monitoramentoInterval = setInterval(fetchMedidas, 5000);
 }
