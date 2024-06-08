@@ -15,13 +15,14 @@ listarDadosTvEmpresa(sessionIdEmpresa).then(tvInfoArrayJson => {
 
         // Adicionar um evento de escuta para o evento change no seletor
         selectElement.addEventListener("change", function () {
-            // Obter o valor da opção selecionada
+            // Obter o idTv da opção selecionada
             var selectedOption = selectElement.value;
             
             // Chamar a função para armazenar as propriedades da TV com base na opção selecionada
             armazenarPropriedades(tvInfoArrayJson, selectedOption);
             document.getElementById("nome_tvChart").innerText = sessionStorage.NOME_TV;
             trocarTipoComponente();
+            medidadsPorComponentes(selectedOption)
         });
 
     } else {

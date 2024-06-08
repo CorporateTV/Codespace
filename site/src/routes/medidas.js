@@ -19,4 +19,8 @@ router.get("/atualizacao-empresa/:idEmpresa", function (req, res) {
     medidaController.verificarAtualizacaoTelevisoesEmpresa(req, res);
 })
 
+router.get("/tempo-real-tv/:idTelevisao", function (req, res) {
+    medidaController.buscarMedidasComponentesTv(req, res);
+})
+
 module.exports = router;

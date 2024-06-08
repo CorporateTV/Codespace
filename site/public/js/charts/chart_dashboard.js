@@ -35,7 +35,6 @@ function drawChartUsuarios() {
 
     // Parse the JSON data
     var data = JSON.parse(jsonData);
-    console.log(data);
 
     // Create a DataTable and add columns
     var dataUsuarios = new google.visualization.DataTable();

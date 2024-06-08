@@ -9,7 +9,7 @@ function quantidadeTvEmpresa(idEmpresa) {
 
 }
 
-function listarDadosTv(idEmpresa) {
+function listarDadosEmpresaTv(idEmpresa) {
     sql = `SELECT * FROM Televisao as televisao JOIN Ambiente as ambiente ON fkAmbiente = IdAmbiente 
     JOIN Empresa as empresa ON fkEmpresa = IdEmpresa WHERE idEmpresa = ${idEmpresa}`
 
@@ -17,8 +17,14 @@ function listarDadosTv(idEmpresa) {
     return(database.executar(sql));    
 }
 
+function dadosTv(idTelevisao) {
+    sql = `SELECT * FROM Televisao WHERE idTelevisao = ${idTelevisao}`;
+
+    return(database.executar(sql));
+}
 
 module.exports = {
     quantidadeTvEmpresa,
-    listarDadosTv
+    listarDadosEmpresaTv,
+    dadosTv
 }

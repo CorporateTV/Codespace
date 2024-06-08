@@ -1,5 +1,6 @@
 var medidaModel = require("../models/medidasModel");
 var tvModel = require("../models/tvModel");
+var componenteModel = require("../models/componenteModel")
 
 function buscarUtlimasMedidasComponente(req, res) {
     const limite_linhas = 7;
@@ -80,7 +81,7 @@ function verificarAtualizacaoTelevisoesEmpresa(req, res) {
     var limiteTempo = 30000; 
     console.log(`Verificando atualização para todas as televisões da empresa ${idEmpresa}`);
 
-    tvModel.listarDadosTv(idEmpresa).then(function (televisoes) {
+    tvModel.listarDadosEmpresaTv(idEmpresa).then(function (televisoes) {
         if (televisoes.length > 0) {
             let verificacoes = televisoes.map(tv => {
                 return Promise.all([
@@ -144,10 +145,73 @@ function verificarAtualizacaoTelevisoesEmpresa(req, res) {
     });
 }
 
+function buscarMedidasComponentesTv(req, res) {
+    var idTv = req.params.idTelevisao;
+
+    tvModel.dadosTv(idTv).then((dadosTv) => {
+        if (dadosTv.length > 0) {
+            componenteModel.componentesTv(idTv).then((respostaComponentes) => {
+                let promessasLogs = respostaComponentes.map((componente) => {
+                    return new Promise((resolve, reject) => {
+                        medidaModel.buscarMedidasComponenteEmTempoReal(idTv, componente.tipoComponente)
+                            .then((log) => {
+                                if (log.length > 0) {
+                                    resolve({
+                                        idComponente: log[0].idComponente,
+                                        tipoComponente: log[0].tipoComponente,
+                                        uso_percentual: log[0].usoComponente,
+                                        horario: log[0].dataRegistro
+                                    });
+                                } else {
+                                    resolve({
+                                        idComponente: componente.idComponente,
+                                        tipoComponente: componente.tipoComponente,
+                                        uso_percentual: null,
+                                        horario: null
+                                    });
+                                }
+                            })
+                            .catch((erro) => {
+                                reject(erro);
+                            });
+                    });
+                });
+
+                Promise.all(promessasLogs).then((componentesInfo) => {
+                    let resultado = {
+                        id_televisao: dadosTv[0].idTelevisao,
+                        nome_televisao: dadosTv[0].nomeTelevisao,
+                        componentes: componentesInfo
+                    };
+                    res.status(200).json(resultado);
+                }).catch((erro) => {
+                    console.log(erro);
+                    console.log("Houve um erro ao buscar os logs dos componentes: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                });
+            }).catch((erro) => {
+                console.log(erro);
+                console.log("Houve um erro ao buscar os componentes da televisão: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            });
+        } else {
+            res.status(204).json([]);
+        }
+    }).catch((erro) => {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as televisões: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+ 
+
 
 module.exports = {
     buscarMedidasComponenteEmTempoReal,
     buscarUtlimasMedidasComponente,
     verificarAtualizacaoComponente,
-    verificarAtualizacaoTelevisoesEmpresa
+    verificarAtualizacaoTelevisoesEmpresa,
+    buscarMedidasComponentesTv
 }

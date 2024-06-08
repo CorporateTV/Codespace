@@ -18,13 +18,13 @@ function quantidadeTvEmpresa(req, res) {
 
 }
 
-function listarDadosTv(req, res) {
+function listarDadosEmpresaTv(req, res) {
     var idEmpresa = req.params.idEmpresa;
 
     if (idEmpresa == undefined) {
         res.status(400).send("IdEmpresa está indefinido")
     } else {
-        tvModel.listarDadosTv(idEmpresa).then((resultado) => {
+        tvModel.listarDadosEmpresaTv(idEmpresa).then((resultado) => {
 
             console.log("TV encontrados: " + resultado.length);
 
@@ -69,7 +69,19 @@ function listarDadosTv(req, res) {
     }
 }
 
+function dadosTv(req, res) {
+    var idTv = req.params.idEmpresa;
+
+    tvModel.dadosTv(idTv).then((resultado) => {
+        res.status(200).json(resultado);
+    }).catch(function (erro) {
+        console.log("Houve um erro tv não existe: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 module.exports = {
     quantidadeTvEmpresa,
-    listarDadosTv
+    listarDadosEmpresaTv,
+    dadosTv
 }

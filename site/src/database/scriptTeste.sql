@@ -281,15 +281,19 @@ INSERT INTO LogComponente (dataHora, valor, fkComponente) VALUES
     ('2024-06-02 12:00:00', 4.7, 18);
 
 SELECT date_format(dataHora,'%H:%i:%s') as dataRegistro, valor as usoComponente, fkTelevisao as idTelevisao 
-FROM LogComponente JOIN Componente ON fkComponente = idComponente JOIN Televisao ON fkTelevisao = idTelevisao WHERE idTelevisao = 2 AND tipoComponente = 'CPU'
-order by idLogComponente;
+FROM LogComponente JOIN Componente ON fkComponente = idComponente JOIN Televisao ON fkTelevisao = idTelevisao 
+JOIN Ambiente ON fkAmbiente = idAmbiente WHERE idAmbiente = 1 order by idLogComponente;
 
 SELECT date_format(dataHora,'%H:%i:%s') as dataRegistro, valor as usoComponente,
         fkComponente as idComponente, comp.tipoComponente, tv.nome as nomeTv FROM
         LogComponente JOIN Componente as comp ON fkComponente = idComponente
         JOIN Televisao as tv ON fkTelevisao = idTelevisao
-        WHERE idTelevisao = 1 AND fkComponente = 1
-        order by idLogComponente desc limit 7;
+        WHERE idTelevisao = 1 AND tipoComponente = 'CPU'
+        order by idLogComponente desc limit 1;
+
+SELECT * FROM Televisao as televisao JOIN Ambiente as ambiente ON fkAmbiente = IdAmbiente 
+    JOIN Empresa as empresa ON fkEmpresa = IdEmpresa WHERE idEmpresa = 1;
 
 
+SELECT * FROM componente;
 -- DROP DATABASE lisyncDB;

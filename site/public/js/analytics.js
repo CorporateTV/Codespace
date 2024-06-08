@@ -5,6 +5,9 @@ var statusTv = sessionStorage.STATUS_TV;
 var andar = sessionStorage.FLOOR_TV;
 var setor = sessionStorage.SECTOR_TV;
 
+// Intervalo para alterar monitoramento das tv's
+var monitoramentoInterval;
+
 function primeioAcessoAnalytcs(idTelevisao, idEmpresa) {
     if (idTelevisao == undefined) {
         fetch(`/tv/listarDadosTv/${idEmpresa}`, {

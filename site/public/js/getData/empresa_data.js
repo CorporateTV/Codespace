@@ -9,22 +9,22 @@ function dadosEmpresa(idEmpresa) {
         }
 
         resposta.json().then((data) => {
-            console.log(data);
-            console.log(data[0].plano)
+            var nomePlano = data[0].plano;
             sessionStorage.NOME_FANTASIA = data[0].nomeFantasia;
-            sessionStorage.PLANO = data[0].plano;
+            sessionStorage.PLANO = nomePlano;
 
+            exibirDadosPlano(nomePlano);
         })
     })
 }
 
-function exibirDadosPlano() {
-    const nomePlano = sessionStorage.PLANO;
+function exibirDadosPlano(nomePlano) {
     const licencasUtilizadas = sessionStorage.QUANTIDADE_TV;
     var totalTvPorPlano; 
 
     document.getElementById("text_nomePlano").innerText = nomePlano;
     document.getElementById("text_planoUtilizado").innerText = licencasUtilizadas;
+    
     
 
     switch(nomePlano) {
@@ -34,7 +34,6 @@ function exibirDadosPlano() {
             break;
         case "Corporativo":
             document.getElementById("text_planoTotal").innerText = "25";
-            console.log("Entrou");
             totalTvPorPlano = 25;
             break;
         case "Basico":
@@ -48,8 +47,7 @@ function exibirDadosPlano() {
             break;
     }
     
-
-    const quantidadeDisponivel = totalTvPorPlano - Number(licencasUtilizadas);
+    var quantidadeDisponivel = totalTvPorPlano - Number(licencasUtilizadas);
     document.getElementById("text_planoDisponivel").innerText = quantidadeDisponivel;
 
 } 
@@ -147,7 +145,7 @@ function listarUsuariosEmpresa(idEmpresa) {
 
 /* Execução das funções */
 
-dadosEmpresa(sessionIdEmpresa);
-
 // Funções página Dashboard
 listarAmbientes(sessionIdEmpresa);
+quantidadeTv(sessionIdEmpresa)
+dadosEmpresa(sessionIdEmpresa)
