@@ -31,8 +31,30 @@ function televisoesEmpresaAtualizadas(idEmpresa) {
             var qtdInativo = data.quantidadeNaoAtualizadas
             var qtdAtivo = sessionStorage.QUANTIDADE_TV - qtdInativo;
 
-            console.log(data);
-            console.log(data.ambienteStatus);
+            console.log(data.televisoes);
+
+            let tvInfoArrayJson = data.televisoes;
+            
+
+            createMultipleComponents(tvInfoArrayJson);
+            populateFloorOptions(tvInfoArrayJson);
+
+            var defaultAndar = document.getElementById('andar').value;
+            populateSectorOptions(tvInfoArrayJson, defaultAndar);
+            filterComponents(tvInfoArrayJson);
+
+            document.getElementById('andar').addEventListener('change', function () {
+                var andar = this.value;
+                populateSectorOptions(tvInfoArrayJson, andar);
+                var setor = document.getElementById('setor').value;
+                filterComponents(tvInfoArrayJson, andar, setor);
+            });
+
+            document.getElementById('setor').addEventListener('change', function () {
+                var andar = document.getElementById('andar').value;
+                var setor = this.value;
+                filterComponents(tvInfoArrayJson, andar, setor);
+            });
 
             drawChartAtualizadosPorSetor(data.ambienteStatus)
 

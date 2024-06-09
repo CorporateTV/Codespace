@@ -5,6 +5,25 @@ google.charts.setOnLoadCallback(drawChartHistoricoTv);
 
 const tiposComponentes = ["CPU", "Disco", "RAM"];
 
+function iniciarGraficos(idTelevisao, tipoComponente) {
+    switch (tipoComponente) {
+        case "CPU":
+            drawCharMonitoramento(idTelevisao, 'chart_cpu', 'CPU');
+            break;
+        case "Disco":
+            drawCharMonitoramento(idTelevisao, 'chart_disco', 'Disco');
+            break;
+        case "RAM":
+            drawCharMonitoramento(idTelevisao, 'chart_ram', 'RAM');
+            break;
+        default:
+            console.error('Tipo de componente desconhecido');
+    }
+    processosTv(idTelevisao);
+}
+
+iniciarGraficos(sessionStorage.ID_TV, 'CPU')
+
 function drawChartHistoricoTv() {
     var dataHistorico = google.visualization.arrayToDataTable([
         ['Status', 'Quantidade'],
@@ -32,25 +51,6 @@ function drawChartHistoricoTv() {
     var chart = new google.visualization.PieChart(document.getElementById('chart_historico'));
     chart.draw(dataHistorico, optionsHistoricoTv);
 }
-
-function iniciarGraficos(idTelevisao, tipoComponente) {
-    switch (tipoComponente) {
-        case "CPU":
-            drawCharMonitoramento(idTelevisao, 'chart_cpu', 'CPU');
-            break;
-        case "Disco":
-            drawCharMonitoramento(idTelevisao, 'chart_disco', 'Disco');
-            break;
-        case "RAM":
-            drawCharMonitoramento(idTelevisao, 'chart_ram', 'RAM');
-            break;
-        default:
-            console.error('Tipo de componente desconhecido');
-    }
-    processosTv(idTelevisao);
-}
-
-
 
 function drawCharMonitoramento(idTelevisao, chartElementId, tipo) {
     fetch(`/medidas/ultimas/${idTelevisao}/${tipo}`, { cache: 'no-store' }).then(response => {
@@ -135,7 +135,6 @@ function usoComponentesTempoReal(idTelevisao, tipo, chart, dataMonitoramento, op
         setTimeout(() => usoComponentesTempoReal(idTelevisao, tipo, chart, dataMonitoramento, optionsMonitoramento), 5000);
     }).catch(error => {
         console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-
         // Continua atualizando mesmo com erro
         setTimeout(() => usoComponentesTempoReal(idTelevisao, tipo, chart, dataMonitoramento, optionsMonitoramento), 5000);
     });

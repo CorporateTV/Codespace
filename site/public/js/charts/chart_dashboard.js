@@ -1,6 +1,36 @@
 /* Gráfico usuários */
 google.charts.setOnLoadCallback(drawChartUsuarios);
 
+primeioAcessoAnalytcs(sessionStorage.ID_TV, sessionIdEmpresa)
+
+function primeioAcessoAnalytcs(idTelevisao, idEmpresa) {
+    if (idTelevisao == undefined) {
+        fetch(`/medidas/atualizacao-empresa/${idEmpresa}`, {
+            method: "GET",
+        })
+            .then((resposta) => {
+                if (resposta.ok) {
+                    return resposta.json();
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .then((data) => {
+
+                console.log(data.televisoes[0].componentes)
+
+                sessionStorage.ID_TV = data.televisoes[0].idTelevisao;
+                sessionStorage.NOME_TV = data.televisoes[0].nomeTelevisao;
+                sessionStorage.HOSTNAME_TV = data.televisoes[0].hostname;
+                sessionStorage.STATUS_TV = "NORMAL";
+                sessionStorage.FLOOR_TV = data.televisoes[0].andar;
+                sessionStorage.SECTOR_TV = data.televisoes[0].setor;
+                sessionStorage.CONEXAO_TV = data.televisoes[0].conexao;
+                sessionStorage.COMPONENTES_TV = JSON.stringify(data.televisoes[0].componentes);
+            })
+    }
+}
+
 function quantidadeUsuariosPorTipo(idEmpresa) {
     fetch(`/usuarios/quantidadeUsuariosPorTipo/${idEmpresa}`, {
         method: "GET",
@@ -18,8 +48,6 @@ function quantidadeUsuariosPorTipo(idEmpresa) {
         document.getElementById("text_qtdAssistente").innerText = qtdAssistenteNoc;
         document.getElementById("text_qtdGerente").innerText = qtdGerenteNoc;
 
-
-        
     })
     .catch(function (error) {
         console.error('Error:', error);
@@ -100,8 +128,6 @@ function drawChartQuantidadeTv(qtdInativo, qtdAtivo) {
 /* Gráfico Dashboard setores */
 
 function drawChartAtualizadosPorSetor(ambientesStatus) {
-
-    console.log(ambientesStatus)
 
     const ambientesData =[['Setor', 'ON', 'OFF']];
 

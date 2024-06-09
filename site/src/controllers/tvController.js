@@ -22,15 +22,12 @@ function listarDadosEmpresaTv(req, res) {
     var idEmpresa = req.params.idEmpresa;
 
     if (idEmpresa == undefined) {
-        res.status(400).send("IdEmpresa está indefinido")
+        res.status(400).send("IdEmpresa está indefinido");
     } else {
         tvModel.listarDadosEmpresaTv(idEmpresa).then((resultado) => {
-
-            console.log("TV encontrados: " + resultado.length);
+            console.log("TVs encontradas: " + resultado.length);
 
             if (resultado.length > 0) {
-                let tvsComComponentes = [];
-
                 let fetchComponentes = resultado.map(tv => {
                     return componenteModel.componentesTv(tv.idTelevisao)
                         .then((resultadoComponentes) => {
@@ -58,14 +55,14 @@ function listarDadosEmpresaTv(req, res) {
                 });
 
             } else {
-                res.status(204).json([])
+                res.status(204).json([]);
             }
 
         }).catch(function (erro) {
             console.log(erro);
-            console.log("Houve um erro ao buscar as Televiões: ", erro.sqlMessage);
+            console.log("Houve um erro ao buscar as TVs: ", erro.sqlMessage);
             res.status(500).json(erro.sqlMessage);
-        })
+        });
     }
 }
 

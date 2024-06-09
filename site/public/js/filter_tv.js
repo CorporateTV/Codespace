@@ -47,7 +47,7 @@ function createComponent(tvInfo) {
     statusP.id = "status_componente";
 
     var conditionP = document.createElement("p");
-    conditionP.textContent = "ON";
+    conditionP.textContent = tvInfo.conexao;
     conditionP.id = "condition_componente";
 
     infoTvDiv.appendChild(tvNameP);
@@ -63,7 +63,7 @@ function createComponent(tvInfo) {
         sessionStorage.NOME_TV = tvInfo.nomeTelevisao;
         sessionStorage.HOSTNAME_TV = tvInfo.hostname;
         sessionStorage.STATUS_TV = "NORMAL";
-        sessionStorage.CONEXAO_TV = "ON";
+        sessionStorage.CONEXAO_TV = tvInfo.conexao;
         sessionStorage.FLOOR_TV = tvInfo.andar;
         sessionStorage.SECTOR_TV = tvInfo.setor;
         sessionStorage.COMPONENTES_TV = JSON.stringify(tvInfo.componentes);
@@ -161,30 +161,3 @@ function filterComponents(tvInfoArray, andar, setor) {
         }
     }
 }
-
-listarDadosTvEmpresa(sessionIdEmpresa).then(tvInfoArrayJson => {
-    if (tvInfoArrayJson) {
-        createMultipleComponents(tvInfoArrayJson);
-        populateFloorOptions(tvInfoArrayJson);
-
-        var defaultAndar = document.getElementById('andar').value;
-        populateSectorOptions(tvInfoArrayJson, defaultAndar);
-        filterComponents(tvInfoArrayJson);
-
-        document.getElementById('andar').addEventListener('change', function () {
-            var andar = this.value;
-            populateSectorOptions(tvInfoArrayJson, andar);
-            var setor = document.getElementById('setor').value;
-            filterComponents(tvInfoArrayJson, andar, setor);
-        });
-
-        document.getElementById('setor').addEventListener('change', function () {
-            var andar = document.getElementById('andar').value;
-            var setor = this.value;
-            filterComponents(tvInfoArrayJson, andar, setor);
-        });
-
-    } else {
-        console.error("No TV data found for the company.");
-    }
-});

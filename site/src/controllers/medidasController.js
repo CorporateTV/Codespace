@@ -76,6 +76,7 @@ function verificarAtualizacaoComponente(req, res) {
     });
 }
 
+
 function verificarAtualizacaoTelevisoesEmpresa(req, res) {
     var idEmpresa = req.params.idEmpresa;
     var limiteTempo = 30000; 
@@ -83,58 +84,75 @@ function verificarAtualizacaoTelevisoesEmpresa(req, res) {
 
     tvModel.listarDadosEmpresaTv(idEmpresa).then(function (televisoes) {
         if (televisoes.length > 0) {
-            let verificacoes = televisoes.map(tv => {
-                return Promise.all([
-                    medidaModel.buscarUltimaAtualizacaoComponente(tv.idTelevisao, 'CPU'),
-                    medidaModel.buscarUltimaAtualizacaoComponente(tv.idTelevisao, 'Disco'),
-                    medidaModel.buscarUltimaAtualizacaoComponente(tv.idTelevisao, 'RAM')
-                ]).then(resultados => {
-                    let atualizado = resultados.every(resultado => {
-                        if (resultado.length > 0) {
-                            var ultimaAtualizacao = new Date(resultado[0].dataRegistro).getTime();
-                            var agora = new Date().getTime();
-                            var diferencaTempo = agora - ultimaAtualizacao;
-                            return diferencaTempo <= limiteTempo;
+            let fetchComponentes = televisoes.map(tv => {
+                return componenteModel.componentesTv(tv.idTelevisao)
+                    .then((resultadoComponentes) => {
+                        return {
+                            ...tv,
+                            componentes: resultadoComponentes.length > 0 ? resultadoComponentes : []
+                        };
+                    });
+            });
+
+            Promise.all(fetchComponentes).then(tvsComComponentes => {
+                let verificacoes = tvsComComponentes.map(tv => {
+                    return Promise.all([
+                        medidaModel.buscarUltimaAtualizacaoComponente(tv.idTelevisao, 'CPU'),
+                        medidaModel.buscarUltimaAtualizacaoComponente(tv.idTelevisao, 'Disco'),
+                        medidaModel.buscarUltimaAtualizacaoComponente(tv.idTelevisao, 'RAM')
+                    ]).then(resultados => {
+                        let atualizado = resultados.every(resultado => {
+                            if (resultado.length > 0) {
+                                var ultimaAtualizacao = new Date(resultado[0].dataRegistro).getTime();
+                                var agora = new Date().getTime();
+                                var diferencaTempo = agora - ultimaAtualizacao;
+                                return diferencaTempo <= limiteTempo;
+                            }
+                            return false;
+                        });
+
+                        return {
+                            ...tv,
+                            atualizado: atualizado,
+                            conexao: atualizado ? "ON" : "OFF",
+                            status: atualizado ? "Normal" : "Atrasado"
+                        };
+                    });
+                });
+
+                Promise.all(verificacoes).then(resultados => {
+                    let televisoesNaoAtualizadas = resultados.filter(tv => !tv.atualizado);
+                    let ambientesStatus = {};
+
+                    resultados.forEach(tv => {
+                        if (!ambientesStatus[tv.setor]) {
+                            ambientesStatus[tv.setor] = { atualizado: 0, naoAtualizado: 0 };
                         }
-                        return false;
+
+                        if (tv.atualizado) {
+                            ambientesStatus[tv.setor].atualizado += 1;
+                        } else {
+                            ambientesStatus[tv.setor].naoAtualizado += 1;
+                        }
                     });
 
-                    return {
-                        idTelevisao: tv.idTelevisao,
-                        nomeTv: tv.nomeTelevisao,
-                        atualizado: atualizado,
-                        setor: tv.setor
-                    };
+                    res.status(200).json({
+                        quantidadeNaoAtualizadas: televisoesNaoAtualizadas.length,
+                        televisoesNaoAtualizadas: televisoesNaoAtualizadas,
+                        ambienteStatus: ambientesStatus,
+                        televisoes: resultados
+                    });
+
+                }).catch(function (erro) {
+                    console.log(erro);
+                    console.log("Houve um erro ao verificar a atualização dos componentes.", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
                 });
+            }).catch(error => {
+                console.log("Houve um erro ao buscar os componentes das TVs: ", error.sqlMessage);
+                res.status(500).json(error.sqlMessage);
             });
 
-            Promise.all(verificacoes).then(resultados => {
-                let televisoesNaoAtualizadas = resultados.filter(tv => !tv.atualizado);
-                let ambientesSatus = {};
-
-                resultados.forEach(tv => {
-                    if (!ambientesSatus[tv.setor]) {
-                        ambientesSatus[tv.setor] = { atualizado: 0, naoAtualizado: 0 };
-                    }
-
-                    if (tv.atualizado) {
-                        ambientesSatus[tv.setor].atualizado += 1;
-                    } else {
-                        ambientesSatus[tv.setor].naoAtualizado += 1;
-                    }
-                });
-
-                res.status(200).json({
-                    quantidadeNaoAtualizadas: televisoesNaoAtualizadas.length,
-                    televisoesNaoAtualizadas: televisoesNaoAtualizadas,
-                    ambienteStatus: ambientesSatus
-                });
-
-            }).catch(function (erro) {
-                console.log(erro);
-                console.log("Houve um erro ao verificar a atualização dos componentes.", erro.sqlMessage);
-                res.status(500).json(erro.sqlMessage);
-            });
         } else {
             res.status(204).send("Nenhuma televisão encontrada para esta empresa!");
         }
