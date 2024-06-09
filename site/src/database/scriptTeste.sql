@@ -205,4 +205,95 @@ DELETE FROM Comando WHERE idComando = 1;
 
 SELECT MAX(idComando) FROM Comando;
 
+-- Inserir os componentes para cada televisão
+INSERT INTO Componente (modelo, identificador, tipoComponente, fkTelevisao) VALUES 
+    ('Modelo X1 TV 1', 'ID_CPU_1', 'CPU', 1),
+    ('Modelo X2 TV 1', 'ID_Disco_1', 'Disco', 1),
+    ('Modelo X3 TV 1', 'ID_RAM_1', 'RAM', 1),
+    ('Modelo X1 TV 2', 'ID_CPU_2', 'CPU', 2),
+    ('Modelo X2 TV 2', 'ID_Disco_2', 'Disco', 2),
+    ('Modelo X3 TV 2', 'ID_RAM_2', 'RAM', 2),
+    ('Modelo X1 TV 3', 'ID_CPU_3', 'CPU', 3),
+    ('Modelo X2 TV 3', 'ID_Disco_3', 'Disco', 3),
+    ('Modelo X3 TV 3', 'ID_RAM_3', 'RAM', 3),
+    ('Modelo X1', 'ID_CPU_4', 'CPU', 4),
+    ('Modelo X2', 'ID_Disco_4', 'Disco', 4),
+    ('Modelo X3', 'ID_RAM_4', 'RAM', 4),
+    ('Modelo X1', 'ID_CPU_5', 'CPU', 5),
+    ('Modelo X2', 'ID_Disco_5', 'Disco', 5),
+    ('Modelo X3', 'ID_RAM_5', 'RAM', 5);
+
+-- Novamente, assumindo que os ids dos componentes são gerados automaticamente e que podemos obtê-los de alguma maneira.
+
+-- Supomos que os ids gerados para os componentes são 1 a 15, três para cada televisão.
+
+-- Inserir os registros de log para cada componente
+-- Televisão 1
+INSERT INTO LogComponente (dataHora, valor, fkComponente) VALUES 
+    ('2024-06-02 10:00:00', 45.5, 4),
+    ('2024-06-02 11:00:00', 50.0, 4),
+    ('2024-06-02 12:00:00', 47.5, 4),
+    ('2024-06-02 10:00:00', 500.0, 5),
+    ('2024-06-02 11:00:00', 480.0, 5),
+    ('2024-06-02 12:00:00', 490.0, 5),
+    ('2024-06-02 10:00:00', 4.0, 6),
+    ('2024-06-02 11:00:00', 4.5, 6),
+    ('2024-06-02 12:00:00', 4.3, 6),
+-- Televisão 2
+    ('2024-06-02 10:00:00', 46.5, 7),
+    ('2024-06-02 11:00:00', 51.0, 7),
+    ('2024-06-02 12:00:00', 48.5, 7),
+    ('2024-06-02 10:00:00', 510.0, 8),
+    ('2024-06-02 11:00:00', 490.0, 8),
+    ('2024-06-02 12:00:00', 500.0, 8),
+    ('2024-06-02 10:00:00', 4.1, 9),
+    ('2024-06-02 11:00:00', 4.6, 9),
+    ('2024-06-02 12:00:00', 4.4, 9),
+-- Televisão 3
+    ('2024-06-02 10:00:00', 47.5, 10),
+    ('2024-06-02 11:00:00', 52.0, 10),
+    ('2024-06-02 12:00:00', 49.5, 10),
+    ('2024-06-02 10:00:00', 520.0, 11),
+    ('2024-06-02 11:00:00', 500.0, 11),
+    ('2024-06-02 12:00:00', 510.0, 11),
+    ('2024-06-02 10:00:00', 4.2, 12),
+    ('2024-06-02 11:00:00', 4.7, 12),
+    ('2024-06-02 12:00:00', 4.5, 12),
+-- Televisão 4
+    ('2024-06-02 10:00:00', 48.5, 13),
+    ('2024-06-02 11:00:00', 53.0, 13),
+    ('2024-06-02 12:00:00', 50.5, 13),
+    ('2024-06-02 10:00:00', 530.0, 14),
+    ('2024-06-02 11:00:00', 510.0, 14),
+    ('2024-06-02 12:00:00', 520.0, 14),
+    ('2024-06-02 10:00:00', 4.3, 15),
+    ('2024-06-02 11:00:00', 4.8, 15),
+    ('2024-06-02 12:00:00', 4.6, 15),
+-- Televisão 5
+    ('2024-06-02 10:00:00', 49.5, 16),
+    ('2024-06-02 11:00:00', 54.0, 16),
+    ('2024-06-02 12:00:00', 51.5, 16),
+    ('2024-06-02 10:00:00', 540.0, 17),
+    ('2024-06-02 11:00:00', 520.0, 17),
+    ('2024-06-02 12:00:00', 530.0, 17),
+    ('2024-06-02 10:00:00', 4.4, 18),
+    ('2024-06-02 11:00:00', 4.9, 18),
+    ('2024-06-02 12:00:00', 4.7, 18);
+
+SELECT date_format(dataHora,'%H:%i:%s') as dataRegistro, valor as usoComponente, fkTelevisao as idTelevisao 
+FROM LogComponente JOIN Componente ON fkComponente = idComponente JOIN Televisao ON fkTelevisao = idTelevisao 
+JOIN Ambiente ON fkAmbiente = idAmbiente WHERE idAmbiente = 1 order by idLogComponente;
+
+SELECT date_format(dataHora,'%H:%i:%s') as dataRegistro, valor as usoComponente,
+        fkComponente as idComponente, comp.tipoComponente, tv.nome as nomeTv FROM
+        LogComponente JOIN Componente as comp ON fkComponente = idComponente
+        JOIN Televisao as tv ON fkTelevisao = idTelevisao
+        WHERE idTelevisao = 1 AND tipoComponente = 'CPU'
+        order by idLogComponente desc limit 1;
+
+SELECT * FROM Televisao as televisao JOIN Ambiente as ambiente ON fkAmbiente = IdAmbiente 
+    JOIN Empresa as empresa ON fkEmpresa = IdEmpresa WHERE idEmpresa = 1;
+
+
+SELECT * FROM componente;
 -- DROP DATABASE lisyncDB;

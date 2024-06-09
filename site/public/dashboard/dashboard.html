@@ -19,7 +19,7 @@
     
 </head>
  
-<body onload="validarSessao(), exibirDadosPlano(), quantidadeTv(sessionIdEmpresa), quantidadeUsuarios(sessionIdEmpresa)", >
+<body onload="validarSessao(), quantidadeUsuarios(sessionIdEmpresa), televisoesEmpresaAtualizadas(sessionIdEmpresa);">
     <div class="bg-layout">
         <div class="sideBar">
             <div class="sideBar-container">
@@ -101,11 +101,11 @@
                         <table>
                             <tr>
                                 <td class="ativo">Ativos</td>
-                                <td class="qtd-table">15</td>
+                                <td class="qtd-table" id="qtdAtivo"></td>
                             </tr>
                             <tr>
                                 <td class="inativo">Inativos</td>
-                                <td class="qtd-table">5</td>
+                                <td class="qtd-table" id="qtdInativo"></td>
                             </tr>
                         </table>
                         <div id="chart_qtdTv" class="grafico-rosca"></div>
@@ -163,6 +163,7 @@
 
 <script src="../js/sessao.js"></script>
 <script src="../js/getData/tv_data.js"></script>
+<script src="../js/getData/alertas.js"></script>
 <script src="../js/getData/empresa_data.js"></script>
 <script src="../js/tv_component_status.js"></script>
 <script src="../js/charts/chart_dashboard.js"></script>

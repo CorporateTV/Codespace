@@ -18,27 +18,23 @@ function quantidadeTvEmpresa(req, res) {
 
 }
 
-function listarDadosTv(req, res) {
+function listarDadosEmpresaTv(req, res) {
     var idEmpresa = req.params.idEmpresa;
 
     if (idEmpresa == undefined) {
-        res.status(400).send("IdEmpresa está indefinido")
+        res.status(400).send("IdEmpresa está indefinido");
     } else {
-        tvModel.listarDadosTv(idEmpresa).then((resultado) => {
-
-            console.log("TV encontrados: " + resultado.length);
+        tvModel.listarDadosEmpresaTv(idEmpresa).then((resultado) => {
 
             if (resultado.length > 0) {
-                let tvsComComponentes = [];
-
                 let fetchComponentes = resultado.map(tv => {
                     return componenteModel.componentesTv(tv.idTelevisao)
                         .then((resultadoComponentes) => {
                             return {
                                 idTelevisao: tv.idTelevisao,
-                                nome: tv.nome,
+                                nomeTelevisao: tv.nomeTelevisao,
                                 taxaAtualizacao: tv.taxaAtualizacao,
-                                hostName: tv.hostName,
+                                hostname: tv.hostname,
                                 fkAmbiente: tv.fkAmbiente,
                                 idAmbiente: tv.idAmbiente,
                                 setor: tv.setor,
@@ -58,18 +54,30 @@ function listarDadosTv(req, res) {
                 });
 
             } else {
-                res.status(204).json([])
+                res.status(204).json([]);
             }
 
         }).catch(function (erro) {
             console.log(erro);
-            console.log("Houve um erro ao buscar as Televiões: ", erro.sqlMessage);
+            console.log("Houve um erro ao buscar as TVs: ", erro.sqlMessage);
             res.status(500).json(erro.sqlMessage);
-        })
+        });
     }
+}
+
+function dadosTv(req, res) {
+    var idTv = req.params.idEmpresa;
+
+    tvModel.dadosTv(idTv).then((resultado) => {
+        res.status(200).json(resultado);
+    }).catch(function (erro) {
+        console.log("Houve um erro tv não existe: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
 }
 
 module.exports = {
     quantidadeTvEmpresa,
-    listarDadosTv
+    listarDadosEmpresaTv,
+    dadosTv
 }

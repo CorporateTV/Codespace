@@ -40,6 +40,7 @@ function cadastrarEmpresa() {
 
 
 
+
 function dadosEmpresa(idEmpresa) {
     fetch(`/empresa/buscar/${idEmpresa}`, {
         method: "GET",
@@ -59,17 +60,16 @@ function dadosEmpresa(idEmpresa) {
                 sessionStorage.ID_EMPRESA = data[0].idEmpresa
 
             })
+
         })
 }
 
-function exibirDadosPlano() {
-    const nomePlano = sessionStorage.PLANO;
+function exibirDadosPlano(nomePlano) {
     const licencasUtilizadas = sessionStorage.QUANTIDADE_TV;
     var totalTvPorPlano;
 
     document.getElementById("text_nomePlano").innerText = nomePlano;
     document.getElementById("text_planoUtilizado").innerText = licencasUtilizadas;
-
 
     switch (nomePlano) {
         case "Enterprise":
@@ -78,7 +78,6 @@ function exibirDadosPlano() {
             break;
         case "Corporativo":
             document.getElementById("text_planoTotal").innerText = "25";
-            console.log("Entrou");
             totalTvPorPlano = 25;
             break;
         case "Basico":
@@ -92,8 +91,8 @@ function exibirDadosPlano() {
             break;
     }
 
+    var quantidadeDisponivel = totalTvPorPlano - Number(licencasUtilizadas);
 
-    const quantidadeDisponivel = totalTvPorPlano - Number(licencasUtilizadas);
     document.getElementById("text_planoDisponivel").innerText = quantidadeDisponivel;
 
 }
@@ -169,21 +168,20 @@ function listarUsuariosEmpresa(idEmpresa) {
         method: "GET",
     })
 
-        .then(function (resposta) {
+    .then(function (resposta) {
 
-            resposta.json().then((usuarios) => {
-                usuarios.forEach((usuario) => {
-                    console.log(usuario.nome);
-                    const spanElement = document.createElement("span");
-                    spanElement.className = "opcaoEmpresa";
-                    spanElement.id = usuario.idUsuario;
-                    spanElement.textContent = usuario.nome;
-                    spanElement.onclick = function () {
-                        selecionarUsuario(idEmpresa, usuario.idUsuario);
-                        idUsuarioSelecionado = this.id;
-                    };
-                    lista_usuarios_empresa.appendChild(spanElement);
-                })
+        resposta.json().then((usuarios) => {
+            usuarios.forEach((usuario) => {
+                console.log(usuario.nome);
+                const spanElement = document.createElement("span");
+                spanElement.className = "opcaoEmpresa";
+                spanElement.id = usuario.idUsuario;
+                spanElement.textContent = usuario.nomeUsuario;
+                spanElement.onclick = function() {
+                    selecionarUsuario(idEmpresa, usuario.idUsuario);
+                    idUsuarioSelecionado = this.id;
+                };
+                lista_usuarios_empresa.appendChild(spanElement);
             })
         })
 }
@@ -284,7 +282,7 @@ function atualizarEmpresa(idEmpresa) {
 
 /* Execução das funções */
 
-dadosEmpresa(sessionIdEmpresa);
-
 // Funções página Dashboard
 listarAmbientes(sessionIdEmpresa);
+quantidadeTv(sessionIdEmpresa)
+dadosEmpresa(sessionIdEmpresa)

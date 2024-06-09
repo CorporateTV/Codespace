@@ -19,7 +19,7 @@ function trocarTipoComponente() {
                 graficoCpu.style.display = "block";
                 graficoRam.style.display = "none";
                 graficoDisco.style.display = "none";
-                iniciarGraficos(sessionIdTv, 1, "CPU")
+                iniciarGraficos(sessionIdTv, "CPU")
                 break;
             case "Disco":
                 tituloComponente.innerHTML = `Disco`;
@@ -27,7 +27,7 @@ function trocarTipoComponente() {
                 graficoCpu.style.display = "none";
                 graficoRam.style.display = "none";
                 graficoDisco.style.display = "block";
-                iniciarGraficos(sessionIdTv, 2, "Disco");
+                iniciarGraficos(sessionIdTv, "Disco");
                 break;
             case "RAM":
                 tituloComponente.innerHTML = `RAM`;
@@ -35,7 +35,7 @@ function trocarTipoComponente() {
                 graficoCpu.style.display = "none";
                 graficoRam.style.display = "block";
                 graficoDisco.style.display = "none";
-                iniciarGraficos(sessionIdTv, 3, "RAM");
+                iniciarGraficos(sessionIdTv, "RAM");
                 break;
             default:
                 tituloComponente.innerHTML = `Sem componente`;
@@ -47,6 +47,7 @@ function trocarTipoComponente() {
     }).catch((erro) => {
         tituloComponente.innerHTML = `Sem componente`;
         modelosComponentes.innerHTML = `Sem componente`
+        document.getElementById("conexao").innerHTML = "OFF";
         console.error(`Erro ao listar componentes: ${erro}`);
     });
 

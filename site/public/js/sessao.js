@@ -5,6 +5,7 @@ var sessaoIdUsuario = sessionStorage.ID_USUARIO;
 var sessaoeEmail = sessionStorage.EMAIL_USUARIO;
 var sessaoNomeUsuario = sessionStorage.NOME_USUARIO;
 var sessaoGestor = sessionStorage.ID_GESTOR;
+var sessionIdEmpresa = sessionStorage.ID_EMPRESA;
 
 function validarSessao() {
     var email = sessionStorage.EMAIL_USUARIO;

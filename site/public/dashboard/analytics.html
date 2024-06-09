@@ -21,7 +21,7 @@
 
 </head>
 
-<body onload="validarSessao(), alterarLinkPorTipoUsuario(), iniciarGraficos(idTv, 1, 'CPU')">
+<body onload="validarSessao(), alterarLinkPorTipoUsuario(), iniciarGraficos(idTv, 'CPU'), medidadsPorComponentes(idTv)">
     <div class="bg-layout">
         <div class="bg-layout">
             <div class="sideBar">
@@ -135,12 +135,7 @@
                     <div class="header-box">
                         <h3>Processos com maior consumo</h3>
                     </div>
-                    <ul class="lista-log">
-                        <li>1º Processo </li>
-                        <li>2º Processo </li>
-                        <li>3º Processo </li>
-                        <li>4º Processo </li>
-                        <li>5º Processo </li>
+                    <ul id="lista_processos" class="lista-log">
                     </ul>
                 </div>
                 <div class="box geral">
@@ -159,11 +154,7 @@
                     <div class="header-box">
                         <h3>Alertas</h3>
                     </div>
-                    <ul class="lista-log">
-                        <li>Alerta de CPU</li>
-                        <li>Alerta de RAM</li>
-                        <li>Alerta de Disco</li>
-                    </ul>
+                    <ul id="lista_logComponente" class="lista-log"></ul>
                 </div>
             </div>
         </div>
@@ -174,6 +165,7 @@
 <script src="../js/sessao.js"></script>
 <script src="../js/getData/tv_data.js"></script>
 <script src="../js/analytics.js"></script>
+<script src="../js/getData/alertas.js"></script>
 <script src="../js/charts/chart_analytics.js"></script>
 <script src="../js/select_chart.js"></script>
 <script src="../js/change_info_page.js"></script>
