@@ -25,7 +25,6 @@ function listarDadosEmpresaTv(req, res) {
         res.status(400).send("IdEmpresa está indefinido");
     } else {
         tvModel.listarDadosEmpresaTv(idEmpresa).then((resultado) => {
-            console.log("TVs encontradas: " + resultado.length);
 
             if (resultado.length > 0) {
                 let fetchComponentes = resultado.map(tv => {

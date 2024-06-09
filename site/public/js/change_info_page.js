@@ -47,7 +47,7 @@ function armazenarPropriedades(tvInfoArray, idTelevisao) {
         // Armazenar as propriedades da TV em variáveis
         var tvName = tv.nomeTelevisao;
         var hostname = tv.hostname;
-        var status = "NORMAL";
+        var status = tv.status;
         var conexao = tv.conexao;
         var andar = tv.andar;
         var setor = tv.setor;
@@ -55,7 +55,7 @@ function armazenarPropriedades(tvInfoArray, idTelevisao) {
         sessionStorage.ID_TV = tv.idTelevisao;
         sessionStorage.NOME_TV = tv.nomeTelevisao;
         sessionStorage.HOSTNAME_TV = tv.hostname;
-        sessionStorage.STATUS_TV = "NORMAL";
+        sessionStorage.STATUS_TV = tv.status;
         sessionStorage.CONEXAO_TV = tv.conexao;
         sessionStorage.FLOOR_TV = tv.andar;
         sessionStorage.SECTOR_TV = tv.setor;

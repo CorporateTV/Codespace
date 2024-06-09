@@ -22,7 +22,7 @@ function primeioAcessoAnalytcs(idTelevisao, idEmpresa) {
                 sessionStorage.ID_TV = data.televisoes[0].idTelevisao;
                 sessionStorage.NOME_TV = data.televisoes[0].nomeTelevisao;
                 sessionStorage.HOSTNAME_TV = data.televisoes[0].hostname;
-                sessionStorage.STATUS_TV = "NORMAL";
+                sessionStorage.STATUS_TV = data.televisoes[0].status;
                 sessionStorage.FLOOR_TV = data.televisoes[0].andar;
                 sessionStorage.SECTOR_TV = data.televisoes[0].setor;
                 sessionStorage.CONEXAO_TV = data.televisoes[0].conexao;

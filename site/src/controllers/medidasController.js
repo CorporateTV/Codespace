@@ -79,7 +79,7 @@ function verificarAtualizacaoComponente(req, res) {
 
 function verificarAtualizacaoTelevisoesEmpresa(req, res) {
     var idEmpresa = req.params.idEmpresa;
-    var limiteTempo = 30000; 
+    var limiteTempo = 30000;
     console.log(`Verificando atualização para todas as televisões da empresa ${idEmpresa}`);
 
     tvModel.listarDadosEmpresaTv(idEmpresa).then(function (televisoes) {
@@ -111,11 +111,54 @@ function verificarAtualizacaoTelevisoesEmpresa(req, res) {
                             return false;
                         });
 
+                        let statusCritico = false;
+                        let statusAtencao = false;
+                        let statusTv = "NORMAL";
+
+                        resultados.forEach(registro => {
+                            if (registro.length > 0 && atualizado) {
+                                var tipo = registro[0].tipoComponente;
+                                var usoComponente = registro[0].usoComponente;
+
+                                switch (tipo) {
+                                    case "CPU":
+                                        if (usoComponente > 80.0) {
+                                            statusCritico = true;
+                                        } else if (usoComponente > 60.0) {
+                                            statusAtencao = true;
+                                        }
+                                        break;
+                                    case "Disco":
+                                        if (usoComponente > 60.0) {
+                                            statusCritico = true;
+                                        } else if (usoComponente > 30.0) {
+                                            statusAtencao = true;
+                                        }
+                                        break;
+                                    case "RAM":
+                                        if (usoComponente > 90.0) {
+                                            statusCritico = true;
+                                        } else if (usoComponente > 75.0) {
+                                            statusAtencao = true;
+                                        }
+                                        break;
+                                }
+                            } else {
+                                statusTv = "Indisponível"
+                            }
+                        });
+
+                        if (statusCritico) {
+                            statusTv = "CRÍTICO";
+                        } else if (statusAtencao) {
+                            statusTv = "ATENÇÃO";
+                        }
+
                         return {
                             ...tv,
                             atualizado: atualizado,
                             conexao: atualizado ? "ON" : "OFF",
-                            status: atualizado ? "Normal" : "Atrasado"
+                            status: statusTv
                         };
                     });
                 });
@@ -239,7 +282,7 @@ function buscarMedidasProcessos(req, res) {
 }
 
 
- 
+
 
 
 module.exports = {
