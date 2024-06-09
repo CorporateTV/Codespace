@@ -1,119 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cadastro | LySync</title>
-    <link rel="stylesheet" href="css/style-auth-admin.css" />
-    <link rel="stylesheet" href="css/style-auth-admin-responsivo.css" />
-    <script src="./js/auth/cadastroAdmin.js"></script>
-    
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    />
-  </head>
 
-  <body>
-    <div class="container-btn-voltar">
-      <a href="index.html">
-        <i class="fa-solid fa-right-from-bracket fa-lg"></i>
-      </a>
-    </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analytics</title>
+  <link rel="stylesheet" href="./css/style-sidebar-dash.css">
+  <link rel="stylesheet" href="./css/style-reset.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="./css/style-auth-admin.css">
+  <link rel="stylesheet" href="./css/style-auth.css">
 
-    <div class="container-alert">
-      <div id="alerta-confirmacao" class="alert"></div>
-    </div>
 
-    <div class="center-container">
-       
-      <div class="container-default-auth cadastro-mobile" style="flex-direction: column;">
-        <div class="container-bemvindo-mobile">
-          <div class="text-bemvindo-mobile">
-            <h1>CADASTRO</h1>
-          </div>
-        </div>
-        <div class="container-bemvindo">
-          <div class="text-bemvindo">
-            <h1>CADASTRO</h1>
-          </div>
+</head>
+
+<body>
+
+  <div class="container-alert">
+    <div id="alerta-confirmacao" class="alert"></div>
+  </div>
+  <div class="bg-layout">
+    <div class="container-layout">
+      <div class="content-layout">
+        <div class="header-layout">
+          <div class="imgIcon-header"><img src="../assets/Engrenagem.png" alt=""></div>
+          <h1> Cadastro Admin </h1>
         </div>
 
-        <div class="container-geral">
-
-          <div class="container-empresas">
-            <div class="list-empresas" id="list-empresas_ID">
+        <div class="container-content">
+          <div class="container-tab-layout">
+            <div class="display-tab">
+              <button class="tab-links" onclick="tabConfiguracao(event, 'Geral')" id="defaultOpen">
+                Perfil de Empresas
+              </button>
+              <button class="tab-links" onclick="tabConfiguracao(event, 'CadastroFuncionários')"
+                id="cadastroFuncionarios">
+                Cadastro de Empresas
+              </button>
+             
               
-              
-            </div>  
-            <button onclick="listarEmpresas()">Editar Empresa</button>
-
-          </div>
-
-          <div class="container-form">
-           
-            <div class="logo-form">
-              <img src="assets/Logo-LiSync-Inverso.png" alt="Logo" class="logo" />
             </div>
-            
-  
-            <div class="group-input-form">
-  
-              <div class="input-box">
-                <label> Nome Completo: </label>
-                <!-- Adicione IDs aos seus campos de entrada -->
-                <input id="input_nome" type="text" />
-                <div id="nome-error" class="error-message"></div>
-              </div>
-  
-  
-              <div class="input-box">
-                <label> E-mail: </label>
-                <input id="input_email" type="text" />
-                <div id="email-error" class="error-message"></div>
-              </div>
-  
-              <div class="input-box">
-                <label> Confirmar Email: </label>
-                <input id="input_confirmarEmail" type="text" />
-                <div id="email-error" class="error-message"></div>
-              </div>
-  
-              <div class="input-box">
-                <label> Nome Fantasia: </label>
-                <!-- Adicione IDs aos seus campos de entrada -->
-                <input id="input_nomeFantasia" type="text" />
-                <div id="nome-error" class="error-message"></div>
-              </div>
 
-              <div class="input-box">
-                <label for="plan">Selecione um plano:</label>
-                <select id="plan" name="plan" class="selectPlano" onchange="mudarSelect()">
-                    <option value="Basico">Básico</option>
-                    <option value="Corporativo">Corporativo</option>
-                    <option value="Interprise">Interprise</option>
-                </select>
+            
+
+            <div id="Geral"  class="tab-content">
+
+              <div class="row-container">
+
+                <div class="listFunc">
+                  <h3 class="titulo-form">Lista de Empresas</h3>
+                  <div class="list-usuario-empresas" id="list-empresas_ID">
+
+                  </div>
+                </div>
+
+                <div class="form-editar">
+                  <h3 class="titulo-form">Informações da Empresa</h3>
+                  <div class="container-form">
+
+                    <div class="campos-editar">
+                      <div class="input-configuracao editar">
+                        <label class="labelClass"> Nome Fantasia </label>
+                        <input class="input-edit-gestor" id="input_nome_fantasia" name="text" type="text" readonly>
+                        <span class="edit-button" onclick="editInputGestor()"><i class="fa-solid fa-pencil"></i></span>
+                      </div>
+                      <div class="input-configuracao editar">
+                        <label class="labelClass"> CNPJ </label>
+                        <input class="input-edit-gestor" id="input_CNPJ" name="text" type="text"
+                          readonly>
+                        <span class="edit-button" onclick="editInputGestor()"><i class="fa-solid fa-pencil"></i></span>
+                      </div>
+                      <div class="input-column">
+                        <label class="labelClass"> Plano </label>
+                        <select id="select_gestor_cargo" class="select-painel" disabled>
+                          <option value="Basico">Basico</option>
+                          <option value="Corporativo">Corporativo</option>
+                          <option value="Enterprise">Enterprise</option>
+                        </select>
+                      </div>
+                      <button class="button-funcionario" style="display: none;" id="button-edit-gestor"
+                        onclick="atualizarInformacoesCadastro()">Atualizar</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-editar">
+                  <h3 class="titulo-form">Informações do Gestor</h3>
+                  <div class="container-form">
+
+                    <div class="campos-editar">
+                      <div class="input-configuracao editar">
+                        <label class="labelClass"> Nome Completo</label>
+                        <input class="input-edit-gestor" id="input_nome_perfil" name="text" type="text" readonly>
+                        <span class="edit-button" onclick="editInputGestor()"><i class="fa-solid fa-pencil"></i></span>
+                      </div>
+                      <div class="input-configuracao editar">
+                        <label class="labelClass"> Email </label>
+                        <input class="input-edit-gestor" id="input_email_perfil" name="text" type="text"
+                          readonly>
+                        <span class="edit-button" onclick="editInputGestor()"><i class="fa-solid fa-pencil"></i></span>
+                      </div>
+                      <button class="button-funcionario" style="display: none;" id="button-edit-gestor"
+                        onclick="atualizarPerfilGestor(sessaoIdUsuario)">Atualizar</button>
+                    </div>
+                  </div>
+                </div>
+
+
               </div>
               
-              <div class="input-box">
-                <label> CNPJ: </label>
-                <input id="input_empresa" type="text" />
-                <div id="empresa-error" class="error-message"></div>
+            </div>
+
+            <div  id="CadastroFuncionários" class="tab-content">
+              <div class="form-cadastrar">
+                <h3 class="titulo-form">Cadastro Empresa</h3>
+
+                <div class="campos-cadastrar">
+                  <img src="../assets/Logo-LiSync-Inverso.png" class="img-logo" alt="">
+                  <div class="container-input">
+                    <label class="labelClass">Nome completo</label>
+                    <input id="input_nome_cadastro" type="text" />
+                    <div id="nome-error" class="error-message"></div>
+                  </div>
+
+                  <div class="container-input">
+                    <label class="labelClass">Email</label>
+                    <input id="input_email_cadastro" type="text" />
+                    <div id="email-error" class="error-message"></div>
+                  </div>
+
+                  <div class="container-input">
+                    <label class="labelClass">Confirmar Email</label>
+                    <input id="input_confirmarEmail" type="text" />
+                    <div id="email-error" class="error-message"></div>
+                  </div>
+
+                  <div class="container-input">
+                    <label class="labelClass"> Nome Fantasia: </label>
+                    <input id="input_nomeFantasia_cadastro" type="text" />
+                    <div id="nome-error" class="error-message"></div>
+                  </div>
+
+                  <div class="container-input">
+                    <label class="labelClass">CNPJ</label>
+                    <input id="input_empresa_CNPJ" type="text" />
+                    <div id="empresa-error" class="error-message"></div>
+                  </div>
+
+                  <div class="input-box">
+                    <label for="plan" class="labelClass">Selecione um plano:</label>
+                    <select id="plan" name="plan" class="selectPlano" onchange="mudarSelect()">
+                        <option value="Basico">Básico</option>
+                        <option value="Corporativo">Corporativo</option>
+                        <option value="Enterprise">Enterprise</option>
+                    </select>
+                  </div>
+
+                  <button class="button-funcionario"   onclick="validarEnvio()"
+                  id="cadastrar">Cadastrar Empresa</button>
+
+                </div>
               </div>
-            </div> 
-            <button
-              onclick="validarEnvio()"
-              id="cadastrar"
-              class="btn-cadastrar"
-            >
-              <a href="verificacao.html"></a>Cadastrar Empresa
-            </button>
-          
+            </div>
+
+
+
+
+
+
           </div>
-      </div>
+
+
+
+        </div>
       </div>
     </div>
+  </div>
 
-  </body>
+
+</body>
+
 </html>
 
+<script src="./js/sessao.js"></script>
+<script src="./js/getData/usuario_data.js"></script>
+<script src="./js/getData/empresa_data.js"></script>
+<script src="./js/config_client.js"></script>
+<script src="./js/auth/cadastroAdmin.js"></script>

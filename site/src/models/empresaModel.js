@@ -26,11 +26,11 @@ function cadastrarGestor(nome, email, senha, idEmpresa) {
   return database.executar(instrucao);
 }
 
-function cadastrarEmpresa(nomeFantasia, plano) {
+function cadastrarEmpresa(nomeFantasia,cnpj, plano) {
   console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nomeFantasia);
 
   var instrucao = `
-       INSERT INTO Empresa (nomeFantasia, plano) VALUES ("${nomeFantasia}", '${plano}');
+       INSERT INTO Empresa (nomeFantasia, cnpj , plano) VALUES ("${nomeFantasia}","${cnpj}", '${plano}');
     `;
   console.log("Executando a instrução SQL: \n" + instrucao);
   return database.executar(instrucao);
@@ -48,8 +48,15 @@ function listarUsuariosEmpresa(idEmpresa) {
   return database.executar(sql);
 }
 
+function atualizarEmpresa(nomeFantasia, cnpj, idEmpresa, plano) {
+  var instrucao = `UPDATE Empresa set nomeFantasia = "${nomeFantasia}", cnpj = "${cnpj}", plano ="${plano}"  WHERE idEmpresa = ${idEmpresa};`;
+  console.log("Executando a instrução SQL: \n" + instrucao);
+  return database.executar(instrucao);
+}
+
 
 module.exports = {
+  atualizarEmpresa,
   cadastrarGestor,
   cadastrarEmpresa,
   buscarPorId,

@@ -123,13 +123,10 @@ function atualizarPerfilGestor(req, res) {
 
 
 function gestorCadastrar(req, res) {
-    var nome = req.body.nomeServer;
-    var email = req.body.emailServer;
-    var senha = req.body.senhaServer;
-    var idEmpresa = req.body.idEmpresaServer;
+    const { nome, email, senha, fkEmpresa } = req.body;
 
 
-    usuarioModel.gestorCadastrar(nome, email, senha, idEmpresa).then(
+    usuarioModel.gestorCadastrar(nome, email, senha, fkEmpresa).then(
         function (resultado) {
             res.json(resultado);
         }
@@ -170,8 +167,16 @@ function buscarUsuario(req, res) {
     })
 }
 
+function buscarGestor(req, res) {
+    var idEmpresa = req.query.idEmpresa;
+    usuarioModel.buscarGestor(idEmpresa).then((resultado) => {
+        res.status(200).json(resultado);
+    })
+}
+
 
 module.exports = {
+    buscarGestor,
     gestorCadastrar,
     autenticar,
     cadastrar,

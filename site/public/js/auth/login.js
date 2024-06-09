@@ -39,16 +39,22 @@ function entrar() {
           sessionStorage.ID_GESTOR = json.idGestor;
           sessionStorage.ID_EMPRESA = json.idEmpresa;
 
-          if (json.idGestor == null) {
+          if (json.idGestor == null && json.idEmpresa != null) {
             alert("Gestor")
             setTimeout(function () {
               window.location.href = "./dashboard/dashboard.html";
             }, 1000); 
-          } else {
+          } else if (json.idEmpresa != null) {
             alert("Assistente")
             setTimeout(function () {
               window.location.href = "./dashboard/dashboard_funcionario.html";
+              
             }, 1000); 
+          }else{
+            alert("Administrador")
+            setTimeout(function () {
+              window.location.href = "./cadastro-admin.html";
+            }, 1000);
           }
 
         });
