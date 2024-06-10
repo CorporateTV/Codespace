@@ -23,7 +23,7 @@ var sqlServerConfig = {
     host: "localhost",
     database: "lisyncDB",
     user: "root",
-    password: "root",
+    password: "urubu100",
 };
 
 function executar(instrucao) {

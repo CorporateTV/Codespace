@@ -102,14 +102,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     width: 100%;
-    height: 250px;
 }
 
 .div-historico h2 {
     font-size: 1.25em;
-    position: absolute;
-    top: 0;
+    line-height: 2em;
 }
 
 .tv-uptime {

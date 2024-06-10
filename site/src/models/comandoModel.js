@@ -1,7 +1,7 @@
 var database = require("../database/config");
 
 function inserirComando(nomeComando, idTelevisao) {
-    sql = `INSERT INTO Comando (nome, fkTelevisao) VALUES ('${nomeComando}', ${idTelevisao});`
+    sql = `INSERT INTO Comando (nomeComando, fkTelevisao) VALUES ('${nomeComando}', ${idTelevisao});`
 
     console.log("Executando a instrução SQL: \n" + sql);
     return database.executar(sql);
@@ -15,7 +15,7 @@ function listarComandos(idTelevisao) {
 }
 
 function atualizarComando(nomeComando, idComando) {
-    sql = `UPDATE Comando SET nome = '${nomeComando}' WHERE idComando = ${idComando};`
+    sql = `UPDATE Comando SET nomeComando = '${nomeComando}' WHERE idComando = ${idComando};`
 
     console.log("Executando a instrução SQL: \n" + sql);
     return database.executar(sql);

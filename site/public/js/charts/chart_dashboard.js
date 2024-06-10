@@ -138,8 +138,6 @@ function drawChartAtualizadosPorSetor(ambientesStatus) {
     var dataChart = google.visualization.arrayToDataTable(ambientesData);
 
     var options = {
-        width: 600,
-        height: 400,
         backgroundColor: 'transparent',
         bar: { groupWidth: '75%' },
         isStacked: true,

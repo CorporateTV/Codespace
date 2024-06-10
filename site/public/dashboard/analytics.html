@@ -21,7 +21,7 @@
 
 </head>
 
-<body onload="validarSessao(), iniciarGraficos(idTv, 'CPU'), medidadsPorComponentes(idTv)">
+<body onload="validarSessao(), iniciarGraficos(idTv, 'CPU'), medidadsPorComponentes(idTv), televisoesEmpresaAtualizadas(sessionIdEmpresa)">
     <div class="bg-layout">
         <div class="bg-layout">
             <div class="sideBar">
@@ -106,8 +106,8 @@
                                 </select>
                             </div>
                             <div class="div-historico">
+                                <h2 id="titulo-status-analytcs"></h2>
                                 <div id="chart_historico" ></div>
-                                <h2> Histórico ideal</h2>
                             </div>
                         </div>
                     </div>

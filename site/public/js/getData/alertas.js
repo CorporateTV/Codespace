@@ -50,7 +50,7 @@ function televisoesEmpresaAtualizadas(idEmpresa, pagina) {
             if (pagina == 'control') {
                 createMultipleComponentsStatus(tvInfoArrayJson);
                 drawChartStatusTv(contadorStatus)
-            } else {
+            } else if(pagina == 'dashboard')  {
                 createMultipleComponents(tvInfoArrayJson);
                 populateFloorOptions(tvInfoArrayJson);
 
@@ -77,6 +77,8 @@ function televisoesEmpresaAtualizadas(idEmpresa, pagina) {
                 document.getElementById("qtdInativo").innerText = `${qtdInativo}`
 
                 drawChartQuantidadeTv(data.quantidadeNaoAtualizadas, qtdAtivo)
+            } else {
+                drawChartStatusAnalytcs(contadorStatus)
             }
         })
         .catch(error => {
@@ -205,6 +207,8 @@ function alertaMonitoramento(idTelevisao, componentes) {
                     }
                     break;
             }
+        } else {
+            statusTv = "Indisponível"
         }
     });
 

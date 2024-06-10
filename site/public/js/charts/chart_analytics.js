@@ -1,8 +1,6 @@
 google.charts.load("current", { packages: ["corechart"] });
 google.charts.load('current', { 'packages': ['line'] });
 
-google.charts.setOnLoadCallback(drawChartHistoricoTv);
-
 const tiposComponentes = ["CPU", "Disco", "RAM"];
 
 function iniciarGraficos(idTelevisao, tipoComponente) {
@@ -24,32 +22,37 @@ function iniciarGraficos(idTelevisao, tipoComponente) {
 
 iniciarGraficos(sessionStorage.ID_TV, 'CPU')
 
-function drawChartHistoricoTv() {
-    var dataHistorico = google.visualization.arrayToDataTable([
+function drawChartStatusAnalytcs(contadorStatus) {
+    var qtdNormal = contadorStatus.NORMAL;
+    var qtdAtencao = contadorStatus.ATENÇÃO;
+    var qtdCritico = contadorStatus.CRÍTICO + contadorStatus.Indisponível
+
+    var dataStatus = google.visualization.arrayToDataTable([
         ['Status', 'Quantidade'],
-        ['Inativo', 16 - 8],
-        ['Ativo', 16],
+        ['NORMAL', qtdNormal],
+        ['ATENÇÃO',qtdAtencao],
+        ['ALERTA', qtdCritico]
     ]);
 
-    var optionsHistoricoTv = {
-        pieHole: 0.55,
+    var optionsStatus = {
         backgroundColor: 'transparent',
-        pieSliceBorderColor: "transparent",
-        legend: 'none',
-        chartArea: {
-            bottom: 40,
-            left: "20%",
-            width: "60%",
-            height: "60%",
-            backgroundColor: 'transparent'
+        legend: {
+            textStyle: {color: 'white'},
         },
-        width: 300,
-        height: 300,
-        colors: ['#D8474D', '#29AB48'],
+        chartArea: {
+            width: "100%",
+            height: "80%",
+        },
+        width: 150,
+        height: 125,
+        pieSliceBorderColor : "transparent",
+        colors: ['#0FCF51', '#EBB52A', '#DC2020']
     };
 
+    document.getElementById("titulo-status-analytcs").innerHTML = `TV's ${sessaoNomeFantasia}`
+
     var chart = new google.visualization.PieChart(document.getElementById('chart_historico'));
-    chart.draw(dataHistorico, optionsHistoricoTv);
+    chart.draw(dataStatus, optionsStatus);
 }
 
 function drawCharMonitoramento(idTelevisao, chartElementId, tipo) {

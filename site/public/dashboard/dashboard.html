@@ -19,7 +19,7 @@
     
 </head>
  
-<body onload="validarSessao(), quantidadeUsuarios(sessionIdEmpresa), televisoesEmpresaAtualizadas(sessionIdEmpresa);">
+<body onload="validarSessao(), quantidadeUsuarios(sessionIdEmpresa), televisoesEmpresaAtualizadas(sessionIdEmpresa, 'dashboard');">
     <div class="bg-layout">
         <div class="sideBar">
             <div class="sideBar-container">
@@ -151,7 +151,7 @@
                             <h1> Televisões on / off por setor </h1>
                         </div>
                         <div class="setores-container">
-                            <div id="chart_porSetor"></div>
+                            <div id="chart_porSetor" style="width: 100%; height: 100%;"></div>
                         </div>
                     </div>
                 </div>
