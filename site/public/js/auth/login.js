@@ -8,7 +8,7 @@ function entrar() {
     return false;
   }
   else {
-    setInterval(/* sumirMensagem, */ 5000);
+    setInterval(5000);
   }
 
   console.log("FORM LOGIN: ", emailVar);
@@ -25,8 +25,6 @@ function entrar() {
     }),
   })
     .then(function (resposta) {
-      console.log("ESTOU NO THEN DO entrar()!");
-
       if (resposta.ok) {
         console.log(resposta);
 
@@ -63,7 +61,6 @@ function entrar() {
 
         resposta.text().then((texto) => {
           console.error(texto);
-          /* finalizarAguardar(texto); */
         });
       }
     })

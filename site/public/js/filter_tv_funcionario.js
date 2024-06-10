@@ -37,20 +37,22 @@ function createComponent(tvInfo) {
     infoTvDiv.className = "info-tv";
 
     var tvNameP = document.createElement("p");
-    tvNameP.textContent = tvInfo.nome;
+    tvNameP.textContent = tvInfo.nomeTelevisao;
     tvNameP.id = "nome_tv_componente";
 
     var hostnameP = document.createElement("p");
-    hostnameP.textContent = tvInfo.hostName;
+    hostnameP.textContent = tvInfo.hostname;
     hostnameP.id = "hostname_componente";
 
     var statusP = document.createElement("p");
-    statusP.textContent = "ON";
+    statusP.textContent = tvInfo.status;
     statusP.id = "status_componente";
+    statusP.className = tvInfo.status == "NORMAL" ? "status-normal" : tvInfo.status == "ATENÇÃO" ? "status-atencao" : "status-alerta"
 
     var conditionP = document.createElement("p");
-    conditionP.textContent = "NORMAL";
+    conditionP.textContent = tvInfo.conexao;
     conditionP.id = "condition_componente";
+    conditionP.className = tvInfo.conexao == "ON" ? "status-normal" : "status-alerta"
 
     infoTvDiv.appendChild(tvNameP);
     infoTvDiv.appendChild(hostnameP);
@@ -62,10 +64,10 @@ function createComponent(tvInfo) {
 
     cardDiv.addEventListener("click", function () {
         sessionStorage.ID_TV = tvInfo.idTelevisao;
-        sessionStorage.NOME_TV = tvInfo.nome;
-        sessionStorage.HOSTNAME_TV = tvInfo.hostName;
-        sessionStorage.STATUS_TV = "ON";
-        sessionStorage.CONDITION_TV = "NORMAL";
+        sessionStorage.NOME_TV = tvInfo.nomeTelevisao;
+        sessionStorage.HOSTNAME_TV = tvInfo.hostname;
+        sessionStorage.STATUS_TV = tvInfo.status;
+        sessionStorage.CONEXAO_TV = tvInfo.conexao;        
         sessionStorage.FLOOR_TV = tvInfo.andar;
         sessionStorage.SECTOR_TV = tvInfo.setor;
         sessionStorage.COMPONENTES_TV = JSON.stringify(tvInfo.componentes);
@@ -138,56 +140,28 @@ function filterComponents(tvInfoArray, andar, setor) {
         var tvName = infoTv.children[0].textContent;
         var hostname = infoTv.children[1].textContent;
 
-        var tvInfo = tvInfoArray.find(tv => tv.nome === tvName && tv.hostName === hostname);
+        var tvInfo = tvInfoArray.find(tv => tv.nomeTelevisao === tvName && tv.hostname === hostname);
 
         if (andar && setor) {
             if (tvInfo.andar === andar && tvInfo.setor === setor) {
-                component.style.display = 'block';
+                component.style.display = 'flex';
             } else {
                 component.style.display = 'none';
             }
         } else if (andar) {
             if (tvInfo.andar === andar) {
-                component.style.display = 'block';
+                component.style.display = 'flex';
             } else {
                 component.style.display = 'none';
             }
         } else if (setor) {
             if (tvInfo.setor === setor) {
-                component.style.display = 'block';
+                component.style.display = 'flex';
             } else {
                 component.style.display = 'none';
             }
         } else {
-            component.style.display = 'block';
+            component.style.display = 'flex';
         }
     }
 }
-
-
-listarDadosTvEmpresa(sessionIdEmpresa).then(tvInfoArrayJson => {
-    if (tvInfoArrayJson) {
-        createMultipleComponents(tvInfoArrayJson);
-        populateFloorOptions(tvInfoArrayJson);
-
-        var defaultAndar = document.getElementById('andar').value;
-        populateSectorOptions(tvInfoArrayJson, defaultAndar);
-        filterComponents(tvInfoArrayJson);
-
-        document.getElementById('andar').addEventListener('change', function () {
-            var andar = this.value;
-            populateSectorOptions(tvInfoArrayJson, andar);
-            var setor = document.getElementById('setor').value;
-            filterComponents(tvInfoArrayJson, andar, setor);
-        });
-
-        document.getElementById('setor').addEventListener('change', function () {
-            var andar = document.getElementById('andar').value;
-            var setor = this.value;
-            filterComponents(tvInfoArrayJson, andar, setor);
-        });
-
-    } else {
-        console.error("No TV data found for the company.");
-    }
-});

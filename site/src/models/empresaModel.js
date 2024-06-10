@@ -20,7 +20,7 @@ function cadastrarGestor(nome, email, senha, idEmpresa) {
   console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha, idEmpresa);
 
   var instrucao = `
-        INSERT INTO Usuario (nome ,email, fkEmpresa ,senha) VALUES ('${nome}', '${email}',  '${idEmpresa}','${senha}');
+        INSERT INTO Usuario (nomeUsuario ,email, fkEmpresa ,senha) VALUES ('${nome}', '${email}',  '${idEmpresa}','${senha}');
     `;
   console.log("Executando a instrução SQL: \n" + instrucao);
   return database.executar(instrucao);
@@ -43,7 +43,7 @@ function quantidadeUsuarios(idEmpresa) {
 }
 
 function listarUsuariosEmpresa(idEmpresa) {
-  var sql = `SELECT idUsuario, nome, email, fkGestor FROM Usuario JOIN Empresa as empresa ON fkEmpresa = idEmpresa WHERE idEmpresa = ${idEmpresa}`;
+  var sql = `SELECT idUsuario, nomeUsuario, email, fkGestor FROM Usuario JOIN Empresa as empresa ON fkEmpresa = idEmpresa WHERE idEmpresa = ${idEmpresa}`;
 
   return database.executar(sql);
 }

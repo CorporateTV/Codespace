@@ -19,7 +19,7 @@ function televisoesInativas(idTelevisao, tipoComponente) {
         });
 }
 
-function televisoesEmpresaAtualizadas(idEmpresa) {
+function televisoesEmpresaAtualizadas(idEmpresa, pagina) {
     fetch(`/medidas/atualizacao-empresa/${idEmpresa}`, { cache: 'no-store' }).then(response => {
         if (response.ok) {
             return response.json();
@@ -33,35 +33,51 @@ function televisoesEmpresaAtualizadas(idEmpresa) {
 
             console.log(data.televisoes);
 
+            let contadorStatus = {
+                "NORMAL": 0,
+                "ATENÇÃO": 0,
+                "CRÍTICO": 0,
+                "Indisponível": 0,
+            }
+
             let tvInfoArrayJson = data.televisoes;
 
+            tvInfoArrayJson.forEach(tv => {
+                contadorStatus[tv.status] += 1;
+            })
 
-            createMultipleComponents(tvInfoArrayJson);
-            populateFloorOptions(tvInfoArrayJson);
+        
+            if (pagina == 'control') {
+                createMultipleComponentsStatus(tvInfoArrayJson);
+                drawChartStatusTv(contadorStatus)
+            } else {
+                createMultipleComponents(tvInfoArrayJson);
+                populateFloorOptions(tvInfoArrayJson);
 
-            var defaultAndar = document.getElementById('andar').value;
-            populateSectorOptions(tvInfoArrayJson, defaultAndar);
-            filterComponents(tvInfoArrayJson);
+                var defaultAndar = document.getElementById('andar').value;
+                populateSectorOptions(tvInfoArrayJson, defaultAndar);
+                filterComponents(tvInfoArrayJson);
 
-            document.getElementById('andar').addEventListener('change', function () {
-                var andar = this.value;
-                populateSectorOptions(tvInfoArrayJson, andar);
-                var setor = document.getElementById('setor').value;
-                filterComponents(tvInfoArrayJson, andar, setor);
-            });
+                document.getElementById('andar').addEventListener('change', function () {
+                    var andar = this.value;
+                    populateSectorOptions(tvInfoArrayJson, andar);
+                    var setor = document.getElementById('setor').value;
+                    filterComponents(tvInfoArrayJson, andar, setor);
+                });
 
-            document.getElementById('setor').addEventListener('change', function () {
-                var andar = document.getElementById('andar').value;
-                var setor = this.value;
-                filterComponents(tvInfoArrayJson, andar, setor);
-            });
+                document.getElementById('setor').addEventListener('change', function () {
+                    var andar = document.getElementById('andar').value;
+                    var setor = this.value;
+                    filterComponents(tvInfoArrayJson, andar, setor);
+                });
 
-            drawChartAtualizadosPorSetor(data.ambienteStatus)
+                drawChartAtualizadosPorSetor(data.ambienteStatus)
 
-            document.getElementById("qtdAtivo").innerText = `${qtdAtivo}`;
-            document.getElementById("qtdInativo").innerText = `${qtdInativo}`
+                document.getElementById("qtdAtivo").innerText = `${qtdAtivo}`;
+                document.getElementById("qtdInativo").innerText = `${qtdInativo}`
 
-            drawChartQuantidadeTv(data.quantidadeNaoAtualizadas, qtdAtivo)
+                drawChartQuantidadeTv(data.quantidadeNaoAtualizadas, qtdAtivo)
+            }
         })
         .catch(error => {
             console.error(`Conexão com TV indisponível: ${error.message}`);
@@ -139,7 +155,7 @@ function alertaMonitoramento(idTelevisao, componentes) {
     let statusAtencao = false;
     let statusTv = "NORMAL";
     const limiteTempo = 30000;
-    let estaAtualizado = true; // Assuming true initially
+    let estaAtualizado = true;
 
     componentes.forEach(componente => {
         var tipo = componente.tipoComponente;
@@ -157,36 +173,34 @@ function alertaMonitoramento(idTelevisao, componentes) {
         // Update overall update status
         estaAtualizado = estaAtualizado && componenteAtualizado;
 
-        console.log(ultimaAtualizacao);
-
         if (componenteAtualizado) {
             switch (tipo) {
                 case "CPU":
                     if (dataUso > 80.0) {
-                        textoErro += `<span class='status-alerta'>ESTADO CRÍTICO</span> - Uso da CPU elevado em ${nomeTv} | ${dataUso.toFixed(2)}%<br>`;
+                        textoErro += `<span class='status-alerta'>CRÍTICO</span> - ${componente.horario} | Uso da CPU elevado em ${nomeTv} | ${dataUso.toFixed(2)}%<br>`;
                         statusCritico = true;
                     } else if (dataUso > 60.0) {
-                        textoErro += `<span class='status-atencao'>ESTADO ATENÇÃO</span> - Uso da CPU moderado em ${nomeTv} | ${dataUso.toFixed(2)}%<br>`;
+                        textoErro += `<span class='status-atencao'>ATENÇÃO</span> - ${componente.horario} | Uso da CPU moderado em ${nomeTv} | ${dataUso.toFixed(2)}%<br>`;
                         statusAtencao = true;
                     }
                     break;
 
                 case "Disco":
                     if (dataUso > 60.0) {
-                        textoErro += `<span class='status-alerta'>ESTADO CRÍTICO</span> - Uso do Disco elevado em ${nomeTv} | ${dataUso.toFixed(2)}%<br>`;
+                        textoErro += `<span class='status-alerta'>CRÍTICO</span> - ${componente.horario} | Uso do Disco elevado em ${nomeTv} | ${dataUso.toFixed(2)}%<br>`;
                         statusCritico = true;
                     } else if (dataUso > 30.0) {
-                        textoErro += `<span class='status-atencao'>ESTADO ATENÇÃO</span> - Uso do Disco moderado em ${nomeTv} | ${dataUso.toFixed(2)}%<br>`;
+                        textoErro += `<span class='status-atencao'>ATENÇÃO</span> - ${componente.horario} | Uso do Disco moderado em ${nomeTv} | ${dataUso.toFixed(2)}%<br>`;
                         statusAtencao = true;
                     }
                     break;
 
                 case "RAM":
                     if (dataUso > 90.0) {
-                        textoErro += `<span class='status-alerta'>ESTADO CRÍTICO</span> - Uso da RAM elevado em ${nomeTv} | ${dataUso.toFixed(2)}%<br>`;
+                        textoErro += `<span class='status-alerta'>CRÍTICO</span> - ${componente.horario} | Uso da RAM elevado em ${nomeTv} | ${dataUso.toFixed(2)}%<br>`;
                         statusCritico = true;
                     } else if (dataUso > 75.0) {
-                        textoErro += `<span class='status-atencao'>ESTADO ATENÇÃO</span> - Uso da RAM moderado em ${nomeTv} | ${dataUso.toFixed(2)}%<br>`;
+                        textoErro += `<span class='status-atencao'>ATENÇÃO</span> - ${componente.horario} | Uso da RAM moderado em ${nomeTv} | ${dataUso.toFixed(2)}%<br>`;
                         statusAtencao = true;
                     }
                     break;

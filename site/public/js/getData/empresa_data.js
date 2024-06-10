@@ -52,13 +52,12 @@ function dadosEmpresa(idEmpresa) {
             }
 
             resposta.json().then((data) => {
-                console.log(data);
-                console.log(data[0].plano)
                 sessionStorage.NOME_FANTASIA = data[0].nomeFantasia;
                 sessionStorage.CNPJ = data[0].cnpj;
                 sessionStorage.PLANO = data[0].plano;
                 sessionStorage.ID_EMPRESA = data[0].idEmpresa
 
+                exibirDadosPlano(data[0].plano)
             })
 
         })
@@ -66,12 +65,14 @@ function dadosEmpresa(idEmpresa) {
 
 function exibirDadosPlano(nomePlano) {
     const licencasUtilizadas = sessionStorage.QUANTIDADE_TV;
-    var totalTvPorPlano;
+    var totalTvPorPlano; 
 
     document.getElementById("text_nomePlano").innerText = nomePlano;
     document.getElementById("text_planoUtilizado").innerText = licencasUtilizadas;
+    
+    
 
-    switch (nomePlano) {
+    switch(nomePlano) {
         case "Enterprise":
             document.getElementById("text_planoTotal").innerText = "50";
             totalTvPorPlano = 50;
@@ -90,12 +91,11 @@ function exibirDadosPlano(nomePlano) {
             document.getElementById("text_planoTotal").innerText = "0";
             break;
     }
-
+    
     var quantidadeDisponivel = totalTvPorPlano - Number(licencasUtilizadas);
-
     document.getElementById("text_planoDisponivel").innerText = quantidadeDisponivel;
 
-}
+} 
 
 function quantidadeTv(idEmpresa) {
     fetch(`/tv/quantidadeTv/${idEmpresa}`, {
@@ -172,7 +172,7 @@ function listarUsuariosEmpresa(idEmpresa) {
 
         resposta.json().then((usuarios) => {
             usuarios.forEach((usuario) => {
-                console.log(usuario.nome);
+                console.log(usuario.nomeUsuario);
                 const spanElement = document.createElement("span");
                 spanElement.className = "opcaoEmpresa";
                 spanElement.id = usuario.idUsuario;
@@ -184,6 +184,7 @@ function listarUsuariosEmpresa(idEmpresa) {
                 lista_usuarios_empresa.appendChild(spanElement);
             })
         })
+    });
 }
 
 

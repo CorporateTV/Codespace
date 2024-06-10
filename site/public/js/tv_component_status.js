@@ -19,9 +19,17 @@ function listarDadosTvEmpresaComponentes(idEmpresa) {
 }
 
 function createComponentStatus(tvInfo) {
-    var cardDiv = document.createElement("div");
-    cardDiv.className = "card-tv-status     bg-status-ok";
 
+    var cardDiv = document.createElement("div");
+
+    if(tvInfo.status == 'CRÍTICO' || tvInfo.status == 'Indisponível') {
+        cardDiv.className = "card-tv-status bg-status-alerta";
+    } else if (tvInfo.status == 'ATENÇÃO') {
+        cardDiv.className = "card-tv-status bg-status-atencao";
+    } else {
+        cardDiv.className = "card-tv-status bg-status-ok";
+    }
+    
     var infoTvDiv = document.createElement("div");
     infoTvDiv.className = "card-status-text";
 
@@ -53,12 +61,14 @@ function createComponentStatus(tvInfo) {
     cardDiv.appendChild(containerImgDiv);
 
     cardDiv.addEventListener("click", function () {
-        sessionStorage.NOME_TV = tvInfo.tvName;
+        sessionStorage.ID_TV = tvInfo.idTelevisao;
+        sessionStorage.NOME_TV = tvInfo.nomeTelevisao;
         sessionStorage.HOSTNAME_TV = tvInfo.hostname;
         sessionStorage.STATUS_TV = tvInfo.status;
-        sessionStorage.CONDITION_TV = tvInfo.condition;
-        sessionStorage.FLOOR_TV = tvInfo.floor;
-        sessionStorage.SECTOR_TV = tvInfo.sector;
+        sessionStorage.CONEXAO_TV = tvInfo.conexao;
+        sessionStorage.FLOOR_TV = tvInfo.andar;
+        sessionStorage.SECTOR_TV = tvInfo.setor;
+        sessionStorage.COMPONENTES_TV = JSON.stringify(tvInfo.componentes);
         window.location.href = "analytics.html";
     });
 
@@ -74,32 +84,3 @@ function createMultipleComponentsStatus(tvInfoArray) {
         container.appendChild(component);
     }
 }
-
-function populateFloorOptionsStatus(tvInfoArray) {
-    const andaresUnicos = new Set();
-    const selectElement = document.getElementById('andar');
-
-    selectElement.innerHTML = '';
-
-    tvInfoArray.forEach(tvInfo => {
-        andaresUnicos.add(tvInfo.andar);
-    });
-
-    andaresUnicos.forEach(andar => {
-        const option = document.createElement('option');
-        option.value = andar;
-        option.textContent = andar;
-        selectElement.appendChild(option);
-    });
-}
-
-listarDadosTvEmpresaComponentes(sessionIdEmpresa).then(tvInfoArrayJson => {
-    if (tvInfoArrayJson) {
-        createMultipleComponentsStatus(tvInfoArrayJson);
-        populateFloorOptionsStatus(tvInfoArrayJson);
-    } else {
-        console.error("No TV data found for the company.");
-    }
-});
-
-createMultipleComponentsStatus(tvInfoArray);

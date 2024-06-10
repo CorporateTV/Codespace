@@ -21,7 +21,7 @@
 
 </head>
 
-<body onload="validarSessao(), alterarLinkPorTipoUsuario(), iniciarGraficos(idTv, 'CPU'), medidadsPorComponentes(idTv)">
+<body onload="validarSessao(), iniciarGraficos(idTv, 'CPU'), medidadsPorComponentes(idTv)">
     <div class="bg-layout">
         <div class="bg-layout">
             <div class="sideBar">
@@ -54,7 +54,7 @@
         <div class="container-layout">
             <div class="wrapper-layout">
                 <div class="box header">
-                     <a href="dashboard.html"><i class="fa-solid fa-arrow-left"></i></a>
+                     <a onclick="history.back()"><i class="fa-solid fa-arrow-left"></i></a>
                     <h2><span id="setor_name"></span> - <span id="andar_name"></span></h2>
                 </div>
                 <div class="box row-tv">

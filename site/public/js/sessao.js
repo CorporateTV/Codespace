@@ -14,7 +14,7 @@ function validarSessao() {
 
     if (email == null || nome == null) {
         window.location = "../login.html";
-    }   
+    }
 }
 
 function limparSessao() {
@@ -22,12 +22,11 @@ function limparSessao() {
     window.location = "../login.html";
 }
 
-
-function alterarLinkPorTipoUsuario() {
-    if(sessionStorage.ID_GESTOR == "null") {
-        tipo_dash.href = 'dashboard.html'
-    } else {
-        control_center.remove();
-        tipo_dash.href = "dashboard_funcionario.html"
-    }  
-} 
+if (sessionStorage.ID_GESTOR == "null") {
+    tipo_dash.href = 'dashboard.html'
+} else {
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("control_center").style.display = "none"; // Ou "inline", "flex", etc.
+    });
+    tipo_dash.href = "dashboard_funcionario.html"
+}  

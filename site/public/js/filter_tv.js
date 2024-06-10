@@ -46,11 +46,12 @@ function createComponent(tvInfo) {
 
     var statusP = document.createElement("p");
     statusP.textContent = tvInfo.status;
-    statusP.id = "status_componente";
+    statusP.className = tvInfo.status == "NORMAL" ? "status-normal" : tvInfo.status == "ATENÇÃO" ? "status-atencao" : "status-alerta"
 
     var conditionP = document.createElement("p");
     conditionP.textContent = tvInfo.conexao;
     conditionP.id = "condition_componente";
+    conditionP.className = tvInfo.conexao == "ON" ? "status-normal" : "status-alerta"
 
     infoTvDiv.appendChild(tvNameP);
     infoTvDiv.appendChild(hostnameP);

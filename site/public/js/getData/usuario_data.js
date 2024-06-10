@@ -53,7 +53,7 @@ function selecionarUsuario(idEmpresa, idUsuario) {
 
                 console.log(valorCargo);
 
-                document.getElementById("input_gestor_nomeUsuario").value = usuario[0].nome;
+                document.getElementById("input_gestor_nomeUsuario").value = usuario[0].nomeUsuario;
                 document.getElementById("input_gestor_emailUsuario").value = usuario[0].email;
                 document.getElementById("select_gestor_cargo").value = valorCargo;
             })
@@ -75,7 +75,7 @@ function selecionarGestor(idEmpresa) {
             // Atualiza os valores dos inputs se o JSON for válido
             if (Array.isArray(usuario) && usuario.length > 0) {
                 sessionStorage.ID_GESTOR_EMPRESA = usuario[0].idUsuario
-                document.getElementById("input_nome_perfil").value = usuario[0].nome;
+                document.getElementById("input_nome_perfil").value = usuario[0].nomeUsuario;
                 document.getElementById("input_email_perfil").value = usuario[0].email;
             } else {
                 console.error("Resposta JSON não é um array ou está vazio:", usuario);
