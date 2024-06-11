@@ -26,6 +26,13 @@ var sqlServerConfig = {
     password: "urubu100",
 };
 
+var mySqlConfig = {
+    host: "localhost",
+    database: "lisyncDB",
+    user: "root",
+    password: "Guerr@magica1",
+};
+
 function executar(instrucao) {
     // VERIFICA A VARIÁVEL DE AMBIENTE SETADA EM app.js
     if (process.env.AMBIENTE_PROCESSO == "producao") {

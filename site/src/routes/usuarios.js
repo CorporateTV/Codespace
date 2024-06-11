@@ -36,5 +36,4 @@ router.get("/buscarGestor", function(req, res) {
     usuarioController.buscarGestor(req, res);
 });
 
-
 module.exports = router;
