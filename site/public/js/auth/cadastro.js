@@ -139,12 +139,12 @@ function listarEmpresas() {
         });
 }
 
-const codigo = localStorage.getItem('codigo');
+/* const codigo = localStorage.getItem('codigo');
 if (codigo) {
     console.log("Código recuperado:", codigo);
 } else {
     console.log("Nenhum código encontrado no localStorage.");
-}
+} */
 
 function validarCod() {
     var codValidar = number1.value + number2.value + number3.value + number4.value + number5.value + number6.value;
@@ -170,43 +170,84 @@ function validarCod() {
     }
 }
 
-function cadastrar() {
-    const nome = sessionStorage.NOME_USUARIO + sessionStorage.SOBRENOME_USUARIO;
-    const idEmpresa = sessionStorage.ID_EMPRESA;
-    const email = sessionStorage.EMAIL_USUARIO;
-    const senha = sessionStorage.SENHA_USUARIO;
+function cadastrarUsuarioGestor(idEmpresa) {
+    const nome = input_nomeCadastro.value.trim();
+    const idEmpresaVar = idEmpresa;
+    const email = input_emailCadastro.value.trim();
+    const senha = input_senhaCadastro.value.trim();
 
-    // Enviando o valor da nova input
-    fetch("/usuarios/cadastrar", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            nomeServer: nome,
-            emailServer: email,
-            senhaServer: senha,
-            empresaServer: idEmpresa
-        }),
-    })
-        .then(function (resposta) {
-            console.log("resposta: ", resposta);
+    const emailConfirmacao = input_emailConfirmar.value.trim();
+    const senhaConfirmacao = input_senhaConfirmar.value.trim();
 
-            if (resposta.ok) {
-                alert("Cadastro realizado com sucesso! Redirecionando para tela de Login...")
+    /* Regex */
+    const regexNome = /^[a-zA-ZÀ-ÿ\s]+$/;
+    const regexEmail = /^[A-Za-z0-9._%+-]+@(?!gmail\.com|hotmail\.com|outlook\.com).*$/;
+    const regexSenha = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,50}$/;
 
-                setTimeout(() => {
-                    window.location = "login.html";
-                }, "2000");
+    /* Resposta */
+    const validacaoNome = regexNome.test(nome);
+    const validacaoEmail = regexEmail.test(email);
+    const validacaoSenha = regexSenha.test(senha);
 
-            } else {
-                throw "Houve um erro ao tentar realizar o cadastro!";
-            }
+    const duplicidadeEmail = email === emailConfirmacao;
+    const duplicidadeSenha = senha === senhaConfirmacao;
+
+    const erros = {
+        nome: validacaoNome ? "" : (nome ? "O campo nome está preenchido de forma incorreta" : "O campo nome não pode estar vazio"),
+        email: validacaoEmail ? "" : (email ? "Só pode usar email corporativo" : "O campo email não pode estar vazio"),
+        emailConfirmacao: duplicidadeEmail ? "" : (emailConfirmacao ? "Email incorreto" : "O campo confirmar email não pode estar vazio"),
+        senha: validacaoSenha ? "" : (senha ? "A senha deve ter no mínimo 8 caracteres, incluindo pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial" : "O campo senha não pode estar vazio"),
+        senhaConfirmacao: duplicidadeSenha ? "" : (senhaConfirmacao ? "Senha incorreta" : "O campo confirmar senha não pode estar vazio")
+    };
+
+    document.getElementById('nome-error').innerHTML = erros.nome;
+    document.getElementById('email-error').innerHTML = erros.email;
+    document.getElementById('emailConfirmar-error').innerHTML = erros.emailConfirmacao;
+    document.getElementById('senha-error').innerHTML = erros.senha;
+    document.getElementById('senhaConfirmar-error').innerHTML = erros.senhaConfirmacao;
+
+    Object.values(erros).forEach((erro, index) => {
+        const errorElements = ['nome-error', 'email-error', 'emailConfirmar-error', 'senha-error', 'senhaConfirmar-error'];
+        document.getElementById(errorElements[index]).style.color = erro ? "red" : "";
+    });
+
+    if (validacaoNome && validacaoEmail && validacaoSenha && duplicidadeEmail && duplicidadeSenha) {
+
+        input_nomeCadastro.value = '';
+        input_emailCadastro.value = '';
+        input_senhaCadastro.value = '';
+        input_emailConfirmar.value = '';
+        input_senhaConfirmar.value = '';
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/gestorCadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                nomeServer: nome,
+                emailServer: email,
+                senhaServer: senha,
+                idEmpresaServer: idEmpresaVar
+            }),
         })
-        .catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-        });
-        window.onload
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
 
-    return false;
+                if (resposta.ok) {
+                    alert("Cadastro realizado com sucesso!")
+
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+
+        return false;
+    }
+
+
 }

@@ -15,11 +15,11 @@
     <link rel="stylesheet" href="../css/style-dashboard.css">
     <link rel="stylesheet" href="../css/style-components.css">
     <link rel="stylesheet" href="../css/style-reset.css">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
 </head>
  
-<body onload="validarSessao(), exibirDadosPlano()">
+<body onload="validarSessao(), quantidadeUsuarios(sessionIdEmpresa), televisoesEmpresaAtualizadas(sessionIdEmpresa, 'dashboard');">
     <div class="bg-layout">
         <div class="sideBar">
             <div class="sideBar-container">
@@ -51,7 +51,7 @@
             <div class="wrapper-layout">
                 <div class="box plano">
                     <h2>Quantidade de televisões </h2>
-                    <h3>Plano: <span id="text_nomePlano">Premium</span></h3>
+                    <h3>Plano: <span id="text_nomePlano"></span></h3>
                     <div class="container-row-plano">
                         <div class="quantidade-categoria">
                             <p> Total </p>
@@ -101,11 +101,11 @@
                         <table>
                             <tr>
                                 <td class="ativo">Ativos</td>
-                                <td class="qtd-table">15</td>
+                                <td class="qtd-table" id="qtdAtivo"></td>
                             </tr>
                             <tr>
                                 <td class="inativo">Inativos</td>
-                                <td class="qtd-table">5</td>
+                                <td class="qtd-table" id="qtdInativo"></td>
                             </tr>
                         </table>
                         <div id="chart_qtdTv" class="grafico-rosca"></div>
@@ -151,7 +151,7 @@
                             <h1> Televisões on / off por setor </h1>
                         </div>
                         <div class="setores-container">
-                            <div id="chart_porSetor"></div>
+                            <div id="chart_porSetor" style="width: 100%; height: 100%;"></div>
                         </div>
                     </div>
                 </div>
@@ -160,10 +160,12 @@
 </body>
 
 </html>
-<script src="../js/getData/tv_data.js"></script>
-<script src="../js/getData/empresa_data.js"></script>
 
-<script src="../js/carousel.js"></script>
-<script src="../js/charts/chart_dashboard.js"></script>
-<script src="../js/filter_tv.js"></script>
 <script src="../js/sessao.js"></script>
+<script src="../js/getData/tv_data.js"></script>
+<script src="../js/getData/alertas.js"></script>
+<script src="../js/getData/empresa_data.js"></script>
+<script src="../js/charts/chart_dashboard.js"></script>
+
+<script src="../js/filter_tv.js"></script>
+<script src="../js/carousel.js"></script>

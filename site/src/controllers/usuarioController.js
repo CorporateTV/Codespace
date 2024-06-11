@@ -21,7 +21,7 @@ function autenticar(req, res) {
                         res.json({
                             idUsuario: resultadoAutenticar[0].idUsuario,
                             email: resultadoAutenticar[0].email,
-                            nome: resultadoAutenticar[0].nome,
+                            nomeUsuario: resultadoAutenticar[0].nomeUsuario,
                             senha: resultadoAutenticar[0].senha,
                             idGestor: resultadoAutenticar[0].idGestor,
                             idEmpresa: resultadoAutenticar[0].idEmpresa
@@ -95,21 +95,38 @@ function atualizarPerfil(req, res) {
     }
 
     usuarioModel.atualizarPerfil(nome, email, idFuncionario).then(function (resultado) {
-        res.status(200).send("Perfil atualizado com sucesso");
+        res.status(200).send(`Perfil atualizado com sucesso: ${nome} + ${email} + ${idFuncionario}`);
+    }).catch(function (erro) {
+        res.status(500).json(erro.sqlMessage);
+    })
+}
+
+function atualizarPerfilGestor(req, res) {
+    var nome = req.body.nomeServer;
+    var email = req.body.emailServer;
+    var idCargo = req.body.idCargoServer;
+    var idFuncionario = req.body.idServer;
+
+    if (nome == undefined) {
+        res.status(400).send("Seu nome está undefined!");
+    }
+    if (email == undefined) {
+        res.status(400).send("Seu nome está undefined!");
+    }
+
+    usuarioModel.atualizarPerfilGestor(nome, email, idCargo, idFuncionario).then(function (resultado) {
+        res.status(200).send(`Perfil atualizado com sucesso: ${nome} + ${email} + ${idCargo} + ${idFuncionario}`);
     }).catch(function (erro) {
         res.status(500).json(erro.sqlMessage);
     })
 }
 
 
-function cadastrarGestor() {
-    var nome = req.body.nomeGestorServer
-    var email = req.body.emailGestorServer
-    var senha = req.body.senhaGestorServer
-    var idEmpresa = req.body.idEmpresa
+function gestorCadastrar(req, res) {
+    const { nome, email, senha, fkEmpresa } = req.body;
 
 
-    usuarioModel.cadastrarGestor(nome, email, senha, idEmpresa).then(
+    usuarioModel.gestorCadastrar(nome, email, senha, fkEmpresa).then(
         function (resultado) {
             res.json(resultado);
         }
@@ -139,7 +156,23 @@ function quantidadeUsuariosPorTipo(req, res) {
         console.log("Houve um erro ao buscar a quantidade de usuários: ", erro.sqlMessage);
         res.status(500).json(erro.sqlMessage);
     });
-  }
+}
+
+function buscarUsuario(req, res) {
+    var idEmpresa = req.query.idEmpresa;
+    var idUsuario = req.query.idUsuario;
+
+    usuarioModel.buscarUsuario(idEmpresa, idUsuario).then((resultado) => {
+        res.status(200).json(resultado);
+    })
+}
+
+function buscarGestor(req, res) {
+    var idEmpresa = req.query.idEmpresa;
+    usuarioModel.buscarGestor(idEmpresa).then((resultado) => {
+        res.status(200).json(resultado);
+    })
+}
 
   function redefinirSenha(req, res) {
     var novaSenha = req.body.novaSenha;
@@ -163,10 +196,12 @@ function quantidadeUsuariosPorTipo(req, res) {
 
 
 module.exports = {
-    cadastrarGestor,
+    buscarGestor,
+    gestorCadastrar,
     autenticar,
     cadastrar,
     atualizarPerfil,
+    atualizarPerfilGestor,
     quantidadeUsuariosPorTipo,
-    redefinirSenha
+    buscarUsuario
 }

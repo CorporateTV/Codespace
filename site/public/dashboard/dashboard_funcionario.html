@@ -17,24 +17,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
  
-
-<body>
+<body onload="validarSessao(), televisoesEmpresaAtualizadas(sessionIdEmpresa)">
     <div class="bg-layout">
         <div class="sideBar">
             <div class="sideBar-container">
                 <ul class="sideBar-menu">
                     <li class="selection">
                         <div class="imgIcon"><img src="../assets/Dashboard icon.png" alt=""></div>
-                        <p class="selectText"> <a href="dashboard.html">Dashboard</a></p>
+                        <p class="selectText"> <a href="dashboard_funcionario.html">Dashboard</a></p>
                     </li>
                     <li class="selection">
                         <div class="imgIcon"><img src="../assets/Analytics Icon.png" alt=""></div>
                         <p class="selectText"> <a href="analytics.html">Analytics</a></p>
                     </li>
+                    
                     <li class="selection">
                         <div class="imgIcon"><img src="../assets/Engrenagem.png" alt=""></div>
                         <p class="selectText"><a href="configuracao.html">Configurações</a></p>
                     </li>
+                    
                 </ul>
                 <li class="selection exit" onclick="limparSessao()">
                     <div class="imgIcon"><img src="../assets/sair.png" alt=""></div>
@@ -53,10 +54,6 @@
                             <option selected></option>
                         </select>
                         <select name="setor" id="setor" class="select-painel">
-                            <option value="Marketing">Marketing</option>
-                            <option value="RH">RH</option>
-                            <option value="Vendas">Vendas</option>
-                            <option value="Hall">Hall</option>
                         </select>
                     </div>
                     <div class="grid-tv-container">
@@ -71,17 +68,17 @@
                             <i class="fa-solid fa-tv fa-2x"></i>
                             <h1> Televisões </h1>
                         </div>
-                        <span>20</span>
+                        <span id="text_quantidadeTv"></span>
                     </div>
                     <div class="quantidade-chart">
                         <table>
                             <tr>
                                 <td class="ativo">Ativos</td>
-                                <td class="qtd-table">15</td>
+                                <td class="qtd-table" id="qtdAtivo"></td>
                             </tr>
                             <tr>
                                 <td class="inativo">Inativos</td>
-                                <td class="qtd-table">5</td>
+                                <td class="qtd-table" id="qtdInativo"></td>
                             </tr>
                         </table>
                         <div id="chart_qtdTv" class="grafico-rosca"></div>
@@ -101,8 +98,11 @@
 </body>
 
 </html>
-<script src="../js/getData/tv_data.js"></script>
-<script src="../js/carousel.js"></script>
-<script src="../js/charts/chart_dashboard.js"></script>
-<script src="../js/filter_tv_funcionario.js"></script>
 <script src="../js/sessao.js"></script>
+<script src="../js/getData/tv_data.js"></script>
+<script src="../js/getData/alertas.js"></script>
+<script src="../js/getData/empresa_data.js"></script>
+<script src="../js/charts/chart_dashboard.js"></script>
+
+
+<script src="../js/filter_tv_funcionario.js"></script>

@@ -12,7 +12,7 @@
     display: grid;
     width: 95%;
     height: 95%;
-    grid-template-rows: 5% 55% 40%;
+    grid-template-rows: 5% 50% 45%;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
     justify-content: center;
@@ -55,7 +55,7 @@
     background-color: #0C2048;
     padding: 5px;
     display: grid;
-    grid-template-columns: 58% 42%;
+    grid-template-columns: 65% 35%;
     grid-template-rows: 70% 30%;
     border-radius: 20px;
 }
@@ -93,7 +93,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin-top: 70px;
+    margin-top: 30px;
     width: 100%;
 }
 
@@ -102,18 +102,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     width: 100%;
-    height: 250px;
 }
 
 .div-historico h2 {
     font-size: 1.25em;
-    position: absolute;
-    top: 0;
+    line-height: 2em;
 }
 
 .tv-uptime {
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .tv-ideal {
@@ -167,6 +169,10 @@
 
 .lista-log {
     padding: 20px;
-    font-size: 1.1em;
-    line-height: 2em;   
+    font-size: 0.8em;
+    line-height: 2em;  
+    height: 70%;
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }

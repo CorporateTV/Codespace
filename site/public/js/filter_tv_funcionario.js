@@ -1,3 +1,25 @@
+var sessionIdEmpresa = sessionStorage.ID_EMPRESA;
+
+function listarDadosTvEmpresa(idEmpresa) {
+    return fetch(`/tv/listarDadosTv/${idEmpresa}`, {
+        method: "GET",
+    })
+    .then(function (resposta) {
+        if (!resposta.ok) {
+            throw new Error('Network response was not ok ' + resposta.statusText);
+        }
+
+        return resposta.json();
+        
+    })
+    .then((data) => {
+        return data;
+    })
+    .catch(function (erro) {
+        console.log(`#ERRO: ${erro}`);
+    });
+}
+
 function createComponent(tvInfo) {
     var cardDiv = document.createElement("div");
     cardDiv.className = "card";
@@ -15,20 +37,22 @@ function createComponent(tvInfo) {
     infoTvDiv.className = "info-tv";
 
     var tvNameP = document.createElement("p");
-    tvNameP.textContent = tvInfo.tvName;
-    tvNameP.id = "nome_tv_componente"
+    tvNameP.textContent = tvInfo.nomeTelevisao;
+    tvNameP.id = "nome_tv_componente";
 
     var hostnameP = document.createElement("p");
     hostnameP.textContent = tvInfo.hostname;
-    hostnameP.id = "hostname_componente"
+    hostnameP.id = "hostname_componente";
 
     var statusP = document.createElement("p");
     statusP.textContent = tvInfo.status;
-    statusP.id = "status_componente"
+    statusP.id = "status_componente";
+    statusP.className = tvInfo.status == "NORMAL" ? "status-normal" : tvInfo.status == "ATENÇÃO" ? "status-atencao" : "status-alerta"
 
     var conditionP = document.createElement("p");
-    conditionP.textContent = tvInfo.condition;
-    conditionP.id = "condition_componente"
+    conditionP.textContent = tvInfo.conexao;
+    conditionP.id = "condition_componente";
+    conditionP.className = tvInfo.conexao == "ON" ? "status-normal" : "status-alerta"
 
     infoTvDiv.appendChild(tvNameP);
     infoTvDiv.appendChild(hostnameP);
@@ -39,18 +63,20 @@ function createComponent(tvInfo) {
     cardDiv.appendChild(infoTvDiv);
 
     cardDiv.addEventListener("click", function () {
-        sessionStorage.NOME_TV = tvInfo.tvName;
+        sessionStorage.ID_TV = tvInfo.idTelevisao;
+        sessionStorage.NOME_TV = tvInfo.nomeTelevisao;
         sessionStorage.HOSTNAME_TV = tvInfo.hostname;
         sessionStorage.STATUS_TV = tvInfo.status;
-        sessionStorage.CONDITION_TV = tvInfo.condition;
-        sessionStorage.FLOOR_TV = tvInfo.floor;
-        sessionStorage.SECTOR_TV = tvInfo.sector;
+        sessionStorage.CONEXAO_TV = tvInfo.conexao;        
+        sessionStorage.FLOOR_TV = tvInfo.andar;
+        sessionStorage.SECTOR_TV = tvInfo.setor;
+        sessionStorage.COMPONENTES_TV = JSON.stringify(tvInfo.componentes);
+
         window.location.href = "analytics.html";
     });
 
     return cardDiv;
 }
-
 
 function createMultipleComponents(tvInfoArray) {
     var container = document.getElementById("content");
@@ -61,69 +87,51 @@ function createMultipleComponents(tvInfoArray) {
     }
 }
 
-
 function populateFloorOptions(tvInfoArray) {
-    const uniqueFloors = new Set(); // Usando um Set para garantir valores únicos
+    const andaresUnicos = new Set();
     const selectElement = document.getElementById('andar');
 
-    // Limpa as opções existentes
     selectElement.innerHTML = '';
 
-    // Encontra todos os andares únicos na lista tvInfoArray
     tvInfoArray.forEach(tvInfo => {
-        uniqueFloors.add(tvInfo.floor);
+        andaresUnicos.add(tvInfo.andar);
     });
 
-    // Adiciona as opções de andar ao menu suspenso
-    uniqueFloors.forEach(floor => {
+    andaresUnicos.forEach(andar => {
         const option = document.createElement('option');
-        option.value = floor;
-        option.textContent = floor;
+        option.value = andar;
+        option.textContent = andar;
         selectElement.appendChild(option);
     });
 }
 
-populateFloorOptions(tvInfoArray);
+function getUniqueSectorsInFloor(tvInfoArray, andar) {
+    const setoresUnicos = new Set();
 
-function getUniqueSectorsInFloor(tvInfoArray, floor) {
-    const uniqueSectors = new Set(); // Usando um Set para garantir valores únicos
-
-    // Encontra todos os setores únicos para o andar especificado
     tvInfoArray.forEach(tvInfo => {
-        if (tvInfo.floor === floor) {
-            uniqueSectors.add(tvInfo.sector);
+        if (tvInfo.andar === andar) {
+            setoresUnicos.add(tvInfo.setor);
         }
     });
 
-    return Array.from(uniqueSectors); // Convertendo o Set para uma array
+    return Array.from(setoresUnicos);
 }
 
-function populateSectorOptions(tvInfoArray, floor) {
+function populateSectorOptions(tvInfoArray, andar) {
     const selectElement = document.getElementById('setor');
-    const uniqueSectors = getUniqueSectorsInFloor(tvInfoArray, floor);
+    const uniqueSectors = getUniqueSectorsInFloor(tvInfoArray, andar);
 
-    // Limpa as opções existentes
     selectElement.innerHTML = '';
 
-    // Adiciona as opções de setor ao menu suspenso
-    uniqueSectors.forEach(sector => {
+    uniqueSectors.forEach(setor => {
         const option = document.createElement('option');
-        option.value = sector;
-        option.textContent = sector;
+        option.value = setor;
+        option.textContent = setor;
         selectElement.appendChild(option);
     });
 }
 
-function filterComponents(tvInfoArray, floor, sector) {
-    var visibleComponents = new Set();
-
-    for (var i = 0; i < tvInfoArray.length; i++) {
-        var tvInfo = tvInfoArray[i];
-        if (tvInfo.floor === floor && tvInfo.sector === sector) {
-            visibleComponents.add(i);
-        }
-    }
-
+function filterComponents(tvInfoArray, andar, setor) {
     var components = document.querySelectorAll('.card');
 
     for (var j = 0; j < components.length; j++) {
@@ -131,40 +139,29 @@ function filterComponents(tvInfoArray, floor, sector) {
         var infoTv = component.querySelector('.info-tv');
         var tvName = infoTv.children[0].textContent;
         var hostname = infoTv.children[1].textContent;
-        var status = infoTv.children[2].textContent;
-        var condition = infoTv.children[3].textContent;
 
-        if ([...visibleComponents].some(index => {
-            var tvInfo = tvInfoArray[index];
-            return tvName === tvInfo.tvName && hostname === tvInfo.hostname && status === tvInfo.status && condition === tvInfo.condition;
-        })) {
-            component.style.display = 'flex';
+        var tvInfo = tvInfoArray.find(tv => tv.nomeTelevisao === tvName && tv.hostname === hostname);
+
+        if (andar && setor) {
+            if (tvInfo.andar === andar && tvInfo.setor === setor) {
+                component.style.display = 'flex';
+            } else {
+                component.style.display = 'none';
+            }
+        } else if (andar) {
+            if (tvInfo.andar === andar) {
+                component.style.display = 'flex';
+            } else {
+                component.style.display = 'none';
+            }
+        } else if (setor) {
+            if (tvInfo.setor === setor) {
+                component.style.display = 'flex';
+            } else {
+                component.style.display = 'none';
+            }
         } else {
-            component.style.display = 'none';
+            component.style.display = 'flex';
         }
     }
 }
-
-document.getElementById('andar').addEventListener('change', function () {
-    var floor = this.value;
-    populateSectorOptions(tvInfoArray, floor); // Atualiza as opções de setor primeiro
-    var sector = document.getElementById('setor').value;
-    filterComponents(tvInfoArray, floor, sector); // Filtra os componentes depois
-});
-
-document.getElementById('setor').addEventListener('change', function () {
-    var floor = document.getElementById('andar').value;
-    var sector = this.value;
-    filterComponents(tvInfoArray, floor, sector);
-});
-
-// Iniciar valores padrões de andar e setor
-
-var defaultFloor = document.getElementById('andar').value;
-var defaultSector = document.getElementById('setor').value;
-populateSectorOptions(tvInfoArray, defaultFloor);
-filterComponents(tvInfoArray, defaultFloor, defaultSector);
-
-createMultipleComponents(tvInfoArray);
-
-

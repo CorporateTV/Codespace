@@ -26,6 +26,8 @@
 
 .grid-tv-container {
     position: absolute;
+    display: flex;
+    justify-content: center;
     top: 17%;
     left: 0%;
     width: 100%;
@@ -41,7 +43,7 @@
     overflow-y: scroll;
     scrollbar-width: none;
     height: 100%;
-    width: 100%;
+    width: 95%;
     max-width: 964px;
     justify-content: center;
     align-items: baseline;
@@ -61,9 +63,10 @@
     align-items: center;
     gap: 20px;
     cursor: pointer;
-    background-color: #4F699C;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     line-height: 1.5em;
+    background-color: #0F172A;
+    border: 1px solid white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
     &>.container-img {
         width: 125px;

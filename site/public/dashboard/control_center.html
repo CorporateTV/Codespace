@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="../css/style-reset.css">
 </head>
 
-<body onload="validarSessao()">
+<body onload="validarSessao(), televisoesEmpresaAtualizadas(sessionIdEmpresa, 'control')">
     <div class="bg-layout">
         <div class="sideBar">
             <div class="sideBar-container">
@@ -54,16 +54,6 @@
                     </div>
                     <div class="grid-tv-container">
                         <div class="content-grid" id="content">
-<!--                             <div class="card-tv-status bg-status-ok">
-                                <div class="card-status-text">
-                                    <p id="hostname_status">HOSTNAME</p>
-                                    <p>Localização</p>
-                                    <p id="localizacao_status">Setor - Andar </p>
-                                </div>
-                                <div class="container-img">
-                                    <img src="../assets/monitor.png" alt="Monitor">
-                                </div>
-                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -75,15 +65,16 @@
                         </div>
                         <div class="grafico-container">
                             <div id="chart_status" class="chart-status"></div>
+                            <h2 id="titulo-status"></h2>
                             <table>
                                 <tr>
-                                    <td class="status-normal">Normal: <span>50%</span></td>
+                                    <td class="status-normal">Normal: <span id="percent-normal"></span></td>
                                 </tr>
                                 <tr>
-                                    <td class="status-atencao">Atenção: <span>50%</span></td>
+                                    <td class="status-atencao">Atenção: <span id="percent-atencao"></span></td>
                                 </tr>
                                 <tr>
-                                    <td class="status-alerta">Alerta: <span>50%</span></td>
+                                    <td class="status-alerta">Alerta: <span id="percent-alerta"></span></td>
                                 </tr>
                             </table>
                         </div>
@@ -101,7 +92,11 @@
 </body>
 </html>
 
+
+
 <script src="../js/charts/chart_controlCenter.js"></script>
 <script src="../js/getData/tv_data.js"></script>
+<script src="../js/getData/alertas.js"></script>
+
 <script src="../js/tv_component_status.js"></script>
 <script src="../js/sessao.js"></script>

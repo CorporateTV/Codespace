@@ -29,7 +29,7 @@ function listarComponentes(idTv) {
         return resposta.json();
     })
     .then((data) => {
-        /* console.log(data.find(componente => componente.tipoComponente === "CPU")); */
+        document.getElementById("modelos_componentes").innerText = data[0].modelo;
         return data;
     })
     .catch(function (erro) {

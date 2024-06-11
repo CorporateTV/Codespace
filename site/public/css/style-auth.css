@@ -261,7 +261,10 @@ label {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     animation: fadeInOut 3s ease; 
     font-family: oswald;
+    animation: sumir 1s forwards; 
+    animation-delay: 1s
 }
+
 
 .container-alert-erro {
     position: fixed;
@@ -316,3 +319,9 @@ label {
     flex-direction: row;
     justify-content: space-between;
 }
+
+@keyframes sumir{
+    0% { opacity: 1; } /* Opacidade inicial */
+    100% { opacity: 0; display: none; } /* Opacidade final e esconder a div */
+}
+

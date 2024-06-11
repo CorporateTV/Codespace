@@ -13,11 +13,15 @@
     <link rel="stylesheet" href="../css/style-dash-global.css">
     <link rel="stylesheet" href="../css/style-analytcs.css">
     <link rel="stylesheet" href="../css/style-components.css">
+    <link rel="stylesheet" href="../css/style-modal-shell.css">
     <link rel="stylesheet" href="../css/style-reset.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    
+
 </head>
 
-<body onload="validarSessao()" >
+<body onload="validarSessao(), iniciarGraficos(idTv, 'CPU'), medidadsPorComponentes(idTv), televisoesEmpresaAtualizadas(sessionIdEmpresa)">
     <div class="bg-layout">
         <div class="bg-layout">
             <div class="sideBar">
@@ -25,15 +29,15 @@
                     <ul class="sideBar-menu">
                         <li class="selection">
                             <div class="imgIcon"><img src="../assets/Dashboard icon.png" alt=""></div>
-                            <p class="selectText"> <a href="dashboard.html">Dashboard</a></p>
+                            <p class="selectText"> <a id="tipo_dash">Dashboard</a></p>
                         </li>
                         <li class="selection">
                             <div class="imgIcon"><img src="../assets/Analytics Icon.png" alt=""></div>
                             <p class="selectText"> <a href="analytics.html">Analytics</a></p>
                         </li>
-                        <li class="selection">
+                        <li class="selection" id="control_center">
                             <div class="imgIcon"><img src="../assets/Centro de Controle.png" alt=""></div>
-                            <p class="selectText"> <a href="control_center.html">Control Center</a></p>
+                            <p class="selectText"> <a href="control_center.html">Centro de Controle</a></p>
                         </li>
                         <li class="selection">
                             <div class="imgIcon"><img src="../assets/Engrenagem.png" alt=""></div>
@@ -50,7 +54,7 @@
         <div class="container-layout">
             <div class="wrapper-layout">
                 <div class="box header">
-                     <a href="dashboard.html"><i class="fa-solid fa-arrow-left"></i></a>
+                     <a onclick="history.back()"><i class="fa-solid fa-arrow-left"></i></a>
                     <h2><span id="setor_name"></span> - <span id="andar_name"></span></h2>
                 </div>
                 <div class="box row-tv">
@@ -71,8 +75,28 @@
                             </div>
                         </div>
                         <div class="tv-uptime">
-                            <!-- <h3>Tempo em atividade (%)</h3>
-                            <div id="chart_tempoAtividade"></div> -->
+                            <button class="button-default" id="btn-comandos">Comandos</button>
+                            <div id="modalShell" class="modal">
+                                <div class="modal-container">
+                                    <div class="modal-header">
+                                        <h4> Comandos: <span id="nome_tv_modal"></span></h4>
+                                        <span class="close-modal">&times;</span>
+                                    </div>
+                                    <div class="modal-content">
+                                        <div class="container-shell">
+                                            <div class="massage-input-container">
+                                                <input type="text" id="messageInput" placeholder="Digite um comando...">
+                                                <button onclick="enviarComando(idTv)">Enviar</button>
+                                            </div>
+                                            <div class="massage-feed" id="messageFeed">
+                                            </div>
+                                        </div>
+                                        <div class="container-options">
+                                            <h3> Configurações de comando </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="tv-ideal">
                             <div class="select-televisao">
@@ -82,8 +106,8 @@
                                 </select>
                             </div>
                             <div class="div-historico">
+                                <h2 id="titulo-status-analytcs"></h2>
                                 <div id="chart_historico" ></div>
-                                <h2> Histórico ideal</h2>
                             </div>
                         </div>
                     </div>
@@ -97,8 +121,8 @@
                                 <span>Componente</span>
                                 <select name="lista_componente" id="lista_componente" class="select-default" onchange="trocarTipoComponente()">
                                     <option value="CPU" selected>CPU</option>
-                                    <option value="RAM">RAM</option>
                                     <option value="Disco">Disco</option>
+                                    <option value="RAM">RAM</option>
                                 </select>
                             </div>
                         </div>
@@ -111,12 +135,7 @@
                     <div class="header-box">
                         <h3>Processos com maior consumo</h3>
                     </div>
-                    <ul class="lista-log">
-                        <li>1º Processo </li>
-                        <li>2º Processo </li>
-                        <li>3º Processo </li>
-                        <li>4º Processo </li>
-                        <li>5º Processo </li>
+                    <ul id="lista_processos" class="lista-log">
                     </ul>
                 </div>
                 <div class="box geral">
@@ -135,11 +154,7 @@
                     <div class="header-box">
                         <h3>Alertas</h3>
                     </div>
-                    <ul class="lista-log">
-                        <li>Alerta de CPU</li>
-                        <li>Alerta de RAM</li>
-                        <li>Alerta de Disco</li>
-                    </ul>
+                    <ul id="lista_logComponente" class="lista-log"></ul>
                 </div>
             </div>
         </div>
@@ -147,9 +162,13 @@
 </body>
 </html>
 
-<script src="../js/charts/chart_analytics.js"></script>
+<script src="../js/sessao.js"></script>
 <script src="../js/getData/tv_data.js"></script>
+<script src="../js/analytics.js"></script>
+<script src="../js/getData/alertas.js"></script>
+<script src="../js/charts/chart_analytics.js"></script>
 <script src="../js/select_chart.js"></script>
 <script src="../js/change_info_page.js"></script>
-<script src="../js/sessao.js"></script>
-<script src="../js/analytics.js"></script>
+
+<script src="../js/inovacao/modal_shell.js"></script>
+<script src="../js/inovacao/comandos_feed.js"></script>

@@ -1,7 +1,35 @@
-function createComponentStatus(tvInfo) {
-    var cardDiv = document.createElement("div");
-    cardDiv.className = "card-tv-status bg-status-ok";
+function listarDadosTvEmpresaComponentes(idEmpresa) {
+    return fetch(`/tv/listarDadosTv/${idEmpresa}`, {
+        method: "GET",
+    })
+    .then(function (resposta) {
+        if (!resposta.ok) {
+            throw new Error('Network response was not ok ' + resposta.statusText);
+        }
 
+        return resposta.json();
+        
+    })
+    .then((data) => {
+        return data;
+    })
+    .catch(function (erro) {
+        console.log(`#ERRO: ${erro}`);
+    });
+}
+
+function createComponentStatus(tvInfo) {
+
+    var cardDiv = document.createElement("div");
+
+    if(tvInfo.status == 'CRÍTICO' || tvInfo.status == 'Indisponível') {
+        cardDiv.className = "card-tv-status bg-status-alerta";
+    } else if (tvInfo.status == 'ATENÇÃO') {
+        cardDiv.className = "card-tv-status bg-status-atencao";
+    } else {
+        cardDiv.className = "card-tv-status bg-status-ok";
+    }
+    
     var infoTvDiv = document.createElement("div");
     infoTvDiv.className = "card-status-text";
 
@@ -13,7 +41,7 @@ function createComponentStatus(tvInfo) {
     subtitleP.textContent = 'Localização:';
 
     var localizacaoP = document.createElement("p");
-    localizacaoP.textContent = `${tvInfo.floor} - ${tvInfo.sector}` ;
+    localizacaoP.textContent = `${tvInfo.andar} - ${tvInfo.setor}` ;
     localizacaoP.id = "localizacao_status"
 
     infoTvDiv.appendChild(hostnameP);
@@ -33,12 +61,14 @@ function createComponentStatus(tvInfo) {
     cardDiv.appendChild(containerImgDiv);
 
     cardDiv.addEventListener("click", function () {
-        sessionStorage.NOME_TV = tvInfo.tvName;
+        sessionStorage.ID_TV = tvInfo.idTelevisao;
+        sessionStorage.NOME_TV = tvInfo.nomeTelevisao;
         sessionStorage.HOSTNAME_TV = tvInfo.hostname;
         sessionStorage.STATUS_TV = tvInfo.status;
-        sessionStorage.CONDITION_TV = tvInfo.condition;
-        sessionStorage.FLOOR_TV = tvInfo.floor;
-        sessionStorage.SECTOR_TV = tvInfo.sector;
+        sessionStorage.CONEXAO_TV = tvInfo.conexao;
+        sessionStorage.FLOOR_TV = tvInfo.andar;
+        sessionStorage.SECTOR_TV = tvInfo.setor;
+        sessionStorage.COMPONENTES_TV = JSON.stringify(tvInfo.componentes);
         window.location.href = "analytics.html";
     });
 
@@ -54,5 +84,3 @@ function createMultipleComponentsStatus(tvInfoArray) {
         container.appendChild(component);
     }
 }
-
-createMultipleComponentsStatus(tvInfoArray);

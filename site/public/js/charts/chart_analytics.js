@@ -1,265 +1,144 @@
 google.charts.load("current", { packages: ["corechart"] });
 google.charts.load('current', { 'packages': ['line'] });
 
+const tiposComponentes = ["CPU", "Disco", "RAM"];
 
-/* Carregar gráficos */
-
-google.charts.setOnLoadCallback(drwaChartTempoAtividade);
-
-google.charts.setOnLoadCallback(drawChartHistoricoTv);
-
-google.charts.setOnLoadCallback(drawChartHistoricoTv);
-
-function drwaChartTempoAtividade() {
-    var dataTempoAtividade = google.visualization.arrayToDataTable([
-        ['Tempo', 'Ligado', 'Desligado'],
-        ['Tempo', 8, 2],
-    ]);
-
-    var options_fullStacked = {
-        isStacked: 'percent',
-        height: 50,
-        backgroundColor: 'transparent',
-        legend: 'none',
-        colors: ['#8095bf', '#0F172A'],
-        bar: { groupWidth: '100%' },
-        legendTextStyle: {
-            color: 'white'
-        },
-        vAxis: {
-            textStyle: {
-                color: 'white'
-            }
-        }
-    };
-
-    var chart = new google.visualization.BarChart(document.getElementById("chart_tempoAtividade"));
-    chart.draw(dataTempoAtividade, options_fullStacked);
-
+function iniciarGraficos(idTelevisao, tipoComponente) {
+    switch (tipoComponente) {
+        case "CPU":
+            drawCharMonitoramento(idTelevisao, 'chart_cpu', 'CPU');
+            break;
+        case "Disco":
+            drawCharMonitoramento(idTelevisao, 'chart_disco', 'Disco');
+            break;
+        case "RAM":
+            drawCharMonitoramento(idTelevisao, 'chart_ram', 'RAM');
+            break;
+        default:
+            console.error('Tipo de componente desconhecido');
+    }
+    processosTv(idTelevisao);
 }
 
-function drawChartHistoricoTv() {
-    var dataHistorico = google.visualization.arrayToDataTable([
+iniciarGraficos(sessionStorage.ID_TV, 'CPU')
+
+function drawChartStatusAnalytcs(contadorStatus) {
+    var qtdNormal = contadorStatus.NORMAL;
+    var qtdAtencao = contadorStatus.ATENÇÃO;
+    var qtdCritico = contadorStatus.CRÍTICO + contadorStatus.Indisponível
+
+    var dataStatus = google.visualization.arrayToDataTable([
         ['Status', 'Quantidade'],
-        ['Inativo', 16 - 8],
-        ['Ativo', 16],
+        ['NORMAL', qtdNormal],
+        ['ATENÇÃO',qtdAtencao],
+        ['ALERTA', qtdCritico]
     ]);
 
-    var optionsHistoricoTv = {
-        pieHole: 0.55,
+    var optionsStatus = {
         backgroundColor: 'transparent',
-        pieSliceBorderColor: "transparent",
-        legend: 'none',
-        chartArea: {
-            bottom: 40,
-            left: "20%",
-            width: "60%",
-            height: "60%",
-            backgroundColor: 'transparent'
+        legend: {
+            textStyle: {color: 'white'},
         },
-        width: 300,
-        height: 300,
-        colors: ['#D8474D', '#29AB48'],
+        chartArea: {
+            width: "100%",
+            height: "80%",
+        },
+        width: 150,
+        height: 125,
+        pieSliceBorderColor : "transparent",
+        colors: ['#0FCF51', '#EBB52A', '#DC2020']
     };
+
+    document.getElementById("titulo-status-analytcs").innerHTML = `TV's ${sessaoNomeFantasia}`
 
     var chart = new google.visualization.PieChart(document.getElementById('chart_historico'));
-    chart.draw(dataHistorico, optionsHistoricoTv);
+    chart.draw(dataStatus, optionsStatus);
 }
 
+function drawCharMonitoramento(idTelevisao, chartElementId, tipo) {
+    fetch(`/medidas/ultimas/${idTelevisao}/${tipo}`, { cache: 'no-store' }).then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    }).then(data => {
+        if (data) {
+            console.log(`Dados recebidos para ${tipo}: ${JSON.stringify(data)}`);
 
-/* Gráficos de monitoramento */
+            var dataMonitoramento = new google.visualization.DataTable();
+            dataMonitoramento.addColumn('string', 'Data');
+            dataMonitoramento.addColumn('number', 'Uso (%)');
 
-google.charts.setOnLoadCallback(drawCharMonitoramentoCpu);
-google.charts.setOnLoadCallback(drawCharMonitoramentoRam);
-google.charts.setOnLoadCallback(drawCharMonitoramentoDisco);
+            var rows = data.map(item => [item.dataRegistro, item.usoComponente]);
+            dataMonitoramento.addRows(rows);
 
-function drawCharMonitoramentoCpu() {
-    var dataMonitoramento = new google.visualization.DataTable();
-    dataMonitoramento.addColumn('string', 'Período');
-    dataMonitoramento.addColumn('number', 'Uso (%)');
+            var optionsMonitoramento = {
+                legend: { position: 'none' },
+                backgroundColor: 'transparent',
+                chartArea: {
+                    left: 0,
+                    top: 0,
+                    width: "90%",
+                    height: "100%",
+                    backgroundColor: 'transparent'
+                },
+                colors: ['white'],
+                axes: { x: { 0: { side: 'bottom' } } },
+                hAxis: {
+                    textStyle: { color: 'white' },
+                    gridlines: { color: 'white' }
+                },
+                vAxis: {
+                    textStyle: { color: 'white' },
+                    format: '#\'%\'',
+                    viewWindow: { min: 0, max: 100 }
+                }
+            };
 
-    dataMonitoramento.addRows([
-        ['00:00', 10.8],
-        ['01:00', 15.9],
-        ['02:00', 25.2],
-        ['03:00', 34.7],
-        ['04:00', 50.9],
-        ['05:00', 67.8],
-        ['06:00', 72.6],
-        ['07:00', 80.3],
-        ['08:00', 83.9],
-        ['09:00', 92.8],
-    ]);
+            var chart = new google.charts.Line(document.getElementById(chartElementId));
+            chart.draw(dataMonitoramento, google.charts.Line.convertOptions(optionsMonitoramento));
 
-    var optionsMonitoramento = {
-        legend: {
-            position: 'none'
-        },
-        backgroundColor: 'transparent',
-        chartArea: {
-            left: 0,
-            top: 0,
-            width: "90%",
-            height: "100%",
-            backgroundColor: 'transparent'
-        },
-        colors: 'white',
-        axes: {
-            x: {
-                0: { side: 'bottom' }
-            }
-        },
-        hAxis: {
-            textStyle: {
-                color: 'white'
-            },
-            gridlines: {
-                color: 'white',
-            },
-        },
-        vAxis: {
-            textStyle: {
-                color: 'white'
-            },
-            format: '#\'%\'', // Display values as percentages
-            viewWindow: {
-                min: 0,
-                max: 100
+            // Comça a atualizar após plotar os 7 primeiros registros
+            usoComponentesTempoReal(idTelevisao, tipo, chart, dataMonitoramento, optionsMonitoramento);
+        }
+    }).catch(error => {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+}
+
+function usoComponentesTempoReal(idTelevisao, tipo, chart, dataMonitoramento, optionsMonitoramento) {
+    fetch(`/medidas/tempo-real-componentes/${idTelevisao}/${tipo}`, { cache: 'no-store' }).then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    }).then(novoRegistro => {
+        if (novoRegistro) {
+
+            if (novoRegistro.length > 0) {
+                var ultimoRegistro = novoRegistro[0];
+                var novaLinha = [ultimoRegistro.dataRegistro, ultimoRegistro.usoComponente];
+
+                // Limita o gráfico para 7 registros, removendo a primeira linha 
+                if (dataMonitoramento.getNumberOfRows() >= 7) {
+                    dataMonitoramento.removeRow(0);
+                }
+
+                // Adicionar linha
+                dataMonitoramento.addRow(novaLinha);
+
+                // Redesenhar gráfico 
+                chart.draw(dataMonitoramento, google.charts.Line.convertOptions(optionsMonitoramento));
             }
         }
 
-    };
-
-    var chart = new google.charts.Line(document.getElementById('chart_cpu'));
-
-    chart.draw(dataMonitoramento, google.charts.Line.convertOptions(optionsMonitoramento));
-
-}
-
-
-function drawCharMonitoramentoRam() {
-    var dataMonitoramento = new google.visualization.DataTable();
-    dataMonitoramento.addColumn('string', 'Período');
-    dataMonitoramento.addColumn('number', 'Uso (%)');
-
-    dataMonitoramento.addRows([
-        ['00:00', 30.8],
-        ['01:00', 35.9],
-        ['02:00', 45.2],
-        ['03:00', 34.7],
-        ['04:00', 40.9],
-        ['05:00', 57.8],
-        ['06:00', 62.6],
-        ['07:00', 70.3],
-        ['08:00', 73.9],
-        ['09:00', 82.8],
-    ]);
-
-    var optionsMonitoramento = {
-        legend: {
-            position: 'none'
-        },
-        backgroundColor: 'transparent',
-        chartArea: {
-            left: 0,
-            top: 0,
-            width: "90%",
-            height: "100%",
-            backgroundColor: 'transparent'
-        },
-        colors: 'white',
-        axes: {
-            x: {
-                0: { side: 'bottom' }
-            }
-        },
-        hAxis: {
-            textStyle: {
-                color: 'white'
-            },
-            gridlines: {
-                color: 'white',
-            },
-        },
-        vAxis: {
-            textStyle: {
-                color: 'white'
-            },
-            format: '#\'%\'', // Display values as percentages
-            viewWindow: {
-                min: 0,
-                max: 100
-            }
-        }
-
-    };
-
-    var chart = new google.charts.Line(document.getElementById('chart_ram'));
-
-    chart.draw(dataMonitoramento, google.charts.Line.convertOptions(optionsMonitoramento));
-
-}
-
-
-function drawCharMonitoramentoDisco() {
-    var dataMonitoramento = new google.visualization.DataTable();
-    dataMonitoramento.addColumn('string', 'Período');
-    dataMonitoramento.addColumn('number', 'Uso (%)');
-
-    dataMonitoramento.addRows([
-        ['00:00', 0.8],
-        ['01:00', 5.9],
-        ['02:00', 5.2],
-        ['03:00', 4.7],
-        ['04:00', 0.9],
-        ['05:00', 7.8],
-        ['06:00', 2.6],
-        ['07:00', 8.3],
-        ['08:00', 8.9],
-        ['09:00', 9.8],
-    ]);
-
-    var optionsMonitoramento = {
-        legend: {
-            position: 'none'
-        },
-        backgroundColor: 'transparent',
-        chartArea: {
-            left: 0,
-            top: 0,
-            width: "90%",
-            height: "100%",
-            backgroundColor: 'transparent'
-        },
-        colors: 'white',
-        axes: {
-            x: {
-                0: { side: 'bottom' }
-            }
-        },
-        hAxis: {
-            textStyle: {
-                color: 'white'
-            },
-            gridlines: {
-                color: 'white',
-            }
-        },
-        vAxis: {
-            textStyle: {
-                color: 'white'
-            },
-            format: '#\'%\'', // Display values as percentages
-            viewWindow: {
-                min: 0,
-                max: 100
-            }
-        }
-
-    };
-
-    var chart = new google.charts.Line(document.getElementById('chart_disco'));
-
-    chart.draw(dataMonitoramento, google.charts.Line.convertOptions(optionsMonitoramento));
-
+        // Define o tempo que a função de atualizar o gráfico será acionada novamente
+        setTimeout(() => usoComponentesTempoReal(idTelevisao, tipo, chart, dataMonitoramento, optionsMonitoramento), 5000);
+    }).catch(error => {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        // Continua atualizando mesmo com erro
+        setTimeout(() => usoComponentesTempoReal(idTelevisao, tipo, chart, dataMonitoramento, optionsMonitoramento), 5000);
+    });
 }

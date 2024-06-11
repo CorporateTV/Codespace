@@ -1,12 +1,35 @@
 /* Gráfico usuários */
-google.charts.load("current", { packages: ["corechart"] });
-
-
-google.charts.setOnLoadCallback(drawChartQuantidadeTv);
-
-google.charts.setOnLoadCallback(drawChart);
-
 google.charts.setOnLoadCallback(drawChartUsuarios);
+
+primeioAcessoAnalytcs(sessionStorage.ID_TV, sessionIdEmpresa)
+
+function primeioAcessoAnalytcs(idTelevisao, idEmpresa) {
+    if (idTelevisao == undefined) {
+        fetch(`/medidas/atualizacao-empresa/${idEmpresa}`, {
+            method: "GET",
+        })
+            .then((resposta) => {
+                if (resposta.ok) {
+                    return resposta.json();
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .then((data) => {
+
+                console.log(data.televisoes[0].componentes)
+
+                sessionStorage.ID_TV = data.televisoes[0].idTelevisao;
+                sessionStorage.NOME_TV = data.televisoes[0].nomeTelevisao;
+                sessionStorage.HOSTNAME_TV = data.televisoes[0].hostname;
+                sessionStorage.STATUS_TV = data.televisoes[0].status;
+                sessionStorage.FLOOR_TV = data.televisoes[0].andar;
+                sessionStorage.SECTOR_TV = data.televisoes[0].setor;
+                sessionStorage.CONEXAO_TV = data.televisoes[0].conexao;
+                sessionStorage.COMPONENTES_TV = JSON.stringify(data.televisoes[0].componentes);
+            })
+    }
+}
 
 function quantidadeUsuariosPorTipo(idEmpresa) {
     fetch(`/usuarios/quantidadeUsuariosPorTipo/${idEmpresa}`, {
@@ -25,59 +48,11 @@ function quantidadeUsuariosPorTipo(idEmpresa) {
         document.getElementById("text_qtdAssistente").innerText = qtdAssistenteNoc;
         document.getElementById("text_qtdGerente").innerText = qtdGerenteNoc;
 
-
-        
     })
     .catch(function (error) {
         console.error('Error:', error);
     });
 }
-
-/* function drawChartUsuarios() {
-
-    fetch(`/usuarios/quantidadeUsuariosPorTipo/${sessionStorage.ID_EMPRESA}`, {
-        method: "GET",
-    })
-
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok ' + response.statusText);
-        }
-        return response.json();
-    })
-
-    .then(data => {
-        console.log(data)
-
-        var dataUsuarios = google.visualization.arrayToDataTable([
-            ['Cargo', 'Quantidade'],
-            ['Gerente', data.gestorNoc],
-            ['Assistentes NOC', data.assitenteNoc],
-        ]);
-    
-        var optionsUsuarios = {
-            pieHole: 0.4,
-            legend: 'none',
-            backgroundColor: 'transparent',
-            chartArea: {
-                width: "100%",
-                height: "80%",
-                
-            },
-            width: 200,
-            height: 150,
-            pieSliceBorderColor : "transparent",
-            colors: ['#4F699C', '#8095bf']
-        };
-    
-        var chart = new google.visualization.PieChart(document.getElementById('chart_usuarios'));
-        chart.draw(dataUsuarios, optionsUsuarios);
-    })
-
-    .catch(error => {
-        console.error("Error:", error);
-    });
-} */
 
 function drawChartUsuarios() {
     var jsonData = $.ajax({
@@ -88,7 +63,6 @@ function drawChartUsuarios() {
 
     // Parse the JSON data
     var data = JSON.parse(jsonData);
-    console.log(data);
 
     // Create a DataTable and add columns
     var dataUsuarios = new google.visualization.DataTable();
@@ -124,11 +98,11 @@ function drawChartUsuarios() {
 /* Gráfico Quantidade TV */
 
 
-function drawChartQuantidadeTv() {
+function drawChartQuantidadeTv(qtdInativo, qtdAtivo) {
     var dataQtdTelevisoes = google.visualization.arrayToDataTable([
         ['Status', 'Quantidade'],
-        ['Inativo', 5],
-        ['Ativo', 15],
+        ['Inativo', qtdInativo],
+        ['Ativo', qtdAtivo],
     ]);
 
     var optionsQtdTelevisoes = {
@@ -153,18 +127,17 @@ function drawChartQuantidadeTv() {
 
 /* Gráfico Dashboard setores */
 
-function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-        ['Setor' ,'ON', 'OFF'],
-        ['Marketing', 8, 2],
-        ['RH', 4, 1],
-        ['Vendas', 5, 3],
-        ['Hall', 6, 1]
-    ]);
+function drawChartAtualizadosPorSetor(ambientesStatus) {
+
+    const ambientesData =[['Setor', 'ON', 'OFF']];
+
+    for (const [setor, status] of Object.entries(ambientesStatus)) {
+        ambientesData.push([setor, status.atualizado, status.naoAtualizado])
+    }
+
+    var dataChart = google.visualization.arrayToDataTable(ambientesData);
 
     var options = {
-        width: 600,
-        height: 400,
         backgroundColor: 'transparent',
         bar: { groupWidth: '75%' },
         isStacked: true,
@@ -187,7 +160,7 @@ function drawChart() {
         }
     };
     var chart = new google.visualization.ColumnChart(document.getElementById("chart_porSetor"));
-    chart.draw(data, options);
+    chart.draw(dataChart, options);
 }
 
 quantidadeUsuariosPorTipo(sessionIdEmpresa)
