@@ -55,7 +55,7 @@
 }
 
 .container-shell {
-    width: 70%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -135,16 +135,4 @@ button:hover {
     top: 0;
     right: 0;
     color: #ff0000;
-}
-
-.container-options {
-    width: 30%;
-    background-color:#0F172A;
-    border-radius: 10px;
-    border: solid 1px white;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-}
-
-.container-options h3 {
-    padding: 10px;
 }

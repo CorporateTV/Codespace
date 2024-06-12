@@ -79,7 +79,6 @@ function verificarAtualizacaoComponente(req, res) {
 
 function verificarAtualizacaoTelevisoesEmpresa(req, res) {
     var idEmpresa = req.params.idEmpresa;
-    var limiteTempo = 30000;
     console.log(`Verificando atualização para todas as televisões da empresa ${idEmpresa}`);
 
     tvModel.listarDadosEmpresaTv(idEmpresa).then(function (televisoes) {
@@ -106,6 +105,7 @@ function verificarAtualizacaoTelevisoesEmpresa(req, res) {
                                 var ultimaAtualizacao = new Date(resultado[0].dataRegistro).getTime();
                                 var agora = new Date().getTime();
                                 var diferencaTempo = agora - ultimaAtualizacao;
+                                var limiteTempo = tv.taxaAtualizacao + 5000;
                                 return diferencaTempo <= limiteTempo;
                             }
                             return false;
@@ -221,14 +221,16 @@ function buscarMedidasComponentesTv(req, res) {
                                         idComponente: log[0].idComponente,
                                         tipoComponente: log[0].tipoComponente,
                                         uso_percentual: log[0].usoComponente,
-                                        horario: log[0].dataRegistro
+                                        horario: log[0].dataRegistro,
+                                        taxaAtualizacao: dadosTv[0].taxaAtualizacao
                                     });
                                 } else {
                                     resolve({
                                         idComponente: componente.idComponente,
                                         tipoComponente: componente.tipoComponente,
                                         uso_percentual: null,
-                                        horario: null
+                                        horario: null,
+                                        taxaAtualizacao: dadosTv[0].taxaAtualizacao
                                     });
                                 }
                             })
@@ -280,10 +282,6 @@ function buscarMedidasProcessos(req, res) {
         res.status(500).json(erro.sqlMessage);
     });
 }
-
-
-
-
 
 module.exports = {
     buscarMedidasComponenteEmTempoReal,

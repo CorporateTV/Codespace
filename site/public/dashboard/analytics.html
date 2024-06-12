@@ -71,11 +71,17 @@
                             </div>
                             <div class="card-row-buttons">
                                 <button class="button-default">Reiniciar</button>
+                                <button class="button-default" id="btn-comandos">Comandos</button>
                                 <button class="button-default">Desligar</button>
                             </div>
                         </div>
                         <div class="tv-uptime">
-                            <button class="button-default" id="btn-comandos">Comandos</button>
+                            <h3> Componentes </h3>
+                            <div class="container-monitoramento-texto">
+                                <p>CPU <span id="monitor-text-cpu"></span></p>
+                                <p>Disco <span id="monitor-text-disco"></span></p>
+                                <p>RAM <span id="monitor-text-ram"></span></p>
+                            </div>
                             <div id="modalShell" class="modal">
                                 <div class="modal-container">
                                     <div class="modal-header">
@@ -90,9 +96,6 @@
                                             </div>
                                             <div class="massage-feed" id="messageFeed">
                                             </div>
-                                        </div>
-                                        <div class="container-options">
-                                            <h3> Configurações de comando </h3>
                                         </div>
                                     </div>
                                 </div>
@@ -142,12 +145,7 @@
                     <div class="header-box">
                         <h3>Janelas abertas</h3>
                     </div>
-                    <ul class="lista-log">
-                        <li>Nome Janela 1</li>
-                        <li>Nome Janela 2</li>
-                        <li>Nome Janela 3</li>
-                        <li>Nome Janela 4</li>
-                        <li>Nome Janela 5</li>
+                    <ul id="lista_janelas" class="lista-log">
                     </ul>
                 </div>
                 <div class="box notifacao">

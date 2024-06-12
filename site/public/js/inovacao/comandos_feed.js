@@ -102,7 +102,7 @@ function listarComandos(idTelevisao) {
         })
         .then((data) => {
             data.forEach(comando => {
-                escreverComando(comando.idComando, comando.nome);
+                escreverComando(comando.idComando, comando.nomeComando);
             });
         })
         .catch(function (erro) {

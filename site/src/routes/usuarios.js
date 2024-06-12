@@ -36,4 +36,8 @@ router.get("/buscarGestor", function(req, res) {
     usuarioController.buscarGestor(req, res);
 });
 
+router.post("/redefinirSenha", function (req, res) {
+    usuarioController.redefinirSenha(req, res);
+});
+
 module.exports = router;

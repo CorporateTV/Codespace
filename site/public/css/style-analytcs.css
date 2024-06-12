@@ -115,7 +115,15 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 15px;
+}
+
+.container-monitoramento-texto {
+    display: flex;
+    justify-content: space-around;
     align-items: center;
+    font-size: 1.25em;
+    width: 100%;
 }
 
 .tv-ideal {
@@ -176,3 +184,4 @@
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 }
+

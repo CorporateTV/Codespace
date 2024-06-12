@@ -100,6 +100,12 @@ function medidadsPorComponentes(idTelevisao) {
             .then((respostaTv) => {
                 if (respostaTv) {
                     alertaMonitoramento(idTelevisao, respostaTv.componentes);
+
+                    document.getElementById("nome_componente").innerHTML = `${respostaTv.componentes[0].modelo}`
+
+                    document.getElementById("monitor-text-cpu").innerHTML = `${respostaTv.componentes[0].uso_percentual.toFixed(2)}%`;
+                    document.getElementById("monitor-text-disco").innerHTML = `${respostaTv.componentes[1].uso_percentual.toFixed(2)}%`
+                    document.getElementById("monitor-text-ram").innerHTML = `${respostaTv.componentes[2].uso_percentual.toFixed(2)}%`
                 }
             })
             .catch((error) => {
@@ -130,7 +136,6 @@ function processosTv(idTelevisao) {
             })
             .then((respostaProcessos) => {
                 if (respostaProcessos) {
-                    console.log(respostaProcessos);
                     listaProcessos(respostaProcessos);
                 }
             })
@@ -156,12 +161,14 @@ function alertaMonitoramento(idTelevisao, componentes) {
     let statusCritico = false;
     let statusAtencao = false;
     let statusTv = "NORMAL";
-    const limiteTempo = 30000;
     let estaAtualizado = true;
 
     componentes.forEach(componente => {
         var tipo = componente.tipoComponente;
         var dataUso = componente.uso_percentual;
+        let limiteTempo = componente.taxaAtualizacao + 10000;
+
+        console.log(limiteTempo);
 
         // Adiciona a data atual ao horário para criar um objeto Date válido
         var agora = new Date();
@@ -218,8 +225,15 @@ function alertaMonitoramento(idTelevisao, componentes) {
         statusTv = "ATENÇÃO";
     }
 
-    document.getElementById("status").innerHTML = statusTv;
-    document.getElementById("conexao").innerHTML = estaAtualizado ? "ON" : "OFF";
+    const textStatus = document.getElementById("status");
+    const textConexao = document.getElementById("conexao");
+
+    textStatus.innerHTML = statusTv;
+    textConexao.innerHTML = estaAtualizado ? "ON" : "OFF";
+
+    textStatus.className = statusTv == "NORMAL" ? "value-descricao status-normal" : 
+    statusTv == "ATENÇÃO" ? "value-descricao status-atencao" : "value-descricao status-alerta";
+    textConexao.className = estaAtualizado ? "value-descricao status-normal" : "value-descricao status-alerta";
 
     if (textoErro) {
         contador += 1;
@@ -239,7 +253,11 @@ function listaProcessos(processos) {
 
     processos.sort((a, b) => b.valor - a.valor);
 
-    processos.forEach((processo, index) => {
+    let topProcessos = processos.slice(0, 5);
+
+
+
+    topProcessos.forEach((processo, index) => {
         const listItem = document.createElement("li");
         listItem.innerHTML = `${index + 1}º - ${processo.nomeProcesso} - PID: ${processo.pid} - ${processo.tipoComponente} - ${processo.valor.toFixed(2)}%`;
         listaProcessos.appendChild(listItem);

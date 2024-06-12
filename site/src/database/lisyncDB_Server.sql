@@ -172,7 +172,7 @@ INSERT INTO Televisao (nomeTelevisao, taxaAtualizacao, hostname, fkAmbiente) VAL
     ('Televisao 24', 60, 'SPTech_TV24', 2),
     ('Televisao 25', 60, 'SPTech_TV25', 2);
     
-INSERT INTO Televisao (nome, taxaAtualizacao, hostname, fkAmbiente) VALUES 
+INSERT INTO Televisao (nomeTelevisao, taxaAtualizacao, hostname, fkAmbiente) VALUES 
     ('Televisao 1', 60, 'Elera_TV1', 4),
     ('Televisao 2', 60, 'Elera_TV2', 4),
     ('Televisao 3', 60, 'Elera_TV3', 4),

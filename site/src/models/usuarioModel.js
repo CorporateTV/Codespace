@@ -12,7 +12,7 @@ function autenticar(email, senha) {
 
 function cadastrar(nome, email, senha, idEmpresa) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha, idEmpresa);
-    
+
     var instrucao = `
         INSERT INTO Usuario (nomeUsuario ,email, senha, fkEmpresa) VALUES ('${nome}', '${email}', '${senha}', '${idEmpresa}');
     `;
@@ -60,7 +60,7 @@ function buscarGestor(idEmpresa) {
 
 
 
-  function redefinirSenha(email, novaSenha) {
+function redefinirSenha(email, novaSenha) {
     var instrucao = `
         UPDATE funcionario SET senha = '${novaSenha}' WHERE email = '${email}';
     `;
@@ -85,5 +85,6 @@ module.exports = {
     atualizarPerfilGestor,
     quantidadeUsuariosPorTipo,
     buscarUsuario,
-    gestorCadastrar
+    gestorCadastrar,
+    redefinirSenha
 };

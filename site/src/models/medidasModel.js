@@ -143,7 +143,7 @@ function buscarMedidasProcessos(idTelevisao) {
             JOIN Televisao as tv ON fkTelevisao = idTelevisao 
         WHERE idTelevisao = ${idTelevisao}
         ORDER BY 
-            idLog DESC LIMIT 5;
+            idLog DESC LIMIT 12;
         `;
   } else if (process.env.AMBIENTE_PROCESSO == "producao") {
     sql = `
@@ -157,7 +157,7 @@ function buscarMedidasProcessos(idTelevisao) {
         WHERE idTelevisao = ${idTelevisao}
         ORDER BY 
             idLog DESC 
-        OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY;;
+        OFFSET 0 ROWS FETCH NEXT 12 ROWS ONLY;;
     `;
   }
 

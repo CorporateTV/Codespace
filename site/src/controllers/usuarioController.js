@@ -174,7 +174,7 @@ function buscarGestor(req, res) {
     })
 }
 
-  function redefinirSenha(req, res) {
+function redefinirSenha(req, res) {
     var novaSenha = req.body.novaSenha;
     var confirmacaoSenha = req.body.confirmacaoSenha;
 
@@ -203,5 +203,6 @@ module.exports = {
     atualizarPerfil,
     atualizarPerfilGestor,
     quantidadeUsuariosPorTipo,
-    buscarUsuario
+    buscarUsuario,
+    redefinirSenha
 }

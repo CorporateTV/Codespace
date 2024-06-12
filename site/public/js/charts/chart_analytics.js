@@ -142,3 +142,29 @@ function usoComponentesTempoReal(idTelevisao, tipo, chart, dataMonitoramento, op
         setTimeout(() => usoComponentesTempoReal(idTelevisao, tipo, chart, dataMonitoramento, optionsMonitoramento), 5000);
     });
 }
+
+function listarJanelas(idTelevisao) {
+    fetch(`/janela/listaJanelas/${idTelevisao}`, { cache: 'no-store' }).then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .then((data) => {
+            const listaJanelas = document.getElementById("lista_janelas");
+            listaJanelas.innerHTML = ''; // Limpar a lista anterior
+
+
+            data.forEach((janela, index) => {
+                const listItem = document.createElement("li");
+                listItem.innerHTML = `${index + 1} - Pid: ${janela.pidJanela} | ${janela.titulo}`
+                listaJanelas.appendChild(listItem);
+            })
+        })
+        .catch(error => {
+            console.error(`Conexão com TV indisponível: ${error.message}`);
+        });
+}
+
+listarJanelas(idTv);
