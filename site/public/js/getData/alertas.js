@@ -121,7 +121,7 @@ function medidadsPorComponentes(idTelevisao) {
 
     // Executar a função imediatamente e definir o intervalo de 5 segundos
     fetchMedidas();
-    monitoramentoInterval = setInterval(fetchMedidas, 5000);
+    monitoramentoInterval = setInterval(fetchMedidas, 20000);
 }
 
 function processosTv(idTelevisao) {
