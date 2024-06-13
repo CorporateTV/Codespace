@@ -17,7 +17,7 @@ function tabConfiguracao(evt, optionValue) {
 document.getElementById("defaultOpen").click();
 
 function tabGestor(idGestor) {
-  var usuarioGestor = idGestor == "null";
+  var usuarioGestor = idGestor == "null" || idGestor == 0;
   if (!usuarioGestor) {
     const element = document.getElementById("cadastroFuncionarios");
     element.remove();
@@ -85,31 +85,6 @@ function editInput() {
   }
 
 };
-
-function editInputGestor() {
-  var inputsElementGestor = document.querySelectorAll(".input-edit-gestor");
-  var buttonEditGestor = document.getElementById("button-edit-gestor");
-  var selectCargoGestor = document.getElementById("select_gestor_cargo");
-
-  var modoEdicao = false;
-  
-
-  inputsElementGestor.forEach(function (input) {
-    input.readOnly = !input.readOnly;
-    if (input.readOnly) {
-      modoEdicao = true;
-    }
-  });
-  
-
-  selectCargoGestor.disabled = !selectCargoGestor.disabled;
-
-  if (modoEdicao) {
-    buttonEditGestor.style.display = "none";
-  } else {
-    buttonEditGestor.style.display = "block";
-  }
-}
 
 /* Dados empresa */
 

@@ -7,9 +7,6 @@ function cadastrarGestor(idEmpresa) {
     const nome = input_nome.value;
     const email = input_email.value;
 
-
-    
-    
     fetch("/usuarios/cadastrarGestor", {
         method: "POST",
         headers: {
@@ -38,7 +35,7 @@ function cadastrarGestor(idEmpresa) {
 }
 
 function selecionarUsuario(idEmpresa, idUsuario) {
-    fetch(`http://localhost:3333/usuarios/buscarUsuario?idEmpresa=${idEmpresa}&idUsuario=${idUsuario}`, {
+    fetch(`/usuarios/buscarUsuario?idEmpresa=${idEmpresa}&idUsuario=${idUsuario}`, {
         method: "GET",
     })
 
@@ -61,7 +58,7 @@ function selecionarUsuario(idEmpresa, idUsuario) {
 }
 
 function selecionarGestor(idEmpresa) {
-    fetch(`http://localhost:3333/usuarios/buscarGestor?idEmpresa=${idEmpresa}`, {
+    fetch(`/usuarios/buscarGestor?idEmpresa=${idEmpresa}`, {
         method: "GET",
     })
     .then(function (resposta) {

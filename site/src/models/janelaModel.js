@@ -25,7 +25,8 @@ function buscarJanelas(idTelevisao) {
             WHERE fkTelevisao = ${idTelevisao}
             GROUP BY titulo
         )
-        ORDER BY j.idJanela DESC LIMIT 5;
+        ORDER BY j.idJanela DESC
+        OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY;
       `;
     }
 

@@ -14,27 +14,27 @@ function cadastrar(nome, email, senha, idEmpresa) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha, idEmpresa);
 
     var instrucao = `
-        INSERT INTO Usuario (nomeUsuario ,email, senha, fkEmpresa) VALUES ('${nome}', '${email}', '${senha}', '${idEmpresa}');
+        INSERT INTO Usuario (nomeUsuario ,email, senha, fkEmpresa) VALUES ('${nome}', '${email}', '${senha}', ${idEmpresa});
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
 function gestorCadastrar(nome, email, senha, idEmpresa) {
-    var sql = `INSERT INTO Usuario (nomeUsuario ,email, senha, fkEmpresa) VALUES ('${nome}', '${email}', '${senha}', '${idEmpresa}')`
+    var sql = `INSERT INTO Usuario (nomeUsuario ,email, senha, fkEmpresa, fkGestor) VALUES ('${nome}', '${email}', '${senha}', ${idEmpresa}, 1)`
 
     console.log("Executando a instrução SQL: \n" + sql);
     return database.executar(sql);
 }
 
 function atualizarPerfil(nome, email, idUsuario) {
-    var instrucao = `UPDATE Usuario set nomeUsuario = "${nome}", email = "${email}" WHERE idUsuario = ${idUsuario};`;
+    var instrucao = `UPDATE Usuario set nomeUsuario = '${nome}', email = '${email}' WHERE idUsuario = ${idUsuario};`;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
 function atualizarPerfilGestor(nome, email, cargo, idUsuario) {
-    var instrucao = `UPDATE Usuario set nomeUsuario = "${nome}", email = "${email}", fkGestor = ${cargo} WHERE idUsuario = ${idUsuario};`;
+    var instrucao = `UPDATE Usuario set nomeUsuario = '${nome}', email = '${email}', fkGestor = ${cargo} WHERE idUsuario = ${idUsuario};`;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }

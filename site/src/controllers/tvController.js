@@ -66,9 +66,9 @@ function listarDadosEmpresaTv(req, res) {
 }
 
 function dadosTv(req, res) {
-    var idTv = req.params.idEmpresa;
+    var idTelevisao = req.params.idTelevisao;
 
-    tvModel.dadosTv(idTv).then((resultado) => {
+    tvModel.dadosTv(idTelevisao).then((resultado) => {
         res.status(200).json(resultado);
     }).catch(function (erro) {
         console.log("Houve um erro tv não existe: ", erro.sqlMessage);

@@ -40,3 +40,29 @@ function drawChartStatusTv(contadorStatus) {
     var chart = new google.visualization.PieChart(document.getElementById('chart_status'));
     chart.draw(dataStatus, optionsStatus);
 }
+
+document.getElementById("titulo-empresa").innerHTML = `${sessaoNomeFantasia} - Gestores`;
+
+function listarUsuariosEmpresaGestor(idEmpresa) {
+    fetch(`/empresa/listarUsuariosEmpresa/${idEmpresa}`, {
+        method: "GET",
+    })
+
+    .then(function (resposta) {
+        resposta.json().then((usuarios) => {
+            usuarios.forEach((usuario) => {
+                console.log(usuario);
+
+                if(usuario.fkGestor == null) {
+                    const spanElement = document.createElement("span");
+                    spanElement.id = usuario.idUsuario;
+                    spanElement.textContent = usuario.nomeUsuario;
+                    lista_gestores.appendChild(spanElement);
+                }
+
+            })
+        })
+    });
+}
+
+listarUsuariosEmpresaGestor(sessionIdEmpresa);

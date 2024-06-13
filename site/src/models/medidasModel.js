@@ -148,16 +148,24 @@ function buscarMedidasProcessos(idTelevisao) {
   } else if (process.env.AMBIENTE_PROCESSO == "producao") {
     sql = `
         SELECT 
-            processo.idLog, processo.pid, date_format(processo.dataHora,'%H:%i:%s') as dataRegistro,
-            processo.nomeProcesso, processo.valor, processo.fkComponente, comp.modelo, comp.tipoComponente, tv.nomeTelevisao
+            processo.idLog, 
+            processo.pid, 
+            CONVERT(VARCHAR(8), processo.dataHora, 108) as dataRegistro,
+            processo.nomeProcesso, 
+            processo.valor, 
+            processo.fkComponente, 
+            comp.modelo, 
+            comp.tipoComponente, 
+            tv.nomeTelevisao
         FROM 
-            LogProcesso as processo 
-            JOIN Componente as comp ON fkComponente = idComponente 
-            JOIN Televisao as tv ON fkTelevisao = idTelevisao 
-        WHERE idTelevisao = ${idTelevisao}
+            LogProcesso AS processo
+            JOIN Componente AS comp ON processo.fkComponente = comp.idComponente
+            JOIN Televisao AS tv ON comp.fkTelevisao = tv.idTelevisao
+        WHERE 
+            tv.idTelevisao = ${idTelevisao}
         ORDER BY 
-            idLog DESC 
-        OFFSET 0 ROWS FETCH NEXT 12 ROWS ONLY;;
+            processo.idLog DESC
+        OFFSET 0 ROWS FETCH NEXT 12 ROWS ONLY;
     `;
   }
 

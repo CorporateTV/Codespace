@@ -19,12 +19,12 @@ var sqlServerConfig = {
 }
 
 // CONEXÃO DO MYSQL WORKBENCH
- var mySqlConfig = {
+ /* var mySqlConfig = {
     host: "localhost",
     database: "lisyncDB",
     user: "root",
     password: "urubu100",
-};
+}; */
 
 var mySqlConfig = {
     host: "localhost",

@@ -34,8 +34,8 @@ function entrar() {
           sessionStorage.EMAIL_USUARIO = json.email;
           sessionStorage.NOME_USUARIO = json.nomeUsuario;
           sessionStorage.ID_USUARIO = json.idUsuario;
-          sessionStorage.ID_GESTOR = json.idGestor;
-          sessionStorage.ID_EMPRESA = json.idEmpresa;
+          sessionStorage.ID_GESTOR = json.idGestor ?? 0;
+          sessionStorage.ID_EMPRESA = json.idEmpresa ?? 0;
 
           if (json.idGestor == null && json.idEmpresa != null) {
             alert("Gestor")

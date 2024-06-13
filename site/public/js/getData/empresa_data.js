@@ -203,11 +203,15 @@ function listarEmpresas() {
                     divFilho.innerHTML = empresa.nomeFantasia
                     divFilho.classList.add('divFilhoEmpresa');
                     divPai.appendChild(divFilho);
+
+                    console.log(empresa);
+
                     divFilho.onclick = function () {
                         selecionarGestor(empresa.idEmpresa)
 
 
                         input_nome_fantasia.value = this.innerHTML
+                        input_CNPJ.value = empresa.cnpj
                         var divsEmpresas = document.querySelectorAll('.empresa');
 
                         for (var i = 0; i < divsEmpresas.length; i++) {
@@ -237,7 +241,7 @@ function atualizarEmpresa(idEmpresa) {
 
 
 
-    fetch(`/Empresa/atualizarEmpresa`, {
+    fetch(`/empresa/atualizarEmpresa`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

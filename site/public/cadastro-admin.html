@@ -14,7 +14,7 @@
 
 </head>
 
-<body>
+<body onload="listarEmpresas(), resetCredenciais(), validarSessao()">
 
   <div class="container-alert">
     <div id="alerta-confirmacao" class="alert"></div>
@@ -37,8 +37,6 @@
                 id="cadastroFuncionarios">
                 Cadastro de Empresas
               </button>
-
-
             </div>
 
 
@@ -159,16 +157,7 @@
                 </div>
               </div>
             </div>
-
-
-
-
-
-
           </div>
-
-
-
         </div>
       </div>
     </div>
@@ -182,5 +171,5 @@
 <script src="./js/sessao.js"></script>
 <script src="./js/getData/usuario_data.js"></script>
 <script src="./js/getData/empresa_data.js"></script>
-<script src="./js/config_client.js"></script>
+<script src="./js/config_admin.js"></script>
 <script src="./js/auth/cadastroAdmin.js"></script>

@@ -1,4 +1,18 @@
+function tabConfiguracao(evt, optionValue) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tab-content");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tab-links");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(optionValue).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
 
+  document.getElementById("defaultOpen").click();
 
 function buscarEmpresaPnome(nomeEmpresa) {
 
@@ -10,8 +24,6 @@ function buscarEmpresaPnome(nomeEmpresa) {
             if (!resposta.ok) {
                 throw new Error('Erro ao buscar dados');
             }
-            // Retorna os dados como JSON
-            
             return resposta.json();
             
         })
@@ -25,7 +37,30 @@ function buscarEmpresaPnome(nomeEmpresa) {
         });
 }
 
-
+function editInputGestor() {
+    var inputsElementGestor = document.querySelectorAll(".input-edit-gestor");
+    var buttonEditGestor = document.getElementById("button-edit-gestor");
+    var selectCargoGestor = document.getElementById("select_gestor_cargo");
+  
+    var modoEdicao = false;
+    
+  
+    inputsElementGestor.forEach(function (input) {
+      input.readOnly = !input.readOnly;
+      if (input.readOnly) {
+        modoEdicao = true;
+      }
+    });
+    
+  
+    selectCargoGestor.disabled = !selectCargoGestor.disabled;
+  
+    if (modoEdicao) {
+      buttonEditGestor.style.display = "none";
+    } else {
+      buttonEditGestor.style.display = "block";
+    }
+  }
 
 function mudarSelect() {
     const selectElement = document.getElementById("plan");
@@ -67,7 +102,7 @@ function validarEnvio() {
         var alertaConfirmacao = document.getElementById('alerta-confirmacao');
         alertaConfirmacao.innerHTML = "Cadastro Confirmado!";
         alertaConfirmacao.style.display = "block";
-
+        
         cadastrarEmpresaGestor()
     }
     else if (!validacaoNomeFantasia) {

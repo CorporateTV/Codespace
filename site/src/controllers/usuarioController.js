@@ -123,10 +123,12 @@ function atualizarPerfilGestor(req, res) {
 
 
 function gestorCadastrar(req, res) {
-    const { nome, email, senha, fkEmpresa } = req.body;
+    var nome = req.body.nomeServer;
+    var email = req.body.emailServer;
+    var senha = req.body.senhaServer;
+    var idEmpresa = req.body.idEmpresaServer;
 
-
-    usuarioModel.gestorCadastrar(nome, email, senha, fkEmpresa).then(
+    usuarioModel.gestorCadastrar(nome, email, senha, idEmpresa).then(
         function (resultado) {
             res.json(resultado);
         }

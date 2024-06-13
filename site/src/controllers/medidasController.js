@@ -45,7 +45,7 @@ function buscarMedidasComponenteEmTempoReal(req, res) {
 function verificarAtualizacaoComponente(req, res) {
     var idTelevisao = req.params.idTelevisao;
     var tipoComponente = req.params.tipoComponente;
-    var limiteTempo = 5000; // 5 segundos
+    var limiteTempo = 30000; // 5 segundos
 
     console.log(`Verificando atualização para a TV ${idTelevisao} e componente ${tipoComponente}`);
 
@@ -105,7 +105,7 @@ function verificarAtualizacaoTelevisoesEmpresa(req, res) {
                                 var ultimaAtualizacao = new Date(resultado[0].dataRegistro).getTime();
                                 var agora = new Date().getTime();
                                 var diferencaTempo = agora - ultimaAtualizacao;
-                                var limiteTempo = tv.taxaAtualizacao + 5000;
+                                var limiteTempo = 30000;
                                 return diferencaTempo <= limiteTempo;
                             }
                             return false;

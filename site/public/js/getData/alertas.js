@@ -12,7 +12,7 @@ function televisoesInativas(idTelevisao, tipoComponente) {
         }
     })
         .then((data) => {
-            console.log(data.atualizado);
+            console.log(data);
         })
         .catch(error => {
             console.error(`Conexão com TV indisponível: ${error.message}`);
@@ -31,7 +31,7 @@ function televisoesEmpresaAtualizadas(idEmpresa, pagina) {
             var qtdInativo = data.quantidadeNaoAtualizadas
             var qtdAtivo = sessionStorage.QUANTIDADE_TV - qtdInativo;
 
-            console.log(data.televisoes);
+            console.log(data);
 
             let contadorStatus = {
                 "NORMAL": 0,
@@ -99,9 +99,10 @@ function medidadsPorComponentes(idTelevisao) {
             })
             .then((respostaTv) => {
                 if (respostaTv) {
-                    alertaMonitoramento(idTelevisao, respostaTv.componentes);
 
-                    document.getElementById("nome_componente").innerHTML = `${respostaTv.componentes[0].modelo}`
+                    console.log(respostaTv)
+
+                    alertaMonitoramento(idTelevisao, respostaTv.componentes);
 
                     document.getElementById("monitor-text-cpu").innerHTML = `${respostaTv.componentes[0].uso_percentual.toFixed(2)}%`;
                     document.getElementById("monitor-text-disco").innerHTML = `${respostaTv.componentes[1].uso_percentual.toFixed(2)}%`
@@ -168,8 +169,6 @@ function alertaMonitoramento(idTelevisao, componentes) {
         var dataUso = componente.uso_percentual;
         let limiteTempo = componente.taxaAtualizacao + 10000;
 
-        console.log(limiteTempo);
-
         // Adiciona a data atual ao horário para criar um objeto Date válido
         var agora = new Date();
         var [hours, minutes, seconds] = componente.horario.split(':');
@@ -182,7 +181,7 @@ function alertaMonitoramento(idTelevisao, componentes) {
         // Update overall update status
         estaAtualizado = estaAtualizado && componenteAtualizado;
 
-        if (componenteAtualizado) {
+        if (componenteAtualizado || estaAtualizado) {
             switch (tipo) {
                 case "CPU":
                     if (dataUso > 80.0) {

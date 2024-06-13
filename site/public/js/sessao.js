@@ -22,7 +22,7 @@ function limparSessao() {
     window.location = "../login.html";
 }
 
-if (sessionStorage.ID_GESTOR == "null") {
+if (sessionStorage.ID_GESTOR == "null" || sessionStorage.ID_GESTOR == 0) {
     tipo_dash.href = 'dashboard.html'
 } else {
     document.addEventListener("DOMContentLoaded", function () {

@@ -11,4 +11,8 @@ router.get("/listarDadosTv/:idEmpresa", function(req, res) {
     tvController.listarDadosEmpresaTv(req, res);
 })
 
+router.get("/dados-tv/:idTelevisao", function(req, res) {
+    tvController.dadosTv(req, res);
+})
+
 module.exports = router;
