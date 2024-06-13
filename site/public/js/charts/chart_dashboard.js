@@ -56,7 +56,7 @@ function quantidadeUsuariosPorTipo(idEmpresa) {
 
 function drawChartUsuarios() {
     var jsonData = $.ajax({
-        url: `http://localhost:8080/usuarios/quantidadeUsuariosPorTipo/${sessionStorage.ID_EMPRESA}`,
+        url: `http://52.6.118.102/usuarios/quantidadeUsuariosPorTipo/${sessionStorage.ID_EMPRESA}`,
         dataType: "json",
         async: false
     }).responseText;
