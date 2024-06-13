@@ -106,7 +106,7 @@ function buscarUltimaAtualizacaoComponente(idTelevisao, tipoComponente) {
   } else if (process.env.AMBIENTE_PROCESSO == "producao") {
     sql = `
         SELECT
-            CONVERT(VARCHAR(8), CAST(dataHora AS TIME), 108) AS dataRegistro,
+            dataHora AS dataRegistro,
             valor AS usoComponente,
             fkComponente AS idComponente,
             comp.tipoComponente,

@@ -181,7 +181,7 @@ function alertaMonitoramento(idTelevisao, componentes) {
         // Update overall update status
         estaAtualizado = estaAtualizado && componenteAtualizado;
 
-        if (componenteAtualizado || estaAtualizado) {
+        if (componenteAtualizado) {
             switch (tipo) {
                 case "CPU":
                     if (dataUso > 80.0) {

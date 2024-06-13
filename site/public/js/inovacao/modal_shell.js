@@ -21,4 +21,42 @@ window.onclick = function (event) {
         document.getElementById('messageFeed').innerText = "";
     }
 }
+function desligarComando(idTelevisao) {
+    const messageInput = document.getElementById('messageInput');
+    var comando = messageInput.value.trim();
 
+    if (comando === '') return;
+
+    fetch("/comando/inserirComando", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            nomeComandoServer: comando,
+            idTelevisaoServer: idTelevisao
+        }),
+    })
+        .then(function (resposta) {
+            if (resposta.ok) {
+                return resposta.json();
+            } else {
+                throw new Error("Houve um erro ao tentar realizar o cadastro!");
+            }
+        })
+        .then((data) => {
+            ultimoComando();
+
+            console.log(numeroUltimoComando);
+
+            var novoValorComando = numeroUltimoComando + 1;
+
+            escreverComando(novoValorComando, comando);
+        })
+        .catch(function (erro) {
+            console.log(`#ERRO: ${erro}`);
+        });
+
+    messageInput.value = '';
+    return false;
+}

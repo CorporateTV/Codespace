@@ -31,9 +31,9 @@ function drawChartStatusTv(contadorStatus) {
         colors: ['#0FCF51', '#EBB52A', '#DC2020']
     };
 
-    document.getElementById("percent-normal").innerHTML = `${porcentagemNormal}%`
-    document.getElementById("percent-atencao").innerHTML = `${porcentagemAtencao}%`
-    document.getElementById("percent-alerta").innerHTML = `${porcentagemCritico}%`
+    document.getElementById("percent-normal").innerHTML = `${porcentagemNormal.toFixed(2)}%`
+    document.getElementById("percent-atencao").innerHTML = `${porcentagemAtencao.toFixed(2)}%`
+    document.getElementById("percent-alerta").innerHTML = `${porcentagemCritico.toFixed(2)}%`
 
     document.getElementById("titulo-status").innerHTML = `Status televisões ${sessaoNomeFantasia}`
 
